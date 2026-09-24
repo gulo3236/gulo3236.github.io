@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="bn">
 <head>
@@ -200,26 +201,37 @@
       overflow: hidden;
     }
 
+    /* =========================================================
+       STAGE BRAND / LABEL
+       ========================================================= */
+
     .stage-header {
       position: absolute;
       left: 13px;
       top: 12px;
-      z-index: 5;
-
-      display: flex;
-      align-items: center;
-      gap: 7px;
+      z-index: 50;
     }
 
     .stage-label {
-      background: rgba(255, 255, 255, 0.92);
+      background: rgba(255, 255, 255, 0.94);
       border: 1px solid var(--border-soft);
       border-radius: 7px;
 
       padding: 6px 9px;
 
-      color: var(--muted);
+      color: #555b61;
       font-size: 11px;
+
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+
+      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
+    }
+
+    .stage-label:active {
+      cursor: grabbing;
     }
 
     /* =========================================================
@@ -294,7 +306,7 @@
 
     .mentor-card {
       position: absolute;
-      z-index: 20;
+      z-index: 60;
 
       top: 17px;
       right: 17px;
@@ -315,22 +327,13 @@
       min-height: 90px;
       max-width: 45%;
       max-height: 45%;
+
+      touch-action: none;
     }
 
+    /* Mentor header text completely hidden */
     .mentor-header {
-      position: absolute;
-      left: 7px;
-      top: 6px;
-      z-index: 4;
-
-      background: rgba(255, 255, 255, 0.84);
-      border: 1px solid rgba(150, 180, 205, 0.4);
-      border-radius: 5px;
-
-      padding: 3px 6px;
-
-      color: #4d6578;
-      font-size: 9px;
+      display: none;
     }
 
     .mentor-video {
@@ -355,6 +358,9 @@
       font-size: 11px;
       line-height: 1.5;
       padding: 20px;
+
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     .mentor-placeholder span {
@@ -369,7 +375,7 @@
 
     .brand-badge {
       position: absolute;
-      z-index: 10;
+      z-index: 55;
 
       left: 17px;
       bottom: 17px;
@@ -386,10 +392,27 @@
 
       box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
 
-      max-width: 250px;
+      max-width: 300px;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+    }
+
+    .brand-badge:active {
+      cursor: grabbing;
+    }
+
+    .brand-badge.dragging,
+    .stage-label.dragging,
+    .mentor-card.dragging {
+      cursor: grabbing;
+      user-select: none;
+      -webkit-user-select: none;
     }
 
     /* =========================================================
@@ -989,10 +1012,19 @@
         id="stage"
       >
 
-        <div class="stage-header">
+        <!-- DRAGGABLE LABEL -->
 
-          <div class="stage-label">
-            মূল কনটেন্ট
+        <div
+          class="stage-header"
+          id="stageHeader"
+        >
+
+          <div
+            class="stage-label"
+            id="stageLabel"
+            title="Drag করে সরাতে পারবেন"
+          >
+            Shah Neil Khan / USHA.AI
           </div>
 
         </div>
@@ -1049,11 +1081,10 @@
         <div
           class="mentor-card"
           id="mentorCard"
+          title="Drag করে Mentor Video সরাতে পারবেন"
         >
 
-          <div class="mentor-header">
-            Mentor Video
-          </div>
+          <!-- Mentor Video লেখা REMOVE করা হয়েছে -->
 
           <div
             class="mentor-placeholder"
@@ -1080,14 +1111,15 @@
 
 
         <!-- ===================================================
-             BRAND
+             DRAGGABLE BRAND
              =================================================== -->
 
         <div
           class="brand-badge"
           id="brandBadge"
+          title="Drag করে যেকোনো জায়গায় নিতে পারবেন"
         >
-          আমার ওয়েবসাইট নাম
+          Shah Neil Khan / USHA.AI
         </div>
 
       </section>
@@ -1126,11 +1158,7 @@
         <div
           class="students-list"
           id="studentsList"
-        >
-
-          <!-- Students inserted by JavaScript -->
-
-        </div>
+        ></div>
 
 
         <div class="panel-footer">
@@ -1282,7 +1310,7 @@
             type="text"
             id="brandInput"
             class="text-input"
-            value="আমার ওয়েবসাইট নাম"
+            value="Shah Neil Khan / USHA.AI"
             placeholder="আপনার ওয়েবসাইট নাম"
           />
 
@@ -1417,6 +1445,9 @@
     const mentorCard =
       document.getElementById("mentorCard");
 
+    const stageLabel =
+      document.getElementById("stageLabel");
+
     const studentsList =
       document.getElementById("studentsList");
 
@@ -1459,7 +1490,8 @@
 
       students.forEach((name, index) => {
 
-        const student = document.createElement("div");
+        const student =
+          document.createElement("div");
 
         student.className = "student";
 
@@ -1555,7 +1587,6 @@
         showToast("কমপক্ষে একজন Student রাখুন");
 
         return;
-
       }
 
       students.splice(index, 1);
@@ -1657,6 +1688,8 @@
 
         showToast("Mentor video loaded");
 
+        setStatus("Mentor video ready");
+
       }
     );
 
@@ -1683,10 +1716,11 @@
         }
 
         return;
-
       }
 
-      showToast("প্রথমে একটি Main Video upload করুন");
+      showToast(
+        "প্রথমে একটি Main Video upload করুন"
+      );
 
     }
 
@@ -1845,6 +1879,7 @@
         );
 
         setStatus("Recording...");
+
 
         stream
           .getVideoTracks()[0]
@@ -2084,6 +2119,245 @@
 
 
     /* =========================================================
+       DRAG SYSTEM
+       ========================================================= */
+
+    function makeDraggable(
+      element,
+      boundary
+    ) {
+
+      let dragging = false;
+
+      let startX = 0;
+      let startY = 0;
+
+      let startLeft = 0;
+      let startTop = 0;
+
+
+      function getPoint(event) {
+
+        if (event.touches && event.touches.length) {
+
+          return {
+            x: event.touches[0].clientX,
+            y: event.touches[0].clientY
+          };
+
+        }
+
+        return {
+          x: event.clientX,
+          y: event.clientY
+        };
+
+      }
+
+
+      function startDrag(event) {
+
+        if (
+          event.target.tagName === "BUTTON" ||
+          event.target.tagName === "INPUT" ||
+          event.target.tagName === "VIDEO"
+        ) {
+
+          return;
+
+        }
+
+        const point =
+          getPoint(event);
+
+        const rect =
+          element.getBoundingClientRect();
+
+        const boundaryRect =
+          boundary.getBoundingClientRect();
+
+        dragging = true;
+
+        startX = point.x;
+        startY = point.y;
+
+        startLeft =
+          rect.left -
+          boundaryRect.left;
+
+        startTop =
+          rect.top -
+          boundaryRect.top;
+
+        element.classList.add(
+          "dragging"
+        );
+
+        element.style.left =
+          startLeft + "px";
+
+        element.style.top =
+          startTop + "px";
+
+        element.style.right =
+          "auto";
+
+        element.style.bottom =
+          "auto";
+
+        if (event.cancelable) {
+          event.preventDefault();
+        }
+
+      }
+
+
+      function moveDrag(event) {
+
+        if (!dragging) return;
+
+        const point =
+          getPoint(event);
+
+        const boundaryRect =
+          boundary.getBoundingClientRect();
+
+        const elementRect =
+          element.getBoundingClientRect();
+
+
+        let newLeft =
+          startLeft +
+          (point.x - startX);
+
+        let newTop =
+          startTop +
+          (point.y - startY);
+
+
+        const maxLeft =
+          boundaryRect.width -
+          elementRect.width;
+
+        const maxTop =
+          boundaryRect.height -
+          elementRect.height;
+
+
+        newLeft =
+          Math.max(
+            0,
+            Math.min(
+              newLeft,
+              maxLeft
+            )
+          );
+
+
+        newTop =
+          Math.max(
+            0,
+            Math.min(
+              newTop,
+              maxTop
+            )
+          );
+
+
+        element.style.left =
+          newLeft + "px";
+
+        element.style.top =
+          newTop + "px";
+
+
+        if (event.cancelable) {
+          event.preventDefault();
+        }
+
+      }
+
+
+      function stopDrag() {
+
+        if (!dragging) return;
+
+        dragging = false;
+
+        element.classList.remove(
+          "dragging"
+        );
+
+      }
+
+
+      element.addEventListener(
+        "mousedown",
+        startDrag
+      );
+
+      document.addEventListener(
+        "mousemove",
+        moveDrag
+      );
+
+      document.addEventListener(
+        "mouseup",
+        stopDrag
+      );
+
+
+      element.addEventListener(
+        "touchstart",
+        startDrag,
+        {
+          passive: false
+        }
+      );
+
+      document.addEventListener(
+        "touchmove",
+        moveDrag,
+        {
+          passive: false
+        }
+      );
+
+      document.addEventListener(
+        "touchend",
+        stopDrag
+      );
+
+    }
+
+
+    /* =========================================================
+       INITIALIZE DRAG
+       ========================================================= */
+
+    const stage =
+      document.getElementById("stage");
+
+
+    makeDraggable(
+      brandBadge,
+      stage
+    );
+
+
+    makeDraggable(
+      stageLabel,
+      stage
+    );
+
+
+    makeDraggable(
+      mentorCard,
+      stage
+    );
+
+
+    /* =========================================================
        MODAL CLICK OUTSIDE
        ========================================================= */
 
@@ -2137,3 +2411,4 @@
 
 </body>
 </html>
+```
