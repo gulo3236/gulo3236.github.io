@@ -18,14 +18,14 @@
   <style>
     /* =========================================================
        PERSONAL COURSE STUDIO
-       CINEMATIC HOME + SALAT TIME
+       HOME + SALAT SYSTEM — STEP 2
        ========================================================= */
 
     :root {
       --bg: #050812;
       --bg2: #07111f;
-      --card: rgba(10, 20, 35, 0.72);
-      --card2: rgba(15, 29, 48, 0.78);
+      --card: rgba(10, 20, 35, 0.76);
+      --card2: rgba(15, 29, 48, 0.82);
       --border: rgba(255, 255, 255, 0.10);
 
       --text: #ffffff;
@@ -36,6 +36,7 @@
 
       --green: #49e39b;
       --blue: #55aaff;
+      --red: #ff7777;
 
       --shadow:
         0 30px 80px rgba(0, 0, 0, 0.45);
@@ -55,6 +56,7 @@
 
     body {
       min-height: 100vh;
+
       font-family:
         Inter,
         system-ui,
@@ -64,6 +66,7 @@
         sans-serif;
 
       color: var(--text);
+
       background:
         radial-gradient(
           circle at 20% 20%,
@@ -85,6 +88,12 @@
       overflow-x: hidden;
     }
 
+    button,
+    input,
+    select {
+      font: inherit;
+    }
+
     /* =========================================================
        BACKGROUND
        ========================================================= */
@@ -93,7 +102,9 @@
       position: fixed;
       inset: 0;
       z-index: -10;
+
       overflow: hidden;
+
       background:
         linear-gradient(
           rgba(2, 7, 15, 0.62),
@@ -105,6 +116,7 @@
 
     .background::before {
       content: "";
+
       position: absolute;
       inset: 0;
 
@@ -118,12 +130,16 @@
 
     .background::after {
       content: "";
+
       position: absolute;
+
       width: 600px;
       height: 600px;
+
       border-radius: 50%;
 
-      background: rgba(244, 201, 93, 0.08);
+      background:
+        rgba(244, 201, 93, 0.08);
 
       filter: blur(100px);
 
@@ -137,6 +153,7 @@
 
     .navbar {
       position: fixed;
+
       top: 0;
       left: 0;
       right: 0;
@@ -151,10 +168,13 @@
 
       padding: 0 6%;
 
-      background: rgba(3, 8, 16, 0.58);
+      background:
+        rgba(3, 8, 16, 0.58);
+
       backdrop-filter: blur(20px);
 
-      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+      border-bottom:
+        1px solid rgba(255, 255, 255, 0.07);
     }
 
     .brand {
@@ -174,6 +194,7 @@
       border-radius: 14px;
 
       color: #07111f;
+
       background:
         linear-gradient(
           135deg,
@@ -190,21 +211,24 @@
 
     .brand-text strong {
       display: block;
+
       font-size: 15px;
-      letter-spacing: 0.2px;
     }
 
     .brand-text span {
       display: block;
+
       margin-top: 2px;
 
       font-size: 11px;
+
       color: var(--muted);
     }
 
     .nav-actions {
       display: flex;
       align-items: center;
+
       gap: 10px;
     }
 
@@ -216,15 +240,18 @@
       justify-content: center;
 
       min-height: 42px;
+
       padding: 0 18px;
 
       border-radius: 12px;
 
       color: #fff;
 
-      border: 1px solid rgba(255,255,255,0.10);
+      border:
+        1px solid rgba(255,255,255,0.10);
 
-      background: rgba(255,255,255,0.05);
+      background:
+        rgba(255,255,255,0.05);
 
       font-size: 13px;
       font-weight: 700;
@@ -234,11 +261,14 @@
 
     .nav-btn:hover {
       transform: translateY(-2px);
-      background: rgba(255,255,255,0.10);
+
+      background:
+        rgba(255,255,255,0.10);
     }
 
     .nav-btn.primary {
       color: #08111c;
+
       border-color: transparent;
 
       background:
@@ -270,9 +300,10 @@
       max-width: 1200px;
 
       display: grid;
+
       grid-template-columns:
         minmax(0, 1.15fr)
-        minmax(320px, 0.85fr);
+        minmax(350px, 0.85fr);
 
       gap: 55px;
 
@@ -286,14 +317,18 @@
     .eyebrow {
       display: inline-flex;
       align-items: center;
+
       gap: 9px;
 
       padding: 8px 13px;
 
       border-radius: 999px;
 
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.09);
+      background:
+        rgba(255,255,255,0.06);
+
+      border:
+        1px solid rgba(255,255,255,0.09);
 
       color: #d9e4f2;
 
@@ -347,20 +382,14 @@
       color: transparent;
     }
 
-    .hero-description {
-      max-width: 650px;
-
-      color: var(--muted);
-
-      font-size: 17px;
-      line-height: 1.8;
-
-      margin-bottom: 30px;
-    }
+    /* =========================================================
+       HERO ACTIONS
+       ========================================================= */
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
+
       gap: 12px;
     }
 
@@ -425,8 +454,8 @@
       background:
         linear-gradient(
           145deg,
-          rgba(15, 31, 51, 0.90),
-          rgba(5, 12, 22, 0.86)
+          rgba(15, 31, 51, 0.92),
+          rgba(5, 12, 22, 0.90)
         );
 
       border:
@@ -444,18 +473,18 @@
 
       position: absolute;
 
-      width: 220px;
-      height: 220px;
+      width: 260px;
+      height: 260px;
 
       border-radius: 50%;
 
       background:
         rgba(244,201,93,0.10);
 
-      filter: blur(50px);
+      filter: blur(60px);
 
-      top: -100px;
-      right: -80px;
+      top: -120px;
+      right: -90px;
     }
 
     .salat-header {
@@ -463,15 +492,20 @@
       z-index: 1;
 
       display: flex;
+
       justify-content: space-between;
       align-items: flex-start;
 
-      margin-bottom: 22px;
+      gap: 12px;
+
+      margin-bottom: 20px;
     }
 
     .salat-title {
       display: flex;
+
       gap: 12px;
+
       align-items: center;
     }
 
@@ -496,11 +530,13 @@
 
     .salat-title h2 {
       font-size: 20px;
+
       margin-bottom: 4px;
     }
 
     .salat-title p {
       color: var(--muted);
+
       font-size: 12px;
     }
 
@@ -519,6 +555,167 @@
 
       font-size: 11px;
       font-weight: 700;
+    }
+
+    /* =========================================================
+       DATE BAR
+       ========================================================= */
+
+    .date-bar {
+      position: relative;
+      z-index: 1;
+
+      display: grid;
+
+      grid-template-columns: 1fr 1fr;
+
+      gap: 9px;
+
+      margin-bottom: 12px;
+    }
+
+    .date-box {
+      padding: 12px;
+
+      border-radius: 14px;
+
+      background:
+        rgba(255,255,255,0.035);
+
+      border:
+        1px solid rgba(255,255,255,0.06);
+    }
+
+    .date-label {
+      color: #71849a;
+
+      font-size: 10px;
+
+      margin-bottom: 4px;
+    }
+
+    .date-value {
+      color: #edf5ff;
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+      line-height: 1.4;
+    }
+
+    /* =========================================================
+       SUNRISE
+       ========================================================= */
+
+    .sunrise-box {
+      position: relative;
+      z-index: 1;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 15px;
+
+      padding: 14px 16px;
+
+      margin-bottom: 16px;
+
+      border-radius: 15px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255, 193, 7, 0.09),
+          rgba(255, 255, 255, 0.035)
+        );
+
+      border:
+        1px solid rgba(255, 201, 75, 0.12);
+    }
+
+    .sunrise-left {
+      display: flex;
+      align-items: center;
+
+      gap: 10px;
+    }
+
+    .sunrise-icon {
+      font-size: 21px;
+    }
+
+    .sunrise-title {
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .sunrise-subtitle {
+      color: #71849a;
+
+      font-size: 10px;
+
+      margin-top: 2px;
+    }
+
+    .sunrise-time {
+      color: var(--gold2);
+
+      font-size: 14px;
+      font-weight: 900;
+    }
+
+    /* =========================================================
+       JUMMAH
+       ========================================================= */
+
+    .jummah-box {
+      position: relative;
+      z-index: 1;
+
+      display: none;
+
+      padding: 15px;
+
+      margin-bottom: 16px;
+
+      border-radius: 16px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(73,227,155,0.12),
+          rgba(85,170,255,0.08)
+        );
+
+      border:
+        1px solid rgba(73,227,155,0.20);
+    }
+
+    .jummah-box.show {
+      display: block;
+    }
+
+    .jummah-title {
+      display: flex;
+      align-items: center;
+
+      gap: 9px;
+
+      font-size: 13px;
+      font-weight: 850;
+
+      margin-bottom: 5px;
+    }
+
+    .jummah-text {
+      color: #a8b9cb;
+
+      font-size: 11px;
+
+      line-height: 1.6;
     }
 
     /* =========================================================
@@ -666,7 +863,9 @@
 
     .prayer-arabic {
       color: #71849a;
+
       font-size: 10px;
+
       margin-top: 2px;
     }
 
@@ -679,11 +878,198 @@
       font-variant-numeric: tabular-nums;
     }
 
+    /* =========================================================
+       SETTINGS
+       ========================================================= */
+
+    .settings-toggle {
+      position: relative;
+      z-index: 1;
+
+      width: 100%;
+
+      display: flex;
+
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 12px;
+
+      margin-top: 17px;
+
+      padding: 13px 14px;
+
+      border: 1px solid rgba(255,255,255,0.07);
+
+      border-radius: 13px;
+
+      color: #dfe9f5;
+
+      background:
+        rgba(255,255,255,0.035);
+
+      cursor: pointer;
+
+      font-size: 12px;
+      font-weight: 800;
+
+      text-align: left;
+
+      transition: 0.2s ease;
+    }
+
+    .settings-toggle:hover {
+      background:
+        rgba(255,255,255,0.07);
+    }
+
+    .settings-panel {
+      position: relative;
+      z-index: 1;
+
+      display: none;
+
+      margin-top: 10px;
+
+      padding: 16px;
+
+      border-radius: 17px;
+
+      background:
+        rgba(3,9,17,0.80);
+
+      border:
+        1px solid rgba(255,255,255,0.08);
+    }
+
+    .settings-panel.open {
+      display: block;
+    }
+
+    .setting-group {
+      margin-bottom: 13px;
+    }
+
+    .setting-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .setting-group label {
+      display: block;
+
+      color: #9aaabd;
+
+      font-size: 10px;
+      font-weight: 700;
+
+      margin-bottom: 6px;
+    }
+
+    .setting-group input,
+    .setting-group select {
+      width: 100%;
+
+      height: 42px;
+
+      padding: 0 12px;
+
+      border-radius: 11px;
+
+      color: #fff;
+
+      background:
+        rgba(255,255,255,0.06);
+
+      border:
+        1px solid rgba(255,255,255,0.09);
+
+      outline: none;
+
+      font-size: 12px;
+    }
+
+    .setting-group input:focus,
+    .setting-group select:focus {
+      border-color:
+        rgba(244,201,93,0.45);
+    }
+
+    .setting-group select option {
+      color: #111;
+
+      background: #fff;
+    }
+
+    .setting-help {
+      color: #66788e;
+
+      font-size: 9px;
+
+      line-height: 1.5;
+
+      margin-top: 5px;
+    }
+
+    .settings-actions {
+      display: flex;
+
+      gap: 8px;
+
+      margin-top: 15px;
+    }
+
+    .settings-btn {
+      flex: 1;
+
+      height: 42px;
+
+      border: 0;
+
+      border-radius: 11px;
+
+      cursor: pointer;
+
+      font-size: 11px;
+      font-weight: 800;
+
+      transition: 0.2s ease;
+    }
+
+    .settings-btn.save {
+      color: #07111f;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--gold2),
+          var(--gold)
+        );
+    }
+
+    .settings-btn.reset {
+      color: #dce7f4;
+
+      background:
+        rgba(255,255,255,0.06);
+
+      border:
+        1px solid rgba(255,255,255,0.08);
+    }
+
+    .settings-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    /* =========================================================
+       SALAT FOOTER
+       ========================================================= */
+
     .salat-footer {
       position: relative;
       z-index: 1;
 
       display: flex;
+
       align-items: center;
       justify-content: space-between;
 
@@ -699,7 +1085,9 @@
 
     .date-info {
       color: #8091a6;
-      font-size: 11px;
+
+      font-size: 10px;
+
       line-height: 1.6;
     }
 
@@ -789,6 +1177,7 @@
 
     .info-card h3 {
       font-size: 16px;
+
       margin-bottom: 8px;
     }
 
@@ -796,6 +1185,7 @@
       color: var(--muted);
 
       font-size: 13px;
+
       line-height: 1.7;
     }
 
@@ -804,7 +1194,9 @@
        ========================================================= */
 
     footer {
-      padding: 25px 6% 35px;
+      padding:
+        25px 6%
+        35px;
 
       text-align: center;
 
@@ -814,17 +1206,20 @@
     }
 
     /* =========================================================
-       LOADING
+       LOADING / ERROR
        ========================================================= */
 
     .loading {
       color: #91a5ba;
+
       font-size: 12px;
     }
 
     .error {
       color: #ff9c9c;
+
       font-size: 12px;
+
       line-height: 1.6;
     }
 
@@ -842,6 +1237,7 @@
 
       .hero-copy {
         text-align: center;
+
         margin: auto;
       }
 
@@ -856,20 +1252,25 @@
 
       .salat-card {
         max-width: 560px;
+
         width: 100%;
+
         margin: auto;
       }
 
       .info-grid {
         grid-template-columns: 1fr;
+
         max-width: 760px;
       }
+
     }
 
     @media (max-width: 600px) {
 
       .navbar {
         height: 68px;
+
         padding: 0 18px;
       }
 
@@ -879,7 +1280,9 @@
 
       .nav-btn {
         min-height: 38px;
+
         padding: 0 12px;
+
         font-size: 11px;
       }
 
@@ -891,12 +1294,8 @@
 
       h1 {
         font-size: 48px;
-        letter-spacing: -2.5px;
-      }
 
-      .hero-description {
-        font-size: 14px;
-        line-height: 1.7;
+        letter-spacing: -2.5px;
       }
 
       .hero-btn {
@@ -905,6 +1304,7 @@
 
       .salat-card {
         padding: 18px;
+
         border-radius: 22px;
       }
 
@@ -914,6 +1314,10 @@
 
       .location {
         display: none;
+      }
+
+      .date-bar {
+        grid-template-columns: 1fr;
       }
 
       .countdown {
@@ -932,6 +1336,7 @@
           25px 18px
           60px;
       }
+
     }
   </style>
 </head>
@@ -958,11 +1363,19 @@
       </div>
 
       <div class="brand-text">
-        <strong>Personal Course Studio</strong>
-        <span>Learn • Create • Teach</span>
+
+        <strong>
+          Personal Course Studio
+        </strong>
+
+        <span>
+          Learn • Create • Teach
+        </span>
+
       </div>
 
     </div>
+
 
     <nav class="nav-actions">
 
@@ -996,27 +1409,33 @@
       <div class="hero-inner">
 
 
-        <!-- HERO TEXT -->
+        <!-- =================================================
+             HERO COPY
+             ================================================= -->
 
         <div class="hero-copy">
 
           <div class="eyebrow">
+
             <span class="eyebrow-dot"></span>
+
             Personal Learning & Recording Studio
+
           </div>
 
+
           <h1>
+
             Create.
-            <span>Teach.</span>
+
+            <span>
+              Teach.
+            </span>
+
             Inspire.
+
           </h1>
 
-          <p class="hero-description">
-            নিজের ক্লাস, কোর্স এবং educational video
-            সুন্দরভাবে তৈরি করার জন্য একটি personal studio।
-            Slide, video, mentor camera এবং recording —
-            সবকিছু এক জায়গায়।
-          </p>
 
           <div class="hero-actions">
 
@@ -1045,6 +1464,9 @@
 
         <div class="salat-card">
 
+
+          <!-- HEADER -->
+
           <div class="salat-header">
 
             <div class="salat-title">
@@ -1054,23 +1476,134 @@
               </div>
 
               <div>
-                <h2>Salat Times</h2>
+
+                <h2>
+                  Salat Times
+                </h2>
 
                 <p>
                   আজকের নামাজের সময়
                 </p>
+
               </div>
 
             </div>
 
-            <div class="location">
-              📍 Dhaka
+
+            <div
+              class="location"
+              id="locationBadge"
+            >
+              📍 Dhaka, Bangladesh
             </div>
 
           </div>
 
 
-          <!-- NEXT PRAYER -->
+          <!-- =================================================
+               GREGORIAN + HIJRI
+               ================================================= -->
+
+          <div class="date-bar">
+
+            <div class="date-box">
+
+              <div class="date-label">
+                Gregorian
+              </div>
+
+              <div
+                class="date-value"
+                id="gregorianDate"
+              >
+                Loading...
+              </div>
+
+            </div>
+
+
+            <div class="date-box">
+
+              <div class="date-label">
+                Hijri
+              </div>
+
+              <div
+                class="date-value"
+                id="hijriDate"
+              >
+                Loading...
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               SUNRISE
+               ================================================= -->
+
+          <div class="sunrise-box">
+
+            <div class="sunrise-left">
+
+              <div class="sunrise-icon">
+                🌅
+              </div>
+
+              <div>
+
+                <div class="sunrise-title">
+                  Sunrise
+                </div>
+
+                <div class="sunrise-subtitle">
+                  সূর্যোদয়
+                </div>
+
+              </div>
+
+            </div>
+
+
+            <div
+              class="sunrise-time"
+              id="sunriseTime"
+            >
+              --
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               JUMMAH
+               ================================================= -->
+
+          <div
+            class="jummah-box"
+            id="jummahBox"
+          >
+
+            <div class="jummah-title">
+              🕌 Jummah Mubarak
+            </div>
+
+            <div
+              class="jummah-text"
+              id="jummahText"
+            >
+              আজ শুক্রবার। যোহরের পরিবর্তে
+              স্থানীয় মসজিদের জুমার জামাতের সময় অনুসরণ করুন।
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               NEXT PRAYER
+               ================================================= -->
 
           <div
             class="next-prayer"
@@ -1109,7 +1642,9 @@
           </div>
 
 
-          <!-- PRAYER LIST -->
+          <!-- =================================================
+               PRAYER LIST
+               ================================================= -->
 
           <div
             class="prayer-list"
@@ -1123,7 +1658,225 @@
           </div>
 
 
-          <!-- FOOTER -->
+          <!-- =================================================
+               SETTINGS TOGGLE
+               ================================================= -->
+
+          <button
+            class="settings-toggle"
+            id="settingsToggle"
+            type="button"
+          >
+
+            <span>
+              ⚙️ Salat Settings
+            </span>
+
+            <span id="settingsArrow">
+              ＋
+            </span>
+
+          </button>
+
+
+          <!-- =================================================
+               SETTINGS PANEL
+               ================================================= -->
+
+          <div
+            class="settings-panel"
+            id="settingsPanel"
+          >
+
+            <div class="setting-group">
+
+              <label for="cityInput">
+                City
+              </label>
+
+              <input
+                id="cityInput"
+                type="text"
+                placeholder="Dhaka"
+                autocomplete="off"
+              />
+
+              <div class="setting-help">
+                Example: Dhaka, Makkah, London, Istanbul
+              </div>
+
+            </div>
+
+
+            <div class="setting-group">
+
+              <label for="countryInput">
+                Country
+              </label>
+
+              <input
+                id="countryInput"
+                type="text"
+                placeholder="Bangladesh"
+                autocomplete="off"
+              />
+
+            </div>
+
+
+            <div class="setting-group">
+
+              <label for="methodSelect">
+                Calculation Method
+              </label>
+
+              <select id="methodSelect">
+
+                <option value="1">
+                  Karachi
+                </option>
+
+                <option value="2">
+                  ISNA
+                </option>
+
+                <option value="3">
+                  Muslim World League
+                </option>
+
+                <option value="4">
+                  Umm Al-Qura, Makkah
+                </option>
+
+                <option value="5">
+                  Egyptian General Authority
+                </option>
+
+                <option value="7">
+                  Institute of Geophysics, Tehran
+                </option>
+
+                <option value="8">
+                  Gulf Region
+                </option>
+
+                <option value="9">
+                  Kuwait
+                </option>
+
+                <option value="10">
+                  Qatar
+                </option>
+
+                <option value="11">
+                  Majlis Ugama Islam Singapura
+                </option>
+
+                <option value="12">
+                  Union Organization Islamic de France
+                </option>
+
+                <option value="13">
+                  Diyanet, Turkey
+                </option>
+
+                <option value="14">
+                  Spiritual Administration of Muslims of Russia
+                </option>
+
+                <option value="15">
+                  Moonsighting Committee
+                </option>
+
+                <option value="16">
+                  Dubai, UAE
+                </option>
+
+                <option value="17">
+                  JAKIM, Malaysia
+                </option>
+
+                <option value="18">
+                  Tunisia
+                </option>
+
+                <option value="19">
+                  Algeria
+                </option>
+
+                <option value="20">
+                  Kementerian Agama Indonesia
+                </option>
+
+                <option value="21">
+                  Morocco
+                </option>
+
+                <option value="22">
+                  Comunidate Islamica de Lisboa
+                </option>
+
+              </select>
+
+              <div class="setting-help">
+                Different calculation methods can produce
+                different prayer times.
+              </div>
+
+            </div>
+
+
+            <div class="setting-group">
+
+              <label for="schoolSelect">
+                Asr Juristic School
+              </label>
+
+              <select id="schoolSelect">
+
+                <option value="0">
+                  Shafi / Maliki / Hanbali
+                </option>
+
+                <option value="1">
+                  Hanafi
+                </option>
+
+              </select>
+
+              <div class="setting-help">
+                This setting mainly affects Asr.
+              </div>
+
+            </div>
+
+
+            <div class="settings-actions">
+
+              <button
+                type="button"
+                class="settings-btn save"
+                id="saveSettingsBtn"
+              >
+                Save & Refresh
+              </button>
+
+              <button
+                type="button"
+                class="settings-btn reset"
+                id="resetSettingsBtn"
+              >
+                Reset
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               FOOTER
+               ================================================= -->
 
           <div class="salat-footer">
 
@@ -1133,6 +1886,7 @@
             >
               Today's prayer times
             </div>
+
 
             <button
               class="refresh-btn"
@@ -1158,6 +1912,7 @@
     <section class="info-section">
 
       <div class="info-grid">
+
 
         <div class="info-card">
 
@@ -1206,11 +1961,12 @@
           </h3>
 
           <p>
-            প্রতিদিনের Fajr, Dhuhr, Asr,
-            Maghrib এবং Isha সময় দেখুন।
+            Prayer time, Hijri date, Sunrise এবং
+            Jummah information এক জায়গায়।
           </p>
 
         </div>
+
 
       </div>
 
@@ -1235,28 +1991,81 @@
   <script>
 
     /* =======================================================
-       CONFIG
+       STORAGE
        ======================================================= */
 
-    const CITY = "Dhaka";
-    const COUNTRY = "Bangladesh";
-
-    /*
-      Method 1 = University of Islamic Sciences, Karachi
-      The API supports multiple calculation methods.
-    */
-
-    const METHOD = 1;
-
-    const API_URL =
-      `https://api.aladhan.com/v1/timingsByCity` +
-      `?city=${encodeURIComponent(CITY)}` +
-      `&country=${encodeURIComponent(COUNTRY)}` +
-      `&method=${METHOD}`;
+    const SALAT_SETTINGS_KEY =
+      "personalCourseStudioSalatSettings";
 
 
     /* =======================================================
-       PRAYER DATA
+       DEFAULT SETTINGS
+       ======================================================= */
+
+    const DEFAULT_SETTINGS = {
+
+      city: "Dhaka",
+
+      country: "Bangladesh",
+
+      method: "1",
+
+      school: "0"
+
+    };
+
+
+    /* =======================================================
+       LOAD SAVED SETTINGS
+       ======================================================= */
+
+    function loadSavedSettings() {
+
+      try {
+
+        const saved =
+          localStorage.getItem(
+            SALAT_SETTINGS_KEY
+          );
+
+        if (!saved) {
+
+          return {
+            ...DEFAULT_SETTINGS
+          };
+
+        }
+
+        const parsed =
+          JSON.parse(saved);
+
+        return {
+          ...DEFAULT_SETTINGS,
+          ...parsed
+        };
+
+      } catch (error) {
+
+        console.error(
+          "Settings error:",
+          error
+        );
+
+        return {
+          ...DEFAULT_SETTINGS
+        };
+
+      }
+
+    }
+
+
+    let salatSettings =
+      loadSavedSettings();
+
+
+    /* =======================================================
+       PRAYER DEFINITIONS
        ======================================================= */
 
     const prayerDefinitions = [
@@ -1309,26 +2118,161 @@
        ======================================================= */
 
     const prayerList =
-      document.getElementById("prayerList");
+      document.getElementById(
+        "prayerList"
+      );
 
     const nextPrayerName =
-      document.getElementById("nextPrayerName");
+      document.getElementById(
+        "nextPrayerName"
+      );
 
     const nextPrayerTime =
-      document.getElementById("nextPrayerTime");
+      document.getElementById(
+        "nextPrayerTime"
+      );
 
     const countdown =
-      document.getElementById("countdown");
+      document.getElementById(
+        "countdown"
+      );
 
     const dateInfo =
-      document.getElementById("dateInfo");
+      document.getElementById(
+        "dateInfo"
+      );
 
     const refreshBtn =
-      document.getElementById("refreshBtn");
+      document.getElementById(
+        "refreshBtn"
+      );
+
+    const settingsToggle =
+      document.getElementById(
+        "settingsToggle"
+      );
+
+    const settingsPanel =
+      document.getElementById(
+        "settingsPanel"
+      );
+
+    const settingsArrow =
+      document.getElementById(
+        "settingsArrow"
+      );
+
+    const cityInput =
+      document.getElementById(
+        "cityInput"
+      );
+
+    const countryInput =
+      document.getElementById(
+        "countryInput"
+      );
+
+    const methodSelect =
+      document.getElementById(
+        "methodSelect"
+      );
+
+    const schoolSelect =
+      document.getElementById(
+        "schoolSelect"
+      );
+
+    const saveSettingsBtn =
+      document.getElementById(
+        "saveSettingsBtn"
+      );
+
+    const resetSettingsBtn =
+      document.getElementById(
+        "resetSettingsBtn"
+      );
+
+    const locationBadge =
+      document.getElementById(
+        "locationBadge"
+      );
+
+    const gregorianDate =
+      document.getElementById(
+        "gregorianDate"
+      );
+
+    const hijriDate =
+      document.getElementById(
+        "hijriDate"
+      );
+
+    const sunriseTime =
+      document.getElementById(
+        "sunriseTime"
+      );
+
+    const jummahBox =
+      document.getElementById(
+        "jummahBox"
+      );
+
+    const jummahText =
+      document.getElementById(
+        "jummahText"
+      );
 
 
     /* =======================================================
-       FORMAT TIME
+       APPLY SETTINGS TO FORM
+       ======================================================= */
+
+    function applySettingsToForm() {
+
+      cityInput.value =
+        salatSettings.city;
+
+      countryInput.value =
+        salatSettings.country;
+
+      methodSelect.value =
+        salatSettings.method;
+
+      schoolSelect.value =
+        salatSettings.school;
+
+    }
+
+
+    /* =======================================================
+       UPDATE API URL
+       ======================================================= */
+
+    function getApiUrl() {
+
+      const city =
+        encodeURIComponent(
+          salatSettings.city
+        );
+
+      const country =
+        encodeURIComponent(
+          salatSettings.country
+        );
+
+      return (
+        `https://api.aladhan.com/v1/timingsByCity` +
+        `?city=${city}` +
+        `&country=${country}` +
+        `&method=${salatSettings.method}` +
+        `&school=${salatSettings.school}`
+      );
+
+    }
+
+
+    /* =======================================================
+       12 HOUR TIME
        ======================================================= */
 
     function convertTo12Hour(time) {
@@ -1338,73 +2282,64 @@
       }
 
       const cleanTime =
-        time.split(" ")[0];
+        time
+          .split(" ")[0]
+          .trim();
 
       const parts =
         cleanTime.split(":");
 
       let hour =
-        parseInt(parts[0], 10);
+        parseInt(
+          parts[0],
+          10
+        );
 
       const minute =
         parts[1];
 
       const ampm =
-        hour >= 12 ? "PM" : "AM";
+        hour >= 12
+          ? "PM"
+          : "AM";
 
       hour =
         hour % 12 || 12;
 
-      return `${hour}:${minute} ${ampm}`;
-    }
-
-
-    /* =======================================================
-       CREATE TODAY DATE
-       ======================================================= */
-
-    function getTodayDate() {
-
-      const now =
-        new Date();
-
       return (
-        now.getFullYear() +
-        "-" +
-        String(now.getMonth() + 1).padStart(2, "0") +
-        "-" +
-        String(now.getDate()).padStart(2, "0")
+        `${hour}:${minute} ${ampm}`
       );
 
     }
 
 
     /* =======================================================
-       CREATE DATE OBJECT
+       CREATE PRAYER DATE
        ======================================================= */
 
     function createPrayerDate(time) {
 
-      const [hours, minutes] =
+      const cleanTime =
         time
-          .split(" ")[0]
+          .split(" ")[0];
+
+      const parts =
+        cleanTime
           .split(":")
           .map(Number);
-
-      const now =
-        new Date();
 
       const date =
         new Date();
 
       date.setHours(
-        hours,
-        minutes,
+        parts[0],
+        parts[1],
         0,
         0
       );
 
       return date;
+
     }
 
 
@@ -1420,40 +2355,79 @@
         </div>
       `;
 
+
+      if (countdownTimer) {
+
+        clearInterval(
+          countdownTimer
+        );
+
+        countdownTimer = null;
+
+      }
+
+
+      locationBadge.textContent =
+        `📍 ${salatSettings.city}, ${salatSettings.country}`;
+
+
       try {
 
         const response =
-          await fetch(API_URL, {
-            cache: "no-store"
-          });
+          await fetch(
+            getApiUrl(),
+            {
+              cache: "no-store"
+            }
+          );
+
 
         if (!response.ok) {
+
           throw new Error(
             "Prayer API request failed"
           );
+
         }
+
 
         const data =
           await response.json();
+
 
         if (
           !data ||
           data.code !== 200 ||
           !data.data
         ) {
+
           throw new Error(
             "Invalid prayer time data"
           );
+
         }
+
 
         prayerTimes =
           data.data.timings || {};
 
-        renderPrayerList(
+
+        renderDates(
           data.data
         );
 
+
+        renderSunrise();
+
+
+        renderJummah();
+
+
+        renderPrayerList();
+
+
         updateNextPrayer();
+
 
       } catch (error) {
 
@@ -1462,21 +2436,145 @@
           error
         );
 
+
         prayerList.innerHTML = `
           <div class="error">
-            নামাজের সময় লোড করা যাচ্ছে না।<br>
-            Internet connection check করে আবার Refresh চাপুন।
+            নামাজের সময় লোড করা যাচ্ছে না।<br><br>
+            City / Country সঠিক আছে কিনা দেখুন।
+            তারপর Refresh করুন।
           </div>
         `;
+
 
         nextPrayerName.textContent =
           "Unavailable";
 
+
         nextPrayerTime.textContent =
           "--";
 
+
         countdown.textContent =
           "--:--:--";
+
+
+        sunriseTime.textContent =
+          "--";
+
+      }
+
+    }
+
+
+    /* =======================================================
+       RENDER DATES
+       ======================================================= */
+
+    function renderDates(data) {
+
+      if (
+        data.date &&
+        data.date.gregorian
+      ) {
+
+        const g =
+          data.date.gregorian;
+
+        gregorianDate.textContent =
+          `${g.day} ${g.month.en} ${g.year}`;
+
+      }
+
+
+      if (
+        data.date &&
+        data.date.hijri
+      ) {
+
+        const h =
+          data.date.hijri;
+
+        hijriDate.textContent =
+          `${h.day} ${h.month.en} ${h.year} AH`;
+
+      }
+
+
+      if (
+        data.date &&
+        data.date.readable
+      ) {
+
+        dateInfo.textContent =
+          `${data.date.readable} • ` +
+          `${salatSettings.city}`;
+
+      } else {
+
+        dateInfo.textContent =
+          `Today • ${salatSettings.city}`;
+
+      }
+
+    }
+
+
+    /* =======================================================
+       SUNRISE
+       ======================================================= */
+
+    function renderSunrise() {
+
+      if (
+        prayerTimes.Sunrise
+      ) {
+
+        sunriseTime.textContent =
+          convertTo12Hour(
+            prayerTimes.Sunrise
+          );
+
+      } else {
+
+        sunriseTime.textContent =
+          "--";
+
+      }
+
+    }
+
+
+    /* =======================================================
+       JUMMAH
+       ======================================================= */
+
+    function renderJummah() {
+
+      const today =
+        new Date();
+
+      const day =
+        today.getDay();
+
+      if (day === 5) {
+
+        jummahBox.classList.add(
+          "show"
+        );
+
+        jummahText.textContent =
+          "আজ শুক্রবার। স্থানীয় মসজিদের " +
+          "জুমার জামাতের সময় অনুসরণ করুন। " +
+          "এই system আপনার configured prayer calculation-এর " +
+          "Dhuhr time দেখাবে, কিন্তু Jummah congregation time " +
+          "স্থানীয় মসজিদ অনুযায়ী ভিন্ন হতে পারে।";
+
+      } else {
+
+        jummahBox.classList.remove(
+          "show"
+        );
+
       }
 
     }
@@ -1486,28 +2584,38 @@
        RENDER PRAYER LIST
        ======================================================= */
 
-    function renderPrayerList(data) {
+    function renderPrayerList() {
 
       prayerList.innerHTML = "";
+
 
       prayerDefinitions.forEach(
         prayer => {
 
           const time =
-            prayerTimes[prayer.key];
+            prayerTimes[
+              prayer.key
+            ];
+
 
           if (!time) {
             return;
           }
 
+
           const row =
-            document.createElement("div");
+            document.createElement(
+              "div"
+            );
+
 
           row.className =
             "prayer-row";
 
+
           row.dataset.prayer =
             prayer.key;
+
 
           row.innerHTML = `
 
@@ -1533,34 +2641,19 @@
 
           `;
 
-          prayerList.appendChild(row);
+
+          prayerList.appendChild(
+            row
+          );
 
         }
       );
-
-
-      /* API DATE */
-
-      if (
-        data.date &&
-        data.date.readable
-      ) {
-
-        dateInfo.textContent =
-          `${data.date.readable} • ${CITY}`;
-
-      } else {
-
-        dateInfo.textContent =
-          `Today • ${CITY}`;
-
-      }
 
     }
 
 
     /* =======================================================
-       FIND NEXT PRAYER
+       GET NEXT PRAYER
        ======================================================= */
 
     function getNextPrayer() {
@@ -1570,26 +2663,36 @@
 
       const prayersToday = [];
 
+
       prayerDefinitions.forEach(
         prayer => {
 
           const raw =
-            prayerTimes[prayer.key];
+            prayerTimes[
+              prayer.key
+            ];
+
 
           if (!raw) {
             return;
           }
 
-          const time =
-            raw.split(" ")[0];
 
           const date =
-            createPrayerDate(time);
+            createPrayerDate(
+              raw
+            );
+
 
           prayersToday.push({
+
             ...prayer,
-            rawTime: time,
+
+            rawTime:
+              raw.split(" ")[0],
+
             date
+
           });
 
         }
@@ -1597,7 +2700,8 @@
 
 
       for (
-        const prayer of prayersToday
+        const prayer of
+        prayersToday
       ) {
 
         if (
@@ -1611,32 +2715,39 @@
       }
 
 
-      /*
-        If all prayers have passed,
-        next prayer = tomorrow's Fajr
-      */
-
-      if (prayersToday.length > 0) {
+      if (
+        prayersToday.length > 0
+      ) {
 
         const first =
           prayersToday[0];
+
 
         const tomorrow =
           new Date(
             first.date
           );
 
+
         tomorrow.setDate(
           tomorrow.getDate() + 1
         );
 
+
         return {
+
           ...first,
-          date: tomorrow,
-          tomorrow: true
+
+          date:
+            tomorrow,
+
+          tomorrow:
+            true
+
         };
 
       }
+
 
       return null;
 
@@ -1652,6 +2763,7 @@
       const next =
         getNextPrayer();
 
+
       if (!next) {
 
         nextPrayerName.textContent =
@@ -1664,11 +2776,14 @@
           "--:--:--";
 
         return;
+
       }
 
 
       nextPrayerName.textContent =
-        `${next.name}${next.tomorrow ? " • Tomorrow" : ""}`;
+        `${next.name}` +
+        `${next.tomorrow ? " • Tomorrow" : ""}`;
+
 
       nextPrayerTime.textContent =
         convertTo12Hour(
@@ -1676,30 +2791,31 @@
         );
 
 
-      /*
-        Highlight active/next prayer
-      */
-
       document
-        .querySelectorAll(".prayer-row")
-        .forEach(row => {
+        .querySelectorAll(
+          ".prayer-row"
+        )
+        .forEach(
+          row => {
 
-          row.classList.remove(
-            "active"
-          );
-
-          if (
-            row.dataset.prayer ===
-            next.key
-          ) {
-
-            row.classList.add(
+            row.classList.remove(
               "active"
             );
 
-          }
 
-        });
+            if (
+              row.dataset.prayer ===
+              next.key
+            ) {
+
+              row.classList.add(
+                "active"
+              );
+
+            }
+
+          }
+        );
 
 
       if (countdownTimer) {
@@ -1714,6 +2830,7 @@
       updateCountdown(
         next.date
       );
+
 
       countdownTimer =
         setInterval(
@@ -1734,26 +2851,25 @@
        COUNTDOWN
        ======================================================= */
 
-    function updateCountdown(targetDate) {
+    function updateCountdown(
+      targetDate
+    ) {
 
       const now =
         new Date();
 
-      let difference =
+
+      const difference =
         targetDate.getTime() -
         now.getTime();
 
-
-      /*
-        Target passed.
-        Recalculate next prayer.
-      */
 
       if (
         difference <= 0
       ) {
 
         updateNextPrayer();
+
         return;
 
       }
@@ -1764,16 +2880,19 @@
           difference / 1000
         );
 
+
       const hours =
         Math.floor(
           totalSeconds / 3600
         );
+
 
       const minutes =
         Math.floor(
           (totalSeconds % 3600) /
           60
         );
+
 
       const seconds =
         totalSeconds % 60;
@@ -1788,7 +2907,125 @@
 
 
     /* =======================================================
-       REFRESH BUTTON
+       SETTINGS OPEN / CLOSE
+       ======================================================= */
+
+    settingsToggle.addEventListener(
+      "click",
+      () => {
+
+        const isOpen =
+          settingsPanel.classList.toggle(
+            "open"
+          );
+
+
+        settingsArrow.textContent =
+          isOpen
+            ? "−"
+            : "＋";
+
+      }
+    );
+
+
+    /* =======================================================
+       SAVE SETTINGS
+       ======================================================= */
+
+    saveSettingsBtn.addEventListener(
+      "click",
+      () => {
+
+        const city =
+          cityInput.value.trim();
+
+
+        const country =
+          countryInput.value.trim();
+
+
+        if (
+          !city ||
+          !country
+        ) {
+
+          alert(
+            "City এবং Country দুটোই দিতে হবে।"
+          );
+
+          return;
+
+        }
+
+
+        salatSettings = {
+
+          city,
+
+          country,
+
+          method:
+            methodSelect.value,
+
+          school:
+            schoolSelect.value
+
+        };
+
+
+        localStorage.setItem(
+          SALAT_SETTINGS_KEY,
+          JSON.stringify(
+            salatSettings
+          )
+        );
+
+
+        settingsPanel.classList.remove(
+          "open"
+        );
+
+
+        settingsArrow.textContent =
+          "＋";
+
+
+        loadPrayerTimes();
+
+      }
+    );
+
+
+    /* =======================================================
+       RESET SETTINGS
+       ======================================================= */
+
+    resetSettingsBtn.addEventListener(
+      "click",
+      () => {
+
+        salatSettings = {
+          ...DEFAULT_SETTINGS
+        };
+
+
+        localStorage.removeItem(
+          SALAT_SETTINGS_KEY
+        );
+
+
+        applySettingsToForm();
+
+
+        loadPrayerTimes();
+
+      }
+    );
+
+
+    /* =======================================================
+       REFRESH
        ======================================================= */
 
     refreshBtn.addEventListener(
@@ -1803,7 +3040,6 @@
 
     /* =======================================================
        AUTO REFRESH
-       Every 30 minutes
        ======================================================= */
 
     setInterval(
@@ -1814,13 +3050,6 @@
       },
       30 * 60 * 1000
     );
-
-
-    /* =======================================================
-       START
-       ======================================================= */
-
-    loadPrayerTimes();
 
 
     /* =======================================================
@@ -1852,6 +3081,15 @@
       );
 
     }
+
+
+    /* =======================================================
+       INITIALIZE
+       ======================================================= */
+
+    applySettingsToForm();
+
+    loadPrayerTimes();
 
   </script>
 
