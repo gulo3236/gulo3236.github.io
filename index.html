@@ -1,35 +1,16 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
+
   <meta
     name="viewport"
     content="width=device-width, initial-scale=1.0"
-  />
+  >
 
   <title>Personal Course Studio</title>
 
   <style>
-    /* =========================================================
-       PERSONAL COURSE STUDIO
-       Clean White + Light Blue UI
-       ========================================================= */
-
-    :root {
-      --bg: #f7f8fa;
-      --panel: #ffffff;
-      --border: #e1e4e8;
-      --border-soft: #eceff2;
-      --text: #202124;
-      --muted: #7a7f87;
-      --blue: #d5e9fb;
-      --blue-strong: #b9d9f7;
-      --blue-text: #245579;
-      --green: #65c89b;
-      --danger: #e57373;
-      --shadow: 0 4px 18px rgba(25, 35, 45, 0.06);
-      --radius: 12px;
-    }
 
     * {
       box-sizing: border-box;
@@ -37,1242 +18,1429 @@
       padding: 0;
     }
 
-    html,
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --bg: #f4f8ff;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #667085;
+      --border: #e2e8f0;
+      --danger: #dc2626;
+      --success: #16a34a;
+    }
+
     body {
-      width: 100%;
-      min-height: 100%;
       font-family:
         Inter,
         "Segoe UI",
         Arial,
-        "Noto Sans Bengali",
         sans-serif;
+
       background: var(--bg);
       color: var(--text);
+
+      min-height: 100vh;
+
+      overflow-x: hidden;
     }
 
-    body {
-      padding: 14px;
-    }
 
-    button,
-    input {
-      font: inherit;
-    }
-
-    button {
-      cursor: pointer;
-    }
-
-    /* =========================================================
-       APP
-       ========================================================= */
-
-    .app {
-      width: 100%;
-      max-width: 1500px;
-      margin: 0 auto;
-      min-height: calc(100vh - 28px);
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    /* =========================================================
-       TOP BAR
-       ========================================================= */
+    /* ==========================================
+       TOPBAR
+    ========================================== */
 
     .topbar {
-      min-height: 58px;
-      background: var(--panel);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+      height: 70px;
+
+      background: #ffffff;
+
+      border-bottom:
+        1px solid var(--border);
 
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
-      gap: 15px;
-      padding: 9px 12px;
-    }
 
-    .top-left {
-      display: flex;
-      align-items: center;
-      gap: 11px;
-      min-width: 0;
-    }
+      padding:
+        0 20px;
 
-    .app-logo {
-      width: 38px;
-      height: 38px;
-      border-radius: 10px;
-      background: var(--blue);
-      color: var(--blue-text);
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-weight: 700;
-      font-size: 16px;
-      flex-shrink: 0;
-    }
-
-    .title-area {
-      min-width: 0;
-    }
-
-    .title-area h1 {
-      font-size: 15px;
-      font-weight: 600;
-      white-space: nowrap;
-    }
-
-    .title-area p {
-      color: var(--muted);
-      font-size: 11px;
-      margin-top: 2px;
-    }
-
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-
-    .small-btn {
-      border: 1px solid var(--border);
-      background: #fff;
-      color: #4e5359;
-
-      min-height: 34px;
-      padding: 0 12px;
-      border-radius: 8px;
-
-      font-size: 12px;
-      transition: 0.2s ease;
-    }
-
-    .small-btn:hover {
-      background: #f6f8fa;
-      border-color: #cfd5db;
-    }
-
-    .record-btn {
-      background: #fff5f5;
-      color: #bd5656;
-      border-color: #f0cccc;
-    }
-
-    .record-btn.active {
-      background: #ffe3e3;
-      color: #b72f2f;
-    }
-
-    /* =========================================================
-       WORKSPACE
-       ========================================================= */
-
-    .workspace {
-      flex: 1;
-      min-height: 650px;
-
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) 215px;
-      gap: 11px;
-    }
-
-    /* =========================================================
-       MAIN STAGE
-       ========================================================= */
-
-    .stage {
       position: relative;
+
+      z-index: 100;
+    }
+
+
+    .topbar-left {
+      display: flex;
+
+      align-items: center;
+
+      gap: 11px;
+
       min-width: 0;
-      min-height: 650px;
-
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-
-      overflow: hidden;
     }
 
-    /* =========================================================
-       STAGE BRAND / LABEL
-       ========================================================= */
 
-    .stage-header {
-      position: absolute;
-      left: 13px;
-      top: 12px;
-      z-index: 50;
-    }
+    .studio-logo {
+      width: 42px;
 
-    .stage-label {
-      background: rgba(255, 255, 255, 0.94);
-      border: 1px solid var(--border-soft);
-      border-radius: 7px;
+      height: 42px;
 
-      padding: 6px 9px;
+      min-width: 42px;
 
-      color: #555b61;
-      font-size: 11px;
+      border-radius: 12px;
 
-      cursor: grab;
-      user-select: none;
-      -webkit-user-select: none;
-      touch-action: none;
+      background:
+        linear-gradient(
+          135deg,
+          #2563eb,
+          #06b6d4
+        );
 
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
-    }
-
-    .stage-label:active {
-      cursor: grabbing;
-    }
-
-    /* =========================================================
-       CONTENT AREA
-       ========================================================= */
-
-    .content-area {
-      position: absolute;
-      inset: 0;
+      color: #ffffff;
 
       display: flex;
+
       align-items: center;
+
       justify-content: center;
 
-      background: #fff;
-      overflow: hidden;
-    }
+      font-size: 14px;
 
-    .welcome-content {
-      text-align: center;
-      max-width: 430px;
-      padding: 25px;
-    }
-
-    .welcome-icon {
-      width: 58px;
-      height: 58px;
-      border-radius: 15px;
-      background: #e7f2fc;
-      color: #4b83ad;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      margin: 0 auto 13px;
-
-      font-size: 25px;
-    }
-
-    .welcome-content h2 {
-      font-size: 19px;
-      font-weight: 500;
-      margin-bottom: 7px;
-    }
-
-    .welcome-content p {
-      color: var(--muted);
-      font-size: 12px;
-      line-height: 1.7;
-    }
-
-    .content-media {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: none;
-      background: #fff;
-    }
-
-    .content-video {
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: none;
-      background: #111;
-    }
-
-    /* =========================================================
-       MENTOR VIDEO
-       ========================================================= */
-
-    .mentor-card {
-      position: absolute;
-      z-index: 60;
-
-      top: 17px;
-      right: 17px;
-
-      width: 190px;
-      height: 125px;
-
-      background: #eaf4fc;
-      border: 1px solid #b8d8f2;
-      border-radius: 9px;
+      font-weight: 800;
 
       overflow: hidden;
 
-      box-shadow: 0 6px 18px rgba(35, 80, 110, 0.08);
-
-      resize: both;
-      min-width: 130px;
-      min-height: 90px;
-      max-width: 45%;
-      max-height: 45%;
-
-      touch-action: none;
+      white-space: nowrap;
     }
 
-    /* Mentor header text completely hidden */
-    .mentor-header {
-      display: none;
+
+    .top-title {
+      min-width: 0;
     }
 
-    .mentor-video {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: none;
-      background: transparent;
-    }
 
-    .mentor-placeholder {
-      width: 100%;
-      height: 100%;
+    .top-title h1 {
+      font-size: 17px;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      line-height: 1.2;
 
-      text-align: center;
-
-      color: #557187;
-      font-size: 11px;
-      line-height: 1.5;
-      padding: 20px;
-
-      user-select: none;
-      -webkit-user-select: none;
-    }
-
-    .mentor-placeholder span {
-      display: block;
-      font-size: 25px;
-      margin-bottom: 5px;
-    }
-
-    /* =========================================================
-       BRAND BADGE
-       ========================================================= */
-
-    .brand-badge {
-      position: absolute;
-      z-index: 55;
-
-      left: 17px;
-      bottom: 17px;
-
-      background: rgba(255, 255, 255, 0.94);
-      border: 1px solid var(--border);
-
-      border-radius: 7px;
-
-      padding: 7px 10px;
-
-      color: #555b61;
-      font-size: 11px;
-
-      box-shadow: 0 3px 10px rgba(0, 0, 0, 0.04);
-
-      max-width: 300px;
-      overflow: hidden;
-      text-overflow: ellipsis;
       white-space: nowrap;
 
-      cursor: grab;
-      user-select: none;
-      -webkit-user-select: none;
-      touch-action: none;
-    }
-
-    .brand-badge:active {
-      cursor: grabbing;
-    }
-
-    .brand-badge.dragging,
-    .stage-label.dragging,
-    .mentor-card.dragging {
-      cursor: grabbing;
-      user-select: none;
-      -webkit-user-select: none;
-    }
-
-    /* =========================================================
-       RIGHT PANEL
-       ========================================================= */
-
-    .students-panel {
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-
-      display: flex;
-      flex-direction: column;
-      min-width: 0;
       overflow: hidden;
-    }
 
-    .panel-header {
-      padding: 13px 12px 11px;
-      border-bottom: 1px solid var(--border-soft);
-    }
-
-    .panel-title-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 5px;
-    }
-
-    .panel-title {
-      font-size: 12px;
-      font-weight: 500;
-      color: #555b61;
-    }
-
-    .student-count {
-      font-size: 10px;
-      color: var(--muted);
-      background: #f4f5f6;
-      border-radius: 20px;
-      padding: 3px 7px;
-    }
-
-    .panel-subtitle {
-      font-size: 10px;
-      color: var(--muted);
-      margin-top: 4px;
-    }
-
-    .students-list {
-      flex: 1;
-      overflow-y: auto;
-      padding: 5px;
-    }
-
-    .students-list::-webkit-scrollbar {
-      width: 4px;
-    }
-
-    .students-list::-webkit-scrollbar-thumb {
-      background: #d9dde1;
-      border-radius: 10px;
-    }
-
-    /* =========================================================
-       STUDENT
-       ========================================================= */
-
-    .student {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-
-      padding: 7px 6px;
-
-      border-bottom: 1px solid #f0f1f2;
-
-      transition: 0.18s ease;
-    }
-
-    .student:hover {
-      background: #fafbfc;
-    }
-
-    .avatar {
-      width: 28px;
-      height: 28px;
-
-      border-radius: 50%;
-
-      background: #d7e9fa;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      color: #4e7c9e;
-      font-size: 10px;
-      font-weight: 600;
-
-      flex-shrink: 0;
-
-      overflow: hidden;
-    }
-
-    .avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .student-info {
-      min-width: 0;
-      flex: 1;
-    }
-
-    .student-name {
-      font-size: 10px;
-      color: #444a50;
-
-      overflow: hidden;
-      white-space: nowrap;
       text-overflow: ellipsis;
     }
 
-    .student-status {
-      display: flex;
-      align-items: center;
-      gap: 4px;
+
+    .top-title p {
+      color: var(--muted);
+
+      font-size: 11px;
 
       margin-top: 3px;
 
-      font-size: 8px;
-      color: #9a9ea3;
+      white-space: nowrap;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
     }
 
-    .online-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: var(--green);
+
+    .top-actions {
+      display: flex;
+
+      align-items: center;
+
+      gap: 8px;
     }
 
-    .student-menu {
+
+    button {
       border: 0;
-      background: transparent;
-      color: #a0a5aa;
-      font-size: 15px;
-      padding: 3px;
+
+      cursor: pointer;
+
+      font-family: inherit;
     }
 
-    /* =========================================================
-       PANEL FOOTER
-       ========================================================= */
 
-    .panel-footer {
-      padding: 9px;
-      border-top: 1px solid var(--border-soft);
+    .top-btn {
+      padding:
+        9px 13px;
+
+      border-radius: 9px;
+
+      font-size: 13px;
+
+      font-weight: 700;
     }
 
-    .add-student {
-      width: 100%;
 
-      min-height: 32px;
+    .admin-btn {
+      background: #eff6ff;
 
-      border: 1px solid #c9dfee;
-      background: #edf7ff;
-      color: #48708d;
-
-      border-radius: 7px;
-
-      font-size: 10px;
+      color: #2563eb;
     }
 
-    .add-student:hover {
-      background: #e2f2ff;
+
+    .logout-btn {
+      background: #fef2f2;
+
+      color: #dc2626;
     }
 
-    /* =========================================================
-       BOTTOM TOOLBAR
-       ========================================================= */
 
-    .toolbar {
-      min-height: 55px;
+    /* ==========================================
+       MAIN
+    ========================================== */
 
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
+    .page {
+      max-width: 1450px;
 
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      margin: 0 auto;
 
-      padding: 8px 10px;
-
-      gap: 10px;
-    }
-
-    .toolbar-group {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .tool-btn {
-      height: 34px;
-
-      border: 1px solid var(--border);
-      background: #fff;
-      color: #555b61;
-
-      border-radius: 7px;
-
-      padding: 0 10px;
-
-      font-size: 10px;
-
-      transition: 0.2s ease;
-    }
-
-    .tool-btn:hover {
-      background: #f7f9fa;
-      border-color: #cdd3d8;
-    }
-
-    .tool-btn.primary {
-      background: #e8f4fd;
-      border-color: #c5dfef;
-      color: #3f6e8c;
-    }
-
-    .tool-btn.danger {
-      color: #bd5959;
-      background: #fff7f7;
-      border-color: #f0d5d5;
-    }
-
-    .status {
-      font-size: 10px;
-      color: var(--muted);
-
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .status-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #aab0b5;
-    }
-
-    .status-dot.recording {
-      background: #d95c5c;
-      animation: pulse 1s infinite;
-    }
-
-    @keyframes pulse {
-      0% {
-        opacity: 1;
-      }
-
-      50% {
-        opacity: 0.35;
-      }
-
-      100% {
-        opacity: 1;
-      }
-    }
-
-    /* =========================================================
-       SETTINGS MODAL
-       ========================================================= */
-
-    .modal-overlay {
-      position: fixed;
-      inset: 0;
-
-      background: rgba(20, 25, 30, 0.24);
-
-      display: none;
-      align-items: center;
-      justify-content: center;
-
-      z-index: 100;
       padding: 20px;
     }
+
+
+    .studio-layout {
+      display: grid;
+
+      grid-template-columns:
+        minmax(0, 1fr)
+        300px;
+
+      gap: 18px;
+
+      align-items: start;
+    }
+
+
+    /* ==========================================
+       STAGE
+    ========================================== */
+
+    .stage {
+      position: relative;
+
+      min-height: 650px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #fafdff,
+          #edf5ff
+        );
+
+      border:
+        1px solid #dbe7f5;
+
+      border-radius: 20px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 15px 45px
+        rgba(15, 23, 42, 0.07);
+    }
+
+
+    .stage-content {
+      position: absolute;
+
+      inset: 0;
+
+      display: flex;
+
+      flex-direction: column;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 30px;
+
+      text-align: center;
+
+      pointer-events: none;
+    }
+
+
+    .stage-content h2 {
+      font-size: 28px;
+
+      margin-bottom: 10px;
+    }
+
+
+    .stage-content p {
+      color: var(--muted);
+
+      max-width: 600px;
+
+      line-height: 1.6;
+    }
+
+
+    .empty-icon {
+      width: 72px;
+
+      height: 72px;
+
+      border-radius: 20px;
+
+      background: #ffffff;
+
+      box-shadow:
+        0 8px 25px
+        rgba(37, 99, 235, 0.10);
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      font-size: 32px;
+
+      margin-bottom: 18px;
+    }
+
+
+    /* ==========================================
+       MAIN CONTENT IMAGE / VIDEO
+    ========================================== */
+
+    #mainImage,
+    #mainVideo {
+
+      position: absolute;
+
+      max-width: 100%;
+
+      max-height: 100%;
+
+      object-fit: contain;
+
+      display: none;
+
+      inset: 0;
+
+      margin: auto;
+
+      z-index: 3;
+    }
+
+
+    #mainImage {
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: contain;
+
+      padding: 20px;
+    }
+
+
+    #mainVideo {
+      width: 100%;
+
+      height: 100%;
+
+      background: #000000;
+    }
+
+
+    /* ==========================================
+       STAGE LABEL
+    ========================================== */
+
+    .stage-label {
+
+      position: absolute;
+
+      left: 28px;
+
+      top: 28px;
+
+      z-index: 20;
+
+      background:
+        rgba(255, 255, 255, 0.94);
+
+      border:
+        1px solid
+        rgba(37, 99, 235, 0.15);
+
+      padding:
+        9px 14px;
+
+      border-radius: 11px;
+
+      font-size: 13px;
+
+      font-weight: 800;
+
+      color: #1d4ed8;
+
+      box-shadow:
+        0 7px 20px
+        rgba(15, 23, 42, 0.08);
+
+      cursor: move;
+
+      user-select: none;
+
+      touch-action: none;
+    }
+
+
+    /* ==========================================
+       BRAND BADGE
+    ========================================== */
+
+    .brand-badge {
+
+      position: absolute;
+
+      left: 28px;
+
+      bottom: 28px;
+
+      z-index: 25;
+
+      background:
+        rgba(255, 255, 255, 0.96);
+
+      border:
+        1px solid
+        rgba(37, 99, 235, 0.15);
+
+      padding:
+        8px 13px;
+
+      border-radius: 10px;
+
+      font-size: 12px;
+
+      font-weight: 800;
+
+      color: #2563eb;
+
+      box-shadow:
+        0 8px 20px
+        rgba(15, 23, 42, 0.08);
+
+      cursor: move;
+
+      user-select: none;
+
+      touch-action: none;
+    }
+
+
+    /* ==========================================
+       MENTOR CARD
+    ========================================== */
+
+    .mentor-card {
+
+      position: absolute;
+
+      right: 25px;
+
+      top: 25px;
+
+      width: 230px;
+
+      height: 145px;
+
+      z-index: 30;
+
+      background:
+        linear-gradient(
+          135deg,
+          #dbeafe,
+          #eff6ff
+        );
+
+      border:
+        2px solid
+        rgba(37, 99, 235, 0.15);
+
+      border-radius: 16px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 12px 30px
+        rgba(15, 23, 42, 0.13);
+
+      cursor: move;
+
+      touch-action: none;
+    }
+
+
+    .mentor-placeholder {
+
+      position: absolute;
+
+      inset: 0;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      flex-direction: column;
+
+      gap: 7px;
+
+      color: #2563eb;
+
+      text-align: center;
+
+      padding: 10px;
+    }
+
+
+    .mentor-placeholder-icon {
+      font-size: 27px;
+    }
+
+
+    .mentor-placeholder span {
+      font-size: 11px;
+
+      font-weight: 700;
+    }
+
+
+    #mentorVideo {
+
+      position: absolute;
+
+      inset: 0;
+
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+
+      display: none;
+
+      background: #000000;
+    }
+
+
+    /* ==========================================
+       STUDENT PANEL
+    ========================================== */
+
+    .side-panel {
+      background: #ffffff;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 18px;
+
+      padding: 17px;
+
+      box-shadow:
+        0 10px 30px
+        rgba(15, 23, 42, 0.05);
+    }
+
+
+    .side-title {
+      display: flex;
+
+      align-items: center;
+
+      justify-content: space-between;
+
+      margin-bottom: 15px;
+    }
+
+
+    .side-title h3 {
+      font-size: 16px;
+    }
+
+
+    .student-count {
+      background: #eff6ff;
+
+      color: #2563eb;
+
+      border-radius: 20px;
+
+      padding: 5px 9px;
+
+      font-size: 11px;
+
+      font-weight: 800;
+    }
+
+
+    .student-list {
+      display: grid;
+
+      gap: 9px;
+
+      max-height: 450px;
+
+      overflow-y: auto;
+    }
+
+
+    .student-item {
+      display: flex;
+
+      align-items: center;
+
+      gap: 10px;
+
+      padding: 9px;
+
+      background: #f8fbff;
+
+      border:
+        1px solid #edf2f7;
+
+      border-radius: 11px;
+    }
+
+
+    .student-photo {
+      width: 36px;
+
+      height: 36px;
+
+      min-width: 36px;
+
+      border-radius: 50%;
+
+      background: #dbeafe;
+
+      display: flex;
+
+      align-items: center;
+
+      justify-content: center;
+
+      overflow: hidden;
+
+      color: #2563eb;
+
+      font-weight: 800;
+
+      font-size: 12px;
+    }
+
+
+    .student-photo img {
+      width: 100%;
+
+      height: 100%;
+
+      object-fit: cover;
+    }
+
+
+    .student-info {
+      min-width: 0;
+    }
+
+
+    .student-name {
+      font-size: 13px;
+
+      font-weight: 700;
+
+      white-space: nowrap;
+
+      overflow: hidden;
+
+      text-overflow: ellipsis;
+    }
+
+
+    .student-status {
+      font-size: 10px;
+
+      color: #16a34a;
+
+      margin-top: 2px;
+    }
+
+
+    .empty-students {
+      padding: 25px 10px;
+
+      text-align: center;
+
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+
+    /* ==========================================
+       TOOLBAR
+    ========================================== */
+
+    .toolbar {
+      margin-top: 15px;
+
+      background: #ffffff;
+
+      border:
+        1px solid var(--border);
+
+      border-radius: 16px;
+
+      padding: 11px;
+
+      display: flex;
+
+      flex-wrap: wrap;
+
+      align-items: center;
+
+      gap: 8px;
+
+      box-shadow:
+        0 8px 25px
+        rgba(15, 23, 42, 0.05);
+    }
+
+
+    .tool-btn {
+      padding:
+        10px 13px;
+
+      border-radius: 10px;
+
+      background: #f8fafc;
+
+      border:
+        1px solid #e2e8f0;
+
+      color: #334155;
+
+      font-size: 12px;
+
+      font-weight: 700;
+    }
+
+
+    .tool-btn:hover {
+      background: #eff6ff;
+
+      color: #2563eb;
+    }
+
+
+    .record-btn {
+      background: #fee2e2;
+
+      color: #dc2626;
+
+      border-color: #fecaca;
+    }
+
+
+    .status {
+      margin-left: auto;
+
+      font-size: 11px;
+
+      color: var(--muted);
+
+      padding:
+        0 6px;
+    }
+
+
+    /* ==========================================
+       HIDDEN FILE INPUTS
+    ========================================== */
+
+    .hidden {
+      display: none;
+    }
+
+
+    /* ==========================================
+       SETTINGS MODAL
+    ========================================== */
+
+    .modal-overlay {
+
+      position: fixed;
+
+      inset: 0;
+
+      background:
+        rgba(15, 23, 42, 0.48);
+
+      display: none;
+
+      align-items: center;
+
+      justify-content: center;
+
+      padding: 20px;
+
+      z-index: 500;
+    }
+
 
     .modal-overlay.show {
       display: flex;
     }
 
+
     .modal {
+
       width: 100%;
-      max-width: 430px;
 
-      background: #fff;
-      border: 1px solid var(--border);
-      border-radius: 14px;
+      max-width: 450px;
 
-      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.12);
+      background: #ffffff;
 
-      overflow: hidden;
+      border-radius: 18px;
+
+      padding: 22px;
+
+      box-shadow:
+        0 25px 70px
+        rgba(0, 0, 0, 0.22);
     }
 
-    .modal-head {
-      padding: 15px;
-      border-bottom: 1px solid var(--border-soft);
+
+    .modal-header {
 
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
+
+      margin-bottom: 20px;
     }
 
-    .modal-head h3 {
-      font-size: 14px;
-      font-weight: 600;
-    }
 
-    .close-modal {
-      border: 0;
-      background: transparent;
-      color: #888;
+    .modal-header h3 {
       font-size: 18px;
     }
 
-    .modal-body {
-      padding: 15px;
+
+    .close-btn {
+
+      width: 34px;
+
+      height: 34px;
+
+      border-radius: 9px;
+
+      background: #f1f5f9;
+
+      font-size: 18px;
+
+      color: #475569;
     }
 
-    .setting-group {
+
+    .form-group {
       margin-bottom: 15px;
     }
 
-    .setting-group:last-child {
-      margin-bottom: 0;
-    }
 
-    .setting-label {
+    .form-group label {
       display: block;
 
-      font-size: 10px;
-      color: #6f757b;
+      font-size: 12px;
 
-      margin-bottom: 6px;
+      font-weight: 800;
+
+      margin-bottom: 7px;
     }
 
-    .text-input {
+
+    .form-group input,
+    .form-group select {
+
       width: 100%;
-      height: 36px;
 
-      border: 1px solid var(--border);
-      border-radius: 7px;
+      padding: 11px 12px;
 
-      padding: 0 10px;
+      border:
+        1px solid #dbe3ed;
+
+      border-radius: 10px;
 
       outline: none;
 
-      color: #454a50;
-      font-size: 11px;
+      font-family: inherit;
     }
 
-    .text-input:focus {
-      border-color: #b7d7ef;
-      box-shadow: 0 0 0 3px rgba(183, 215, 239, 0.18);
+
+    .form-group input:focus,
+    .form-group select:focus {
+      border-color: #2563eb;
     }
 
-    .color-row {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-    }
 
-    .color-option {
-      width: 31px;
-      height: 31px;
-
-      border-radius: 7px;
-
-      border: 2px solid #fff;
-      box-shadow: 0 0 0 1px #d7dce0;
-
-      cursor: pointer;
-    }
-
-    .modal-footer {
-      padding: 11px 15px;
-
-      border-top: 1px solid var(--border-soft);
+    .modal-actions {
 
       display: flex;
+
       justify-content: flex-end;
-      gap: 7px;
+
+      gap: 8px;
+
+      margin-top: 20px;
     }
 
-    /* =========================================================
-       TOAST
-       ========================================================= */
 
-    .toast {
-      position: fixed;
+    .save-btn {
 
-      left: 50%;
-      bottom: 25px;
+      padding:
+        10px 16px;
 
-      transform: translateX(-50%) translateY(20px);
+      background: #2563eb;
 
-      background: #272b30;
-      color: #fff;
+      color: white;
 
-      padding: 9px 14px;
+      border-radius: 10px;
 
-      border-radius: 7px;
-
-      font-size: 10px;
-
-      opacity: 0;
-      pointer-events: none;
-
-      transition: 0.25s ease;
-
-      z-index: 300;
+      font-weight: 800;
     }
 
-    .toast.show {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
+
+    /* ==========================================
+       RECORDING
+    ========================================== */
+
+    .recording {
+      animation:
+        recordingPulse
+        1.2s infinite;
     }
 
-    /* =========================================================
-       FILE INPUT
-       ========================================================= */
 
-    input[type="file"] {
-      display: none;
+    @keyframes recordingPulse {
+
+      0% {
+        box-shadow:
+          0 0 0 0
+          rgba(220, 38, 38, 0.35);
+      }
+
+      70% {
+        box-shadow:
+          0 0 0 10px
+          rgba(220, 38, 38, 0);
+      }
+
+      100% {
+        box-shadow:
+          0 0 0 0
+          rgba(220, 38, 38, 0);
+      }
+
     }
 
-    /* =========================================================
+
+    /* ==========================================
        RESPONSIVE
-       ========================================================= */
+    ========================================== */
 
-    @media (max-width: 850px) {
-      body {
-        padding: 8px;
-      }
+    @media (max-width: 1000px) {
 
-      .app {
-        min-height: calc(100vh - 16px);
-      }
-
-      .workspace {
+      .studio-layout {
         grid-template-columns: 1fr;
-        min-height: auto;
+      }
+
+      .side-panel {
+        order: 2;
       }
 
       .stage {
-        min-height: 58vh;
+        min-height: 580px;
       }
 
-      .students-panel {
-        min-height: 300px;
-      }
+    }
+
+
+    @media (max-width: 650px) {
 
       .topbar {
-        flex-wrap: wrap;
+        height: auto;
+
+        min-height: 68px;
+
+        padding:
+          10px 12px;
       }
 
-      .top-actions {
-        width: 100%;
+
+      .top-title h1 {
+        font-size: 14px;
       }
 
-      .top-actions .small-btn {
-        flex: 1;
+
+      .top-title p {
+        display: none;
       }
 
-      .toolbar {
-        flex-direction: column;
-        align-items: stretch;
+
+      .admin-btn {
+        display: none;
       }
 
-      .toolbar-group {
-        justify-content: center;
+
+      .page {
+        padding: 12px;
       }
 
-      .status {
-        justify-content: center;
-      }
-    }
-
-    @media (max-width: 520px) {
-      .title-area h1 {
-        font-size: 13px;
-      }
-
-      .title-area p {
-        font-size: 9px;
-      }
-
-      .app-logo {
-        width: 34px;
-        height: 34px;
-      }
 
       .stage {
-        min-height: 55vh;
+        min-height: 480px;
+
+        border-radius: 15px;
       }
+
+
+      .stage-content {
+        padding: 20px;
+      }
+
+
+      .stage-content h2 {
+        font-size: 21px;
+      }
+
 
       .mentor-card {
-        width: 145px;
+        width: 155px;
+
         height: 100px;
 
-        top: 12px;
         right: 12px;
+
+        top: 12px;
       }
+
+
+      .stage-label {
+        left: 12px;
+
+        top: 12px;
+
+        font-size: 10px;
+
+        padding:
+          7px 9px;
+      }
+
 
       .brand-badge {
         left: 12px;
+
         bottom: 12px;
+
+        font-size: 10px;
+
+        padding:
+          6px 9px;
       }
 
-      .tool-btn {
-        padding: 0 8px;
+
+      .toolbar {
+        padding: 8px;
       }
+
+
+      .tool-btn {
+        padding:
+          9px 10px;
+
+        font-size: 11px;
+      }
+
+
+      .status {
+        width: 100%;
+
+        margin-left: 0;
+
+        padding: 4px;
+      }
+
     }
+
   </style>
 </head>
 
+
 <body>
 
-  <div class="app">
+  <!-- ==========================================
+       LOGIN PROTECTION
+  =========================================== -->
 
-    <!-- =======================================================
-         TOP BAR
-         ======================================================= -->
+  <script>
 
-    <header class="topbar">
+    const SESSION_KEY =
+      "personalCourseStudioLoggedIn";
 
-      <div class="top-left">
+    if (
+      sessionStorage.getItem(
+        SESSION_KEY
+      ) !== "true"
+    ) {
 
-        <div class="app-logo">
-          CS
-        </div>
+      window.location.replace(
+        "login.html"
+      );
 
-        <div class="title-area">
-          <h1>Personal Course Studio</h1>
-          <p>নিজের ক্লাস ও কোর্স ভিডিও তৈরির জন্য</p>
-        </div>
+    }
 
-      </div>
-
-      <div class="top-actions">
-
-        <button
-          class="small-btn"
-          onclick="openSettings()"
-        >
-          ⚙ Settings
-        </button>
-
-        <button
-          class="small-btn"
-          onclick="openBrandSettings()"
-        >
-          ✎ Brand
-        </button>
-
-        <button
-          id="recordTopBtn"
-          class="small-btn record-btn"
-          onclick="toggleRecording()"
-        >
-          ● Record
-        </button>
-
-      </div>
-
-    </header>
+  </script>
 
 
-    <!-- =======================================================
-         WORKSPACE
-         ======================================================= -->
+  <!-- ==========================================
+       TOPBAR
+  =========================================== -->
 
-    <main class="workspace">
+  <header class="topbar">
 
-      <!-- =====================================================
-           MAIN STAGE
-           ===================================================== -->
+    <div class="topbar-left">
 
-      <section
-        class="stage"
-        id="stage"
+      <div
+        class="studio-logo"
+        id="studioLogo"
       >
+        CS
+      </div>
 
-        <!-- DRAGGABLE LABEL -->
+      <div class="top-title">
+
+        <h1 id="studioName">
+          Personal Course Studio
+        </h1>
+
+        <p id="studioSubtitle">
+          নিজের ক্লাস ও কোর্স ভিডিও তৈরির জন্য
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="top-actions">
+
+      <button
+        class="top-btn admin-btn"
+        onclick="openAdmin()"
+      >
+        ⚙ Admin
+      </button>
+
+      <button
+        class="top-btn logout-btn"
+        onclick="logout()"
+      >
+        Logout
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- ==========================================
+       MAIN
+  =========================================== -->
+
+  <main class="page">
+
+    <div class="studio-layout">
+
+
+      <!-- ======================================
+           LEFT / STUDIO
+      ======================================= -->
+
+      <section>
 
         <div
-          class="stage-header"
-          id="stageHeader"
+          class="stage"
+          id="stage"
         >
 
-          <div
-            class="stage-label"
-            id="stageLabel"
-            title="Drag করে সরাতে পারবেন"
-          >
-            Shah Neil Khan / USHA.AI
-          </div>
 
-        </div>
-
-
-        <!-- MAIN CONTENT -->
-
-        <div
-          class="content-area"
-          id="contentArea"
-        >
+          <!-- Welcome -->
 
           <div
-            class="welcome-content"
-            id="welcomeContent"
+            class="stage-content"
+            id="stageWelcome"
           >
 
-            <div class="welcome-icon">
-              ▷
+            <div class="empty-icon">
+              🎬
             </div>
 
             <h2>
-              What does a UI designer do?
+              Welcome
             </h2>
 
-            <p>
-              এখানে আপনার Slide, Image অথবা Course Video
-              চলবে।
+            <p id="welcomeText">
+              আপনার ক্লাস শুরু করার জন্য প্রস্তুত?
             </p>
 
           </div>
 
 
+          <!-- Main Image -->
+
           <img
             id="mainImage"
-            class="content-media"
-            alt="Course content"
-          />
+            alt="Main Content"
+          >
 
+
+          <!-- Main Video -->
 
           <video
             id="mainVideo"
-            class="content-video"
             controls
-          ></video>
-
-        </div>
-
-
-        <!-- ===================================================
-             MENTOR VIDEO
-             =================================================== -->
-
-        <div
-          class="mentor-card"
-          id="mentorCard"
-          title="Drag করে Mentor Video সরাতে পারবেন"
-        >
-
-          <!-- Mentor Video লেখা REMOVE করা হয়েছে -->
-
-          <div
-            class="mentor-placeholder"
-            id="mentorPlaceholder"
-          >
-
-            <div>
-              <span>◉</span>
-              Mentor Video<br />
-              Upload করুন
-            </div>
-
-          </div>
-
-          <video
-            id="mentorVideo"
-            class="mentor-video"
-            autoplay
-            muted
             playsinline
           ></video>
 
+
+          <!-- Draggable Stage Label -->
+
+          <div
+            class="stage-label"
+            id="stageLabel"
+          >
+            Shah Neil Khan / USHA.AI
+          </div>
+
+
+          <!-- Draggable Brand -->
+
+          <div
+            class="brand-badge"
+            id="brandBadge"
+          >
+            Shah Neil Khan / USHA.AI
+          </div>
+
+
+          <!-- Mentor -->
+
+          <div
+            class="mentor-card"
+            id="mentorCard"
+          >
+
+            <div
+              class="mentor-placeholder"
+              id="mentorPlaceholder"
+            >
+
+              <div
+                class="mentor-placeholder-icon"
+              >
+                🎥
+              </div>
+
+              <span>
+                Mentor Video
+              </span>
+
+            </div>
+
+            <video
+              id="mentorVideo"
+              controls
+              playsinline
+            ></video>
+
+          </div>
+
+
         </div>
 
 
-        <!-- ===================================================
-             DRAGGABLE BRAND
-             =================================================== -->
+        <!-- ==================================
+             TOOLBAR
+        =================================== -->
 
-        <div
-          class="brand-badge"
-          id="brandBadge"
-          title="Drag করে যেকোনো জায়গায় নিতে পারবেন"
+        <div class="toolbar">
+
+
+          <button
+            class="tool-btn"
+            onclick="document
+              .getElementById('imageInput')
+              .click()"
+          >
+            🖼 Slide / Image
+          </button>
+
+
+          <button
+            class="tool-btn"
+            onclick="document
+              .getElementById('mainVideoInput')
+              .click()"
+          >
+            🎬 Main Video
+          </button>
+
+
+          <button
+            class="tool-btn"
+            onclick="document
+              .getElementById('mentorVideoInput')
+              .click()"
+          >
+            🎥 Mentor Video
+          </button>
+
+
+          <button
+            class="tool-btn"
+            onclick="clearContent()"
+          >
+            🗑 Clear
+          </button>
+
+
+          <button
+            class="tool-btn"
+            onclick="toggleMainVideo()"
+          >
+            ▶ / ⏸ Play
+          </button>
+
+
+          <button
+            class="tool-btn"
+            onclick="fullscreenStage()"
+          >
+            ⛶ Fullscreen
+          </button>
+
+
+          <button
+            class="tool-btn record-btn"
+            id="recordButton"
+            onclick="toggleRecording()"
+          >
+            🔴 Record
+          </button>
+
+
+          <div
+            class="status"
+            id="status"
+          >
+            Ready
+          </div>
+
+        </div>
+
+
+        <!-- Hidden inputs -->
+
+        <input
+          type="file"
+          id="imageInput"
+          class="hidden"
+          accept="image/*"
         >
-          Shah Neil Khan / USHA.AI
-        </div>
+
+
+        <input
+          type="file"
+          id="mainVideoInput"
+          class="hidden"
+          accept="video/*"
+        >
+
+
+        <input
+          type="file"
+          id="mentorVideoInput"
+          class="hidden"
+          accept="video/*"
+        >
 
       </section>
 
 
-      <!-- =====================================================
-           STUDENT PANEL
-           ===================================================== -->
+      <!-- ======================================
+           RIGHT / STUDENTS
+      ======================================= -->
 
-      <aside class="students-panel">
+      <aside class="side-panel">
 
-        <div class="panel-header">
+        <div class="side-title">
 
-          <div class="panel-title-row">
+          <h3 id="zoomTitle">
+            Zoom Demo
+          </h3>
 
-            <div class="panel-title">
-              ▫ Zoom Demo
-            </div>
-
-            <div
-              class="student-count"
-              id="studentCount"
-            >
-              8 Students
-            </div>
-
-          </div>
-
-          <div class="panel-subtitle">
-            Student List
-          </div>
+          <span
+            class="student-count"
+            id="studentCount"
+          >
+            0 Students
+          </span>
 
         </div>
 
 
         <div
-          class="students-list"
-          id="studentsList"
-        ></div>
+          class="student-list"
+          id="studentList"
+        >
 
-
-        <div class="panel-footer">
-
-          <button
-            class="add-student"
-            onclick="addStudent()"
-          >
-            + Add Student
-          </button>
+          <div class="empty-students">
+            এখনো কোনো student যোগ করা হয়নি।
+          </div>
 
         </div>
 
       </aside>
 
-    </main>
+
+    </div>
+
+  </main>
 
 
-    <!-- =======================================================
-         TOOLBAR
-         ======================================================= -->
-
-    <footer class="toolbar">
-
-      <div class="toolbar-group">
-
-        <label class="tool-btn primary">
-
-          + Slide / Image
-
-          <input
-            type="file"
-            id="imageUpload"
-            accept="image/*"
-          />
-
-        </label>
-
-
-        <label class="tool-btn">
-
-          + Main Video
-
-          <input
-            type="file"
-            id="videoUpload"
-            accept="video/*"
-          />
-
-        </label>
-
-
-        <label class="tool-btn">
-
-          + Mentor Video
-
-          <input
-            type="file"
-            id="mentorUpload"
-            accept="video/*"
-          />
-
-        </label>
-
-
-        <button
-          class="tool-btn"
-          onclick="clearMainContent()"
-        >
-          Clear
-        </button>
-
-      </div>
-
-
-      <div class="toolbar-group">
-
-        <button
-          class="tool-btn"
-          onclick="toggleMainPlay()"
-        >
-          ▶ / ❚❚
-        </button>
-
-        <button
-          class="tool-btn"
-          onclick="fullscreenStage()"
-        >
-          ⛶ Fullscreen
-        </button>
-
-      </div>
-
-
-      <div class="status">
-
-        <span
-          id="statusDot"
-          class="status-dot"
-        ></span>
-
-        <span id="statusText">
-          Ready
-        </span>
-
-      </div>
-
-    </footer>
-
-  </div>
-
-
-  <!-- =========================================================
+  <!-- ==========================================
        SETTINGS MODAL
-       ========================================================= -->
+  =========================================== -->
 
   <div
     class="modal-overlay"
@@ -1281,14 +1449,14 @@
 
     <div class="modal">
 
-      <div class="modal-head">
+      <div class="modal-header">
 
         <h3>
           Studio Settings
         </h3>
 
         <button
-          class="close-modal"
+          class="close-btn"
           onclick="closeSettings()"
         >
           ×
@@ -1297,90 +1465,61 @@
       </div>
 
 
-      <div class="modal-body">
+      <div class="form-group">
 
-        <div class="setting-group">
+        <label>
+          Studio Name
+        </label>
 
-          <label class="setting-label">
-            Brand / Website Name
-          </label>
-
-          <input
-            type="text"
-            id="brandInput"
-            class="text-input"
-            value="Shah Neil Khan / USHA.AI"
-            placeholder="আপনার ওয়েবসাইট নাম"
-          />
-
-        </div>
-
-
-        <div class="setting-group">
-
-          <label class="setting-label">
-            Mentor Video Frame Background
-          </label>
-
-          <div class="color-row">
-
-            <button
-              class="color-option"
-              style="background:#eaf4fc"
-              onclick="changeMentorBackground('#eaf4fc')"
-            ></button>
-
-            <button
-              class="color-option"
-              style="background:#ffffff"
-              onclick="changeMentorBackground('#ffffff')"
-            ></button>
-
-            <button
-              class="color-option"
-              style="background:#e9f5ef"
-              onclick="changeMentorBackground('#e9f5ef')"
-            ></button>
-
-            <button
-              class="color-option"
-              style="background:#f7eeee"
-              onclick="changeMentorBackground('#f7eeee')"
-            ></button>
-
-            <button
-              class="color-option"
-              style="background:#f0edf8"
-              onclick="changeMentorBackground('#f0edf8')"
-            ></button>
-
-            <button
-              class="color-option"
-              style="background:#222b35"
-              onclick="changeMentorBackground('#222b35')"
-            ></button>
-
-          </div>
-
-        </div>
+        <input
+          id="modalStudioName"
+          type="text"
+        >
 
       </div>
 
 
-      <div class="modal-footer">
+      <div class="form-group">
+
+        <label>
+          Subtitle
+        </label>
+
+        <input
+          id="modalStudioSubtitle"
+          type="text"
+        >
+
+      </div>
+
+
+      <div class="form-group">
+
+        <label>
+          Brand
+        </label>
+
+        <select
+          id="modalBrand"
+        ></select>
+
+      </div>
+
+
+      <div class="modal-actions">
 
         <button
-          class="tool-btn"
+          class="top-btn admin-btn"
           onclick="closeSettings()"
         >
           Cancel
         </button>
 
         <button
-          class="tool-btn primary"
-          onclick="saveSettings()"
+          class="save-btn"
+          onclick="saveLocalSettings()"
         >
-          Save Settings
+          Save
         </button>
 
       </div>
@@ -1390,807 +1529,746 @@
   </div>
 
 
-  <!-- =========================================================
-       TOAST
-       ========================================================= -->
-
-  <div
-    class="toast"
-    id="toast"
-  ></div>
-
-
   <script>
-    /* =========================================================
-       PERSONAL COURSE STUDIO
-       JavaScript
-       ========================================================= */
+
+    /* ==========================================
+       STORAGE
+    ========================================== */
+
+    const SETTINGS_KEY =
+      "personalCourseStudioSettings";
+
+    const BRANDS_KEY =
+      "personalCourseStudioBrands";
 
 
-    /* =========================================================
-       ELEMENTS
-       ========================================================= */
+    /* ==========================================
+       DEFAULT
+    ========================================== */
 
-    const imageUpload =
-      document.getElementById("imageUpload");
+    const defaultSettings = {
 
-    const videoUpload =
-      document.getElementById("videoUpload");
+      studioName:
+        "Personal Course Studio",
 
-    const mentorUpload =
-      document.getElementById("mentorUpload");
+      studioSubtitle:
+        "নিজের ক্লাস ও কোর্স ভিডিও তৈরির জন্য",
 
-    const mainImage =
-      document.getElementById("mainImage");
+      studioLogo:
+        "CS",
 
-    const mainVideo =
-      document.getElementById("mainVideo");
+      selectedBrand:
+        "Shah Neil Khan / USHA.AI",
 
-    const mentorVideo =
-      document.getElementById("mentorVideo");
+      zoomTitle:
+        "Zoom Demo",
 
-    const mentorPlaceholder =
-      document.getElementById("mentorPlaceholder");
+      welcomeText:
+        "আপনার ক্লাস শুরু করার জন্য প্রস্তুত?"
 
-    const welcomeContent =
-      document.getElementById("welcomeContent");
-
-    const brandBadge =
-      document.getElementById("brandBadge");
-
-    const brandInput =
-      document.getElementById("brandInput");
-
-    const mentorCard =
-      document.getElementById("mentorCard");
-
-    const stageLabel =
-      document.getElementById("stageLabel");
-
-    const studentsList =
-      document.getElementById("studentsList");
-
-    const studentCount =
-      document.getElementById("studentCount");
-
-    const statusText =
-      document.getElementById("statusText");
-
-    const statusDot =
-      document.getElementById("statusDot");
-
-    const recordTopBtn =
-      document.getElementById("recordTopBtn");
+    };
 
 
-    /* =========================================================
-       STUDENT DATA
-       ========================================================= */
+    const defaultBrands = [
 
-    let students = [
-      "Student 01",
-      "Student 02",
-      "Student 03",
-      "Student 04",
-      "Student 05",
-      "Student 06",
-      "Student 07",
-      "Student 08"
+      "Shah Neil Khan / USHA.AI",
+
+      "SNK AI Academy",
+
+      "SNK IT Institute",
+
+      "My Personal Studio",
+
+      "Custom Brand"
+
     ];
 
 
-    /* =========================================================
-       RENDER STUDENTS
-       ========================================================= */
+    /* ==========================================
+       SETTINGS
+    ========================================== */
 
-    function renderStudents() {
+    function getSettings() {
 
-      studentsList.innerHTML = "";
+      try {
 
-      students.forEach((name, index) => {
+        const saved =
+          localStorage.getItem(
+            SETTINGS_KEY
+          );
 
-        const student =
-          document.createElement("div");
+        if (!saved) {
 
-        student.className = "student";
-
-        const initials =
-          name
-            .split(" ")
-            .map(word => word.charAt(0))
-            .join("")
-            .substring(0, 2)
-            .toUpperCase();
-
-        student.innerHTML = `
-
-          <div class="avatar">
-            ${initials}
-          </div>
-
-          <div class="student-info">
-
-            <div class="student-name">
-              ${escapeHTML(name)}
-            </div>
-
-            <div class="student-status">
-
-              <span class="online-dot"></span>
-
-              Online
-
-            </div>
-
-          </div>
-
-          <button
-            class="student-menu"
-            onclick="removeStudent(${index})"
-            title="Remove student"
-          >
-            ×
-          </button>
-
-        `;
-
-        studentsList.appendChild(student);
-
-      });
-
-
-      studentCount.textContent =
-        students.length +
-        (students.length === 1
-          ? " Student"
-          : " Students");
-
-    }
-
-
-    /* =========================================================
-       ADD STUDENT
-       ========================================================= */
-
-    function addStudent() {
-
-      const number =
-        students.length + 1;
-
-      const name =
-        prompt(
-          "Student name লিখুন:",
-          "Student " +
-          String(number).padStart(2, "0")
-        );
-
-      if (!name) return;
-
-      students.push(name.trim());
-
-      renderStudents();
-
-      showToast("Student added");
-
-    }
-
-
-    /* =========================================================
-       REMOVE STUDENT
-       ========================================================= */
-
-    function removeStudent(index) {
-
-      if (students.length <= 1) {
-
-        showToast("কমপক্ষে একজন Student রাখুন");
-
-        return;
-      }
-
-      students.splice(index, 1);
-
-      renderStudents();
-
-      showToast("Student removed");
-
-    }
-
-
-    /* =========================================================
-       IMAGE UPLOAD
-       ========================================================= */
-
-    imageUpload.addEventListener(
-      "change",
-      function () {
-
-        const file =
-          this.files[0];
-
-        if (!file) return;
-
-        const url =
-          URL.createObjectURL(file);
-
-        mainImage.src = url;
-
-        mainImage.style.display = "block";
-
-        mainVideo.style.display = "none";
-
-        welcomeContent.style.display = "none";
-
-        showToast("Slide/Image loaded");
-
-        setStatus("Slide ready");
-
-      }
-    );
-
-
-    /* =========================================================
-       MAIN VIDEO UPLOAD
-       ========================================================= */
-
-    videoUpload.addEventListener(
-      "change",
-      function () {
-
-        const file =
-          this.files[0];
-
-        if (!file) return;
-
-        const url =
-          URL.createObjectURL(file);
-
-        mainVideo.src = url;
-
-        mainVideo.style.display = "block";
-
-        mainImage.style.display = "none";
-
-        welcomeContent.style.display = "none";
-
-        showToast("Main video loaded");
-
-        setStatus("Video ready");
-
-      }
-    );
-
-
-    /* =========================================================
-       MENTOR VIDEO UPLOAD
-       ========================================================= */
-
-    mentorUpload.addEventListener(
-      "change",
-      function () {
-
-        const file =
-          this.files[0];
-
-        if (!file) return;
-
-        const url =
-          URL.createObjectURL(file);
-
-        mentorVideo.src = url;
-
-        mentorVideo.style.display = "block";
-
-        mentorPlaceholder.style.display = "none";
-
-        mentorVideo.play().catch(() => {});
-
-        showToast("Mentor video loaded");
-
-        setStatus("Mentor video ready");
-
-      }
-    );
-
-
-    /* =========================================================
-       MAIN PLAY / PAUSE
-       ========================================================= */
-
-    function toggleMainPlay() {
-
-      if (
-        mainVideo.style.display === "block" &&
-        mainVideo.src
-      ) {
-
-        if (mainVideo.paused) {
-
-          mainVideo.play();
-
-        } else {
-
-          mainVideo.pause();
+          return {
+            ...defaultSettings
+          };
 
         }
 
-        return;
+        return {
+          ...defaultSettings,
+          ...JSON.parse(saved)
+        };
+
+      } catch (error) {
+
+        return {
+          ...defaultSettings
+        };
+
       }
 
-      showToast(
-        "প্রথমে একটি Main Video upload করুন"
+    }
+
+
+    function getBrands() {
+
+      try {
+
+        const saved =
+          localStorage.getItem(
+            BRANDS_KEY
+          );
+
+        if (!saved) {
+
+          return [
+            ...defaultBrands
+          ];
+
+        }
+
+        const brands =
+          JSON.parse(saved);
+
+        if (
+          !Array.isArray(brands)
+        ) {
+
+          return [
+            ...defaultBrands
+          ];
+
+        }
+
+        return brands;
+
+      } catch (error) {
+
+        return [
+          ...defaultBrands
+        ];
+
+      }
+
+    }
+
+
+    /* ==========================================
+       APPLY ADMIN SETTINGS
+    ========================================== */
+
+    function applyAdminSettings() {
+
+      const settings =
+        getSettings();
+
+
+      /* Studio Name */
+
+      document.getElementById(
+        "studioName"
+      ).textContent =
+        settings.studioName;
+
+
+      /* Subtitle */
+
+      document.getElementById(
+        "studioSubtitle"
+      ).textContent =
+        settings.studioSubtitle;
+
+
+      /* Logo */
+
+      document.getElementById(
+        "studioLogo"
+      ).textContent =
+        settings.studioLogo;
+
+
+      /* Brand */
+
+      document.getElementById(
+        "stageLabel"
+      ).textContent =
+        settings.selectedBrand;
+
+
+      document.getElementById(
+        "brandBadge"
+      ).textContent =
+        settings.selectedBrand;
+
+
+      /* Zoom */
+
+      document.getElementById(
+        "zoomTitle"
+      ).textContent =
+        settings.zoomTitle;
+
+
+      /* Welcome */
+
+      document.getElementById(
+        "welcomeText"
+      ).textContent =
+        settings.welcomeText;
+
+
+      /* Browser title */
+
+      document.title =
+        settings.studioName;
+
+    }
+
+
+    /* ==========================================
+       ADMIN
+    ========================================== */
+
+    function openAdmin() {
+
+      window.location.href =
+        "admin.html";
+
+    }
+
+
+    /* ==========================================
+       LOGOUT
+    ========================================== */
+
+    function logout() {
+
+      sessionStorage.removeItem(
+        "personalCourseStudioLoggedIn"
+      );
+
+      window.location.replace(
+        "login.html"
       );
 
     }
 
 
-    /* =========================================================
-       CLEAR MAIN CONTENT
-       ========================================================= */
+    /* ==========================================
+       IMAGE
+    ========================================== */
 
-    function clearMainContent() {
+    document
+      .getElementById("imageInput")
+      .addEventListener(
+        "change",
+        function(event) {
 
-      mainImage.removeAttribute("src");
+          const file =
+            event.target.files[0];
 
-      mainVideo.pause();
+          if (!file) {
+            return;
+          }
 
-      mainVideo.removeAttribute("src");
 
-      mainImage.style.display = "none";
+          const url =
+            URL.createObjectURL(
+              file
+            );
 
-      mainVideo.style.display = "none";
 
-      welcomeContent.style.display = "block";
+          const image =
+            document.getElementById(
+              "mainImage"
+            );
 
-      imageUpload.value = "";
 
-      videoUpload.value = "";
+          const video =
+            document.getElementById(
+              "mainVideo"
+            );
 
-      setStatus("Ready");
 
-      showToast("Main content cleared");
+          image.src = url;
+
+          image.style.display =
+            "block";
+
+          video.style.display =
+            "none";
+
+
+          document.getElementById(
+            "stageWelcome"
+          ).style.display =
+            "none";
+
+
+          setStatus(
+            "Image loaded"
+          );
+
+        }
+      );
+
+
+    /* ==========================================
+       MAIN VIDEO
+    ========================================== */
+
+    document
+      .getElementById("mainVideoInput")
+      .addEventListener(
+        "change",
+        function(event) {
+
+          const file =
+            event.target.files[0];
+
+          if (!file) {
+            return;
+          }
+
+
+          const url =
+            URL.createObjectURL(
+              file
+            );
+
+
+          const video =
+            document.getElementById(
+              "mainVideo"
+            );
+
+
+          const image =
+            document.getElementById(
+              "mainImage"
+            );
+
+
+          video.src = url;
+
+          video.style.display =
+            "block";
+
+          image.style.display =
+            "none";
+
+
+          document.getElementById(
+            "stageWelcome"
+          ).style.display =
+            "none";
+
+
+          setStatus(
+            "Main video loaded"
+          );
+
+        }
+      );
+
+
+    /* ==========================================
+       MENTOR VIDEO
+    ========================================== */
+
+    document
+      .getElementById("mentorVideoInput")
+      .addEventListener(
+        "change",
+        function(event) {
+
+          const file =
+            event.target.files[0];
+
+          if (!file) {
+            return;
+          }
+
+
+          const url =
+            URL.createObjectURL(
+              file
+            );
+
+
+          const video =
+            document.getElementById(
+              "mentorVideo"
+            );
+
+
+          const placeholder =
+            document.getElementById(
+              "mentorPlaceholder"
+            );
+
+
+          video.src = url;
+
+          video.style.display =
+            "block";
+
+          placeholder.style.display =
+            "none";
+
+
+          setStatus(
+            "Mentor video loaded"
+          );
+
+        }
+      );
+
+
+    /* ==========================================
+       CLEAR
+    ========================================== */
+
+    function clearContent() {
+
+      const image =
+        document.getElementById(
+          "mainImage"
+        );
+
+      const mainVideo =
+        document.getElementById(
+          "mainVideo"
+        );
+
+      const mentorVideo =
+        document.getElementById(
+          "mentorVideo"
+        );
+
+      const placeholder =
+        document.getElementById(
+          "mentorPlaceholder"
+        );
+
+
+      image.removeAttribute(
+        "src"
+      );
+
+      mainVideo.removeAttribute(
+        "src"
+      );
+
+      mentorVideo.removeAttribute(
+        "src"
+      );
+
+
+      image.style.display =
+        "none";
+
+      mainVideo.style.display =
+        "none";
+
+      mentorVideo.style.display =
+        "none";
+
+      placeholder.style.display =
+        "flex";
+
+
+      document.getElementById(
+        "stageWelcome"
+      ).style.display =
+        "flex";
+
+
+      setStatus(
+        "Content cleared"
+      );
 
     }
 
 
-    /* =========================================================
+    /* ==========================================
+       PLAY / PAUSE
+    ========================================== */
+
+    function toggleMainVideo() {
+
+      const video =
+        document.getElementById(
+          "mainVideo"
+        );
+
+
+      if (
+        video.style.display ===
+        "none"
+      ) {
+
+        setStatus(
+          "No main video loaded"
+        );
+
+        return;
+
+      }
+
+
+      if (video.paused) {
+
+        video.play();
+
+        setStatus(
+          "Playing"
+        );
+
+      } else {
+
+        video.pause();
+
+        setStatus(
+          "Paused"
+        );
+
+      }
+
+    }
+
+
+    /* ==========================================
        FULLSCREEN
-       ========================================================= */
+    ========================================== */
 
     function fullscreenStage() {
 
       const stage =
-        document.getElementById("stage");
-
-      if (!document.fullscreenElement) {
-
-        stage.requestFullscreen().catch(() => {
-
-          showToast("Fullscreen unavailable");
-
-        });
-
-      } else {
-
-        document.exitFullscreen();
-
-      }
-
-    }
-
-
-    /* =========================================================
-       RECORDING
-       ========================================================= */
-
-    let isRecording = false;
-
-    let mediaRecorder = null;
-
-    let recordedChunks = [];
-
-
-    async function toggleRecording() {
-
-      if (isRecording) {
-
-        stopRecording();
-
-        return;
-
-      }
-
-
-      try {
-
-        const stream =
-          await navigator.mediaDevices.getDisplayMedia({
-            video: true,
-            audio: true
-          });
-
-        recordedChunks = [];
-
-        mediaRecorder =
-          new MediaRecorder(stream);
-
-
-        mediaRecorder.ondataavailable =
-          function (event) {
-
-            if (event.data.size > 0) {
-
-              recordedChunks.push(event.data);
-
-            }
-
-          };
-
-
-        mediaRecorder.onstop =
-          function () {
-
-            const blob =
-              new Blob(
-                recordedChunks,
-                {
-                  type: "video/webm"
-                }
-              );
-
-            const url =
-              URL.createObjectURL(blob);
-
-            const a =
-              document.createElement("a");
-
-            a.href = url;
-
-            a.download =
-              "course-recording-" +
-              Date.now() +
-              ".webm";
-
-            a.click();
-
-            URL.revokeObjectURL(url);
-
-            showToast(
-              "Recording তৈরি হয়েছে"
-            );
-
-          };
-
-
-        mediaRecorder.start();
-
-        isRecording = true;
-
-        recordTopBtn.textContent =
-          "■ Stop Recording";
-
-        recordTopBtn.classList.add(
-          "active"
+        document.getElementById(
+          "stage"
         );
 
-        statusDot.classList.add(
-          "recording"
-        );
-
-        setStatus("Recording...");
-
-
-        stream
-          .getVideoTracks()[0]
-          .addEventListener(
-            "ended",
-            function () {
-
-              if (isRecording) {
-
-                stopRecording();
-
-              }
-
-            }
-          );
-
-
-      } catch (error) {
-
-        showToast(
-          "Screen recording permission প্রয়োজন"
-        );
-
-      }
-
-    }
-
-
-    /* =========================================================
-       STOP RECORDING
-       ========================================================= */
-
-    function stopRecording() {
 
       if (
-        mediaRecorder &&
-        mediaRecorder.state !== "inactive"
+        stage.requestFullscreen
       ) {
 
-        mediaRecorder.stop();
+        stage.requestFullscreen();
 
       }
-
-      isRecording = false;
-
-      recordTopBtn.textContent =
-        "● Record";
-
-      recordTopBtn.classList.remove(
-        "active"
-      );
-
-      statusDot.classList.remove(
-        "recording"
-      );
-
-      setStatus("Ready");
 
     }
 
 
-    /* =========================================================
-       SETTINGS
-       ========================================================= */
+    /* ==========================================
+       STATUS
+    ========================================== */
+
+    function setStatus(
+      message
+    ) {
+
+      document.getElementById(
+        "status"
+      ).textContent =
+        message;
+
+    }
+
+
+    /* ==========================================
+       SETTINGS MODAL
+    ========================================== */
 
     function openSettings() {
 
-      document
-        .getElementById("settingsModal")
-        .classList.add("show");
+      const settings =
+        getSettings();
+
+
+      document.getElementById(
+        "modalStudioName"
+      ).value =
+        settings.studioName;
+
+
+      document.getElementById(
+        "modalStudioSubtitle"
+      ).value =
+        settings.studioSubtitle;
+
+
+      const select =
+        document.getElementById(
+          "modalBrand"
+        );
+
+
+      select.innerHTML = "";
+
+
+      getBrands().forEach(
+        function(brand) {
+
+          const option =
+            document.createElement(
+              "option"
+            );
+
+          option.value =
+            brand;
+
+          option.textContent =
+            brand;
+
+          select.appendChild(
+            option
+          );
+
+        }
+      );
+
+
+      select.value =
+        settings.selectedBrand;
+
+
+      document.getElementById(
+        "settingsModal"
+      ).classList.add(
+        "show"
+      );
 
     }
 
 
     function closeSettings() {
 
-      document
-        .getElementById("settingsModal")
-        .classList.remove("show");
-
-    }
-
-
-    function openBrandSettings() {
-
-      openSettings();
-
-      setTimeout(() => {
-
-        brandInput.focus();
-
-      }, 100);
-
-    }
-
-
-    function saveSettings() {
-
-      const name =
-        brandInput.value.trim();
-
-      if (name) {
-
-        brandBadge.textContent =
-          name;
-
-        localStorage.setItem(
-          "courseStudioBrand",
-          name
-        );
-
-      }
-
-      closeSettings();
-
-      showToast("Settings saved");
-
-    }
-
-
-    /* =========================================================
-       BRAND LOAD
-       ========================================================= */
-
-    function loadSettings() {
-
-      const savedBrand =
-        localStorage.getItem(
-          "courseStudioBrand"
-        );
-
-      if (savedBrand) {
-
-        brandInput.value =
-          savedBrand;
-
-        brandBadge.textContent =
-          savedBrand;
-
-      }
-
-      const savedBackground =
-        localStorage.getItem(
-          "courseStudioMentorBg"
-        );
-
-      if (savedBackground) {
-
-        mentorCard.style.background =
-          savedBackground;
-
-      }
-
-    }
-
-
-    /* =========================================================
-       MENTOR BACKGROUND
-       ========================================================= */
-
-    function changeMentorBackground(
-      color
-    ) {
-
-      mentorCard.style.background =
-        color;
-
-      localStorage.setItem(
-        "courseStudioMentorBg",
-        color
-      );
-
-    }
-
-
-    /* =========================================================
-       STATUS
-       ========================================================= */
-
-    function setStatus(text) {
-
-      statusText.textContent =
-        text;
-
-    }
-
-
-    /* =========================================================
-       TOAST
-       ========================================================= */
-
-    let toastTimer;
-
-    function showToast(message) {
-
-      const toast =
-        document.getElementById(
-          "toast"
-        );
-
-      toast.textContent =
-        message;
-
-      toast.classList.add(
+      document.getElementById(
+        "settingsModal"
+      ).classList.remove(
         "show"
       );
 
-      clearTimeout(toastTimer);
+    }
 
-      toastTimer =
-        setTimeout(() => {
 
-          toast.classList.remove(
-            "show"
-          );
+    function saveLocalSettings() {
 
-        }, 2200);
+      const current =
+        getSettings();
+
+
+      const updated = {
+
+        ...current,
+
+        studioName:
+          document.getElementById(
+            "modalStudioName"
+          ).value.trim(),
+
+        studioSubtitle:
+          document.getElementById(
+            "modalStudioSubtitle"
+          ).value.trim(),
+
+        selectedBrand:
+          document.getElementById(
+            "modalBrand"
+          ).value
+
+      };
+
+
+      localStorage.setItem(
+        SETTINGS_KEY,
+        JSON.stringify(
+          updated
+        )
+      );
+
+
+      applyAdminSettings();
+
+      closeSettings();
+
+      setStatus(
+        "Settings updated"
+      );
 
     }
 
 
-    /* =========================================================
-       ESCAPE HTML
-       ========================================================= */
-
-    function escapeHTML(text) {
-
-      const div =
-        document.createElement("div");
-
-      div.textContent =
-        text;
-
-      return div.innerHTML;
-
-    }
-
-
-    /* =========================================================
-       DRAG SYSTEM
-       ========================================================= */
+    /* ==========================================
+       DRAGGABLE
+    ========================================== */
 
     function makeDraggable(
       element,
-      boundary
+      container
     ) {
 
       let dragging = false;
 
       let startX = 0;
+
       let startY = 0;
 
       let startLeft = 0;
+
       let startTop = 0;
 
 
-      function getPoint(event) {
-
-        if (event.touches && event.touches.length) {
-
-          return {
-            x: event.touches[0].clientX,
-            y: event.touches[0].clientY
-          };
-
-        }
-
-        return {
-          x: event.clientX,
-          y: event.clientY
-        };
-
-      }
-
-
-      function startDrag(event) {
-
-        if (
-          event.target.tagName === "BUTTON" ||
-          event.target.tagName === "INPUT" ||
-          event.target.tagName === "VIDEO"
-        ) {
-
-          return;
-
-        }
-
-        const point =
-          getPoint(event);
-
-        const rect =
-          element.getBoundingClientRect();
-
-        const boundaryRect =
-          boundary.getBoundingClientRect();
+      function pointerDown(
+        event
+      ) {
 
         dragging = true;
 
-        startX = point.x;
-        startY = point.y;
+
+        const point =
+          event.touches
+            ? event.touches[0]
+            : event;
+
+
+        const elementRect =
+          element.getBoundingClientRect();
+
+
+        const containerRect =
+          container.getBoundingClientRect();
+
+
+        startX =
+          point.clientX;
+
+        startY =
+          point.clientY;
+
 
         startLeft =
-          rect.left -
-          boundaryRect.left;
+          elementRect.left -
+          containerRect.left;
+
 
         startTop =
-          rect.top -
-          boundaryRect.top;
+          elementRect.top -
+          containerRect.top;
 
-        element.classList.add(
-          "dragging"
-        );
 
         element.style.left =
           startLeft + "px";
@@ -2204,22 +2282,34 @@
         element.style.bottom =
           "auto";
 
-        if (event.cancelable) {
-          event.preventDefault();
-        }
+
+        element.style.cursor =
+          "grabbing";
+
+
+        event.preventDefault();
 
       }
 
 
-      function moveDrag(event) {
+      function pointerMove(
+        event
+      ) {
 
-        if (!dragging) return;
+        if (!dragging) {
+          return;
+        }
+
 
         const point =
-          getPoint(event);
+          event.touches
+            ? event.touches[0]
+            : event;
 
-        const boundaryRect =
-          boundary.getBoundingClientRect();
+
+        const containerRect =
+          container.getBoundingClientRect();
+
 
         const elementRect =
           element.getBoundingClientRect();
@@ -2227,19 +2317,27 @@
 
         let newLeft =
           startLeft +
-          (point.x - startX);
+          (
+            point.clientX -
+            startX
+          );
+
 
         let newTop =
           startTop +
-          (point.y - startY);
+          (
+            point.clientY -
+            startY
+          );
 
 
         const maxLeft =
-          boundaryRect.width -
+          containerRect.width -
           elementRect.width;
 
+
         const maxTop =
-          boundaryRect.height -
+          containerRect.height -
           elementRect.height;
 
 
@@ -2270,45 +2368,40 @@
           newTop + "px";
 
 
-        if (event.cancelable) {
-          event.preventDefault();
-        }
+        event.preventDefault();
 
       }
 
 
-      function stopDrag() {
-
-        if (!dragging) return;
+      function pointerUp() {
 
         dragging = false;
 
-        element.classList.remove(
-          "dragging"
-        );
+        element.style.cursor =
+          "move";
 
       }
 
 
       element.addEventListener(
         "mousedown",
-        startDrag
+        pointerDown
       );
 
       document.addEventListener(
         "mousemove",
-        moveDrag
+        pointerMove
       );
 
       document.addEventListener(
         "mouseup",
-        stopDrag
+        pointerUp
       );
 
 
       element.addEventListener(
         "touchstart",
-        startDrag,
+        pointerDown,
         {
           passive: false
         }
@@ -2316,7 +2409,7 @@
 
       document.addEventListener(
         "touchmove",
-        moveDrag,
+        pointerMove,
         {
           passive: false
         }
@@ -2324,90 +2417,267 @@
 
       document.addEventListener(
         "touchend",
-        stopDrag
+        pointerUp
       );
 
     }
 
 
-    /* =========================================================
-       INITIALIZE DRAG
-       ========================================================= */
+    /* ==========================================
+       RECORDING
+    ========================================== */
 
-    const stage =
-      document.getElementById("stage");
+    let mediaRecorder = null;
 
+    let recordedChunks = [];
 
-    makeDraggable(
-      brandBadge,
-      stage
-    );
+    let recordingStream = null;
 
 
-    makeDraggable(
-      stageLabel,
-      stage
-    );
+    async function toggleRecording() {
 
+      if (
+        mediaRecorder &&
+        mediaRecorder.state ===
+        "recording"
+      ) {
 
-    makeDraggable(
-      mentorCard,
-      stage
-    );
+        mediaRecorder.stop();
 
-
-    /* =========================================================
-       MODAL CLICK OUTSIDE
-       ========================================================= */
-
-    document
-      .getElementById("settingsModal")
-      .addEventListener(
-        "click",
-        function (event) {
-
-          if (
-            event.target === this
-          ) {
-
-            closeSettings();
-
-          }
-
-        }
-      );
-
-
-    /* =========================================================
-       KEYBOARD
-       ========================================================= */
-
-    document.addEventListener(
-      "keydown",
-      function (event) {
-
-        if (
-          event.key === "Escape"
-        ) {
-
-          closeSettings();
-
-        }
+        return;
 
       }
+
+
+      try {
+
+        recordingStream =
+          await navigator
+            .mediaDevices
+            .getDisplayMedia({
+
+              video: true,
+
+              audio: true
+
+            });
+
+
+        recordedChunks = [];
+
+
+        mediaRecorder =
+          new MediaRecorder(
+            recordingStream
+          );
+
+
+        mediaRecorder.ondataavailable =
+          function(event) {
+
+            if (
+              event.data.size > 0
+            ) {
+
+              recordedChunks.push(
+                event.data
+              );
+
+            }
+
+          };
+
+
+        mediaRecorder.onstop =
+          function() {
+
+            const blob =
+              new Blob(
+                recordedChunks,
+                {
+                  type:
+                    "video/webm"
+                }
+              );
+
+
+            const url =
+              URL.createObjectURL(
+                blob
+              );
+
+
+            const a =
+              document.createElement(
+                "a"
+              );
+
+
+            a.href = url;
+
+            a.download =
+              "course-recording-" +
+              Date.now() +
+              ".webm";
+
+
+            a.click();
+
+
+            URL.revokeObjectURL(
+              url
+            );
+
+
+            if (
+              recordingStream
+            ) {
+
+              recordingStream
+                .getTracks()
+                .forEach(
+                  function(track) {
+
+                    track.stop();
+
+                  }
+                );
+
+            }
+
+
+            const button =
+              document.getElementById(
+                "recordButton"
+              );
+
+
+            button.classList.remove(
+              "recording"
+            );
+
+
+            button.textContent =
+              "🔴 Record";
+
+
+            setStatus(
+              "Recording saved"
+            );
+
+          };
+
+
+        mediaRecorder.start();
+
+
+        const button =
+          document.getElementById(
+            "recordButton"
+          );
+
+
+        button.classList.add(
+          "recording"
+        );
+
+
+        button.textContent =
+          "⏹ Stop Recording";
+
+
+        setStatus(
+          "Recording..."
+        );
+
+
+        recordingStream
+          .getVideoTracks()
+          [0]
+          .addEventListener(
+            "ended",
+            function() {
+
+              if (
+                mediaRecorder &&
+                mediaRecorder.state ===
+                "recording"
+              ) {
+
+                mediaRecorder.stop();
+
+              }
+
+            }
+          );
+
+
+      } catch (error) {
+
+        console.error(
+          error
+        );
+
+
+        setStatus(
+          "Recording cancelled"
+        );
+
+      }
+
+    }
+
+
+    /* ==========================================
+       INITIALIZE DRAGGING
+    ========================================== */
+
+    makeDraggable(
+
+      document.getElementById(
+        "stageLabel"
+      ),
+
+      document.getElementById(
+        "stage"
+      )
+
     );
 
 
-    /* =========================================================
-       INITIALIZE
-       ========================================================= */
+    makeDraggable(
 
-    renderStudents();
+      document.getElementById(
+        "brandBadge"
+      ),
 
-    loadSettings();
+      document.getElementById(
+        "stage"
+      )
+
+    );
+
+
+    makeDraggable(
+
+      document.getElementById(
+        "mentorCard"
+      ),
+
+      document.getElementById(
+        "stage"
+      )
+
+    );
+
+
+    /* ==========================================
+       LOAD SETTINGS ON START
+    ========================================== */
+
+    applyAdminSettings();
 
   </script>
 
 </body>
 </html>
-```
