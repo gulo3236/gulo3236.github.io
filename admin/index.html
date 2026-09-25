@@ -2,58 +2,66 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
+  />
 
   <title>Admin Studio — Personal Course Studio</title>
 
-  <meta name="theme-color" content="#05070d" />
+  <meta
+    name="description"
+    content="Ultra Premium Admin Studio for Personal Course Studio"
+  />
 
-  <link rel="icon" id="favicon" href="" />
+  <link rel="icon" href="" id="favicon" />
 
   <style>
     /* =========================================================
        PERSONAL COURSE STUDIO
-       ULTRA PREMIUM ADMIN STUDIO
+       ULTRA PREMIUM ADMIN PANEL
        ========================================================= */
 
     :root {
-      --bg: #05070d;
-      --bg-2: #080c14;
-      --surface: rgba(13, 18, 29, 0.76);
-      --surface-strong: rgba(17, 23, 36, 0.94);
-      --surface-soft: rgba(255,255,255,.035);
+      --bg: #03050a;
+      --bg-2: #070b12;
+      --bg-3: #0b111b;
 
-      --line: rgba(255,255,255,.075);
-      --line-strong: rgba(255,255,255,.13);
+      --card: rgba(13, 18, 29, 0.78);
+      --card-strong: rgba(17, 23, 36, 0.92);
+
+      --border: rgba(255, 255, 255, 0.08);
+      --border-soft: rgba(255, 255, 255, 0.05);
 
       --text: #f7f9fc;
-      --text-soft: #c8d1df;
-      --muted: #7e8ba0;
+      --text-soft: #aab4c4;
+      --text-muted: #6f7b8e;
 
-      --blue: #4da3ff;
-      --blue-2: #1677ff;
-      --cyan: #5ce1e6;
+      --accent: #6c8cff;
+      --accent-2: #8d6cff;
+      --cyan: #48d8ff;
+      --green: #39df9a;
+      --red: #ff5d73;
+      --yellow: #f5c86a;
 
-      --green: #35d483;
-      --red: #ff6674;
-      --orange: #ffb84d;
+      --sidebar: 276px;
+      --topbar: 82px;
+
+      --radius-xl: 28px;
+      --radius-lg: 20px;
+      --radius-md: 15px;
 
       --shadow:
-        0 30px 90px rgba(0,0,0,.42);
+        0 30px 80px rgba(0, 0, 0, 0.38),
+        0 10px 30px rgba(0, 0, 0, 0.2);
 
-      --shadow-soft:
-        0 15px 45px rgba(0,0,0,.25);
-
-      --radius: 24px;
-      --radius-small: 15px;
-
-      --sidebar-width: 286px;
+      --transition: 0.25s ease;
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
     html {
@@ -62,8 +70,6 @@
 
     body {
       min-height: 100vh;
-      color: var(--text);
-
       font-family:
         Inter,
         ui-sans-serif,
@@ -73,138 +79,109 @@
         "Segoe UI",
         sans-serif;
 
+      color: var(--text);
+
       background:
         radial-gradient(
-          circle at 12% 8%,
-          rgba(29, 119, 255, .14),
+          circle at 15% 10%,
+          rgba(83, 113, 255, 0.13),
+          transparent 32%
+        ),
+        radial-gradient(
+          circle at 85% 20%,
+          rgba(100, 76, 255, 0.11),
           transparent 28%
         ),
         radial-gradient(
-          circle at 88% 12%,
-          rgba(92, 225, 230, .07),
-          transparent 24%
-        ),
-        radial-gradient(
-          circle at 70% 90%,
-          rgba(25, 118, 255, .08),
+          circle at 50% 100%,
+          rgba(26, 190, 255, 0.07),
           transparent 30%
         ),
-        linear-gradient(
-          135deg,
-          #04060b,
-          #070b13 50%,
-          #05080f
-        );
+        linear-gradient(135deg, #02040a, #060a12 45%, #03050a);
 
       overflow-x: hidden;
     }
 
-    body::before {
-      content: "";
-      position: fixed;
-      inset: 0;
-
-      pointer-events: none;
-
-      background-image:
-        linear-gradient(
-          rgba(255,255,255,.018) 1px,
-          transparent 1px
-        ),
-        linear-gradient(
-          90deg,
-          rgba(255,255,255,.018) 1px,
-          transparent 1px
-        );
-
-      background-size: 55px 55px;
-
-      mask-image:
-        linear-gradient(
-          to bottom,
-          black,
-          transparent 90%
-        );
-
-      opacity: .35;
-
-      z-index: -1;
-    }
-
     button,
-    input {
+    input,
+    select {
       font: inherit;
     }
 
     button {
+      border: 0;
       cursor: pointer;
     }
 
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
     /* =========================================================
-       AMBIENT LIGHT
+       BACKGROUND
        ========================================================= */
 
     .ambient {
       position: fixed;
-      width: 500px;
-      height: 500px;
-
-      border-radius: 50%;
-
-      filter: blur(100px);
-
+      inset: 0;
       pointer-events: none;
-
-      opacity: .07;
-
-      z-index: -1;
-
-      animation:
-        ambientFloat 12s ease-in-out infinite;
+      z-index: -2;
+      overflow: hidden;
     }
 
-    .ambient.one {
-      top: -220px;
-      left: 180px;
-      background: #1b7cff;
+    .ambient::before,
+    .ambient::after {
+      content: "";
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      border-radius: 50%;
+      filter: blur(90px);
+      opacity: 0.16;
     }
 
-    .ambient.two {
-      right: -230px;
-      bottom: -180px;
-      background: #37d5ff;
-      animation-delay: -5s;
+    .ambient::before {
+      background: #546fff;
+      top: -180px;
+      left: 20%;
     }
 
-    @keyframes ambientFloat {
-      0%,
-      100% {
-        transform: translate3d(0,0,0);
-      }
-
-      50% {
-        transform: translate3d(25px,-18px,0);
-      }
+    .ambient::after {
+      background: #6f4dff;
+      right: -160px;
+      top: 30%;
     }
 
-    /* =========================================================
-       MOBILE OVERLAY
-       ========================================================= */
-
-    .mobile-overlay {
+    .grid-bg {
       position: fixed;
       inset: 0;
+      z-index: -1;
+      pointer-events: none;
 
-      background: rgba(0,0,0,.68);
-      backdrop-filter: blur(7px);
+      background-image:
+        linear-gradient(
+          rgba(255, 255, 255, 0.018) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255, 255, 255, 0.018) 1px,
+          transparent 1px
+        );
 
-      display: none;
+      background-size: 50px 50px;
 
-      z-index: 90;
-    }
-
-    .mobile-overlay.show {
-      display: block;
+      mask-image: linear-gradient(
+        to bottom,
+        black,
+        transparent 85%
+      );
     }
 
     /* =========================================================
@@ -213,373 +190,268 @@
 
     .sidebar {
       position: fixed;
+      left: 0;
+      top: 0;
+      bottom: 0;
 
-      top: 14px;
-      left: 14px;
-      bottom: 14px;
+      width: var(--sidebar);
 
-      width: var(--sidebar-width);
-
-      border:
-        1px solid var(--line);
-
-      border-radius: 26px;
+      padding: 22px 16px;
 
       background:
         linear-gradient(
           180deg,
-          rgba(14,20,32,.92),
-          rgba(7,11,18,.94)
+          rgba(8, 12, 21, 0.94),
+          rgba(3, 6, 11, 0.97)
         );
 
-      backdrop-filter: blur(25px);
+      border-right: 1px solid var(--border);
 
-      box-shadow:
-        0 25px 80px rgba(0,0,0,.35);
+      backdrop-filter: blur(28px);
+      -webkit-backdrop-filter: blur(28px);
+
+      z-index: 1000;
 
       display: flex;
       flex-direction: column;
 
-      z-index: 100;
-
-      overflow: hidden;
-
-      transition:
-        transform .35s cubic-bezier(.22,.61,.36,1);
+      transition: transform var(--transition);
     }
-
-    .sidebar::after {
-      content: "";
-
-      position: absolute;
-
-      left: 0;
-      top: 0;
-      right: 0;
-
-      height: 1px;
-
-      background:
-        linear-gradient(
-          90deg,
-          transparent,
-          rgba(77,163,255,.7),
-          transparent
-        );
-
-      opacity: .7;
-    }
-
-    /* =========================================================
-       BRAND
-       ========================================================= */
 
     .brand {
-      padding: 22px 19px;
-
       display: flex;
       align-items: center;
       gap: 13px;
 
-      border-bottom: 1px solid var(--line);
+      padding: 7px 9px 25px;
     }
 
     .brand-logo {
-      width: 47px;
-      height: 47px;
-
-      flex: 0 0 47px;
+      width: 48px;
+      height: 48px;
 
       border-radius: 15px;
+
+      display: grid;
+      place-items: center;
+
+      overflow: hidden;
 
       background:
         linear-gradient(
           145deg,
-          #1976ff,
-          #53b4ff
+          rgba(255, 255, 255, 0.1),
+          rgba(255, 255, 255, 0.025)
         );
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      overflow: hidden;
-
-      position: relative;
+      border: 1px solid rgba(255, 255, 255, 0.1);
 
       box-shadow:
-        0 12px 35px rgba(25,118,255,.28);
+        0 10px 30px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
 
-    .brand-logo::after {
-      content: "";
-
-      position: absolute;
-      inset: 0;
+    .brand-logo span {
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: -0.03em;
 
       background:
         linear-gradient(
-          130deg,
-          rgba(255,255,255,.22),
-          transparent 45%
+          135deg,
+          #fff,
+          #91a9ff,
+          #6c8cff
         );
 
-      pointer-events: none;
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
     }
 
     .brand-logo img {
       width: 100%;
       height: 100%;
-
       object-fit: cover;
-
-      display: none;
-
-      position: relative;
-      z-index: 2;
-    }
-
-    .brand-logo span {
-      font-size: 14px;
-      font-weight: 950;
-
-      position: relative;
-      z-index: 1;
-    }
-
-    .brand-text {
-      min-width: 0;
     }
 
     .brand-text strong {
       display: block;
 
-      font-size: 13px;
-      font-weight: 850;
+      font-size: 14px;
+      font-weight: 800;
 
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-
-      letter-spacing: -.01em;
+      letter-spacing: -0.02em;
     }
 
-    .brand-text small {
-      display: flex;
-      align-items: center;
-      gap: 5px;
+    .brand-text span {
+      display: block;
 
-      color: var(--muted);
+      margin-top: 3px;
 
-      font-size: 10px;
+      color: var(--text-muted);
 
-      margin-top: 5px;
+      font-size: 11px;
+      font-weight: 600;
     }
 
-    .brand-text small::before {
-      content: "";
+    .side-label {
+      padding: 0 11px 9px;
 
-      width: 6px;
-      height: 6px;
-
-      border-radius: 50%;
-
-      background: var(--green);
-
-      box-shadow:
-        0 0 10px rgba(53,212,131,.7);
-    }
-
-    /* =========================================================
-       NAV
-       ========================================================= */
-
-    .nav {
-      padding: 22px 12px;
-
-      flex: 1;
-    }
-
-    .nav-label {
-      color: #58667a;
+      color: #596477;
 
       font-size: 9px;
-      font-weight: 900;
+      font-weight: 800;
 
+      letter-spacing: 0.16em;
       text-transform: uppercase;
+    }
 
-      letter-spacing: .18em;
-
-      padding:
-        0 12px 10px;
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
     }
 
     .nav-item {
       width: 100%;
 
-      border: 1px solid transparent;
+      display: flex;
+      align-items: center;
+      gap: 12px;
 
-      background: transparent;
+      padding: 13px 13px;
 
-      color: #8e9bad;
-
-      padding: 11px 11px;
+      color: var(--text-soft);
 
       border-radius: 14px;
 
-      display: flex;
-      align-items: center;
-
-      gap: 11px;
-
-      text-align: left;
-
-      margin-bottom: 5px;
+      font-size: 13px;
+      font-weight: 700;
 
       transition:
-        .22s ease;
+        background var(--transition),
+        color var(--transition),
+        transform var(--transition);
     }
 
     .nav-item:hover {
-      color: white;
-
-      background:
-        rgba(255,255,255,.035);
-
-      border-color:
-        rgba(255,255,255,.05);
-
-      transform:
-        translateX(2px);
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.045);
+      transform: translateX(2px);
     }
 
     .nav-item.active {
-      color: white;
+      color: #fff;
 
       background:
         linear-gradient(
-          90deg,
-          rgba(35,126,255,.17),
-          rgba(35,126,255,.045)
+          135deg,
+          rgba(108, 140, 255, 0.17),
+          rgba(108, 140, 255, 0.055)
         );
 
-      border-color:
-        rgba(77,163,255,.13);
+      border: 1px solid rgba(108, 140, 255, 0.15);
 
       box-shadow:
-        inset 3px 0 0 var(--blue);
+        inset 0 1px 0 rgba(255, 255, 255, 0.035);
     }
 
     .nav-icon {
       width: 34px;
       height: 34px;
 
-      border-radius: 11px;
+      display: grid;
+      place-items: center;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border-radius: 10px;
 
-      background:
-        rgba(255,255,255,.035);
+      background: rgba(255, 255, 255, 0.035);
 
       font-size: 15px;
-
-      flex: 0 0 34px;
-
-      transition: .2s;
+      flex-shrink: 0;
     }
 
     .nav-item.active .nav-icon {
-      background:
-        rgba(77,163,255,.15);
-
-      box-shadow:
-        0 6px 20px rgba(25,118,255,.12);
+      background: rgba(108, 140, 255, 0.17);
     }
 
-    .nav-text {
-      font-size: 12px;
-      font-weight: 750;
+    .sidebar-spacer {
+      flex: 1;
     }
 
-    .nav-arrow {
-      margin-left: auto;
-      color: #566378;
-      font-size: 13px;
-    }
+    .secure-card {
+      margin: 12px 4px;
 
-    /* =========================================================
-       SIDEBAR BOTTOM
-       ========================================================= */
+      padding: 15px;
 
-    .sidebar-bottom {
-      padding: 14px;
-
-      border-top:
-        1px solid var(--line);
-    }
-
-    .admin-mini-card {
-      padding: 12px;
-
-      border-radius: 16px;
+      border-radius: 17px;
 
       background:
-        rgba(255,255,255,.025);
+        linear-gradient(
+          145deg,
+          rgba(57, 223, 154, 0.08),
+          rgba(57, 223, 154, 0.025)
+        );
 
-      border:
-        1px solid var(--line);
-
-      margin-bottom: 10px;
+      border: 1px solid rgba(57, 223, 154, 0.1);
     }
 
-    .admin-mini-card span {
-      display: block;
-
-      color: #627086;
-
-      font-size: 9px;
-
-      text-transform: uppercase;
-      letter-spacing: .12em;
-    }
-
-    .admin-mini-card strong {
-      display: block;
-
-      margin-top: 5px;
+    .secure-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
 
       font-size: 11px;
+      font-weight: 800;
+    }
+
+    .secure-dot {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow: 0 0 15px rgba(57, 223, 154, 0.75);
+    }
+
+    .secure-card p {
+      margin-top: 7px;
+
+      color: var(--text-muted);
+
+      font-size: 10px;
+      line-height: 1.5;
     }
 
     .logout-btn {
       width: 100%;
 
-      border:
-        1px solid rgba(255,102,116,.15);
-
-      background:
-        rgba(255,102,116,.055);
-
-      color: #ff9ba4;
+      display: flex;
+      align-items: center;
+      gap: 11px;
 
       padding: 12px;
 
+      color: #ff8797;
+
+      background: rgba(255, 93, 115, 0.055);
+
+      border: 1px solid rgba(255, 93, 115, 0.08);
+
       border-radius: 13px;
 
-      font-size: 11px;
+      font-size: 12px;
       font-weight: 800;
 
-      transition: .2s;
+      transition: var(--transition);
     }
 
     .logout-btn:hover {
-      background:
-        rgba(255,102,116,.11);
-
-      border-color:
-        rgba(255,102,116,.25);
+      background: rgba(255, 93, 115, 0.1);
+      border-color: rgba(255, 93, 115, 0.18);
     }
 
     /* =========================================================
@@ -587,12 +459,8 @@
        ========================================================= */
 
     .main {
-      margin-left:
-        calc(var(--sidebar-width) + 28px);
-
+      margin-left: var(--sidebar);
       min-height: 100vh;
-
-      padding-right: 14px;
     }
 
     /* =========================================================
@@ -600,143 +468,147 @@
        ========================================================= */
 
     .topbar {
+      height: var(--topbar);
+
       position: sticky;
-
-      top: 14px;
-
-      height: 72px;
-
-      margin:
-        14px 14px 0 0;
-
-      padding:
-        0 19px;
-
-      border:
-        1px solid var(--line);
-
-      border-radius: 20px;
-
-      background:
-        rgba(8,13,21,.72);
-
-      backdrop-filter:
-        blur(24px);
-
-      box-shadow:
-        0 15px 45px rgba(0,0,0,.18);
+      top: 0;
+      z-index: 900;
 
       display: flex;
       align-items: center;
       justify-content: space-between;
 
-      z-index: 50;
+      padding: 0 32px;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(4, 7, 13, 0.94),
+          rgba(4, 7, 13, 0.72)
+        );
+
+      border-bottom: 1px solid var(--border);
+
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
     }
 
-    .topbar-left {
-      display: flex;
-      align-items: center;
-      gap: 13px;
-    }
-
-    .mobile-menu-btn {
+    .mobile-menu {
       display: none;
 
-      width: 42px;
-      height: 42px;
+      width: 40px;
+      height: 40px;
 
       border-radius: 12px;
 
-      border:
-        1px solid var(--line);
+      background: rgba(255, 255, 255, 0.05);
 
-      background:
-        rgba(255,255,255,.035);
-
-      color: white;
+      color: #fff;
 
       font-size: 18px;
     }
 
-    .page-title h1 {
-      font-size: 17px;
-      font-weight: 850;
+    .page-heading small {
+      display: block;
 
-      letter-spacing: -.035em;
-    }
-
-    .page-title p {
-      color: var(--muted);
+      color: var(--text-muted);
 
       font-size: 10px;
+      font-weight: 800;
 
+      letter-spacing: 0.13em;
+      text-transform: uppercase;
+    }
+
+    .page-heading h1 {
       margin-top: 3px;
-    }
 
-    .topbar-right {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .sync-status {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-
-      padding:
-        8px 11px;
-
-      border-radius: 999px;
-
-      background:
-        rgba(53,212,131,.055);
-
-      border:
-        1px solid rgba(53,212,131,.12);
-
-      color: #8be6ad;
-
-      font-size: 9px;
+      font-size: 20px;
       font-weight: 850;
 
-      letter-spacing: .03em;
+      letter-spacing: -0.04em;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+    }
+
+    .sync-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 9px 12px;
+
+      border-radius: 100px;
+
+      background: rgba(255, 255, 255, 0.035);
+
+      border: 1px solid var(--border);
+
+      color: var(--text-soft);
+
+      font-size: 10px;
+      font-weight: 800;
     }
 
     .sync-dot {
-      width: 6px;
-      height: 6px;
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: var(--yellow);
+    }
+
+    .sync-pill.live .sync-dot {
+      background: var(--green);
+      box-shadow: 0 0 12px rgba(57, 223, 154, 0.7);
+    }
+
+    .sync-pill.error .sync-dot {
+      background: var(--red);
+    }
+
+    .admin-profile {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      padding: 5px 10px 5px 5px;
+
+      border-radius: 100px;
+
+      background: rgba(255, 255, 255, 0.035);
+
+      border: 1px solid var(--border);
+    }
+
+    .admin-avatar {
+      width: 32px;
+      height: 32px;
+
+      display: grid;
+      place-items: center;
 
       border-radius: 50%;
 
       background:
-        var(--green);
-
-      box-shadow:
-        0 0 12px rgba(53,212,131,.7);
-    }
-
-    .admin-pill {
-      width: 35px;
-      height: 35px;
-
-      border-radius: 12px;
-
-      background:
         linear-gradient(
-          145deg,
-          rgba(77,163,255,.18),
-          rgba(255,255,255,.035)
+          135deg,
+          #718dff,
+          #7c55f5
         );
 
-      border:
-        1px solid var(--line);
+      font-size: 12px;
+      font-weight: 900;
+    }
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 14px;
+    .admin-profile span {
+      font-size: 11px;
+      font-weight: 800;
     }
 
     /* =========================================================
@@ -744,151 +616,134 @@
        ========================================================= */
 
     .content {
-      width: 100%;
-      max-width: 1450px;
+      padding: 30px 32px 60px;
 
+      max-width: 1600px;
       margin: 0 auto;
-
-      padding:
-        28px 14px 55px 0;
     }
 
     /* =========================================================
        HERO
        ========================================================= */
 
-    .hero-card {
+    .hero {
       position: relative;
-
-      min-height: 205px;
-
-      border-radius: 27px;
-
       overflow: hidden;
 
-      border:
-        1px solid var(--line);
+      min-height: 225px;
 
-      background:
-        radial-gradient(
-          circle at 82% 25%,
-          rgba(66,157,255,.18),
-          transparent 30%
-        ),
-        linear-gradient(
-          135deg,
-          rgba(17,28,45,.93),
-          rgba(7,12,20,.94)
-        );
-
-      box-shadow:
-        var(--shadow);
-
-      margin-bottom: 23px;
+      padding: 31px;
 
       display: flex;
       align-items: center;
+      justify-content: space-between;
+      gap: 30px;
 
-      padding:
-        32px 34px;
+      border-radius: var(--radius-xl);
+
+      background:
+        radial-gradient(
+          circle at 80% 30%,
+          rgba(100, 117, 255, 0.22),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 60% 100%,
+          rgba(69, 206, 255, 0.08),
+          transparent 35%
+        ),
+        linear-gradient(
+          135deg,
+          rgba(17, 24, 39, 0.94),
+          rgba(8, 12, 20, 0.92)
+        );
+
+      border: 1px solid rgba(255, 255, 255, 0.09);
+
+      box-shadow: var(--shadow);
     }
 
-    .hero-card::before {
+    .hero::before {
       content: "";
 
       position: absolute;
 
-      width: 300px;
-      height: 300px;
+      width: 320px;
+      height: 320px;
 
-      right: -100px;
-      top: -130px;
+      right: -120px;
+      top: -170px;
 
       border-radius: 50%;
 
-      border:
-        1px solid rgba(77,163,255,.12);
-
+      border: 1px solid rgba(255, 255, 255, 0.08);
       box-shadow:
-        0 0 0 35px rgba(77,163,255,.025),
-        0 0 0 70px rgba(77,163,255,.018);
+        0 0 0 35px rgba(255, 255, 255, 0.015),
+        0 0 0 70px rgba(255, 255, 255, 0.01);
+
+      pointer-events: none;
     }
 
-    .hero-card::after {
-      content: "";
-
-      position: absolute;
-
-      left: 0;
-      right: 0;
-      bottom: 0;
-
-      height: 1px;
-
-      background:
-        linear-gradient(
-          90deg,
-          transparent,
-          rgba(77,163,255,.55),
-          transparent
-        );
-    }
-
-    .hero-content {
+    .hero-copy {
       position: relative;
       z-index: 2;
-
-      max-width: 700px;
     }
 
-    .eyebrow {
+    .hero-eyebrow {
       display: inline-flex;
       align-items: center;
       gap: 7px;
 
-      color: #82bfff;
+      padding: 7px 10px;
+
+      border-radius: 100px;
+
+      background: rgba(108, 140, 255, 0.09);
+
+      border: 1px solid rgba(108, 140, 255, 0.13);
+
+      color: #a9b9ff;
 
       font-size: 9px;
       font-weight: 900;
 
+      letter-spacing: 0.12em;
       text-transform: uppercase;
-      letter-spacing: .16em;
-
-      margin-bottom: 11px;
     }
 
-    .eyebrow span {
+    .hero-eyebrow::before {
+      content: "";
+
       width: 5px;
       height: 5px;
 
       border-radius: 50%;
 
-      background:
-        var(--blue);
+      background: var(--accent);
 
-      box-shadow:
-        0 0 12px rgba(77,163,255,.8);
+      box-shadow: 0 0 10px var(--accent);
     }
 
-    .hero-content h2 {
-      font-size:
-        clamp(25px, 3vw, 38px);
-
-      line-height: 1.04;
-
-      letter-spacing: -.055em;
+    .hero h2 {
+      margin-top: 15px;
 
       max-width: 650px;
+
+      font-size: clamp(29px, 4vw, 47px);
+      line-height: 0.98;
+
+      font-weight: 900;
+
+      letter-spacing: -0.055em;
     }
 
-    .hero-content h2 em {
-      font-style: normal;
-
+    .hero h2 span {
       background:
         linear-gradient(
-          90deg,
-          #fff,
-          #69b8ff
+          100deg,
+          #fff 15%,
+          #9db0ff 60%,
+          #6cdcff
         );
 
       -webkit-background-clip: text;
@@ -897,55 +752,148 @@
       color: transparent;
     }
 
-    .hero-content p {
-      color: #8e9bad;
+    .hero p {
+      max-width: 570px;
+
+      margin-top: 13px;
+
+      color: var(--text-soft);
 
       font-size: 12px;
-
       line-height: 1.7;
-
-      margin-top: 11px;
-
-      max-width: 570px;
     }
 
-    .hero-badge {
-      position: absolute;
+    .hero-logo-preview {
+      position: relative;
+      z-index: 2;
 
-      right: 42px;
-      bottom: 30px;
+      width: 145px;
+      height: 145px;
 
-      width: 105px;
-      height: 105px;
+      flex-shrink: 0;
 
-      border-radius: 31px;
+      display: grid;
+      place-items: center;
+
+      border-radius: 38px;
 
       background:
         linear-gradient(
           145deg,
-          rgba(77,163,255,.16),
-          rgba(255,255,255,.025)
+          rgba(255, 255, 255, 0.09),
+          rgba(255, 255, 255, 0.025)
         );
 
-      border:
-        1px solid rgba(77,163,255,.15);
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 38px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
 
       box-shadow:
-        0 20px 50px rgba(0,0,0,.2);
-
-      transform:
-        rotate(5deg);
+        0 30px 60px rgba(0, 0, 0, 0.3),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
     }
 
-    .hero-badge span {
-      transform:
-        rotate(-5deg);
+    .hero-logo-preview img {
+      width: 82%;
+      height: 82%;
+      object-fit: contain;
+
+      border-radius: 25px;
+    }
+
+    .hero-logo-preview .logo-fallback {
+      color: #829aff;
+
+      font-size: 35px;
+      font-weight: 950;
+      letter-spacing: -0.08em;
+    }
+
+    /* =========================================================
+       STATS
+       ========================================================= */
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+
+      gap: 15px;
+
+      margin-top: 18px;
+    }
+
+    .stat-card {
+      position: relative;
+      overflow: hidden;
+
+      padding: 19px;
+
+      min-height: 125px;
+
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(17, 23, 36, 0.82),
+          rgba(8, 12, 19, 0.8)
+        );
+
+      border: 1px solid var(--border);
+
+      transition:
+        transform var(--transition),
+        border-color var(--transition);
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(255, 255, 255, 0.13);
+    }
+
+    .stat-icon {
+      width: 36px;
+      height: 36px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 11px;
+
+      background: rgba(255, 255, 255, 0.045);
+
+      font-size: 15px;
+    }
+
+    .stat-title {
+      margin-top: 14px;
+
+      color: var(--text-muted);
+
+      font-size: 10px;
+      font-weight: 800;
+
+      text-transform: uppercase;
+      letter-spacing: 0.09em;
+    }
+
+    .stat-value {
+      margin-top: 4px;
+
+      font-size: 22px;
+      font-weight: 900;
+
+      letter-spacing: -0.04em;
+    }
+
+    .stat-card small {
+      position: absolute;
+
+      right: 18px;
+      bottom: 19px;
+
+      color: var(--text-muted);
+
+      font-size: 9px;
+      font-weight: 700;
     }
 
     /* =========================================================
@@ -953,66 +901,620 @@
        ========================================================= */
 
     .section {
-      margin-bottom: 25px;
+      margin-top: 18px;
 
-      scroll-margin-top: 100px;
+      padding: 22px;
+
+      border-radius: 23px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(13, 18, 29, 0.88),
+          rgba(6, 10, 17, 0.9)
+        );
+
+      border: 1px solid var(--border);
+
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.16);
     }
 
     .section-head {
       display: flex;
-      align-items: flex-end;
+      align-items: center;
       justify-content: space-between;
 
       gap: 15px;
 
-      margin-bottom: 13px;
-
-      padding:
-        0 3px;
+      margin-bottom: 18px;
     }
 
-    .section-kicker {
-      color: #58708c;
-
-      font-size: 8px;
-      font-weight: 900;
-
-      text-transform: uppercase;
-
-      letter-spacing: .17em;
-
-      margin-bottom: 5px;
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 11px;
     }
 
-    .section-head h2 {
-      font-size: 17px;
+    .section-title-icon {
+      width: 38px;
+      height: 38px;
 
-      letter-spacing: -.035em;
+      display: grid;
+      place-items: center;
 
+      border-radius: 12px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(108, 140, 255, 0.16),
+          rgba(108, 140, 255, 0.04)
+        );
+
+      border: 1px solid rgba(108, 140, 255, 0.11);
+
+      font-size: 15px;
+    }
+
+    .section-title h3 {
+      font-size: 14px;
       font-weight: 850;
     }
 
-    .section-head p {
-      color: var(--muted);
+    .section-title p {
+      margin-top: 3px;
+
+      color: var(--text-muted);
 
       font-size: 10px;
+    }
 
-      margin-top: 4px;
+    .search-box {
+      position: relative;
+
+      width: 245px;
+    }
+
+    .search-box input {
+      width: 100%;
+
+      height: 40px;
+
+      padding: 0 13px 0 38px;
+
+      color: #fff;
+
+      outline: none;
+
+      background: rgba(255, 255, 255, 0.035);
+
+      border: 1px solid var(--border);
+
+      border-radius: 12px;
+
+      font-size: 11px;
+    }
+
+    .search-box input::placeholder {
+      color: #5e697a;
+    }
+
+    .search-icon {
+      position: absolute;
+
+      left: 13px;
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      color: #697588;
+
+      font-size: 13px;
     }
 
     /* =========================================================
-       LOGO CARD
+       LOGO MANAGER
        ========================================================= */
 
-    .logo-card {
-      position: relative;
+    .logo-manager {
+      display: grid;
 
+      grid-template-columns: 180px 1fr;
+
+      gap: 22px;
+    }
+
+    .logo-display {
+      min-height: 180px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 20px;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(108, 140, 255, 0.09),
+          transparent 65%
+        ),
+        rgba(255, 255, 255, 0.025);
+
+      border: 1px solid var(--border);
+    }
+
+    .logo-display-inner {
+      width: 125px;
+      height: 125px;
+
+      display: grid;
+      place-items: center;
+
+      overflow: hidden;
+
+      border-radius: 30px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.08),
+          rgba(255, 255, 255, 0.025)
+        );
+
+      border: 1px solid rgba(255, 255, 255, 0.1);
+
+      box-shadow:
+        0 25px 45px rgba(0, 0, 0, 0.25);
+    }
+
+    .logo-display-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .logo-display-inner span {
+      font-size: 31px;
+      font-weight: 950;
+
+      color: #829aff;
+
+      letter-spacing: -0.08em;
+    }
+
+    .logo-upload {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .upload-zone {
+      min-height: 140px;
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+
+      text-align: center;
+
+      border-radius: 18px;
+
+      border: 1px dashed rgba(108, 140, 255, 0.28);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(108, 140, 255, 0.055),
+          rgba(255, 255, 255, 0.018)
+        );
+
+      cursor: pointer;
+
+      transition: var(--transition);
+    }
+
+    .upload-zone:hover,
+    .upload-zone.dragover {
+      border-color: rgba(108, 140, 255, 0.55);
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(108, 140, 255, 0.11),
+          rgba(255, 255, 255, 0.025)
+        );
+    }
+
+    .upload-icon {
+      width: 42px;
+      height: 42px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 13px;
+
+      background: rgba(108, 140, 255, 0.1);
+
+      color: #9db0ff;
+
+      font-size: 17px;
+    }
+
+    .upload-zone strong {
+      margin-top: 10px;
+
+      font-size: 12px;
+      font-weight: 850;
+    }
+
+    .upload-zone span {
+      margin-top: 4px;
+
+      color: var(--text-muted);
+
+      font-size: 9px;
+    }
+
+    #logoInput {
+      display: none;
+    }
+
+    .logo-actions {
+      display: flex;
+      gap: 9px;
+
+      margin-top: 10px;
+    }
+
+    /* =========================================================
+       BUTTONS
+       ========================================================= */
+
+    .btn {
+      min-height: 39px;
+
+      padding: 0 14px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+
+      border-radius: 11px;
+
+      font-size: 10px;
+      font-weight: 850;
+
+      transition:
+        transform var(--transition),
+        background var(--transition),
+        border-color var(--transition),
+        opacity var(--transition);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .btn-primary {
+      color: #fff;
+
+      background:
+        linear-gradient(
+          135deg,
+          #6f8fff,
+          #7358e8
+        );
+
+      box-shadow:
+        0 10px 25px rgba(95, 108, 255, 0.18);
+    }
+
+    .btn-secondary {
+      color: var(--text-soft);
+
+      background: rgba(255, 255, 255, 0.04);
+
+      border: 1px solid var(--border);
+    }
+
+    .btn-danger {
+      color: #ff9aa8;
+
+      background: rgba(255, 93, 115, 0.06);
+
+      border: 1px solid rgba(255, 93, 115, 0.1);
+    }
+
+    .btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    /* =========================================================
+       STUDENT GRID
+       ========================================================= */
+
+    .student-grid {
       display: grid;
 
       grid-template-columns:
-        190px 1fr;
+        repeat(auto-fill, minmax(235px, 1fr));
 
-      gap: 28px;
+      gap: 13px;
+    }
+
+    .student-card {
+      position: relative;
+      overflow: hidden;
+
+      min-height: 155px;
+
+      padding: 16px;
+
+      display: flex;
+      align-items: center;
+      gap: 13px;
+
+      border-radius: 18px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255, 255, 255, 0.045),
+          rgba(255, 255, 255, 0.018)
+        );
+
+      border: 1px solid var(--border);
+
+      transition:
+        transform var(--transition),
+        border-color var(--transition),
+        box-shadow var(--transition);
+    }
+
+    .student-card:hover {
+      transform: translateY(-3px);
+
+      border-color: rgba(108, 140, 255, 0.18);
+
+      box-shadow:
+        0 18px 40px rgba(0, 0, 0, 0.2);
+    }
+
+    .student-photo {
+      width: 75px;
+      height: 75px;
+
+      flex-shrink: 0;
+
+      display: grid;
+      place-items: center;
+
+      overflow: hidden;
+
+      border-radius: 20px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(108, 140, 255, 0.13),
+          rgba(108, 140, 255, 0.035)
+        );
+
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .student-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .student-initial {
+      color: #91a5ff;
+
+      font-size: 23px;
+      font-weight: 900;
+    }
+
+    .student-info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .student-info h4 {
+      overflow: hidden;
+
+      font-size: 13px;
+      font-weight: 850;
+
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .student-info p {
+      margin-top: 4px;
+
+      color: var(--text-muted);
+
+      font-size: 9px;
+    }
+
+    .student-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+
+      margin-top: 9px;
+
+      padding: 5px 7px;
+
+      border-radius: 100px;
+
+      background: rgba(57, 223, 154, 0.055);
+
+      border: 1px solid rgba(57, 223, 154, 0.08);
+
+      color: #70e5b5;
+
+      font-size: 8px;
+      font-weight: 800;
+    }
+
+    .student-badge::before {
+      content: "";
+
+      width: 4px;
+      height: 4px;
+
+      border-radius: 50%;
+
+      background: currentColor;
+    }
+
+    .student-actions {
+      position: absolute;
+
+      right: 10px;
+      top: 10px;
+
+      display: flex;
+      gap: 4px;
+    }
+
+    .icon-btn {
+      width: 29px;
+      height: 29px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 9px;
+
+      color: var(--text-muted);
+
+      background: rgba(255, 255, 255, 0.035);
+
+      border: 1px solid transparent;
+
+      font-size: 11px;
+
+      transition: var(--transition);
+    }
+
+    .icon-btn:hover {
+      color: #fff;
+
+      background: rgba(255, 255, 255, 0.07);
+
+      border-color: var(--border);
+    }
+
+    .icon-btn.delete:hover {
+      color: #ff8596;
+
+      background: rgba(255, 93, 115, 0.08);
+
+      border-color: rgba(255, 93, 115, 0.12);
+    }
+
+    /* =========================================================
+       EMPTY
+       ========================================================= */
+
+    .empty-state {
+      padding: 50px 20px;
+
+      text-align: center;
+
+      border-radius: 18px;
+
+      border: 1px dashed var(--border);
+
+      background: rgba(255, 255, 255, 0.018);
+    }
+
+    .empty-icon {
+      width: 50px;
+      height: 50px;
+
+      margin: 0 auto;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 15px;
+
+      background: rgba(255, 255, 255, 0.04);
+
+      color: #718096;
+
+      font-size: 20px;
+    }
+
+    .empty-state h4 {
+      margin-top: 12px;
+
+      font-size: 13px;
+    }
+
+    .empty-state p {
+      margin-top: 5px;
+
+      color: var(--text-muted);
+
+      font-size: 10px;
+    }
+
+    /* =========================================================
+       MODAL
+       ========================================================= */
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+
+      display: none;
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+
+      background: rgba(0, 0, 0, 0.72);
+
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+
+      z-index: 3000;
+    }
+
+    .modal-backdrop.show {
+      display: flex;
+      animation: fadeIn 0.2s ease;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    .modal {
+      width: min(540px, 100%);
+
+      max-height: 90vh;
+
+      overflow-y: auto;
 
       padding: 24px;
 
@@ -1021,914 +1523,201 @@
       background:
         linear-gradient(
           145deg,
-          rgba(16,24,37,.84),
-          rgba(9,14,23,.78)
+          rgba(18, 24, 38, 0.98),
+          rgba(7, 11, 18, 0.99)
         );
 
-      border:
-        1px solid var(--line);
+      border: 1px solid rgba(255, 255, 255, 0.1);
 
       box-shadow:
-        var(--shadow-soft);
+        0 40px 120px rgba(0, 0, 0, 0.6);
 
-      overflow: hidden;
-    }
-
-    .logo-card::before {
-      content: "";
-
-      position: absolute;
-
-      width: 280px;
-      height: 280px;
-
-      left: -170px;
-      top: -170px;
-
-      border-radius: 50%;
-
-      background:
-        rgba(25,118,255,.08);
-
-      filter: blur(15px);
-    }
-
-    .logo-preview {
-      width: 190px;
-      height: 190px;
-
-      border-radius: 28px;
-
-      position: relative;
-
-      overflow: hidden;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background:
-        radial-gradient(
-          circle at 35% 25%,
-          rgba(77,163,255,.17),
-          transparent 34%
-        ),
-        rgba(255,255,255,.025);
-
-      border:
-        1px solid rgba(255,255,255,.1);
-
-      box-shadow:
-        inset 0 1px 0 rgba(255,255,255,.05),
-        0 20px 50px rgba(0,0,0,.18);
-    }
-
-    .logo-preview::after {
-      content: "";
-
-      position: absolute;
-      inset: 0;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255,255,255,.07),
-          transparent 38%
-        );
-
-      pointer-events: none;
-    }
-
-    .logo-preview img {
-      width: 100%;
-      height: 100%;
-
-      object-fit: cover;
-
-      display: none;
-
-      position: relative;
-      z-index: 2;
-    }
-
-    .logo-preview-text {
-      font-size: 42px;
-      font-weight: 950;
-
-      color: #79bfff;
-
-      text-shadow:
-        0 0 35px rgba(77,163,255,.35);
-    }
-
-    .logo-info {
-      position: relative;
-      z-index: 2;
-
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .logo-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-
-      width: fit-content;
-
-      padding:
-        6px 9px;
-
-      border-radius: 999px;
-
-      background:
-        rgba(53,212,131,.05);
-
-      border:
-        1px solid rgba(53,212,131,.1);
-
-      color: #7fe3a5;
-
-      font-size: 8px;
-      font-weight: 900;
-
-      text-transform: uppercase;
-      letter-spacing: .1em;
-
-      margin-bottom: 12px;
-    }
-
-    .logo-status i {
-      width: 5px;
-      height: 5px;
-
-      border-radius: 50%;
-
-      background: var(--green);
-    }
-
-    .logo-info h3 {
-      font-size: 20px;
-
-      letter-spacing: -.04em;
-
-      margin-bottom: 7px;
-    }
-
-    .logo-info p {
-      color: #8996a8;
-
-      font-size: 11px;
-
-      line-height: 1.75;
-
-      max-width: 680px;
-    }
-
-    .logo-actions {
-      display: flex;
-      flex-wrap: wrap;
-
-      gap: 8px;
-
-      margin-top: 17px;
-    }
-
-    /* =========================================================
-       BUTTONS
-       ========================================================= */
-
-    .btn {
-      border: 0;
-
-      border-radius: 12px;
-
-      padding:
-        10px 14px;
-
-      font-size: 10px;
-      font-weight: 850;
-
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-
-      gap: 7px;
-
-      transition:
-        transform .2s,
-        box-shadow .2s,
-        background .2s,
-        border .2s;
-    }
-
-    .btn:disabled {
-      opacity: .55;
-      cursor: not-allowed;
-      transform: none !important;
-    }
-
-    .btn-primary {
-      color: white;
-
-      background:
-        linear-gradient(
-          135deg,
-          #1976ff,
-          #55afff
-        );
-
-      box-shadow:
-        0 10px 28px rgba(25,118,255,.2);
-    }
-
-    .btn-primary:hover {
-      transform:
-        translateY(-2px);
-
-      box-shadow:
-        0 15px 35px rgba(25,118,255,.28);
-    }
-
-    .btn-secondary {
-      color: #dce4ef;
-
-      background:
-        rgba(255,255,255,.035);
-
-      border:
-        1px solid var(--line);
-    }
-
-    .btn-secondary:hover {
-      background:
-        rgba(255,255,255,.065);
-
-      border-color:
-        var(--line-strong);
-
-      transform:
-        translateY(-1px);
-    }
-
-    .btn-danger {
-      color: #ff9aa3;
-
-      background:
-        rgba(255,102,116,.055);
-
-      border:
-        1px solid rgba(255,102,116,.12);
-    }
-
-    .btn-danger:hover {
-      background:
-        rgba(255,102,116,.1);
-
-      border-color:
-        rgba(255,102,116,.2);
-    }
-
-    input[type="file"] {
-      display: none;
-    }
-
-    /* =========================================================
-       STUDENT HEADER
-       ========================================================= */
-
-    .student-toolbar {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .student-count {
-      padding:
-        7px 10px;
-
-      border-radius: 999px;
-
-      background:
-        rgba(255,255,255,.035);
-
-      border:
-        1px solid var(--line);
-
-      color: #94a3b8;
-
-      font-size: 9px;
-      font-weight: 800;
-    }
-
-    /* =========================================================
-       STUDENTS GRID
-       ========================================================= */
-
-    .students-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(
-          auto-fill,
-          minmax(245px, 1fr)
-        );
-
-      gap: 13px;
-    }
-
-    .student-card {
-      position: relative;
-
-      padding: 13px;
-
-      border-radius: 20px;
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(15,22,34,.86),
-          rgba(8,13,21,.84)
-        );
-
-      border:
-        1px solid var(--line);
-
-      box-shadow:
-        0 14px 40px rgba(0,0,0,.17);
-
-      overflow: hidden;
-
-      transition:
-        transform .25s,
-        border .25s,
-        box-shadow .25s;
-    }
-
-    .student-card::before {
-      content: "";
-
-      position: absolute;
-
-      width: 120px;
-      height: 120px;
-
-      right: -70px;
-      top: -70px;
-
-      border-radius: 50%;
-
-      background:
-        rgba(77,163,255,.06);
-
-      filter: blur(15px);
-
-      transition: .3s;
-    }
-
-    .student-card:hover {
-      transform:
-        translateY(-4px);
-
-      border-color:
-        rgba(77,163,255,.16);
-
-      box-shadow:
-        0 25px 60px rgba(0,0,0,.27);
-    }
-
-    .student-card:hover::before {
-      background:
-        rgba(77,163,255,.12);
-    }
-
-    .student-image {
-      width: 100%;
-
-      aspect-ratio: 16 / 10;
-
-      border-radius: 15px;
-
-      overflow: hidden;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(77,163,255,.08),
-          rgba(255,255,255,.025)
-        );
-
-      border:
-        1px solid rgba(255,255,255,.06);
-
-      position: relative;
-    }
-
-    .student-image::after {
-      content: "";
-
-      position: absolute;
-      inset: 0;
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(255,255,255,.07),
-          transparent 32%
-        );
-
-      pointer-events: none;
-    }
-
-    .student-image img {
-      width: 100%;
-      height: 100%;
-
-      object-fit: cover;
-
-      transition:
-        transform .45s ease;
-    }
-
-    .student-card:hover
-    .student-image img {
-      transform:
-        scale(1.035);
-    }
-
-    .student-placeholder {
-      color: #4f6077;
-
-      font-size: 34px;
-      font-weight: 950;
-    }
-
-    .student-info {
-      padding:
-        13px 3px 2px;
-    }
-
-    .student-name {
-      font-size: 13px;
-      font-weight: 850;
-
-      white-space: nowrap;
-
-      overflow: hidden;
-      text-overflow: ellipsis;
-
-      letter-spacing: -.015em;
-    }
-
-    .student-meta {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-
-      color: #69778a;
-
-      font-size: 9px;
-
-      margin-top: 5px;
-    }
-
-    .student-meta::before {
-      content: "";
-
-      width: 4px;
-      height: 4px;
-
-      border-radius: 50%;
-
-      background:
-        var(--blue);
-    }
-
-    .student-actions {
-      display: grid;
-
-      grid-template-columns:
-        1fr 1fr;
-
-      gap: 6px;
-
-      margin-top: 11px;
-    }
-
-    .student-actions .btn {
-      padding:
-        8px 9px;
-    }
-
-    /* =========================================================
-       EMPTY
-       ========================================================= */
-
-    .empty-state {
-      grid-column: 1 / -1;
-
-      min-height: 260px;
-
-      border:
-        1px dashed rgba(255,255,255,.11);
-
-      border-radius: 23px;
-
-      display: flex;
-      flex-direction: column;
-
-      align-items: center;
-      justify-content: center;
-
-      text-align: center;
-
-      background:
-        rgba(255,255,255,.012);
-    }
-
-    .empty-icon {
-      width: 62px;
-      height: 62px;
-
-      border-radius: 20px;
-
-      background:
-        rgba(77,163,255,.07);
-
-      border:
-        1px solid rgba(77,163,255,.1);
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 23px;
-
-      margin-bottom: 13px;
-    }
-
-    .empty-state h3 {
-      font-size: 15px;
-    }
-
-    .empty-state p {
-      color: #667488;
-
-      font-size: 10px;
-
-      margin-top: 6px;
-    }
-
-    /* =========================================================
-       MODAL
-       ========================================================= */
-
-    .modal {
-      position: fixed;
-
-      inset: 0;
-
-      background:
-        rgba(0,0,0,.76);
-
-      backdrop-filter:
-        blur(13px);
-
-      display: none;
-
-      align-items: center;
-      justify-content: center;
-
-      padding: 20px;
-
-      z-index: 300;
-    }
-
-    .modal.show {
-      display: flex;
-    }
-
-    .modal-box {
-      width:
-        min(520px, 100%);
-
-      border-radius: 25px;
-
-      background:
-        linear-gradient(
-          145deg,
-          rgba(19,27,42,.98),
-          rgba(7,11,18,.99)
-        );
-
-      border:
-        1px solid var(--line-strong);
-
-      box-shadow:
-        0 45px 120px rgba(0,0,0,.65);
-
-      overflow: hidden;
-
-      animation:
-        modalIn .25s
-        cubic-bezier(.22,.61,.36,1);
+      animation: modalIn 0.25s ease;
     }
 
     @keyframes modalIn {
       from {
         opacity: 0;
-        transform:
-          translateY(20px)
-          scale(.97);
+        transform: translateY(15px) scale(0.98);
       }
 
       to {
         opacity: 1;
-        transform:
-          translateY(0)
-          scale(1);
+        transform: translateY(0) scale(1);
       }
     }
 
     .modal-head {
-      padding:
-        19px 21px;
-
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: flex-start;
 
-      border-bottom:
-        1px solid var(--line);
-    }
-
-    .modal-title-wrap span {
-      color: #607188;
-
-      font-size: 8px;
-      font-weight: 900;
-
-      text-transform: uppercase;
-      letter-spacing: .14em;
+      gap: 20px;
     }
 
     .modal-head h3 {
-      font-size: 16px;
-
-      margin-top: 4px;
-
-      letter-spacing: -.03em;
+      font-size: 17px;
+      font-weight: 900;
     }
 
-    .close-modal {
+    .modal-head p {
+      margin-top: 4px;
+
+      color: var(--text-muted);
+
+      font-size: 10px;
+    }
+
+    .close-btn {
       width: 34px;
       height: 34px;
+
+      flex-shrink: 0;
+
+      display: grid;
+      place-items: center;
 
       border-radius: 10px;
 
-      border:
-        1px solid var(--line);
+      background: rgba(255, 255, 255, 0.04);
 
-      background:
-        rgba(255,255,255,.035);
-
-      color: #c9d3e1;
+      color: #a7b0bf;
 
       font-size: 17px;
-
-      transition: .2s;
     }
 
-    .close-modal:hover {
-      color: white;
-
-      background:
-        rgba(255,255,255,.08);
+    .form-group {
+      margin-top: 18px;
     }
 
-    .modal-body {
-      padding: 21px;
-    }
-
-    .field {
-      margin-bottom: 17px;
-    }
-
-    .field label {
+    .form-label {
       display: block;
 
-      color: #b8c4d3;
-
-      font-size: 10px;
-      font-weight: 800;
-
       margin-bottom: 7px;
+
+      color: #9ca7b8;
+
+      font-size: 9px;
+      font-weight: 850;
+
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
     }
 
-    .field input[type="text"] {
+    .form-input {
       width: 100%;
 
-      padding:
-        12px 13px;
+      height: 46px;
 
-      border-radius: 12px;
-
-      border:
-        1px solid var(--line-strong);
-
-      background:
-        rgba(0,0,0,.2);
-
-      color: white;
+      padding: 0 13px;
 
       outline: none;
 
+      color: #fff;
+
+      background: rgba(255, 255, 255, 0.035);
+
+      border: 1px solid var(--border);
+
+      border-radius: 12px;
+
       font-size: 12px;
 
-      transition: .2s;
+      transition: var(--transition);
     }
 
-    .field input[type="text"]:focus {
-      border-color:
-        rgba(77,163,255,.5);
+    .form-input:focus {
+      border-color: rgba(108, 140, 255, 0.45);
 
       box-shadow:
-        0 0 0 3px
-        rgba(77,163,255,.07);
+        0 0 0 3px rgba(108, 140, 255, 0.07);
     }
 
-    .image-upload-box {
-      padding: 13px;
+    .student-upload {
+      display: grid;
 
-      border:
-        1px dashed rgba(255,255,255,.13);
+      grid-template-columns: 105px 1fr;
 
-      border-radius: 16px;
-
-      background:
-        rgba(255,255,255,.018);
-
-      display: flex;
+      gap: 15px;
 
       align-items: center;
-
-      gap: 13px;
     }
 
-    .modal-image-preview {
-      width: 72px;
-      height: 72px;
+    .student-preview {
+      width: 105px;
+      height: 105px;
 
-      border-radius: 14px;
-
-      flex: 0 0 72px;
+      display: grid;
+      place-items: center;
 
       overflow: hidden;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      border-radius: 23px;
 
       background:
-        rgba(255,255,255,.035);
+        linear-gradient(
+          145deg,
+          rgba(108, 140, 255, 0.11),
+          rgba(255, 255, 255, 0.025)
+        );
 
-      border:
-        1px solid var(--line);
+      border: 1px solid var(--border);
     }
 
-    .modal-image-preview img {
+    .student-preview img {
       width: 100%;
       height: 100%;
-
       object-fit: cover;
-
-      display: none;
     }
 
-    .modal-image-placeholder {
-      color: #55667d;
+    .student-preview span {
+      color: #7389ed;
 
-      font-size: 20px;
+      font-size: 28px;
+      font-weight: 900;
     }
 
-    .upload-content {
-      min-width: 0;
+    .file-box {
+      min-height: 105px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+
+      padding: 15px;
+
+      border-radius: 15px;
+
+      border: 1px dashed rgba(255, 255, 255, 0.12);
+
+      background: rgba(255, 255, 255, 0.025);
+
+      cursor: pointer;
     }
 
-    .upload-content strong {
-      display: block;
-
+    .file-box strong {
       font-size: 11px;
     }
 
-    .upload-content span {
-      display: block;
+    .file-box span {
+      margin-top: 5px;
 
-      color: #69778b;
+      color: var(--text-muted);
 
       font-size: 9px;
-
-      margin:
-        4px 0 8px;
+      line-height: 1.5;
     }
 
-    .modal-footer {
-      padding:
-        16px 21px;
-
-      border-top:
-        1px solid var(--line);
-
-      display: flex;
-
-      justify-content: flex-end;
-
-      gap: 8px;
-    }
-
-    /* =========================================================
-       LOADING
-       ========================================================= */
-
-    .loading-overlay {
-      position: fixed;
-
-      inset: 0;
-
-      background:
-        rgba(2,5,9,.72);
-
-      backdrop-filter:
-        blur(8px);
-
+    #studentImageInput {
       display: none;
-
-      align-items: center;
-      justify-content: center;
-
-      z-index: 500;
     }
 
-    .loading-overlay.show {
+    .modal-actions {
       display: flex;
-    }
+      justify-content: flex-end;
+      gap: 9px;
 
-    .loading-box {
-      width:
-        min(300px, calc(100% - 40px));
-
-      padding:
-        24px;
-
-      border-radius: 20px;
-
-      background:
-        rgba(13,20,31,.96);
-
-      border:
-        1px solid var(--line-strong);
-
-      box-shadow:
-        var(--shadow);
-
-      text-align: center;
-    }
-
-    .spinner {
-      width: 34px;
-      height: 34px;
-
-      border:
-        3px solid
-        rgba(255,255,255,.08);
-
-      border-top-color:
-        var(--blue);
-
-      border-radius: 50%;
-
-      animation:
-        spin .8s linear infinite;
-
-      margin:
-        0 auto 12px;
-    }
-
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
-
-    .loading-box p {
-      color: #cbd5e1;
-
-      font-size: 10px;
+      margin-top: 23px;
     }
 
     /* =========================================================
@@ -1938,597 +1727,648 @@
     .toast-container {
       position: fixed;
 
-      right: 20px;
-      bottom: 20px;
+      right: 22px;
+      bottom: 22px;
 
-      z-index: 600;
+      z-index: 5000;
 
       display: flex;
-
       flex-direction: column;
+      gap: 9px;
 
-      gap: 8px;
+      width: min(340px, calc(100vw - 40px));
     }
 
     .toast {
-      min-width: 270px;
-
-      padding:
-        12px 14px;
-
-      border-radius: 13px;
-
-      background:
-        rgba(13,20,31,.96);
-
-      border:
-        1px solid var(--line-strong);
-
-      box-shadow:
-        0 20px 55px rgba(0,0,0,.35);
+      padding: 13px 15px;
 
       display: flex;
-      align-items: center;
+      align-items: flex-start;
+      gap: 10px;
 
-      gap: 9px;
+      border-radius: 15px;
 
-      font-size: 10px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(22, 29, 44, 0.98),
+          rgba(8, 12, 20, 0.98)
+        );
 
-      animation:
-        toastIn .25s ease;
-    }
+      border: 1px solid var(--border);
 
-    .toast.success {
-      border-color:
-        rgba(53,212,131,.18);
-    }
+      box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.35);
 
-    .toast.error {
-      border-color:
-        rgba(255,102,116,.2);
-    }
-
-    .toast strong {
-      font-size: 12px;
+      animation: toastIn 0.25s ease;
     }
 
     @keyframes toastIn {
       from {
         opacity: 0;
-        transform:
-          translateY(10px);
+        transform: translateY(10px);
       }
 
       to {
         opacity: 1;
-        transform:
-          translateY(0);
+        transform: translateY(0);
       }
+    }
+
+    .toast-icon {
+      width: 25px;
+      height: 25px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 8px;
+
+      background: rgba(57, 223, 154, 0.08);
+
+      color: var(--green);
+
+      font-size: 11px;
+    }
+
+    .toast.error .toast-icon {
+      background: rgba(255, 93, 115, 0.08);
+      color: var(--red);
+    }
+
+    .toast-text strong {
+      display: block;
+
+      font-size: 10px;
+    }
+
+    .toast-text span {
+      display: block;
+
+      margin-top: 2px;
+
+      color: var(--text-muted);
+
+      font-size: 9px;
+      line-height: 1.4;
     }
 
     /* =========================================================
-       RESPONSIVE
+       LOADING
+       ========================================================= */
+
+    .loading-overlay {
+      position: fixed;
+      inset: 0;
+
+      display: none;
+      place-items: center;
+
+      background: rgba(2, 4, 8, 0.7);
+
+      backdrop-filter: blur(7px);
+
+      z-index: 6000;
+    }
+
+    .loading-overlay.show {
+      display: grid;
+    }
+
+    .loader-box {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .spinner {
+      width: 38px;
+      height: 38px;
+
+      border-radius: 50%;
+
+      border: 3px solid rgba(255, 255, 255, 0.08);
+      border-top-color: #7d95ff;
+
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loader-box span {
+      color: #aab4c4;
+
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    /* =========================================================
+       MOBILE
        ========================================================= */
 
     @media (max-width: 1050px) {
-
-      :root {
-        --sidebar-width: 250px;
-      }
-
-      .hero-badge {
-        right: 25px;
-      }
-
-      .logo-card {
-        grid-template-columns:
-          155px 1fr;
-      }
-
-      .logo-preview {
-        width: 155px;
-        height: 155px;
-      }
-    }
-
-    @media (max-width: 850px) {
-
       .sidebar {
-        transform:
-          translateX(
-            calc(-100% - 25px)
-          );
+        transform: translateX(-100%);
+        box-shadow: 30px 0 70px rgba(0, 0, 0, 0.35);
       }
 
       .sidebar.open {
-        transform:
-          translateX(0);
+        transform: translateX(0);
       }
 
       .main {
         margin-left: 0;
+      }
 
-        padding-left: 14px;
+      .mobile-menu {
+        display: grid;
+        place-items: center;
       }
 
       .topbar {
-        margin-left: 0;
+        padding: 0 20px;
       }
 
       .content {
-        padding-left: 0;
-      }
-
-      .mobile-menu-btn {
-        display: block;
-      }
-
-      .hero-badge {
-        display: none;
-      }
-
-      .hero-card {
-        min-height: 190px;
+        padding: 22px 20px 50px;
       }
     }
 
-    @media (max-width: 650px) {
-
-      :root {
-        --sidebar-width: 280px;
-      }
-
-      .main {
-        padding:
-          0 10px;
-      }
-
+    @media (max-width: 760px) {
       .topbar {
-        top: 10px;
-
-        height: 65px;
-
-        margin:
-          10px 0 0;
+        height: 72px;
       }
 
-      .content {
-        padding:
-          20px 0 45px;
+      .page-heading h1 {
+        font-size: 16px;
       }
 
-      .topbar-right {
-        gap: 5px;
+      .page-heading small {
+        font-size: 8px;
       }
 
-      .sync-status {
-        padding:
-          7px 8px;
-      }
-
-      .sync-status span:last-child {
+      .admin-profile {
         display: none;
       }
 
-      .admin-pill {
+      .sync-pill {
+        padding: 8px 9px;
+      }
+
+      .sync-pill span {
         display: none;
       }
 
-      .hero-card {
-        padding:
-          25px 22px;
+      .hero {
+        padding: 25px;
 
-        min-height: 185px;
+        min-height: 245px;
+
+        align-items: flex-start;
+      }
+
+      .hero-logo-preview {
+        position: absolute;
+
+        width: 80px;
+        height: 80px;
+
+        right: 20px;
+        top: 20px;
 
         border-radius: 22px;
       }
 
-      .hero-content h2 {
-        font-size: 27px;
+      .hero-copy {
+        padding-right: 70px;
       }
 
-      .hero-content p {
-        font-size: 10px;
+      .hero h2 {
+        font-size: 32px;
       }
 
-      .logo-card {
+      .hero p {
+        font-size: 11px;
+      }
+
+      .stats {
         grid-template-columns: 1fr;
-
-        padding: 18px;
       }
 
-      .logo-preview {
-        width: 135px;
-        height: 135px;
-
-        border-radius: 21px;
-      }
-
-      .logo-info h3 {
-        font-size: 18px;
-      }
-
-      .students-grid {
+      .logo-manager {
         grid-template-columns: 1fr;
+      }
+
+      .logo-display {
+        min-height: 155px;
+      }
+
+      .section {
+        padding: 16px;
       }
 
       .section-head {
-        align-items:
-          flex-start;
-
-        flex-direction:
-          column;
+        align-items: flex-start;
+        flex-direction: column;
       }
 
-      .student-toolbar {
+      .search-box {
         width: 100%;
       }
 
-      .student-toolbar .btn {
-        width: 100%;
-      }
-
-      .toast-container {
-        left: 12px;
-        right: 12px;
-        bottom: 12px;
-      }
-
-      .toast {
-        min-width: 0;
-        width: 100%;
+      .student-grid {
+        grid-template-columns: 1fr;
       }
     }
 
-    @media (prefers-reduced-motion: reduce) {
-
-      *,
-      *::before,
-      *::after {
-        animation-duration: .01ms !important;
-        animation-iteration-count: 1 !important;
-        scroll-behavior: auto !important;
-        transition-duration: .01ms !important;
+    @media (max-width: 520px) {
+      .content {
+        padding: 15px 12px 40px;
       }
 
+      .topbar {
+        padding: 0 13px;
+      }
+
+      .hero {
+        border-radius: 21px;
+        padding: 21px;
+      }
+
+      .hero h2 {
+        font-size: 28px;
+      }
+
+      .hero p {
+        max-width: 260px;
+      }
+
+      .hero-logo-preview {
+        width: 66px;
+        height: 66px;
+      }
+
+      .student-upload {
+        grid-template-columns: 1fr;
+      }
+
+      .student-preview {
+        width: 110px;
+        height: 110px;
+      }
+
+      .modal {
+        padding: 18px;
+        border-radius: 20px;
+      }
+
+      .logo-actions {
+        flex-direction: column;
+      }
+
+      .logo-actions .btn {
+        width: 100%;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <div class="ambient one"></div>
-  <div class="ambient two"></div>
+  <div class="ambient"></div>
+  <div class="grid-bg"></div>
 
-  <!-- =========================================================
-       MOBILE OVERLAY
-       ========================================================= -->
-
-  <div
-    class="mobile-overlay"
-    id="mobileOverlay">
-  </div>
-
-
-  <!-- =========================================================
+  <!-- =======================================================
        SIDEBAR
-       ========================================================= -->
+       ======================================================= -->
 
-  <aside
-    class="sidebar"
-    id="sidebar">
+  <aside class="sidebar" id="sidebar">
 
     <div class="brand">
-
-      <div class="brand-logo">
-
-        <img
-          id="sidebarLogoImage"
-          alt="Studio Logo"
-        />
-
-        <span id="sidebarLogoText">
-          CS
-        </span>
-
+      <div class="brand-logo" id="sidebarLogo">
+        <span>CS</span>
       </div>
 
       <div class="brand-text">
-
-        <strong>
-          Personal Course Studio
-        </strong>
-
-        <small>
-          Secure Admin Workspace
-        </small>
-
+        <strong>Personal Course Studio</strong>
+        <span>Admin Control Center</span>
       </div>
-
     </div>
 
+    <div class="side-label">
+      Workspace
+    </div>
 
     <nav class="nav">
 
-      <div class="nav-label">
-        Workspace
-      </div>
-
-
-      <button
+      <a
+        href="#overview"
         class="nav-item active"
-        id="studentsNav"
-        type="button">
+      >
+        <span class="nav-icon">⌂</span>
+        <span>Overview</span>
+      </a>
 
-        <span class="nav-icon">
-          👨‍🎓
-        </span>
-
-        <span class="nav-text">
-          Students
-        </span>
-
-        <span class="nav-arrow">
-          ›
-        </span>
-
-      </button>
-
-
-      <button
+      <a
+        href="#students"
         class="nav-item"
-        id="logoNav"
-        type="button">
+      >
+        <span class="nav-icon">♙</span>
+        <span>Students</span>
+      </a>
 
-        <span class="nav-icon">
-          ✦
-        </span>
-
-        <span class="nav-text">
-          Studio Logo
-        </span>
-
-        <span class="nav-arrow">
-          ›
-        </span>
-
-      </button>
+      <a
+        href="#studio"
+        class="nav-item"
+      >
+        <span class="nav-icon">✦</span>
+        <span>Studio Identity</span>
+      </a>
 
     </nav>
 
+    <div class="sidebar-spacer"></div>
 
-    <div class="sidebar-bottom">
-
-      <div class="admin-mini-card">
-
-        <span>
-          Current Access
-        </span>
-
-        <strong>
-          Super Admin
-        </strong>
-
+    <div class="secure-card">
+      <div class="secure-top">
+        <span class="secure-dot"></span>
+        Admin Session Active
       </div>
 
-
-      <button
-        class="logout-btn"
-        id="logoutBtn"
-        type="button">
-
-        ⇥ &nbsp; Logout
-
-      </button>
-
+      <p>
+        Your current studio management session is active.
+      </p>
     </div>
+
+    <button
+      class="logout-btn"
+      id="logoutBtn"
+    >
+      <span>↪</span>
+      <span>Sign Out</span>
+    </button>
 
   </aside>
 
-
-  <!-- =========================================================
+  <!-- =======================================================
        MAIN
-       ========================================================= -->
+       ======================================================= -->
 
   <main class="main">
 
-
-    <!-- =======================================================
-         TOPBAR
-         ======================================================= -->
+    <!-- TOPBAR -->
 
     <header class="topbar">
 
-      <div class="topbar-left">
+      <div style="display:flex;align-items:center;gap:12px;">
 
         <button
-          class="mobile-menu-btn"
-          id="mobileMenuBtn"
-          type="button">
-
+          class="mobile-menu"
+          id="mobileMenu"
+          aria-label="Open menu"
+        >
           ☰
-
         </button>
 
-
-        <div class="page-title">
-
-          <h1>
-            Admin Studio
-          </h1>
-
-          <p>
-            Personal Course Studio · Control Center
-          </p>
-
+        <div class="page-heading">
+          <small>Personal Course Studio</small>
+          <h1>Admin Control Center</h1>
         </div>
 
       </div>
 
+      <div class="top-actions">
 
-      <div class="topbar-right">
-
-        <div class="sync-status">
-
+        <div
+          class="sync-pill"
+          id="syncPill"
+        >
           <span class="sync-dot"></span>
-
-          <span>
-            Firebase Live
-          </span>
-
+          <span id="syncText">Connecting...</span>
         </div>
 
+        <div class="admin-profile">
+          <div class="admin-avatar">
+            A
+          </div>
 
-        <div class="admin-pill">
-          👑
+          <span>Administrator</span>
         </div>
 
       </div>
 
     </header>
 
-
-    <!-- =======================================================
-         CONTENT
-         ======================================================= -->
+    <!-- CONTENT -->
 
     <div class="content">
 
+      <!-- HERO -->
 
-      <!-- =====================================================
-           HERO
-           ===================================================== -->
+      <section
+        class="hero"
+        id="overview"
+      >
 
-      <section class="hero-card">
+        <div class="hero-copy">
 
-        <div class="hero-content">
-
-          <div class="eyebrow">
-            <span></span>
-            Personal Course Studio
+          <div class="hero-eyebrow">
+            Ultra Premium Studio
           </div>
 
           <h2>
-            Your private
-            <em>teaching workspace.</em>
+            Control your
+            <span>learning studio.</span>
           </h2>
 
           <p>
-            Manage your students and studio identity
-            from one premium control center. Changes
-            are synchronized through Firebase in real time.
+            Manage your students and studio identity from one
+            elegant workspace. Changes can sync with Firebase
+            in real time while local storage keeps your studio
+            usable as a fallback.
           </p>
 
         </div>
 
+        <div
+          class="hero-logo-preview"
+          id="heroLogo"
+        >
+          <span class="logo-fallback">CS</span>
+        </div>
 
-        <div class="hero-badge">
-          <span>✦</span>
+      </section>
+
+
+      <!-- STATS -->
+
+      <section class="stats">
+
+        <div class="stat-card">
+
+          <div class="stat-icon">
+            ♙
+          </div>
+
+          <div class="stat-title">
+            Total Students
+          </div>
+
+          <div
+            class="stat-value"
+            id="studentCount"
+          >
+            0
+          </div>
+
+          <small>Registered profiles</small>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-icon">
+            ◈
+          </div>
+
+          <div class="stat-title">
+            Studio Logo
+          </div>
+
+          <div
+            class="stat-value"
+            id="logoStatus"
+          >
+            Ready
+          </div>
+
+          <small id="logoStatusText">
+            Studio identity
+          </small>
+
+        </div>
+
+
+        <div class="stat-card">
+
+          <div class="stat-icon">
+            ◉
+          </div>
+
+          <div class="stat-title">
+            Data Sync
+          </div>
+
+          <div
+            class="stat-value"
+            id="dataStatus"
+          >
+            Local
+          </div>
+
+          <small>
+            Firebase / Local
+          </small>
+
         </div>
 
       </section>
 
 
       <!-- =====================================================
-           LOGO SECTION
+           STUDIO LOGO
            ===================================================== -->
 
       <section
         class="section"
-        id="logoSection">
+        id="studio"
+      >
 
         <div class="section-head">
 
-          <div>
+          <div class="section-title">
 
-            <div class="section-kicker">
-              Brand Identity
+            <div class="section-title-icon">
+              ✦
             </div>
 
-            <h2>
-              Studio Logo
-            </h2>
+            <div>
+              <h3>Studio Identity</h3>
 
-            <p>
-              Your official identity across the studio.
-            </p>
+              <p>
+                Manage the logo used across your studio.
+              </p>
+            </div>
 
           </div>
 
         </div>
 
 
-        <div class="logo-card">
+        <div class="logo-manager">
 
-          <div class="logo-preview">
-
-            <img
-              id="logoPreviewImage"
-              alt="Studio Logo"
-            />
+          <div class="logo-display">
 
             <div
-              class="logo-preview-text"
-              id="logoPreviewText">
-
-              CS
-
+              class="logo-display-inner"
+              id="mainLogoPreview"
+            >
+              <span>CS</span>
             </div>
 
           </div>
 
 
-          <div class="logo-info">
+          <div class="logo-upload">
 
-            <div class="logo-status">
+            <label
+              class="upload-zone"
+              id="logoDropZone"
+              for="logoInput"
+            >
 
-              <i></i>
+              <div class="upload-icon">
+                ↑
+              </div>
 
-              Firebase Synced
+              <strong>
+                Upload Studio Logo
+              </strong>
 
-            </div>
+              <span>
+                PNG, JPG, WEBP or SVG • Recommended 512×512
+              </span>
 
+            </label>
 
-            <h3>
-              Personal Course Studio
-            </h3>
-
-
-            <p>
-              Upload your official studio logo.
-              The image will be stored in Firebase Storage
-              and its secure URL will be synchronized through
-              Firestore for your Mentor Studio and other devices.
-            </p>
-
+            <input
+              type="file"
+              id="logoInput"
+              accept="image/png,image/jpeg,image/webp,image/svg+xml"
+            />
 
             <div class="logo-actions">
 
-              <label
-                for="logoInput"
-                class="btn btn-primary">
-
-                ↑
-                Upload New Logo
-
-              </label>
-
-
-              <input
-                type="file"
-                id="logoInput"
-                accept="image/*"
-              />
-
+              <button
+                class="btn btn-primary"
+                id="saveLogoBtn"
+              >
+                <span>✓</span>
+                Save Logo
+              </button>
 
               <button
                 class="btn btn-danger"
                 id="removeLogoBtn"
-                type="button">
-
-                ×
+              >
+                <span>×</span>
                 Remove Logo
-
               </button>
 
             </div>
@@ -2541,51 +2381,55 @@
 
 
       <!-- =====================================================
-           STUDENTS SECTION
+           STUDENTS
            ===================================================== -->
 
       <section
         class="section"
-        id="studentsSection">
+        id="students"
+      >
 
         <div class="section-head">
 
-          <div>
+          <div class="section-title">
 
-            <div class="section-kicker">
-              People Management
+            <div class="section-title-icon">
+              ♙
             </div>
 
-            <h2>
-              Student Manager
-            </h2>
+            <div>
+              <h3>Student Manager</h3>
 
-            <p>
-              Manage student names and profile images.
-            </p>
+              <p>
+                Create and manage student profiles for your studio.
+              </p>
+            </div>
 
           </div>
 
 
-          <div class="student-toolbar">
+          <div style="display:flex;gap:9px;align-items:center;">
 
-            <div
-              class="student-count"
-              id="studentCount">
+            <div class="search-box">
 
-              0 Students
+              <span class="search-icon">
+                ⌕
+              </span>
+
+              <input
+                type="search"
+                id="studentSearch"
+                placeholder="Search students..."
+              />
 
             </div>
-
 
             <button
               class="btn btn-primary"
               id="addStudentBtn"
-              type="button">
-
-              ＋
+            >
+              <span>＋</span>
               Add Student
-
             </button>
 
           </div>
@@ -2594,9 +2438,9 @@
 
 
         <div
-          class="students-grid"
-          id="studentsGrid">
-        </div>
+          class="student-grid"
+          id="studentGrid"
+        ></div>
 
       </section>
 
@@ -2605,145 +2449,118 @@
   </main>
 
 
-  <!-- =========================================================
+  <!-- =======================================================
        STUDENT MODAL
-       ========================================================= -->
+       ======================================================= -->
 
   <div
-    class="modal"
+    class="modal-backdrop"
     id="studentModal"
-    aria-hidden="true">
+  >
 
-    <div class="modal-box">
-
+    <div class="modal">
 
       <div class="modal-head">
 
-        <div class="modal-title-wrap">
-
-          <span>
-            Student Workspace
-          </span>
-
+        <div>
           <h3 id="modalTitle">
             Add Student
           </h3>
 
+          <p>
+            Create a premium student profile.
+          </p>
         </div>
 
-
         <button
-          class="close-modal"
+          class="close-btn"
           id="closeModalBtn"
-          type="button">
-
+        >
           ×
-
         </button>
 
       </div>
 
 
-      <div class="modal-body">
+      <div class="form-group">
 
+        <label
+          class="form-label"
+          for="studentName"
+        >
+          Student Name
+        </label>
 
-        <div class="field">
-
-          <label for="studentName">
-            Student Name
-          </label>
-
-          <input
-            type="text"
-            id="studentName"
-            placeholder="Enter student name..."
-            autocomplete="off"
-          />
-
-        </div>
-
-
-        <div class="field">
-
-          <label>
-            Student Image
-          </label>
-
-
-          <div class="image-upload-box">
-
-            <div class="modal-image-preview">
-
-              <img
-                id="studentImagePreview"
-                alt="Student Preview"
-              />
-
-              <div
-                class="modal-image-placeholder"
-                id="studentImagePlaceholder">
-
-                👤
-
-              </div>
-
-            </div>
-
-
-            <div class="upload-content">
-
-              <strong>
-                Profile Image
-              </strong>
-
-              <span id="selectedFileName">
-                JPG, PNG or WEBP
-              </span>
-
-
-              <label
-                for="studentImageInput"
-                class="btn btn-secondary">
-
-                Choose Image
-
-              </label>
-
-
-              <input
-                type="file"
-                id="studentImageInput"
-                accept="image/*"
-              />
-
-            </div>
-
-          </div>
-
-        </div>
+        <input
+          class="form-input"
+          id="studentName"
+          type="text"
+          placeholder="Enter student name"
+          autocomplete="off"
+        />
 
       </div>
 
 
-      <div class="modal-footer">
+      <div class="form-group">
+
+        <label class="form-label">
+          Student Photo
+        </label>
+
+        <div class="student-upload">
+
+          <div
+            class="student-preview"
+            id="studentPreview"
+          >
+            <span>?</span>
+          </div>
+
+
+          <label
+            class="file-box"
+            for="studentImageInput"
+          >
+
+            <strong>
+              Choose student image
+            </strong>
+
+            <span>
+              JPG, PNG or WEBP recommended.
+              The image will sync to Firebase Storage
+              when Firebase is available.
+            </span>
+
+          </label>
+
+        </div>
+
+        <input
+          type="file"
+          id="studentImageInput"
+          accept="image/png,image/jpeg,image/webp"
+        />
+
+      </div>
+
+
+      <div class="modal-actions">
 
         <button
           class="btn btn-secondary"
           id="cancelModalBtn"
-          type="button">
-
+        >
           Cancel
-
         </button>
-
 
         <button
           class="btn btn-primary"
           id="saveStudentBtn"
-          type="button">
-
+        >
+          <span>✓</span>
           Save Student
-
         </button>
 
       </div>
@@ -2753,84 +2570,72 @@
   </div>
 
 
-  <!-- =========================================================
+  <!-- =======================================================
+       TOAST
+       ======================================================= -->
+
+  <div
+    class="toast-container"
+    id="toastContainer"
+  ></div>
+
+
+  <!-- =======================================================
        LOADING
-       ========================================================= -->
+       ======================================================= -->
 
   <div
     class="loading-overlay"
-    id="loadingOverlay">
+    id="loadingOverlay"
+  >
 
-    <div class="loading-box">
+    <div class="loader-box">
 
       <div class="spinner"></div>
 
-      <p id="loadingText">
-        Firebase-এ save হচ্ছে...
-      </p>
+      <span id="loadingText">
+        Syncing...
+      </span>
 
     </div>
 
   </div>
 
 
-  <!-- =========================================================
-       TOAST
-       ========================================================= -->
-
-  <div
-    class="toast-container"
-    id="toastContainer">
-  </div>
-
-
-  <!-- =========================================================
-       FIREBASE + ADMIN LOGIC
-       ========================================================= -->
+  <!-- =======================================================
+       JAVASCRIPT
+       ======================================================= -->
 
   <script type="module">
 
-    /* =========================================================
-       AUTH
-       ========================================================= */
-
-    const ADMIN_SESSION_KEY =
-      "personalCourseStudioAdminLoggedIn";
+    /* =======================================================
+       AUTH PROTECTION
+       ======================================================= */
 
     if (
       sessionStorage.getItem(
-        ADMIN_SESSION_KEY
+        "personalCourseStudioAdminLoggedIn"
       ) !== "true"
     ) {
-
-      window.location.replace(
-        "../login/"
-      );
-
+      window.location.replace("../login/");
     }
 
 
-    /* =========================================================
-       FIREBASE
-       ========================================================= */
+    /* =======================================================
+       FIREBASE IMPORTS
+       ======================================================= */
 
-    import {
-      db,
-      storage
-    } from "../firebase.js";
-
+    import { db, storage } from "../firebase.js";
 
     import {
       collection,
       doc,
-      getDocs,
       setDoc,
       deleteDoc,
       onSnapshot,
       serverTimestamp
     } from
       "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
-
 
     import {
       ref,
@@ -2840,9 +2645,9 @@
       "https://www.gstatic.com/firebasejs/12.2.1/firebase-storage.js";
 
 
-    /* =========================================================
+    /* =======================================================
        STORAGE KEYS
-       ========================================================= */
+       ======================================================= */
 
     const STUDENTS_KEY =
       "personalCourseStudioStudents";
@@ -2854,190 +2659,160 @@
       "personalCourseStudioSettings";
 
 
-    const STUDENTS_COLLECTION =
-      "students";
+    /* =======================================================
+       DEFAULT PROFILE
+       ======================================================= */
+
+    const defaultProfile = {
+      logo: ""
+    };
 
 
-    /* =========================================================
+    /* =======================================================
        ELEMENTS
-       ========================================================= */
+       ======================================================= */
 
-    const sidebar =
-      document.getElementById(
-        "sidebar"
-      );
-
-    const mobileOverlay =
-      document.getElementById(
-        "mobileOverlay"
-      );
-
-    const mobileMenuBtn =
-      document.getElementById(
-        "mobileMenuBtn"
-      );
-
-    const logoutBtn =
-      document.getElementById(
-        "logoutBtn"
-      );
-
-    const studentsGrid =
-      document.getElementById(
-        "studentsGrid"
-      );
+    const studentGrid =
+      document.getElementById("studentGrid");
 
     const studentCount =
-      document.getElementById(
-        "studentCount"
-      );
+      document.getElementById("studentCount");
 
-    const addStudentBtn =
-      document.getElementById(
-        "addStudentBtn"
-      );
+    const logoStatus =
+      document.getElementById("logoStatus");
 
-    const studentModal =
-      document.getElementById(
-        "studentModal"
-      );
+    const logoStatusText =
+      document.getElementById("logoStatusText");
 
-    const closeModalBtn =
-      document.getElementById(
-        "closeModalBtn"
-      );
+    const dataStatus =
+      document.getElementById("dataStatus");
 
-    const cancelModalBtn =
-      document.getElementById(
-        "cancelModalBtn"
-      );
+    const syncPill =
+      document.getElementById("syncPill");
 
-    const saveStudentBtn =
-      document.getElementById(
-        "saveStudentBtn"
-      );
+    const syncText =
+      document.getElementById("syncText");
 
-    const studentName =
-      document.getElementById(
-        "studentName"
-      );
+    const sidebarLogo =
+      document.getElementById("sidebarLogo");
 
-    const studentImageInput =
-      document.getElementById(
-        "studentImageInput"
-      );
+    const heroLogo =
+      document.getElementById("heroLogo");
 
-    const studentImagePreview =
-      document.getElementById(
-        "studentImagePreview"
-      );
-
-    const studentImagePlaceholder =
-      document.getElementById(
-        "studentImagePlaceholder"
-      );
-
-    const selectedFileName =
-      document.getElementById(
-        "selectedFileName"
-      );
-
-    const modalTitle =
-      document.getElementById(
-        "modalTitle"
-      );
+    const mainLogoPreview =
+      document.getElementById("mainLogoPreview");
 
     const logoInput =
-      document.getElementById(
-        "logoInput"
-      );
+      document.getElementById("logoInput");
 
-    const logoPreviewImage =
-      document.getElementById(
-        "logoPreviewImage"
-      );
-
-    const logoPreviewText =
-      document.getElementById(
-        "logoPreviewText"
-      );
-
-    const sidebarLogoImage =
-      document.getElementById(
-        "sidebarLogoImage"
-      );
-
-    const sidebarLogoText =
-      document.getElementById(
-        "sidebarLogoText"
-      );
+    const saveLogoBtn =
+      document.getElementById("saveLogoBtn");
 
     const removeLogoBtn =
-      document.getElementById(
-        "removeLogoBtn"
-      );
+      document.getElementById("removeLogoBtn");
 
-    const favicon =
-      document.getElementById(
-        "favicon"
-      );
+    const logoDropZone =
+      document.getElementById("logoDropZone");
 
-    const loadingOverlay =
-      document.getElementById(
-        "loadingOverlay"
-      );
+    const addStudentBtn =
+      document.getElementById("addStudentBtn");
 
-    const loadingText =
-      document.getElementById(
-        "loadingText"
-      );
+    const studentModal =
+      document.getElementById("studentModal");
+
+    const closeModalBtn =
+      document.getElementById("closeModalBtn");
+
+    const cancelModalBtn =
+      document.getElementById("cancelModalBtn");
+
+    const saveStudentBtn =
+      document.getElementById("saveStudentBtn");
+
+    const studentName =
+      document.getElementById("studentName");
+
+    const studentImageInput =
+      document.getElementById("studentImageInput");
+
+    const studentPreview =
+      document.getElementById("studentPreview");
+
+    const modalTitle =
+      document.getElementById("modalTitle");
+
+    const studentSearch =
+      document.getElementById("studentSearch");
 
     const toastContainer =
-      document.getElementById(
-        "toastContainer"
-      );
+      document.getElementById("toastContainer");
 
-    const studentsNav =
-      document.getElementById(
-        "studentsNav"
-      );
+    const loadingOverlay =
+      document.getElementById("loadingOverlay");
 
-    const logoNav =
-      document.getElementById(
-        "logoNav"
-      );
+    const loadingText =
+      document.getElementById("loadingText");
 
-    const studentsSection =
-      document.getElementById(
-        "studentsSection"
-      );
+    const logoutBtn =
+      document.getElementById("logoutBtn");
 
-    const logoSection =
-      document.getElementById(
-        "logoSection"
-      );
+    const mobileMenu =
+      document.getElementById("mobileMenu");
+
+    const sidebar =
+      document.getElementById("sidebar");
 
 
-    /* =========================================================
+    /* =======================================================
        STATE
-       ========================================================= */
+       ======================================================= */
 
     let students = [];
 
     let editingStudentId = null;
 
-    let selectedStudentFile = null;
+    let selectedStudentImageFile = null;
 
-    let savingStudent = false;
+    let selectedLogoFile = null;
 
-    let unsubscribeStudents = null;
-
-    let unsubscribeStudio = null;
+    let firebaseAvailable = true;
 
 
-    /* =========================================================
-       PROFILE
-       ========================================================= */
+    /* =======================================================
+       LOCAL STORAGE
+       ======================================================= */
+
+    function getLocalStudents() {
+
+      try {
+
+        const saved =
+          JSON.parse(
+            localStorage.getItem(STUDENTS_KEY)
+          );
+
+        return Array.isArray(saved)
+          ? saved
+          : [];
+
+      } catch {
+
+        return [];
+
+      }
+
+    }
+
+
+    function saveLocalStudents(list) {
+
+      localStorage.setItem(
+        STUDENTS_KEY,
+        JSON.stringify(list)
+      );
+
+    }
+
 
     function getProfile() {
 
@@ -3045,20 +2820,18 @@
 
         const saved =
           JSON.parse(
-            localStorage.getItem(
-              PROFILE_KEY
-            )
+            localStorage.getItem(PROFILE_KEY)
           );
 
         return {
-          logo: "",
+          ...defaultProfile,
           ...(saved || {})
         };
 
       } catch {
 
         return {
-          logo: ""
+          ...defaultProfile
         };
 
       }
@@ -3066,9 +2839,7 @@
     }
 
 
-    function saveProfile(
-      profile
-    ) {
+    function saveProfile(profile) {
 
       localStorage.setItem(
         PROFILE_KEY,
@@ -3078,33 +2849,24 @@
     }
 
 
-    /* =========================================================
-       LOCAL SETTINGS
-       ========================================================= */
-
-    function updateLocalSettings(
-      logo
-    ) {
-
-      let settings = {};
+    function getSettings() {
 
       try {
 
-        settings =
-          JSON.parse(
-            localStorage.getItem(
-              SETTINGS_KEY
-            )
-          ) || {};
+        return JSON.parse(
+          localStorage.getItem(SETTINGS_KEY)
+        ) || {};
 
       } catch {
 
-        settings = {};
+        return {};
 
       }
 
-      settings.studioLogo =
-        logo || "";
+    }
+
+
+    function saveSettings(settings) {
 
       localStorage.setItem(
         SETTINGS_KEY,
@@ -3114,920 +2876,536 @@
     }
 
 
-    /* =========================================================
-       LOCAL STUDENTS
-       ========================================================= */
+    /* =======================================================
+       UI HELPERS
+       ======================================================= */
 
-    function loadLocalStudents() {
-
-      try {
-
-        const saved =
-          JSON.parse(
-            localStorage.getItem(
-              STUDENTS_KEY
-            )
-          );
-
-        students =
-          Array.isArray(saved)
-            ? saved
-            : [];
-
-      } catch {
-
-        students = [];
-
-      }
-
-    }
-
-
-    function saveLocalStudents() {
-
-      localStorage.setItem(
-        STUDENTS_KEY,
-        JSON.stringify(
-          students
-        )
-      );
-
-    }
-
-
-    /* =========================================================
-       ESCAPE
-       ========================================================= */
-
-    function escapeHtml(
-      value
+    function setSyncStatus(
+      status,
+      message
     ) {
 
-      return String(
-        value || ""
-      )
-        .replace(
-          /&/g,
-          "&amp;"
-        )
-        .replace(
-          /</g,
-          "&lt;"
-        )
-        .replace(
-          />/g,
-          "&gt;"
-        )
-        .replace(
-          /"/g,
-          "&quot;"
-        )
-        .replace(
-          /'/g,
-          "&#039;"
-        );
+      syncPill.classList.remove(
+        "live",
+        "error"
+      );
 
+      if (status === "live") {
+        syncPill.classList.add("live");
+        dataStatus.textContent = "Live";
+      }
+
+      else if (status === "error") {
+        syncPill.classList.add("error");
+        dataStatus.textContent = "Local";
+      }
+
+      else {
+        dataStatus.textContent = "Local";
+      }
+
+      syncText.textContent = message;
     }
 
 
-    /* =========================================================
-       TOAST
-       ========================================================= */
+    function showLoading(
+      show,
+      text = "Syncing..."
+    ) {
 
-    function showToast(
+      loadingText.textContent = text;
+
+      loadingOverlay.classList.toggle(
+        "show",
+        show
+      );
+    }
+
+
+    function toast(
+      title,
       message,
       type = "success"
     ) {
 
-      const toast =
-        document.createElement(
-          "div"
-        );
+      const item =
+        document.createElement("div");
 
-      toast.className =
-        `toast ${type}`;
+      item.className =
+        "toast" +
+        (type === "error"
+          ? " error"
+          : "");
 
-      toast.innerHTML = `
-        <strong>
-          ${
-            type === "error"
-              ? "⚠"
-              : "✓"
-          }
-        </strong>
+      item.innerHTML = `
+        <div class="toast-icon">
+          ${type === "error" ? "!" : "✓"}
+        </div>
 
-        <span>
-          ${escapeHtml(message)}
-        </span>
+        <div class="toast-text">
+          <strong>${escapeHtml(title)}</strong>
+          <span>${escapeHtml(message)}</span>
+        </div>
       `;
 
-      toastContainer.appendChild(
-        toast
-      );
+      toastContainer.appendChild(item);
 
-      setTimeout(
-        () => {
+      setTimeout(() => {
 
-          toast.style.opacity =
-            "0";
+        item.style.opacity = "0";
+        item.style.transform =
+          "translateY(10px)";
 
-          toast.style.transform =
-            "translateY(10px)";
+        setTimeout(() => {
+          item.remove();
+        }, 250);
 
-          setTimeout(
-            () => {
-              toast.remove();
-            },
-            220
-          );
+      }, 3500);
+    }
 
-        },
-        3000
-      );
+
+    function escapeHtml(value) {
+
+      return String(value || "")
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
 
     }
 
 
-    /* =========================================================
-       LOADING
-       ========================================================= */
-
-    function showLoading(
-      message
-    ) {
-
-      loadingText.textContent =
-        message ||
-        "Please wait...";
-
-      loadingOverlay.classList.add(
-        "show"
-      );
-
-    }
-
-
-    function hideLoading() {
-
-      loadingOverlay.classList.remove(
-        "show"
-      );
-
-    }
-
-
-    /* =========================================================
-       ID
-       ========================================================= */
-
-    function generateId() {
+    function createId() {
 
       return (
-        "student_" +
-        Date.now() +
-        "_" +
+        Date.now().toString(36) +
+        "-" +
         Math.random()
           .toString(36)
-          .slice(2, 8)
+          .slice(2, 10)
       );
 
     }
 
 
-    /* =========================================================
-       DATE
-       ========================================================= */
+    /* =======================================================
+       LOGO UI
+       ======================================================= */
 
-    function formatDate(
-      value
-    ) {
+    function applyLogo(logoUrl) {
 
-      if (!value) {
-        return "";
+      const cleanLogo =
+        typeof logoUrl === "string"
+          ? logoUrl.trim()
+          : "";
+
+
+      if (cleanLogo) {
+
+        sidebarLogo.innerHTML =
+          `<img src="${cleanLogo}" alt="Studio Logo">`;
+
+        heroLogo.innerHTML =
+          `<img src="${cleanLogo}" alt="Studio Logo">`;
+
+        mainLogoPreview.innerHTML =
+          `<img src="${cleanLogo}" alt="Studio Logo">`;
+
+        document
+          .getElementById("favicon")
+          .setAttribute(
+            "href",
+            cleanLogo
+          );
+
+        logoStatus.textContent =
+          "Active";
+
+        logoStatusText.textContent =
+          "Logo configured";
+
+      } else {
+
+        sidebarLogo.innerHTML =
+          `<span>CS</span>`;
+
+        heroLogo.innerHTML =
+          `<span class="logo-fallback">CS</span>`;
+
+        mainLogoPreview.innerHTML =
+          `<span>CS</span>`;
+
+        document
+          .getElementById("favicon")
+          .removeAttribute("href");
+
+        logoStatus.textContent =
+          "Ready";
+
+        logoStatusText.textContent =
+          "Default CS identity";
       }
-
-      let date;
-
-      try {
-
-        if (
-          typeof value.toDate ===
-          "function"
-        ) {
-
-          date =
-            value.toDate();
-
-        } else {
-
-          date =
-            new Date(value);
-
-        }
-
-      } catch {
-
-        return "";
-
-      }
-
-      if (
-        Number.isNaN(
-          date.getTime()
-        )
-      ) {
-
-        return "";
-
-      }
-
-      return date.toLocaleDateString(
-        "en-US",
-        {
-          year: "numeric",
-          month: "short",
-          day: "numeric"
-        }
-      );
 
     }
 
 
-    /* =========================================================
-       UPDATE STUDENT COUNT
-       ========================================================= */
-
-    function updateStudentCount() {
-
-      const count =
-        students.length;
-
-      studentCount.textContent =
-        `${count} ${
-          count === 1
-            ? "Student"
-            : "Students"
-        }`;
-
-    }
-
-
-    /* =========================================================
-       RENDER STUDENTS
-       ========================================================= */
-
-    function renderStudents() {
-
-      updateStudentCount();
-
-
-      if (!students.length) {
-
-        studentsGrid.innerHTML = `
-
-          <div class="empty-state">
-
-            <div class="empty-icon">
-              👨‍🎓
-            </div>
-
-            <h3>
-              No students yet
-            </h3>
-
-            <p>
-              Add your first student to
-              start building your studio.
-            </p>
-
-          </div>
-
-        `;
-
-        return;
-
-      }
-
-
-      studentsGrid.innerHTML =
-        students
-          .map(
-            student => {
-
-              const image =
-                student.imageUrl ||
-                student.image ||
-                student.photo ||
-                student.avatar ||
-                "";
-
-              const name =
-                student.name ||
-                "Unnamed Student";
-
-              const date =
-                student.createdAt
-                  ? formatDate(
-                      student.createdAt
-                    )
-                  : "";
-
-
-              return `
-
-                <article
-                  class="student-card"
-                  data-id="${escapeHtml(
-                    student.id
-                  )}">
-
-                  <div
-                    class="student-image">
-
-                    ${
-                      image
-
-                      ? `
-
-                        <img
-                          src="${escapeHtml(
-                            image
-                          )}"
-                          alt="${escapeHtml(
-                            name
-                          )}"
-                          loading="lazy"
-                        />
-
-                      `
-
-                      : `
-
-                        <div
-                          class="student-placeholder">
-
-                          👤
-
-                        </div>
-
-                      `
-                    }
-
-                  </div>
-
-
-                  <div class="student-info">
-
-                    <div
-                      class="student-name">
-
-                      ${escapeHtml(
-                        name
-                      )}
-
-                    </div>
-
-
-                    <div
-                      class="student-meta">
-
-                      ${
-                        date
-                          ? `Added ${escapeHtml(
-                              date
-                            )}`
-                          : "Student Profile"
-                      }
-
-                    </div>
-
-
-                    <div
-                      class="student-actions">
-
-                      <button
-                        class="btn btn-secondary edit-student"
-                        type="button"
-                        data-id="${escapeHtml(
-                          student.id
-                        )}">
-
-                        ✎
-                        Edit
-
-                      </button>
-
-
-                      <button
-                        class="btn btn-danger delete-student"
-                        type="button"
-                        data-id="${escapeHtml(
-                          student.id
-                        )}">
-
-                        ×
-                        Delete
-
-                      </button>
-
-                    </div>
-
-                  </div>
-
-                </article>
-
-              `;
-
-            }
-          )
-          .join("");
-
-
-      document
-        .querySelectorAll(
-          ".edit-student"
-        )
-        .forEach(
-          button => {
-
-            button.addEventListener(
-              "click",
-              () => {
-
-                editStudent(
-                  button.dataset.id
-                );
-
-              }
-            );
-
-          }
-        );
-
-
-      document
-        .querySelectorAll(
-          ".delete-student"
-        )
-        .forEach(
-          button => {
-
-            button.addEventListener(
-              "click",
-              () => {
-
-                deleteStudent(
-                  button.dataset.id
-                );
-
-              }
-            );
-
-          }
-        );
-
-    }
-
-
-    /* =========================================================
-       APPLY LOGO
-       ========================================================= */
-
-    function applyLogo(
-      logo
-    ) {
-
-      const logoUrl =
-        logo || "";
-
+    function loadLocalLogo() {
 
       const profile =
         getProfile();
 
-      profile.logo =
-        logoUrl;
+      const settings =
+        getSettings();
 
-      saveProfile(
-        profile
+      const logo =
+        settings.studioLogo ||
+        profile.logo ||
+        "";
+
+      applyLogo(logo);
+
+    }
+
+
+    /* =======================================================
+       STUDENT IMAGE HELPERS
+       ======================================================= */
+
+    function getStudentImage(student) {
+
+      return (
+        student.image ||
+        student.photo ||
+        student.avatar ||
+        student.imageUrl ||
+        ""
       );
 
-
-      updateLocalSettings(
-        logoUrl
-      );
+    }
 
 
-      /* Main Preview */
+    function studentInitial(name) {
 
-      if (logoUrl) {
+      const value =
+        String(name || "?")
+          .trim();
 
-        logoPreviewImage.src =
-          logoUrl;
+      if (!value) return "?";
 
-        logoPreviewImage.style.display =
-          "block";
+      return value
+        .charAt(0)
+        .toUpperCase();
 
-        logoPreviewText.style.display =
-          "none";
+    }
 
-      } else {
 
-        logoPreviewImage.removeAttribute(
-          "src"
+    /* =======================================================
+       RENDER STUDENTS
+       ======================================================= */
+
+    function renderStudents(
+      filter = ""
+    ) {
+
+      const search =
+        filter
+          .trim()
+          .toLowerCase();
+
+
+      const filtered =
+        students.filter(student =>
+          String(student.name || "")
+            .toLowerCase()
+            .includes(search)
         );
 
-        logoPreviewImage.style.display =
-          "none";
 
-        logoPreviewText.style.display =
-          "block";
+      studentCount.textContent =
+        students.length;
 
+
+      if (!filtered.length) {
+
+        studentGrid.innerHTML = `
+          <div class="empty-state">
+            <div class="empty-icon">♙</div>
+
+            <h4>
+              ${
+                search
+                  ? "No students found"
+                  : "No students yet"
+              }
+            </h4>
+
+            <p>
+              ${
+                search
+                  ? "Try another search."
+                  : "Create your first student profile."
+              }
+            </p>
+          </div>
+        `;
+
+        return;
       }
 
 
-      /* Sidebar */
+      studentGrid.innerHTML =
+        filtered.map(student => {
 
-      if (logoUrl) {
+          const image =
+            getStudentImage(student);
 
-        sidebarLogoImage.src =
-          logoUrl;
+          const imageHtml =
+            image
+              ? `
+                <img
+                  src="${escapeHtml(image)}"
+                  alt="${escapeHtml(student.name)}"
+                  loading="lazy"
+                >
+              `
+              : `
+                <span class="student-initial">
+                  ${escapeHtml(
+                    studentInitial(student.name)
+                  )}
+                </span>
+              `;
 
-        sidebarLogoImage.style.display =
-          "block";
 
-        sidebarLogoText.style.display =
-          "none";
+          const created =
+            student.createdAt
+              ? formatDate(student.createdAt)
+              : "Student profile";
 
-      } else {
 
-        sidebarLogoImage.removeAttribute(
-          "src"
+          return `
+            <article
+              class="student-card"
+              data-id="${escapeHtml(student.id)}"
+            >
+
+              <div class="student-photo">
+                ${imageHtml}
+              </div>
+
+              <div class="student-info">
+
+                <h4>
+                  ${escapeHtml(student.name)}
+                </h4>
+
+                <p>
+                  ${escapeHtml(created)}
+                </p>
+
+                <span class="student-badge">
+                  Active Profile
+                </span>
+
+              </div>
+
+              <div class="student-actions">
+
+                <button
+                  class="icon-btn"
+                  data-action="edit"
+                  data-id="${escapeHtml(student.id)}"
+                  title="Edit"
+                >
+                  ✎
+                </button>
+
+                <button
+                  class="icon-btn delete"
+                  data-action="delete"
+                  data-id="${escapeHtml(student.id)}"
+                  title="Delete"
+                >
+                  ×
+                </button>
+
+              </div>
+
+            </article>
+          `;
+
+        }).join("");
+
+    }
+
+
+    function formatDate(value) {
+
+      try {
+
+        const date =
+          value?.seconds
+            ? new Date(
+                value.seconds * 1000
+              )
+            : new Date(value);
+
+        if (Number.isNaN(date.getTime())) {
+          return "Student profile";
+        }
+
+        return date.toLocaleDateString(
+          "en-US",
+          {
+            month: "short",
+            day: "numeric",
+            year: "numeric"
+          }
         );
 
-        sidebarLogoImage.style.display =
-          "none";
+      } catch {
 
-        sidebarLogoText.style.display =
-          "block";
-
-      }
-
-
-      /* Favicon */
-
-      if (logoUrl) {
-
-        favicon.href =
-          logoUrl;
-
-      } else {
-
-        favicon.removeAttribute(
-          "href"
-        );
+        return "Student profile";
 
       }
 
     }
 
 
-    /* =========================================================
-       DATA URL → BLOB
-       ========================================================= */
+    /* =======================================================
+       DATA URL TO BLOB
+       ======================================================= */
 
     async function dataUrlToBlob(
       dataUrl
     ) {
 
       const response =
-        await fetch(
-          dataUrl
-        );
+        await fetch(dataUrl);
 
-      return await response.blob();
+      return response.blob();
 
     }
 
 
-    /* =========================================================
-       SAFE FILE NAME
-       ========================================================= */
+    /* =======================================================
+       LOAD FIREBASE STUDENTS
+       ======================================================= */
 
-    function safeFileName(
-      name
-    ) {
-
-      return String(
-        name ||
-        "image"
-      )
-        .replace(
-          /[^a-zA-Z0-9._-]/g,
-          "_"
-        );
-
-    }
-
-
-    /* =========================================================
-       UPLOAD
-       ========================================================= */
-
-    async function uploadImageFile(
-      file,
-      path
-    ) {
-
-      const storageRef =
-        ref(
-          storage,
-          path
-        );
-
-      await uploadBytes(
-        storageRef,
-        file
-      );
-
-      return await getDownloadURL(
-        storageRef
-      );
-
-    }
-
-
-    /* =========================================================
-       MIGRATE LOCAL STUDENTS
-       ========================================================= */
-
-    async function migrateLocalStudentsToFirebase(
-      localStudents
-    ) {
-
-      if (
-        !Array.isArray(
-          localStudents
-        ) ||
-        !localStudents.length
-      ) {
-
-        return;
-
-      }
-
-
-      showLoading(
-        "Migrating student data..."
-      );
-
+    function startStudentSync() {
 
       try {
 
-        for (
-          const student
-          of localStudents
-        ) {
-
-          const studentId =
-            student.id ||
-            generateId();
-
-
-          let imageUrl =
-            student.imageUrl ||
-            "";
-
-
-          const oldImage =
-            student.image ||
-            student.photo ||
-            student.avatar ||
-            "";
-
-
-          if (
-            !imageUrl &&
-            oldImage
-          ) {
-
-            if (
-              oldImage.startsWith(
-                "data:"
-              )
-            ) {
-
-              try {
-
-                const blob =
-                  await dataUrlToBlob(
-                    oldImage
-                  );
-
-
-                const storagePath =
-                  `students/${studentId}/${Date.now()}_student`;
-
-
-                imageUrl =
-                  await uploadImageFile(
-                    blob,
-                    storagePath
-                  );
-
-              } catch (
-                error
-              ) {
-
-                console.error(
-                  error
-                );
-
-              }
-
-            } else {
-
-              imageUrl =
-                oldImage;
-
-            }
-
-          }
-
-
-          await setDoc(
-
-            doc(
-              db,
-              STUDENTS_COLLECTION,
-              studentId
-            ),
-
-            {
-              id:
-                studentId,
-
-              name:
-                student.name ||
-                "Unnamed Student",
-
-              imageUrl:
-                imageUrl,
-
-              createdAt:
-                student.createdAt ||
-                new Date()
-                  .toISOString(),
-
-              updatedAt:
-                serverTimestamp()
-            },
-
-            {
-              merge: true
-            }
-
-          );
-
-        }
-
-
-        showToast(
-          "Existing students migrated to Firebase."
-        );
-
-      } catch (
-        error
-      ) {
-
-        console.error(
-          "Migration error:",
-          error
-        );
-
-        showToast(
-          "Student migration failed.",
-          "error"
-        );
-
-      } finally {
-
-        hideLoading();
-
-      }
-
-    }
-
-
-    /* =========================================================
-       STUDENT REALTIME
-       ========================================================= */
-
-    function startStudentRealtimeSync() {
-
-      if (
-        unsubscribeStudents
-      ) {
-
-        unsubscribeStudents();
-
-      }
-
-
-      unsubscribeStudents =
         onSnapshot(
-
-          collection(
-            db,
-            STUDENTS_COLLECTION
-          ),
+          collection(db, "students"),
 
           snapshot => {
 
+            const firebaseStudents =
+              snapshot.docs.map(item => {
+
+                const data =
+                  item.data();
+
+                return {
+                  id: item.id,
+                  ...data
+                };
+
+              });
+
+
             students =
-              snapshot.docs
-                .map(
-                  item => {
-
-                    const data =
-                      item.data();
-
-                    return {
-
-                      id:
-                        data.id ||
-                        item.id,
-
-                      name:
-                        data.name ||
-                        "Unnamed Student",
-
-                      imageUrl:
-                        data.imageUrl ||
-                        data.image ||
-                        "",
-
-                      image:
-                        data.imageUrl ||
-                        data.image ||
-                        "",
-
-                      createdAt:
-                        data.createdAt ||
-                        "",
-
-                      updatedAt:
-                        data.updatedAt ||
-                        ""
-
-                    };
-
-                  }
+              firebaseStudents
+                .sort(
+                  (a, b) =>
+                    String(a.name || "")
+                      .localeCompare(
+                        String(b.name || "")
+                      )
                 );
 
 
-            saveLocalStudents();
+            saveLocalStudents(
+              students
+            );
 
-            renderStudents();
+            renderStudents(
+              studentSearch.value
+            );
+
+            setSyncStatus(
+              "live",
+              "LIVE SYNC"
+            );
+
+            firebaseAvailable = true;
 
           },
 
           error => {
 
             console.error(
-              "Student realtime error:",
+              "Student sync error:",
               error
             );
 
-            showToast(
-              "Firebase student sync unavailable.",
+            firebaseAvailable = false;
+
+            students =
+              getLocalStudents();
+
+            renderStudents(
+              studentSearch.value
+            );
+
+            setSyncStatus(
+              "error",
+              "LOCAL MODE"
+            );
+
+            toast(
+              "Firebase unavailable",
+              "Using local student data.",
               "error"
             );
 
           }
-
         );
+
+      } catch (error) {
+
+        console.error(error);
+
+        firebaseAvailable = false;
+
+        students =
+          getLocalStudents();
+
+        renderStudents(
+          studentSearch.value
+        );
+
+        setSyncStatus(
+          "error",
+          "LOCAL MODE"
+        );
+
+      }
 
     }
 
 
-    /* =========================================================
-       STUDIO REALTIME
-       ========================================================= */
+    /* =======================================================
+       LOAD FIREBASE LOGO
+       ======================================================= */
 
-    function startStudioRealtimeSync() {
+    function startLogoSync() {
 
-      if (
-        unsubscribeStudio
-      ) {
+      try {
 
-        unsubscribeStudio();
-
-      }
-
-
-      unsubscribeStudio =
         onSnapshot(
-
           doc(
             db,
             "studio",
@@ -4036,315 +3414,381 @@
 
           snapshot => {
 
-            if (
-              snapshot.exists()
-            ) {
+            if (!snapshot.exists()) {
 
-              const data =
-                snapshot.data();
+              loadLocalLogo();
 
-              applyLogo(
-                data.studioLogo ||
-                ""
-              );
-
-            } else {
-
-              const profile =
-                getProfile();
-
-              applyLogo(
-                profile.logo ||
-                ""
-              );
-
+              return;
             }
+
+
+            const data =
+              snapshot.data() || {};
+
+            const logo =
+              data.studioLogo || "";
+
+
+            const settings =
+              getSettings();
+
+            settings.studioLogo =
+              logo;
+
+            saveSettings(
+              settings
+            );
+
+
+            const profile =
+              getProfile();
+
+            profile.logo =
+              logo;
+
+            saveProfile(
+              profile
+            );
+
+
+            applyLogo(logo);
+
+            setSyncStatus(
+              "live",
+              "LIVE SYNC"
+            );
 
           },
 
           error => {
 
             console.error(
-              "Studio realtime error:",
+              "Logo sync error:",
               error
             );
 
-            const profile =
-              getProfile();
+            loadLocalLogo();
 
-            applyLogo(
-              profile.logo ||
-              ""
+            setSyncStatus(
+              "error",
+              "LOCAL MODE"
             );
 
           }
-
         );
+
+      } catch (error) {
+
+        console.error(error);
+
+        loadLocalLogo();
+
+      }
 
     }
 
 
-    /* =========================================================
-       INITIALIZE FIREBASE
-       ========================================================= */
+    /* =======================================================
+       SAVE LOGO
+       ======================================================= */
 
-    async function initializeFirebaseData() {
+    async function saveLogo() {
+
+      if (!selectedLogoFile) {
+
+        toast(
+          "Choose a logo",
+          "Please select an image first.",
+          "error"
+        );
+
+        return;
+      }
+
 
       try {
 
-        const snapshot =
-          await getDocs(
-
-            collection(
-              db,
-              STUDENTS_COLLECTION
-            )
-
-          );
-
-
-        if (
-          !snapshot.empty
-        ) {
-
-          students =
-            snapshot.docs
-              .map(
-                item => {
-
-                  const data =
-                    item.data();
-
-                  return {
-
-                    id:
-                      data.id ||
-                      item.id,
-
-                    name:
-                      data.name ||
-                      "Unnamed Student",
-
-                    imageUrl:
-                      data.imageUrl ||
-                      data.image ||
-                      "",
-
-                    image:
-                      data.imageUrl ||
-                      data.image ||
-                      "",
-
-                    createdAt:
-                      data.createdAt ||
-                      "",
-
-                    updatedAt:
-                      data.updatedAt ||
-                      ""
-
-                  };
-
-                }
-              );
-
-
-          saveLocalStudents();
-
-          renderStudents();
-
-        } else {
-
-          await migrateLocalStudentsToFirebase(
-            students
-          );
-
-        }
-
-
-        startStudentRealtimeSync();
-
-        startStudioRealtimeSync();
-
-
-      } catch (
-        error
-      ) {
-
-        console.error(
-          "Firebase initialization:",
-          error
+        showLoading(
+          true,
+          "Uploading studio logo..."
         );
 
 
-        renderStudents();
+        let logoUrl = "";
+
+
+        if (firebaseAvailable) {
+
+          const safeName =
+            selectedLogoFile.name
+              .replace(
+                /[^a-zA-Z0-9._-]/g,
+                "_"
+              );
+
+
+          const storageRef =
+            ref(
+              storage,
+              `studio/logo/${Date.now()}_${safeName}`
+            );
+
+
+          const uploadResult =
+            await uploadBytes(
+              storageRef,
+              selectedLogoFile
+            );
+
+
+          logoUrl =
+            await getDownloadURL(
+              uploadResult.ref
+            );
+
+
+          await setDoc(
+            doc(
+              db,
+              "studio",
+              "settings"
+            ),
+            {
+              studioLogo: logoUrl,
+              updatedAt:
+                serverTimestamp()
+            },
+            {
+              merge: true
+            }
+          );
+
+        } else {
+
+          logoUrl =
+            await fileToDataUrl(
+              selectedLogoFile
+            );
+
+        }
 
 
         const profile =
           getProfile();
 
-        applyLogo(
-          profile.logo ||
-          ""
+        profile.logo =
+          logoUrl;
+
+        saveProfile(
+          profile
         );
 
 
-        showToast(
-          "Firebase unavailable. Local data is active.",
+        const settings =
+          getSettings();
+
+        settings.studioLogo =
+          logoUrl;
+
+        saveSettings(
+          settings
+        );
+
+
+        applyLogo(
+          logoUrl
+        );
+
+
+        selectedLogoFile =
+          null;
+
+        logoInput.value =
+          "";
+
+
+        toast(
+          "Logo saved",
+          "Studio identity has been updated."
+        );
+
+      } catch (error) {
+
+        console.error(
+          "Logo save error:",
+          error
+        );
+
+        toast(
+          "Logo upload failed",
+          error.message ||
+            "Please check Firebase Storage rules.",
           "error"
         );
+
+      } finally {
+
+        showLoading(false);
 
       }
 
     }
 
 
-    /* =========================================================
-       ADD STUDENT
-       ========================================================= */
+    /* =======================================================
+       REMOVE LOGO
+       ======================================================= */
 
-    function openAddStudent() {
+    async function removeLogo() {
 
-      editingStudentId =
-        null;
+      const confirmed =
+        confirm(
+          "Remove the current studio logo?"
+        );
 
-      selectedStudentFile =
-        null;
-
-
-      modalTitle.textContent =
-        "Add Student";
+      if (!confirmed) return;
 
 
-      studentName.value =
-        "";
+      try {
+
+        showLoading(
+          true,
+          "Removing logo..."
+        );
 
 
-      studentImageInput.value =
-        "";
+        if (firebaseAvailable) {
+
+          await setDoc(
+            doc(
+              db,
+              "studio",
+              "settings"
+            ),
+            {
+              studioLogo: "",
+              updatedAt:
+                serverTimestamp()
+            },
+            {
+              merge: true
+            }
+          );
+
+        }
 
 
-      selectedFileName.textContent =
-        "JPG, PNG or WEBP";
+        const profile =
+          getProfile();
+
+        profile.logo =
+          "";
+
+        saveProfile(
+          profile
+        );
 
 
-      studentImagePreview.removeAttribute(
-        "src"
-      );
+        const settings =
+          getSettings();
 
-      studentImagePreview.style.display =
-        "none";
+        settings.studioLogo =
+          "";
 
-      studentImagePlaceholder.style.display =
-        "block";
-
-
-      studentModal.classList.add(
-        "show"
-      );
-
-      studentModal.setAttribute(
-        "aria-hidden",
-        "false"
-      );
+        saveSettings(
+          settings
+        );
 
 
-      setTimeout(
-        () => {
-          studentName.focus();
-        },
-        100
-      );
+        applyLogo("");
+
+        toast(
+          "Logo removed",
+          "The default CS identity is active."
+        );
+
+      } catch (error) {
+
+        console.error(error);
+
+        toast(
+          "Could not remove logo",
+          error.message ||
+            "Please try again.",
+          "error"
+        );
+
+      } finally {
+
+        showLoading(false);
+
+      }
 
     }
 
 
-    /* =========================================================
-       EDIT STUDENT
-       ========================================================= */
+    /* =======================================================
+       ADD / EDIT STUDENT
+       ======================================================= */
 
-    function editStudent(
-      studentId
+    function openStudentModal(
+      student = null
     ) {
 
-      const student =
-        students.find(
-          item =>
-            String(
-              item.id
-            ) ===
-            String(
-              studentId
-            )
-        );
-
-
-      if (!student) {
-
-        showToast(
-          "Student not found.",
-          "error"
-        );
-
-        return;
-
-      }
-
-
       editingStudentId =
-        student.id;
+        student?.id || null;
 
-      selectedStudentFile =
+      selectedStudentImageFile =
         null;
-
-
-      modalTitle.textContent =
-        "Edit Student";
-
-
-      studentName.value =
-        student.name ||
-        "";
-
 
       studentImageInput.value =
         "";
 
 
-      selectedFileName.textContent =
-        "Choose a new image if needed";
+      if (student) {
+
+        modalTitle.textContent =
+          "Edit Student";
+
+        studentName.value =
+          student.name || "";
 
 
-      const image =
-        student.imageUrl ||
-        student.image ||
-        student.photo ||
-        student.avatar ||
-        "";
+        const image =
+          getStudentImage(student);
 
 
-      if (image) {
+        if (image) {
 
-        studentImagePreview.src =
-          image;
+          studentPreview.innerHTML =
+            `<img
+              src="${escapeHtml(image)}"
+              alt="Student"
+            >`;
 
-        studentImagePreview.style.display =
-          "block";
+        } else {
 
-        studentImagePlaceholder.style.display =
-          "none";
+          studentPreview.innerHTML =
+            `<span>
+              ${escapeHtml(
+                studentInitial(
+                  student.name
+                )
+              )}
+            </span>`;
+
+        }
 
       } else {
 
-        studentImagePreview.removeAttribute(
-          "src"
-        );
+        modalTitle.textContent =
+          "Add Student";
 
-        studentImagePreview.style.display =
-          "none";
+        studentName.value =
+          "";
 
-        studentImagePlaceholder.style.display =
-          "block";
+        studentPreview.innerHTML =
+          `<span>?</span>`;
 
       }
 
@@ -4353,62 +3797,43 @@
         "show"
       );
 
-      studentModal.setAttribute(
-        "aria-hidden",
-        "false"
-      );
+
+      setTimeout(() => {
+        studentName.focus();
+      }, 100);
 
     }
 
 
-    /* =========================================================
-       CLOSE MODAL
-       ========================================================= */
-
     function closeStudentModal() {
-
-      if (
-        savingStudent
-      ) {
-
-        return;
-
-      }
-
 
       studentModal.classList.remove(
         "show"
       );
 
-      studentModal.setAttribute(
-        "aria-hidden",
-        "true"
-      );
-
-
       editingStudentId =
         null;
 
-      selectedStudentFile =
+      selectedStudentImageFile =
         null;
+
+      studentName.value =
+        "";
+
+      studentImageInput.value =
+        "";
+
+      studentPreview.innerHTML =
+        "<span>?</span>";
 
     }
 
 
-    /* =========================================================
+    /* =======================================================
        SAVE STUDENT
-       ========================================================= */
+       ======================================================= */
 
     async function saveStudent() {
-
-      if (
-        savingStudent
-      ) {
-
-        return;
-
-      }
-
 
       const name =
         studentName.value.trim();
@@ -4416,212 +3841,235 @@
 
       if (!name) {
 
-        showToast(
-          "Please enter student name.",
+        toast(
+          "Student name required",
+          "Please enter a student name.",
           "error"
         );
 
         studentName.focus();
 
         return;
-
       }
-
-
-      savingStudent =
-        true;
-
-      saveStudentBtn.disabled =
-        true;
 
 
       try {
 
-        const studentId =
-          editingStudentId ||
-          generateId();
-
-
-        let imageUrl =
-          "";
-
-
-        if (
-          editingStudentId
-        ) {
-
-          const oldStudent =
-            students.find(
-              item =>
-                String(
-                  item.id
-                ) ===
-                String(
-                  editingStudentId
-                )
-            );
-
-
-          imageUrl =
-            oldStudent?.imageUrl ||
-            oldStudent?.image ||
-            oldStudent?.photo ||
-            oldStudent?.avatar ||
-            "";
-
-        }
-
-
-        if (
-          selectedStudentFile
-        ) {
-
-          showLoading(
-            "Uploading student image..."
-          );
-
-
-          const fileName =
-            safeFileName(
-              selectedStudentFile.name
-            );
-
-
-          const storagePath =
-            `students/${studentId}/${Date.now()}_${fileName}`;
-
-
-          imageUrl =
-            await uploadImageFile(
-              selectedStudentFile,
-              storagePath
-            );
-
-
-          hideLoading();
-
-        }
-
-
-        const payload = {
-
-          id:
-            studentId,
-
-          name:
-            name,
-
-          imageUrl:
-            imageUrl,
-
-          updatedAt:
-            serverTimestamp()
-
-        };
-
-
-        if (
-          !editingStudentId
-        ) {
-
-          payload.createdAt =
-            new Date()
-              .toISOString();
-
-        }
-
-
         showLoading(
+          true,
           "Saving student..."
         );
 
 
-        await setDoc(
+        const existing =
+          students.find(
+            item =>
+              item.id ===
+              editingStudentId
+          );
 
-          doc(
-            db,
-            STUDENTS_COLLECTION,
-            studentId
-          ),
 
-          payload,
+        const id =
+          editingStudentId ||
+          createId();
 
-          {
-            merge: true
-          }
 
+        let image =
+          existing
+            ? getStudentImage(existing)
+            : "";
+
+
+        /* -----------------------------------------------
+           FIREBASE IMAGE UPLOAD
+           ----------------------------------------------- */
+
+        if (
+          selectedStudentImageFile &&
+          firebaseAvailable
+        ) {
+
+          const safeName =
+            selectedStudentImageFile.name
+              .replace(
+                /[^a-zA-Z0-9._-]/g,
+                "_"
+              );
+
+
+          const imageRef =
+            ref(
+              storage,
+              `students/${id}/${Date.now()}_${safeName}`
+            );
+
+
+          const uploadResult =
+            await uploadBytes(
+              imageRef,
+              selectedStudentImageFile
+            );
+
+
+          image =
+            await getDownloadURL(
+              uploadResult.ref
+            );
+
+        }
+
+
+        /* -----------------------------------------------
+           LOCAL IMAGE FALLBACK
+           ----------------------------------------------- */
+
+        if (
+          selectedStudentImageFile &&
+          !firebaseAvailable
+        ) {
+
+          image =
+            await fileToDataUrl(
+              selectedStudentImageFile
+            );
+
+        }
+
+
+        const studentData = {
+
+          id,
+
+          name,
+
+          image,
+
+          imageUrl: image,
+
+          updatedAt:
+            new Date().toISOString(),
+
+          createdAt:
+            existing?.createdAt ||
+            new Date().toISOString()
+
+        };
+
+
+        /* -----------------------------------------------
+           FIREBASE
+           ----------------------------------------------- */
+
+        if (firebaseAvailable) {
+
+          await setDoc(
+            doc(
+              db,
+              "students",
+              id
+            ),
+            {
+              ...studentData,
+
+              updatedAt:
+                serverTimestamp()
+            },
+            {
+              merge: true
+            }
+          );
+
+        }
+
+
+        /* -----------------------------------------------
+           LOCAL STORAGE
+           ----------------------------------------------- */
+
+        if (editingStudentId) {
+
+          students =
+            students.map(
+              item =>
+                item.id === id
+                  ? {
+                      ...item,
+                      ...studentData
+                    }
+                  : item
+            );
+
+        } else {
+
+          students = [
+            ...students,
+            studentData
+          ];
+
+        }
+
+
+        saveLocalStudents(
+          students
         );
 
 
-        hideLoading();
+        renderStudents(
+          studentSearch.value
+        );
 
 
         closeStudentModal();
 
 
-        showToast(
+        toast(
           editingStudentId
-            ? "Student updated."
-            : "Student added."
+            ? "Student updated"
+            : "Student created",
+
+          firebaseAvailable
+            ? "Profile synced successfully."
+            : "Profile saved locally."
         );
 
-
-      } catch (
-        error
-      ) {
+      } catch (error) {
 
         console.error(
+          "Student save error:",
           error
         );
 
-        hideLoading();
-
-
-        showToast(
-          "Student save failed: " +
-          (
-            error?.message ||
-            "Unknown error"
-          ),
+        toast(
+          "Could not save student",
+          error.message ||
+            "Please try again.",
           "error"
         );
 
       } finally {
 
-        savingStudent =
-          false;
-
-        saveStudentBtn.disabled =
-          false;
+        showLoading(false);
 
       }
 
     }
 
 
-    /* =========================================================
+    /* =======================================================
        DELETE STUDENT
-       ========================================================= */
+       ======================================================= */
 
     async function deleteStudent(
-      studentId
+      id
     ) {
 
       const student =
         students.find(
-          item =>
-            String(
-              item.id
-            ) ===
-            String(
-              studentId
-            )
+          item => item.id === id
         );
 
 
-      if (!student) {
-        return;
-      }
+      if (!student) return;
 
 
       const confirmed =
@@ -4630,372 +4078,278 @@
         );
 
 
-      if (!confirmed) {
-        return;
-      }
+      if (!confirmed) return;
 
 
       try {
 
         showLoading(
+          true,
           "Deleting student..."
         );
 
 
-        await deleteDoc(
+        if (firebaseAvailable) {
 
-          doc(
-            db,
-            STUDENTS_COLLECTION,
-            studentId
-          )
+          await deleteDoc(
+            doc(
+              db,
+              "students",
+              id
+            )
+          );
 
+        }
+
+
+        students =
+          students.filter(
+            item => item.id !== id
+          );
+
+
+        saveLocalStudents(
+          students
         );
 
 
-        hideLoading();
-
-
-        showToast(
-          "Student deleted."
+        renderStudents(
+          studentSearch.value
         );
 
 
-      } catch (
-        error
-      ) {
-
-        console.error(
-          error
+        toast(
+          "Student deleted",
+          "The student profile has been removed."
         );
 
-        hideLoading();
+      } catch (error) {
 
+        console.error(error);
 
-        showToast(
-          "Delete failed: " +
-          (
-            error?.message ||
-            "Unknown error"
-          ),
+        toast(
+          "Delete failed",
+          error.message ||
+            "Please try again.",
           "error"
         );
+
+      } finally {
+
+        showLoading(false);
 
       }
 
     }
 
 
-    /* =========================================================
-       LOGO UPLOAD
-       ========================================================= */
+    /* =======================================================
+       FILE TO DATA URL
+       ======================================================= */
+
+    function fileToDataUrl(
+      file
+    ) {
+
+      return new Promise(
+        (resolve, reject) => {
+
+          const reader =
+            new FileReader();
+
+          reader.onload =
+            () =>
+              resolve(
+                reader.result
+              );
+
+          reader.onerror =
+            reject;
+
+          reader.readAsDataURL(
+            file
+          );
+
+        }
+      );
+
+    }
+
+
+    /* =======================================================
+       LOGO FILE PREVIEW
+       ======================================================= */
 
     logoInput.addEventListener(
       "change",
-      async () => {
+      event => {
 
         const file =
-          logoInput.files?.[0];
+          event.target.files?.[0];
 
+        if (!file) return;
 
-        if (!file) {
-          return;
-        }
-
-
-        if (
-          !file.type.startsWith(
-            "image/"
-          )
-        ) {
-
-          showToast(
-            "Please choose an image file.",
-            "error"
-          );
-
-          logoInput.value =
-            "";
-
-          return;
-
-        }
-
-
-        const reader =
-          new FileReader();
-
-
-        reader.onload =
-          () => {
-
-            applyLogo(
-              reader.result
-            );
-
-          };
-
-
-        reader.readAsDataURL(
-          file
-        );
-
-
-        try {
-
-          showLoading(
-            "Uploading studio logo..."
-          );
-
-
-          const fileName =
-            safeFileName(
-              file.name
-            );
-
-
-          const storagePath =
-            `studio/logo/${Date.now()}_${fileName}`;
-
-
-          const logoUrl =
-            await uploadImageFile(
-              file,
-              storagePath
-            );
-
-
-          await setDoc(
-
-            doc(
-              db,
-              "studio",
-              "settings"
-            ),
-
-            {
-              studioLogo:
-                logoUrl,
-
-              updatedAt:
-                serverTimestamp()
-
-            },
-
-            {
-              merge: true
-            }
-
-          );
-
-
-          applyLogo(
-            logoUrl
-          );
-
-
-          hideLoading();
-
-
-          showToast(
-            "Studio logo synced."
-          );
-
-
-        } catch (
-          error
-        ) {
-
-          console.error(
-            error
-          );
-
-          hideLoading();
-
-
-          showToast(
-            "Logo upload failed: " +
-            (
-              error?.message ||
-              "Unknown error"
-            ),
-            "error"
-          );
-
-        } finally {
-
-          logoInput.value =
-            "";
-
-        }
-
-      }
-    );
-
-
-    /* =========================================================
-       REMOVE LOGO
-       ========================================================= */
-
-    removeLogoBtn.addEventListener(
-      "click",
-      async () => {
-
-        const confirmed =
-          confirm(
-            "Remove the studio logo?"
-          );
-
-
-        if (!confirmed) {
-          return;
-        }
-
-
-        try {
-
-          showLoading(
-            "Removing logo..."
-          );
-
-
-          await setDoc(
-
-            doc(
-              db,
-              "studio",
-              "settings"
-            ),
-
-            {
-              studioLogo:
-                "",
-
-              updatedAt:
-                serverTimestamp()
-
-            },
-
-            {
-              merge: true
-            }
-
-          );
-
-
-          applyLogo(
-            ""
-          );
-
-
-          hideLoading();
-
-
-          showToast(
-            "Studio logo removed."
-          );
-
-
-        } catch (
-          error
-        ) {
-
-          console.error(
-            error
-          );
-
-          hideLoading();
-
-
-          showToast(
-            "Logo remove failed.",
-            "error"
-          );
-
-        }
-
-      }
-    );
-
-
-    /* =========================================================
-       STUDENT IMAGE
-       ========================================================= */
-
-    studentImageInput.addEventListener(
-      "change",
-      () => {
-
-        const file =
-          studentImageInput.files?.[0];
-
-
-        if (!file) {
-          return;
-        }
-
-
-        if (
-          !file.type.startsWith(
-            "image/"
-          )
-        ) {
-
-          showToast(
-            "Please choose an image file.",
-            "error"
-          );
-
-          studentImageInput.value =
-            "";
-
-          return;
-
-        }
-
-
-        selectedStudentFile =
+        selectedLogoFile =
           file;
 
 
-        selectedFileName.textContent =
-          file.name;
+        const url =
+          URL.createObjectURL(
+            file
+          );
 
 
-        const reader =
-          new FileReader();
-
-
-        reader.onload =
-          () => {
-
-            studentImagePreview.src =
-              reader.result;
-
-            studentImagePreview.style.display =
-              "block";
-
-            studentImagePlaceholder.style.display =
-              "none";
-
-          };
-
-
-        reader.readAsDataURL(
-          file
-        );
+        mainLogoPreview.innerHTML =
+          `<img
+            src="${url}"
+            alt="New Logo"
+          >`;
 
       }
     );
 
 
-    /* =========================================================
-       BUTTONS
-       ========================================================= */
+    /* =======================================================
+       LOGO DRAG DROP
+       ======================================================= */
+
+    [
+      "dragenter",
+      "dragover"
+    ].forEach(eventName => {
+
+      logoDropZone.addEventListener(
+        eventName,
+        event => {
+
+          event.preventDefault();
+
+          logoDropZone.classList.add(
+            "dragover"
+          );
+
+        }
+      );
+
+    });
+
+
+    [
+      "dragleave",
+      "drop"
+    ].forEach(eventName => {
+
+      logoDropZone.addEventListener(
+        eventName,
+        event => {
+
+          event.preventDefault();
+
+          logoDropZone.classList.remove(
+            "dragover"
+          );
+
+        }
+      );
+
+    });
+
+
+    logoDropZone.addEventListener(
+      "drop",
+      event => {
+
+        const file =
+          event.dataTransfer.files?.[0];
+
+        if (!file) return;
+
+
+        if (
+          !file.type.startsWith(
+            "image/"
+          )
+        ) {
+
+          toast(
+            "Invalid file",
+            "Please select an image.",
+            "error"
+          );
+
+          return;
+        }
+
+
+        selectedLogoFile =
+          file;
+
+
+        const url =
+          URL.createObjectURL(
+            file
+          );
+
+
+        mainLogoPreview.innerHTML =
+          `<img
+            src="${url}"
+            alt="New Logo"
+          >`;
+
+      }
+    );
+
+
+    /* =======================================================
+       STUDENT IMAGE PREVIEW
+       ======================================================= */
+
+    studentImageInput.addEventListener(
+      "change",
+      event => {
+
+        const file =
+          event.target.files?.[0];
+
+        if (!file) return;
+
+
+        selectedStudentImageFile =
+          file;
+
+
+        const url =
+          URL.createObjectURL(
+            file
+          );
+
+
+        studentPreview.innerHTML =
+          `<img
+            src="${url}"
+            alt="Student Preview"
+          >`;
+
+      }
+    );
+
+
+    /* =======================================================
+       BUTTON EVENTS
+       ======================================================= */
 
     addStudentBtn.addEventListener(
       "click",
-      openAddStudent
+      () => {
+        openStudentModal();
+      }
+    );
+
+
+    saveStudentBtn.addEventListener(
+      "click",
+      saveStudent
     );
 
 
@@ -5008,12 +4362,6 @@
     cancelModalBtn.addEventListener(
       "click",
       closeStudentModal
-    );
-
-
-    saveStudentBtn.addEventListener(
-      "click",
-      saveStudent
     );
 
 
@@ -5034,16 +4382,63 @@
     );
 
 
-    document.addEventListener(
-      "keydown",
+    saveLogoBtn.addEventListener(
+      "click",
+      saveLogo
+    );
+
+
+    removeLogoBtn.addEventListener(
+      "click",
+      removeLogo
+    );
+
+
+    /* =======================================================
+       STUDENT CARD ACTIONS
+       ======================================================= */
+
+    studentGrid.addEventListener(
+      "click",
       event => {
 
-        if (
-          event.key ===
-          "Escape"
-        ) {
+        const button =
+          event.target.closest(
+            "[data-action]"
+          );
 
-          closeStudentModal();
+        if (!button) return;
+
+
+        const action =
+          button.dataset.action;
+
+        const id =
+          button.dataset.id;
+
+
+        if (action === "edit") {
+
+          const student =
+            students.find(
+              item =>
+                item.id === id
+            );
+
+          if (student) {
+
+            openStudentModal(
+              student
+            );
+
+          }
+
+        }
+
+
+        if (action === "delete") {
+
+          deleteStudent(id);
 
         }
 
@@ -5051,116 +4446,52 @@
     );
 
 
-    /* =========================================================
-       MOBILE MENU
-       ========================================================= */
+    /* =======================================================
+       SEARCH
+       ======================================================= */
 
-    function openMobileMenu() {
-
-      sidebar.classList.add(
-        "open"
-      );
-
-      mobileOverlay.classList.add(
-        "show"
-      );
-
-    }
-
-
-    function closeMobileMenu() {
-
-      sidebar.classList.remove(
-        "open"
-      );
-
-      mobileOverlay.classList.remove(
-        "show"
-      );
-
-    }
-
-
-    mobileMenuBtn.addEventListener(
-      "click",
-      openMobileMenu
-    );
-
-
-    mobileOverlay.addEventListener(
-      "click",
-      closeMobileMenu
-    );
-
-
-    /* =========================================================
-       NAV
-       ========================================================= */
-
-    studentsNav.addEventListener(
-      "click",
+    studentSearch.addEventListener(
+      "input",
       () => {
 
-        studentsNav.classList.add(
-          "active"
+        renderStudents(
+          studentSearch.value
         );
-
-        logoNav.classList.remove(
-          "active"
-        );
-
-
-        studentsSection.scrollIntoView({
-          behavior:
-            "smooth",
-          block:
-            "start"
-        });
-
-
-        closeMobileMenu();
 
       }
     );
 
 
-    logoNav.addEventListener(
-      "click",
-      () => {
+    /* =======================================================
+       ENTER TO SAVE
+       ======================================================= */
 
-        logoNav.classList.add(
-          "active"
-        );
+    studentName.addEventListener(
+      "keydown",
+      event => {
 
-        studentsNav.classList.remove(
-          "active"
-        );
+        if (
+          event.key === "Enter"
+        ) {
 
+          saveStudent();
 
-        logoSection.scrollIntoView({
-          behavior:
-            "smooth",
-          block:
-            "start"
-        });
-
-
-        closeMobileMenu();
+        }
 
       }
     );
 
 
-    /* =========================================================
+    /* =======================================================
        LOGOUT
-       ========================================================= */
+       ======================================================= */
 
     logoutBtn.addEventListener(
       "click",
       () => {
 
         sessionStorage.removeItem(
-          ADMIN_SESSION_KEY
+          "personalCourseStudioAdminLoggedIn"
         );
 
         sessionStorage.removeItem(
@@ -5171,7 +4502,6 @@
           "personalCourseStudioUsername"
         );
 
-
         window.location.replace(
           "../login/"
         );
@@ -5180,27 +4510,57 @@
     );
 
 
-    /* =========================================================
-       CLEANUP
-       ========================================================= */
+    /* =======================================================
+       MOBILE MENU
+       ======================================================= */
 
-    window.addEventListener(
-      "beforeunload",
+    mobileMenu.addEventListener(
+      "click",
       () => {
 
+        sidebar.classList.toggle(
+          "open"
+        );
+
+      }
+    );
+
+
+    document
+      .querySelectorAll(".nav-item")
+      .forEach(item => {
+
+        item.addEventListener(
+          "click",
+          () => {
+
+            sidebar.classList.remove(
+              "open"
+            );
+
+          }
+        );
+
+      });
+
+
+    /* =======================================================
+       ESCAPE KEY
+       ======================================================= */
+
+    document.addEventListener(
+      "keydown",
+      event => {
+
         if (
-          unsubscribeStudents
+          event.key === "Escape"
         ) {
 
-          unsubscribeStudents();
+          closeStudentModal();
 
-        }
-
-        if (
-          unsubscribeStudio
-        ) {
-
-          unsubscribeStudio();
+          sidebar.classList.remove(
+            "open"
+          );
 
         }
 
@@ -5208,26 +4568,35 @@
     );
 
 
-    /* =========================================================
-       INITIAL LOAD
-       ========================================================= */
+    /* =======================================================
+       INITIALIZE
+       ======================================================= */
 
-    loadLocalStudents();
+    function initialize() {
 
-    renderStudents();
+      students =
+        getLocalStudents();
+
+      loadLocalLogo();
+
+      renderStudents();
+
+      setSyncStatus(
+        "local",
+        "LOCAL MODE"
+      );
 
 
-    const initialProfile =
-      getProfile();
+      /* Firebase realtime sync */
+
+      startStudentSync();
+
+      startLogoSync();
+
+    }
 
 
-    applyLogo(
-      initialProfile.logo ||
-      ""
-    );
-
-
-    initializeFirebaseData();
+    initialize();
 
   </script>
 
