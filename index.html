@@ -1,61 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Personal Course Studio</title>
 
   <meta
     name="description"
-    content="Personal Course Studio — Learn, Create, Teach."
-  >
+    content="Personal Course Studio — Create beautiful course and class videos."
+  />
 
-  <link
-    rel="preconnect"
-    href="https://fonts.googleapis.com"
-  >
+  <meta name="theme-color" content="#07111f" />
 
-  <link
-    rel="preconnect"
-    href="https://fonts.gstatic.com"
-    crossorigin
-  >
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
-    rel="stylesheet"
-  >
+  <link rel="manifest" href="./manifest.json" />
 
   <style>
-
     /* =========================================================
        PERSONAL COURSE STUDIO
-       CINEMATIC HOME PAGE
+       CINEMATIC HOME + SALAT TIME
        ========================================================= */
 
     :root {
-      --white: #ffffff;
-      --soft-white: rgba(255,255,255,.82);
-      --muted: rgba(255,255,255,.62);
+      --bg: #050812;
+      --bg2: #07111f;
+      --card: rgba(10, 20, 35, 0.72);
+      --card2: rgba(15, 29, 48, 0.78);
+      --border: rgba(255, 255, 255, 0.10);
 
-      --glass: rgba(10,14,24,.35);
-      --glass-strong: rgba(8,12,20,.58);
+      --text: #ffffff;
+      --muted: #a9b6c8;
 
-      --border: rgba(255,255,255,.16);
+      --gold: #f4c95d;
+      --gold2: #ffdf82;
 
-      --gold: #e8c875;
-      --gold-light: #ffe7a3;
+      --green: #49e39b;
+      --blue: #55aaff;
 
       --shadow:
-        0 25px 80px rgba(0,0,0,.45);
+        0 30px 80px rgba(0, 0, 0, 0.45);
 
-      --transition:
-        cubic-bezier(.22,.61,.36,1);
+      --radius: 24px;
     }
 
     * {
@@ -69,367 +54,153 @@
     }
 
     body {
-      width: 100%;
       min-height: 100vh;
-      overflow: hidden;
-
       font-family:
-        "Inter",
-        Arial,
+        Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
         sans-serif;
 
-      background: #070a10;
-      color: var(--white);
-    }
-
-    button,
-    a {
-      font: inherit;
-    }
-
-    button {
-      border: 0;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-
-    /* =========================================================
-       CINEMATIC STAGE
-       ========================================================= */
-
-    .cinematic-page {
-      position: relative;
-
-      width: 100%;
-      height: 100vh;
-      min-height: 620px;
-
-      overflow: hidden;
-
+      color: var(--text);
       background:
-        #080b12;
-    }
-
-
-    /* =========================================================
-       BACKGROUND SCENES
-       ========================================================= */
-
-    .scene-layer {
-      position: absolute;
-      inset: 0;
-
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-
-      opacity: 0;
-
-      transform:
-        scale(1.08);
-
-      transition:
-        opacity 1.8s var(--transition),
-        transform 9s ease;
-
-      z-index: 1;
-    }
-
-    .scene-layer.active {
-      opacity: 1;
-
-      transform:
-        scale(1);
-    }
-
-
-    /* =========================================================
-       SCENE IMAGES
-       ========================================================= */
-
-    .scene-sky {
-      background-image:
-        url("https://images.unsplash.com/photo-1499346030926-9a72daac6c63?auto=format&fit=crop&w=2200&q=90");
-    }
-
-    .scene-turkey {
-      background-image:
-        url("https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=2200&q=90");
-    }
-
-    .scene-saudi {
-      background-image:
-        url("https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=2200&q=90");
-    }
-
-    .scene-makkah {
-      background-image:
-        url("https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=2200&q=90");
-    }
-
-    .scene-kaaba {
-      background-image:
-        url("https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?auto=format&fit=crop&w=2200&q=90");
-    }
-
-
-    /* =========================================================
-       DARK CINEMATIC OVERLAY
-       ========================================================= */
-
-    .cinematic-overlay {
-      position: absolute;
-      inset: 0;
-
-      z-index: 2;
-
-      pointer-events: none;
-
-      background:
-        linear-gradient(
-          90deg,
-          rgba(2,5,12,.84) 0%,
-          rgba(2,5,12,.62) 34%,
-          rgba(2,5,12,.25) 68%,
-          rgba(2,5,12,.58) 100%
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(70, 120, 255, 0.15),
+          transparent 35%
         ),
-
+        radial-gradient(
+          circle at 80% 30%,
+          rgba(244, 201, 93, 0.10),
+          transparent 30%
+        ),
         linear-gradient(
-          180deg,
-          rgba(0,0,0,.48) 0%,
-          transparent 28%,
-          transparent 65%,
-          rgba(0,0,0,.76) 100%
+          135deg,
+          #03060d,
+          #07111f 45%,
+          #03060d
         );
+
+      overflow-x: hidden;
     }
 
-
     /* =========================================================
-       CINEMATIC LIGHT
+       BACKGROUND
        ========================================================= */
 
-    .light-glow {
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: -10;
+      overflow: hidden;
+      background:
+        linear-gradient(
+          rgba(2, 7, 15, 0.62),
+          rgba(2, 7, 15, 0.90)
+        ),
+        url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2200&q=85")
+        center / cover;
+    }
+
+    .background::before {
+      content: "";
       position: absolute;
-
-      width: 650px;
-      height: 650px;
-
-      left: -250px;
-      top: -250px;
-
-      z-index: 3;
-
-      border-radius: 50%;
+      inset: 0;
 
       background:
         radial-gradient(
-          circle,
-          rgba(255,224,145,.14),
-          transparent 68%
+          circle at 50% 30%,
+          rgba(85, 170, 255, 0.16),
+          transparent 40%
         );
-
-      pointer-events: none;
-
-      animation:
-        glowMove 12s ease-in-out infinite alternate;
     }
 
-    @keyframes glowMove {
-
-      0% {
-        transform:
-          translate3d(0,0,0);
-      }
-
-      100% {
-        transform:
-          translate3d(220px,130px,0);
-      }
-    }
-
-
-    /* =========================================================
-       PARTICLE / DUST EFFECT
-       ========================================================= */
-
-    .particles {
+    .background::after {
+      content: "";
       position: absolute;
-      inset: 0;
-
-      z-index: 4;
-
-      pointer-events: none;
-
-      overflow: hidden;
-    }
-
-    .particle {
-      position: absolute;
-
-      width: 3px;
-      height: 3px;
-
+      width: 600px;
+      height: 600px;
       border-radius: 50%;
 
-      background:
-        rgba(255,255,255,.7);
+      background: rgba(244, 201, 93, 0.08);
 
-      box-shadow:
-        0 0 12px
-        rgba(255,255,255,.5);
+      filter: blur(100px);
 
-      animation:
-        floatParticle
-        linear infinite;
+      top: -200px;
+      right: -150px;
     }
-
-    .particle:nth-child(1) {
-      left: 12%;
-      animation-duration: 13s;
-      animation-delay: -3s;
-    }
-
-    .particle:nth-child(2) {
-      left: 25%;
-      animation-duration: 17s;
-      animation-delay: -9s;
-    }
-
-    .particle:nth-child(3) {
-      left: 42%;
-      animation-duration: 12s;
-      animation-delay: -5s;
-    }
-
-    .particle:nth-child(4) {
-      left: 58%;
-      animation-duration: 19s;
-      animation-delay: -13s;
-    }
-
-    .particle:nth-child(5) {
-      left: 73%;
-      animation-duration: 15s;
-      animation-delay: -7s;
-    }
-
-    .particle:nth-child(6) {
-      left: 88%;
-      animation-duration: 18s;
-      animation-delay: -11s;
-    }
-
-    @keyframes floatParticle {
-
-      0% {
-        top: 110%;
-        opacity: 0;
-        transform: translateX(0);
-      }
-
-      15% {
-        opacity: .65;
-      }
-
-      80% {
-        opacity: .45;
-      }
-
-      100% {
-        top: -10%;
-        opacity: 0;
-        transform: translateX(80px);
-      }
-    }
-
 
     /* =========================================================
        NAVBAR
        ========================================================= */
 
-    .topbar {
-      position: absolute;
-
+    .navbar {
+      position: fixed;
       top: 0;
       left: 0;
       right: 0;
 
-      z-index: 20;
+      z-index: 100;
 
-      height: 90px;
+      height: 76px;
 
       display: flex;
       align-items: center;
       justify-content: space-between;
 
-      padding:
-        0 5vw;
+      padding: 0 6%;
+
+      background: rgba(3, 8, 16, 0.58);
+      backdrop-filter: blur(20px);
+
+      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 13px;
+      gap: 12px;
     }
 
     .brand-logo {
-      width: 48px;
-      height: 48px;
+      width: 44px;
+      height: 44px;
 
-      display: grid;
-      place-items: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-      border-radius: 15px;
+      border-radius: 14px;
 
+      color: #07111f;
       background:
         linear-gradient(
-          145deg,
-          rgba(255,255,255,.20),
-          rgba(255,255,255,.05)
+          135deg,
+          var(--gold2),
+          var(--gold)
         );
 
-      border:
-        1px solid
-        rgba(255,255,255,.20);
+      font-size: 18px;
+      font-weight: 900;
 
       box-shadow:
-        0 10px 35px rgba(0,0,0,.25);
-
-      font-size: 17px;
-      font-weight: 800;
-
-      color: var(--gold-light);
-
-      backdrop-filter:
-        blur(14px);
+        0 8px 30px rgba(244, 201, 93, 0.22);
     }
 
-    .brand-text {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .brand-name {
+    .brand-text strong {
+      display: block;
       font-size: 15px;
-      font-weight: 800;
-      letter-spacing: .3px;
+      letter-spacing: 0.2px;
     }
 
-    .brand-subtitle {
+    .brand-text span {
+      display: block;
+      margin-top: 2px;
+
       font-size: 11px;
-      color: rgba(255,255,255,.58);
-      letter-spacing: .5px;
+      color: var(--muted);
     }
-
-
-    /* =========================================================
-       NAV RIGHT
-       ========================================================= */
 
     .nav-actions {
       display: flex;
@@ -437,1061 +208,941 @@
       gap: 10px;
     }
 
-    .nav-link {
-      padding:
-        11px 17px;
-
-      border:
-        1px solid
-        rgba(255,255,255,.13);
-
-      background:
-        rgba(0,0,0,.18);
-
-      border-radius: 999px;
-
-      color:
-        rgba(255,255,255,.78);
-
-      font-size: 12px;
-      font-weight: 600;
-
-      backdrop-filter:
-        blur(14px);
-
-      transition:
-        .3s ease;
-    }
-
-    .nav-link:hover {
-      background:
-        rgba(255,255,255,.12);
-
-      color: white;
-
-      transform:
-        translateY(-2px);
-    }
-
-    .login-nav {
-      background:
-        rgba(255,255,255,.13);
-
-      color:
-        white;
-    }
-
-
-    /* =========================================================
-       MAIN CONTENT
-       ========================================================= */
-
-    .content {
-      position: relative;
-
-      z-index: 10;
-
-      width: 100%;
-      height: 100%;
-
-      display: flex;
-      align-items: center;
-
-      padding:
-        110px 8vw 90px;
-    }
-
-    .hero {
-      max-width: 760px;
-
-      animation:
-        heroEnter 1.2s
-        var(--transition);
-    }
-
-    @keyframes heroEnter {
-
-      from {
-        opacity: 0;
-        transform:
-          translateY(30px);
-      }
-
-      to {
-        opacity: 1;
-        transform:
-          translateY(0);
-      }
-    }
-
-
-    /* =========================================================
-       LOCATION BADGE
-       ========================================================= */
-
-    .location-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-
-      padding:
-        9px 14px;
-
-      margin-bottom: 24px;
-
-      border:
-        1px solid
-        rgba(255,255,255,.16);
-
-      border-radius: 999px;
-
-      background:
-        rgba(0,0,0,.24);
-
-      backdrop-filter:
-        blur(15px);
-
-      color:
-        rgba(255,255,255,.82);
-
-      font-size: 11px;
-      font-weight: 600;
-
-      letter-spacing:
-        1.4px;
-
-      text-transform:
-        uppercase;
-    }
-
-    .location-dot {
-      width: 7px;
-      height: 7px;
-
-      border-radius: 50%;
-
-      background:
-        var(--gold);
-
-      box-shadow:
-        0 0 15px
-        rgba(232,200,117,.8);
-    }
-
-
-    /* =========================================================
-       TITLE
-       ========================================================= */
-
-    .hero-title {
-      font-family:
-        "Playfair Display",
-        Georgia,
-        serif;
-
-      font-size:
-        clamp(52px, 7vw, 100px);
-
-      line-height:
-        .96;
-
-      letter-spacing:
-        -3px;
-
-      font-weight:
-        600;
-
-      text-shadow:
-        0 15px 45px
-        rgba(0,0,0,.45);
-
-      margin-bottom:
-        25px;
-    }
-
-    .hero-title span {
-      display: block;
-
-      color:
-        var(--gold-light);
-
-      font-style:
-        italic;
-    }
-
-
-    /* =========================================================
-       DESCRIPTION
-       ========================================================= */
-
-    .hero-description {
-      max-width: 590px;
-
-      color:
-        rgba(255,255,255,.72);
-
-      font-size:
-        clamp(14px, 1.4vw, 17px);
-
-      line-height:
-        1.8;
-
-      margin-bottom:
-        34px;
-    }
-
-
-    /* =========================================================
-       BUTTONS
-       ========================================================= */
-
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-
-      gap: 13px;
-    }
-
-    .primary-btn,
-    .secondary-btn {
-
-      min-height: 54px;
+    .nav-btn {
+      text-decoration: none;
 
       display: inline-flex;
       align-items: center;
       justify-content: center;
 
-      padding:
-        0 23px;
+      min-height: 42px;
+      padding: 0 18px;
 
-      border-radius:
-        15px;
+      border-radius: 12px;
 
-      cursor:
-        pointer;
+      color: #fff;
 
-      transition:
-        .3s var(--transition);
+      border: 1px solid rgba(255,255,255,0.10);
 
-      font-size:
-        13px;
+      background: rgba(255,255,255,0.05);
 
-      font-weight:
-        700;
+      font-size: 13px;
+      font-weight: 700;
+
+      transition: 0.25s ease;
     }
 
-    .primary-btn {
+    .nav-btn:hover {
+      transform: translateY(-2px);
+      background: rgba(255,255,255,0.10);
+    }
+
+    .nav-btn.primary {
+      color: #08111c;
+      border-color: transparent;
 
       background:
         linear-gradient(
           135deg,
-          #fff,
-          #e9e4d5
+          var(--gold2),
+          var(--gold)
         );
-
-      color:
-        #11141a;
-
-      box-shadow:
-        0 15px 40px
-        rgba(0,0,0,.30);
     }
-
-    .primary-btn:hover {
-      transform:
-        translateY(-4px);
-
-      box-shadow:
-        0 20px 50px
-        rgba(0,0,0,.42);
-    }
-
-    .secondary-btn {
-
-      border:
-        1px solid
-        rgba(255,255,255,.18);
-
-      background:
-        rgba(255,255,255,.08);
-
-      color:
-        white;
-
-      backdrop-filter:
-        blur(14px);
-    }
-
-    .secondary-btn:hover {
-
-      background:
-        rgba(255,255,255,.14);
-
-      transform:
-        translateY(-4px);
-    }
-
 
     /* =========================================================
-       ENTRANCE PANEL
+       HERO
        ========================================================= */
 
-    .entrance-panel {
+    .hero {
+      min-height: 100vh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding:
+        130px 6%
+        70px;
+    }
+
+    .hero-inner {
+      width: 100%;
+      max-width: 1200px;
+
+      display: grid;
+      grid-template-columns:
+        minmax(0, 1.15fr)
+        minmax(320px, 0.85fr);
+
+      gap: 55px;
+
+      align-items: center;
+    }
+
+    .hero-copy {
+      max-width: 720px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+
+      padding: 8px 13px;
+
+      border-radius: 999px;
+
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.09);
+
+      color: #d9e4f2;
+
+      font-size: 12px;
+      font-weight: 700;
+
+      margin-bottom: 22px;
+    }
+
+    .eyebrow-dot {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 15px rgba(73,227,155,0.7);
+    }
+
+    h1 {
+      font-size:
+        clamp(
+          48px,
+          7vw,
+          92px
+        );
+
+      line-height: 0.98;
+
+      letter-spacing: -4px;
+
+      margin-bottom: 25px;
+    }
+
+    h1 span {
+      display: block;
+
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff,
+          #d9e6f6 42%,
+          var(--gold2)
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      color: transparent;
+    }
+
+    .hero-description {
+      max-width: 650px;
+
+      color: var(--muted);
+
+      font-size: 17px;
+      line-height: 1.8;
+
+      margin-bottom: 30px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .hero-btn {
+      min-height: 52px;
+
+      padding: 0 22px;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      text-decoration: none;
+
+      border-radius: 14px;
+
+      font-size: 14px;
+      font-weight: 800;
+
+      transition: 0.25s ease;
+    }
+
+    .hero-btn.primary {
+      color: #07111f;
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--gold2),
+          var(--gold)
+        );
+
+      box-shadow:
+        0 15px 40px rgba(244,201,93,0.18);
+    }
+
+    .hero-btn.secondary {
+      color: #fff;
+
+      background:
+        rgba(255,255,255,0.06);
+
+      border:
+        1px solid rgba(255,255,255,0.10);
+    }
+
+    .hero-btn:hover {
+      transform: translateY(-3px);
+    }
+
+    /* =========================================================
+       SALAT CARD
+       ========================================================= */
+
+    .salat-card {
+      position: relative;
+
+      padding: 26px;
+
+      border-radius: 28px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(15, 31, 51, 0.90),
+          rgba(5, 12, 22, 0.86)
+        );
+
+      border:
+        1px solid rgba(255,255,255,0.10);
+
+      box-shadow: var(--shadow);
+
+      overflow: hidden;
+
+      backdrop-filter: blur(20px);
+    }
+
+    .salat-card::before {
+      content: "";
 
       position: absolute;
 
-      right: 5vw;
-      bottom: 8vh;
+      width: 220px;
+      height: 220px;
 
-      z-index: 15;
-
-      width:
-        270px;
-
-      padding:
-        20px;
-
-      border:
-        1px solid
-        rgba(255,255,255,.13);
-
-      border-radius:
-        22px;
+      border-radius: 50%;
 
       background:
-        rgba(5,8,15,.38);
+        rgba(244,201,93,0.10);
 
-      backdrop-filter:
-        blur(20px);
+      filter: blur(50px);
 
-      box-shadow:
-        var(--shadow);
+      top: -100px;
+      right: -80px;
     }
 
-    .entrance-title {
+    .salat-header {
+      position: relative;
+      z-index: 1;
 
-      font-size:
-        11px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
 
-      font-weight:
-        700;
-
-      text-transform:
-        uppercase;
-
-      letter-spacing:
-        1.5px;
-
-      color:
-        rgba(255,255,255,.50);
-
-      margin-bottom:
-        13px;
+      margin-bottom: 22px;
     }
 
-    .entrance-grid {
+    .salat-title {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
 
-      display:
-        grid;
+    .mosque-icon {
+      width: 46px;
+      height: 46px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 14px;
+
+      background:
+        rgba(244,201,93,0.12);
+
+      border:
+        1px solid rgba(244,201,93,0.20);
+
+      font-size: 23px;
+    }
+
+    .salat-title h2 {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .salat-title p {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .location {
+      padding: 7px 10px;
+
+      border-radius: 9px;
+
+      color: #cfe0f3;
+
+      background:
+        rgba(255,255,255,0.05);
+
+      border:
+        1px solid rgba(255,255,255,0.08);
+
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    /* =========================================================
+       NEXT PRAYER
+       ========================================================= */
+
+    .next-prayer {
+      position: relative;
+      z-index: 1;
+
+      padding: 20px;
+
+      margin-bottom: 18px;
+
+      border-radius: 19px;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(73,227,155,0.10),
+          rgba(85,170,255,0.08)
+        );
+
+      border:
+        1px solid rgba(73,227,155,0.16);
+    }
+
+    .next-label {
+      color: #9bb0c7;
+
+      font-size: 11px;
+      font-weight: 700;
+
+      text-transform: uppercase;
+
+      letter-spacing: 1px;
+    }
+
+    .next-name {
+      margin-top: 5px;
+
+      font-size: 24px;
+      font-weight: 850;
+    }
+
+    .next-time {
+      margin-top: 4px;
+
+      color: var(--gold2);
+
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .countdown {
+      margin-top: 13px;
+
+      font-size: 32px;
+      font-weight: 900;
+
+      letter-spacing: 1px;
+
+      font-variant-numeric: tabular-nums;
+    }
+
+    .countdown-label {
+      margin-top: 2px;
+
+      color: var(--muted);
+
+      font-size: 11px;
+    }
+
+    /* =========================================================
+       PRAYER LIST
+       ========================================================= */
+
+    .prayer-list {
+      position: relative;
+      z-index: 1;
+
+      display: grid;
+
+      gap: 8px;
+    }
+
+    .prayer-row {
+      display: grid;
 
       grid-template-columns:
-        1fr 1fr;
+        42px
+        1fr
+        auto;
 
-      gap:
-        9px;
+      align-items: center;
+
+      gap: 10px;
+
+      padding: 11px 12px;
+
+      border-radius: 14px;
+
+      background:
+        rgba(255,255,255,0.035);
+
+      border:
+        1px solid rgba(255,255,255,0.045);
+
+      transition: 0.2s ease;
     }
 
-    .entrance-item {
+    .prayer-row:hover {
+      background:
+        rgba(255,255,255,0.07);
+    }
 
-      min-height:
-        76px;
+    .prayer-row.active {
+      border-color:
+        rgba(244,201,93,0.30);
 
-      display:
-        flex;
+      background:
+        rgba(244,201,93,0.075);
+    }
 
-      flex-direction:
-        column;
+    .prayer-icon {
+      width: 34px;
+      height: 34px;
 
-      justify-content:
-        center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-      gap:
-        5px;
+      border-radius: 10px;
 
+      background:
+        rgba(255,255,255,0.06);
+
+      font-size: 15px;
+    }
+
+    .prayer-name {
+      font-size: 13px;
+      font-weight: 750;
+    }
+
+    .prayer-arabic {
+      color: #71849a;
+      font-size: 10px;
+      margin-top: 2px;
+    }
+
+    .prayer-time {
+      color: #dce7f4;
+
+      font-size: 13px;
+      font-weight: 800;
+
+      font-variant-numeric: tabular-nums;
+    }
+
+    .salat-footer {
+      position: relative;
+      z-index: 1;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 12px;
+
+      margin-top: 16px;
+
+      padding-top: 15px;
+
+      border-top:
+        1px solid rgba(255,255,255,0.07);
+    }
+
+    .date-info {
+      color: #8091a6;
+      font-size: 11px;
+      line-height: 1.6;
+    }
+
+    .refresh-btn {
+      border: 0;
+
+      cursor: pointer;
+
+      padding: 9px 13px;
+
+      border-radius: 10px;
+
+      color: #dfeaf7;
+
+      background:
+        rgba(255,255,255,0.06);
+
+      border:
+        1px solid rgba(255,255,255,0.08);
+
+      font-size: 11px;
+      font-weight: 700;
+
+      transition: 0.2s ease;
+    }
+
+    .refresh-btn:hover {
+      background:
+        rgba(255,255,255,0.11);
+    }
+
+    /* =========================================================
+       INFO SECTION
+       ========================================================= */
+
+    .info-section {
       padding:
-        12px;
+        50px 6%
+        90px;
+    }
+
+    .info-grid {
+      width: 100%;
+      max-width: 1200px;
+
+      margin: auto;
+
+      display: grid;
+
+      grid-template-columns:
+        repeat(3, 1fr);
+
+      gap: 16px;
+    }
+
+    .info-card {
+      padding: 25px;
+
+      border-radius: 22px;
+
+      background:
+        rgba(7,16,28,0.70);
 
       border:
-        1px solid
-        rgba(255,255,255,.10);
+        1px solid rgba(255,255,255,0.07);
 
-      border-radius:
-        15px;
+      backdrop-filter: blur(15px);
+    }
+
+    .info-icon {
+      width: 45px;
+      height: 45px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 13px;
 
       background:
-        rgba(255,255,255,.055);
+        rgba(85,170,255,0.10);
 
-      transition:
-        .3s ease;
+      margin-bottom: 17px;
+
+      font-size: 20px;
     }
 
-    .entrance-item:hover {
-
-      transform:
-        translateY(-3px);
-
-      background:
-        rgba(255,255,255,.11);
+    .info-card h3 {
+      font-size: 16px;
+      margin-bottom: 8px;
     }
 
-    .entrance-icon {
+    .info-card p {
+      color: var(--muted);
 
-      font-size:
-        18px;
+      font-size: 13px;
+      line-height: 1.7;
     }
-
-    .entrance-name {
-
-      font-size:
-        11px;
-
-      font-weight:
-        700;
-    }
-
-    .entrance-desc {
-
-      font-size:
-        9px;
-
-      color:
-        rgba(255,255,255,.45);
-    }
-
 
     /* =========================================================
-       SCENE CONTROLS
+       FOOTER
        ========================================================= */
 
-    .scene-controls {
+    footer {
+      padding: 25px 6% 35px;
 
-      position:
-        absolute;
+      text-align: center;
 
-      left:
-        8vw;
+      color: #64758a;
 
-      bottom:
-        45px;
-
-      z-index:
-        20;
-
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      gap:
-        12px;
+      font-size: 11px;
     }
-
-    .scene-dots {
-
-      display:
-        flex;
-
-      align-items:
-        center;
-
-      gap:
-        7px;
-    }
-
-    .scene-dot {
-
-      width:
-        7px;
-
-      height:
-        7px;
-
-      border-radius:
-        50%;
-
-      border:
-        0;
-
-      background:
-        rgba(255,255,255,.30);
-
-      cursor:
-        pointer;
-
-      transition:
-        .35s ease;
-    }
-
-    .scene-dot.active {
-
-      width:
-        26px;
-
-      border-radius:
-        999px;
-
-      background:
-        var(--gold-light);
-
-      box-shadow:
-        0 0 15px
-        rgba(255,231,163,.45);
-    }
-
-    .scene-counter {
-
-      color:
-        rgba(255,255,255,.55);
-
-      font-size:
-        10px;
-
-      letter-spacing:
-        1px;
-
-      margin-left:
-        5px;
-    }
-
 
     /* =========================================================
-       BOTTOM LINE
+       LOADING
        ========================================================= */
 
-    .bottom-line {
-
-      position:
-        absolute;
-
-      left:
-        0;
-
-      bottom:
-        0;
-
-      z-index:
-        16;
-
-      width:
-        100%;
-
-      height:
-        3px;
-
-      background:
-        rgba(255,255,255,.10);
+    .loading {
+      color: #91a5ba;
+      font-size: 12px;
     }
 
-    .progress-line {
-
-      height:
-        100%;
-
-      width:
-        0%;
-
-      background:
-        var(--gold);
-
-      box-shadow:
-        0 0 14px
-        rgba(232,200,117,.65);
-
-      transition:
-        width .1s linear;
+    .error {
+      color: #ff9c9c;
+      font-size: 12px;
+      line-height: 1.6;
     }
-
-
-    /* =========================================================
-       SOUND BUTTON
-       ========================================================= */
-
-    .sound-button {
-
-      position:
-        absolute;
-
-      right:
-        5vw;
-
-      bottom:
-        45px;
-
-      z-index:
-        20;
-
-      width:
-        40px;
-
-      height:
-        40px;
-
-      border:
-        1px solid
-        rgba(255,255,255,.15);
-
-      border-radius:
-        50%;
-
-      background:
-        rgba(0,0,0,.25);
-
-      color:
-        white;
-
-      cursor:
-        pointer;
-
-      backdrop-filter:
-        blur(12px);
-
-      transition:
-        .3s ease;
-    }
-
-    .sound-button:hover {
-
-      background:
-        rgba(255,255,255,.12);
-
-      transform:
-        scale(1.08);
-    }
-
 
     /* =========================================================
        RESPONSIVE
        ========================================================= */
 
-    @media (max-width: 900px) {
+    @media (max-width: 950px) {
 
-      .topbar {
-        padding:
-          0 5vw;
+      .hero-inner {
+        grid-template-columns: 1fr;
+
+        max-width: 760px;
       }
 
-      .nav-link:not(.login-nav) {
-        display:
-          none;
+      .hero-copy {
+        text-align: center;
+        margin: auto;
       }
 
-      .content {
-        padding:
-          110px 7vw 180px;
+      .hero-actions {
+        justify-content: center;
+      }
+
+      .eyebrow {
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .salat-card {
+        max-width: 560px;
+        width: 100%;
+        margin: auto;
+      }
+
+      .info-grid {
+        grid-template-columns: 1fr;
+        max-width: 760px;
+      }
+    }
+
+    @media (max-width: 600px) {
+
+      .navbar {
+        height: 68px;
+        padding: 0 18px;
+      }
+
+      .brand-text {
+        display: none;
+      }
+
+      .nav-btn {
+        min-height: 38px;
+        padding: 0 12px;
+        font-size: 11px;
       }
 
       .hero {
-        max-width:
-          650px;
-      }
-
-      .entrance-panel {
-
-        right:
-          5vw;
-
-        bottom:
-          18px;
-
-        width:
-          245px;
-      }
-
-      .scene-controls {
-        left:
-          7vw;
-
-        bottom:
-          35px;
-      }
-
-      .sound-button {
-        bottom:
-          35px;
-      }
-    }
-
-
-    @media (max-width: 650px) {
-
-      .cinematic-page {
-        min-height:
-          700px;
-      }
-
-      .topbar {
-        height:
-          75px;
-      }
-
-      .brand-logo {
-        width:
-          42px;
-
-        height:
-          42px;
-
-        border-radius:
-          13px;
-      }
-
-      .brand-name {
-        font-size:
-          13px;
-      }
-
-      .brand-subtitle {
-        font-size:
-          9px;
-      }
-
-      .login-nav {
         padding:
-          9px 13px;
-
-        font-size:
-          10px;
+          105px 18px
+          50px;
       }
 
-      .content {
-
-        align-items:
-          flex-start;
-
-        padding:
-          145px 6vw 240px;
-      }
-
-      .hero-title {
-
-        font-size:
-          clamp(47px, 14vw, 72px);
-
-        letter-spacing:
-          -2px;
+      h1 {
+        font-size: 48px;
+        letter-spacing: -2.5px;
       }
 
       .hero-description {
-
-        font-size:
-          13px;
-
-        line-height:
-          1.7;
-
-        max-width:
-          450px;
+        font-size: 14px;
+        line-height: 1.7;
       }
 
-      .hero-actions {
-
-        width:
-          100%;
+      .hero-btn {
+        width: 100%;
       }
 
-      .primary-btn,
-      .secondary-btn {
-
-        min-height:
-          49px;
-
-        padding:
-          0 17px;
-
-        font-size:
-          11px;
+      .salat-card {
+        padding: 18px;
+        border-radius: 22px;
       }
 
-      .entrance-panel {
-
-        left:
-          6vw;
-
-        right:
-          6vw;
-
-        bottom:
-          62px;
-
-        width:
-          auto;
-
-        padding:
-          13px;
+      .salat-header {
+        gap: 10px;
       }
 
-      .entrance-grid {
+      .location {
+        display: none;
+      }
 
+      .countdown {
+        font-size: 28px;
+      }
+
+      .prayer-row {
         grid-template-columns:
-          1fr 1fr;
+          38px
+          1fr
+          auto;
       }
 
-      .entrance-item {
-
-        min-height:
-          61px;
-      }
-
-      .scene-controls {
-
-        left:
-          6vw;
-
-        bottom:
-          22px;
-      }
-
-      .sound-button {
-
-        right:
-          6vw;
-
-        bottom:
-          17px;
-
-        width:
-          36px;
-
-        height:
-          36px;
+      .info-section {
+        padding:
+          25px 18px
+          60px;
       }
     }
-
-
-    @media (max-width: 420px) {
-
-      .brand-subtitle {
-        display:
-          none;
-      }
-
-      .location-badge {
-        font-size:
-          9px;
-      }
-
-      .hero-title {
-        font-size:
-          45px;
-      }
-
-      .hero-actions {
-        gap:
-          8px;
-      }
-
-      .primary-btn,
-      .secondary-btn {
-        flex:
-          1;
-      }
-    }
-
   </style>
 </head>
 
-
 <body>
+
+  <!-- =======================================================
+       BACKGROUND
+       ======================================================= -->
+
+  <div class="background"></div>
 
 
   <!-- =======================================================
-       CINEMATIC HOME
+       NAVBAR
        ======================================================= -->
 
-  <main class="cinematic-page">
+  <header class="navbar">
 
+    <div class="brand">
 
-    <!-- =====================================================
-         BACKGROUND SCENES
-         ===================================================== -->
+      <div class="brand-logo">
+        CS
+      </div>
 
-    <div
-      class="scene-layer scene-sky active"
-      data-scene="sky"
-    ></div>
-
-    <div
-      class="scene-layer scene-turkey"
-      data-scene="turkey"
-    ></div>
-
-    <div
-      class="scene-layer scene-saudi"
-      data-scene="saudi"
-    ></div>
-
-    <div
-      class="scene-layer scene-makkah"
-      data-scene="makkah"
-    ></div>
-
-    <div
-      class="scene-layer scene-kaaba"
-      data-scene="kaaba"
-    ></div>
-
-
-    <!-- =====================================================
-         CINEMATIC OVERLAY
-         ===================================================== -->
-
-    <div class="cinematic-overlay"></div>
-
-    <div class="light-glow"></div>
-
-
-    <!-- =====================================================
-         PARTICLES
-         ===================================================== -->
-
-    <div class="particles">
-
-      <span class="particle"></span>
-      <span class="particle"></span>
-      <span class="particle"></span>
-      <span class="particle"></span>
-      <span class="particle"></span>
-      <span class="particle"></span>
+      <div class="brand-text">
+        <strong>Personal Course Studio</strong>
+        <span>Learn • Create • Teach</span>
+      </div>
 
     </div>
 
-
-    <!-- =====================================================
-         TOP NAV
-         ===================================================== -->
-
-    <header class="topbar">
+    <nav class="nav-actions">
 
       <a
-        href="/"
-        class="brand"
+        href="./login/"
+        class="nav-btn"
       >
-
-        <div class="brand-logo">
-          CS
-        </div>
-
-        <div class="brand-text">
-
-          <div class="brand-name">
-            Personal Course Studio
-          </div>
-
-          <div class="brand-subtitle">
-            Learn • Create • Teach
-          </div>
-
-        </div>
-
+        Login
       </a>
 
+      <a
+        href="./mentor/"
+        class="nav-btn primary"
+      >
+        Mentor Studio
+      </a>
 
-      <nav class="nav-actions">
+    </nav>
 
-        <a
-          href="/mentor/"
-          class="nav-link"
-        >
-          Mentor
-        </a>
-
-        <a
-          href="/admin/"
-          class="nav-link"
-        >
-          Admin
-        </a>
-
-        <a
-          href="/login/"
-          class="nav-link login-nav"
-        >
-          Login
-        </a>
-
-      </nav>
-
-    </header>
+  </header>
 
 
-    <!-- =====================================================
-         MAIN HERO
-         ===================================================== -->
+  <!-- =======================================================
+       HERO
+       ======================================================= -->
 
-    <section class="content">
+  <main>
 
-      <div class="hero">
+    <section class="hero">
+
+      <div class="hero-inner">
 
 
-        <div class="location-badge">
+        <!-- HERO TEXT -->
 
-          <span class="location-dot"></span>
+        <div class="hero-copy">
 
-          <span id="sceneLocation">
-            Endless Sky
-          </span>
+          <div class="eyebrow">
+            <span class="eyebrow-dot"></span>
+            Personal Learning & Recording Studio
+          </div>
+
+          <h1>
+            Create.
+            <span>Teach.</span>
+            Inspire.
+          </h1>
+
+          <p class="hero-description">
+            নিজের ক্লাস, কোর্স এবং educational video
+            সুন্দরভাবে তৈরি করার জন্য একটি personal studio।
+            Slide, video, mentor camera এবং recording —
+            সবকিছু এক জায়গায়।
+          </p>
+
+          <div class="hero-actions">
+
+            <a
+              href="./login/"
+              class="hero-btn primary"
+            >
+              Enter Studio →
+            </a>
+
+            <a
+              href="./mentor/"
+              class="hero-btn secondary"
+            >
+              Mentor Studio
+            </a>
+
+          </div>
 
         </div>
 
 
-        <h1
-          class="hero-title"
-          id="heroTitle"
-        >
+        <!-- =================================================
+             SALAT CARD
+             ================================================= -->
 
-          Learn.
+        <div class="salat-card">
 
-          <span>
-            Create.
-          </span>
+          <div class="salat-header">
 
-          Teach.
+            <div class="salat-title">
 
-        </h1>
+              <div class="mosque-icon">
+                🕌
+              </div>
+
+              <div>
+                <h2>Salat Times</h2>
+
+                <p>
+                  আজকের নামাজের সময়
+                </p>
+              </div>
+
+            </div>
+
+            <div class="location">
+              📍 Dhaka
+            </div>
+
+          </div>
 
 
-        <p
-          class="hero-description"
-          id="heroDescription"
-        >
+          <!-- NEXT PRAYER -->
 
-          A private cinematic workspace designed
-          for creating beautiful classes, course
-          recordings and learning experiences.
-
-        </p>
-
-
-        <div class="hero-actions">
-
-          <a
-            href="/login/"
-            class="primary-btn"
+          <div
+            class="next-prayer"
+            id="nextPrayerBox"
           >
-            Enter Studio
-            <span style="margin-left:8px;">
-              →
-            </span>
-          </a>
 
-          <a
-            href="/mentor/"
-            class="secondary-btn"
+            <div class="next-label">
+              Next Prayer
+            </div>
+
+            <div
+              class="next-name"
+              id="nextPrayerName"
+            >
+              Loading...
+            </div>
+
+            <div
+              class="next-time"
+              id="nextPrayerTime"
+            >
+              --
+            </div>
+
+            <div
+              class="countdown"
+              id="countdown"
+            >
+              --:--:--
+            </div>
+
+            <div class="countdown-label">
+              remaining
+            </div>
+
+          </div>
+
+
+          <!-- PRAYER LIST -->
+
+          <div
+            class="prayer-list"
+            id="prayerList"
           >
-            Mentor Studio
-          </a>
+
+            <div class="loading">
+              নামাজের সময় লোড হচ্ছে...
+            </div>
+
+          </div>
+
+
+          <!-- FOOTER -->
+
+          <div class="salat-footer">
+
+            <div
+              class="date-info"
+              id="dateInfo"
+            >
+              Today's prayer times
+            </div>
+
+            <button
+              class="refresh-btn"
+              id="refreshBtn"
+              type="button"
+            >
+              ↻ Refresh
+            </button>
+
+          </div>
 
         </div>
 
@@ -1501,643 +1152,706 @@
 
 
     <!-- =====================================================
-         MENTOR / ADMIN ENTRANCE
+         INFO CARDS
          ===================================================== -->
 
-    <aside class="entrance-panel">
+    <section class="info-section">
 
-      <div class="entrance-title">
-        Studio Entrance
-      </div>
+      <div class="info-grid">
 
-      <div class="entrance-grid">
+        <div class="info-card">
 
-
-        <a
-          href="/mentor/"
-          class="entrance-item"
-        >
-
-          <div class="entrance-icon">
-            🎓
+          <div class="info-icon">
+            🎥
           </div>
 
-          <div class="entrance-name">
-            Mentor
+          <h3>
+            Course Recording
+          </h3>
+
+          <p>
+            নিজের course এবং live class recording
+            তৈরি করুন সহজভাবে।
+          </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+          <div class="info-icon">
+            🖥️
           </div>
 
-          <div class="entrance-desc">
-            Course Studio
+          <h3>
+            Mentor Studio
+          </h3>
+
+          <p>
+            Slide, video এবং camera একসাথে ব্যবহার
+            করে teaching setup তৈরি করুন।
+          </p>
+
+        </div>
+
+
+        <div class="info-card">
+
+          <div class="info-icon">
+            🕌
           </div>
 
-        </a>
+          <h3>
+            Daily Salat
+          </h3>
 
+          <p>
+            প্রতিদিনের Fajr, Dhuhr, Asr,
+            Maghrib এবং Isha সময় দেখুন।
+          </p>
 
-        <a
-          href="/admin/"
-          class="entrance-item"
-        >
-
-          <div class="entrance-icon">
-            ⚙️
-          </div>
-
-          <div class="entrance-name">
-            Admin
-          </div>
-
-          <div class="entrance-desc">
-            Control Panel
-          </div>
-
-        </a>
-
-
-      </div>
-
-    </aside>
-
-
-    <!-- =====================================================
-         SCENE CONTROLS
-         ===================================================== -->
-
-    <div class="scene-controls">
-
-      <div class="scene-dots">
-
-        <button
-          class="scene-dot active"
-          data-index="0"
-          aria-label="Sky"
-        ></button>
-
-        <button
-          class="scene-dot"
-          data-index="1"
-          aria-label="Turkey"
-        ></button>
-
-        <button
-          class="scene-dot"
-          data-index="2"
-          aria-label="Saudi Arabia"
-        ></button>
-
-        <button
-          class="scene-dot"
-          data-index="3"
-          aria-label="Makkah"
-        ></button>
-
-        <button
-          class="scene-dot"
-          data-index="4"
-          aria-label="Kaaba"
-        ></button>
+        </div>
 
       </div>
 
-      <div
-        class="scene-counter"
-        id="sceneCounter"
-      >
-        01 / 05
-      </div>
-
-    </div>
-
-
-    <!-- =====================================================
-         SOUND / AMBIENCE BUTTON
-         ===================================================== -->
-
-    <button
-      class="sound-button"
-      id="soundButton"
-      aria-label="Toggle ambience"
-      title="Ambient sound"
-    >
-      🔇
-    </button>
-
-
-    <!-- =====================================================
-         PROGRESS
-         ===================================================== -->
-
-    <div class="bottom-line">
-
-      <div
-        class="progress-line"
-        id="progressLine"
-      ></div>
-
-    </div>
-
+    </section>
 
   </main>
 
 
+  <!-- =======================================================
+       FOOTER
+       ======================================================= -->
+
+  <footer>
+    Personal Course Studio © 2026
+  </footer>
+
+
+  <!-- =======================================================
+       SALAT JAVASCRIPT
+       ======================================================= -->
 
   <script>
 
-    /* =========================================================
-       PERSONAL COURSE STUDIO
-       CINEMATIC SCENE ENGINE
-       ========================================================= */
+    /* =======================================================
+       CONFIG
+       ======================================================= */
+
+    const CITY = "Dhaka";
+    const COUNTRY = "Bangladesh";
+
+    /*
+      Method 1 = University of Islamic Sciences, Karachi
+      The API supports multiple calculation methods.
+    */
+
+    const METHOD = 1;
+
+    const API_URL =
+      `https://api.aladhan.com/v1/timingsByCity` +
+      `?city=${encodeURIComponent(CITY)}` +
+      `&country=${encodeURIComponent(COUNTRY)}` +
+      `&method=${METHOD}`;
 
 
-    const scenes = [
+    /* =======================================================
+       PRAYER DATA
+       ======================================================= */
+
+    const prayerDefinitions = [
 
       {
-        location: "Endless Sky",
-
-        title: "Learn.",
-
-        highlight: "Create.",
-
-        description:
-          "A quiet beginning beneath an endless sky. Your private studio for creating beautiful learning experiences."
+        key: "Fajr",
+        name: "Fajr",
+        arabic: "ফজর",
+        icon: "🌙"
       },
 
       {
-        location: "Cappadocia, Türkiye",
-
-        title: "Dream.",
-
-        highlight: "Explore.",
-
-        description:
-          "Inspired by the timeless landscapes of Türkiye, where every horizon feels like the beginning of a new journey."
+        key: "Dhuhr",
+        name: "Dhuhr",
+        arabic: "যোহর",
+        icon: "☀️"
       },
 
       {
-        location: "Saudi Arabia",
-
-        title: "Focus.",
-
-        highlight: "Build.",
-
-        description:
-          "A calm cinematic atmosphere inspired by the landscapes and architecture of Saudi Arabia."
+        key: "Asr",
+        name: "Asr",
+        arabic: "আসর",
+        icon: "🌤️"
       },
 
       {
-        location: "Makkah",
-
-        title: "Learn.",
-
-        highlight: "Reflect.",
-
-        description:
-          "A peaceful visual journey inspired by Makkah and its timeless atmosphere."
+        key: "Maghrib",
+        name: "Maghrib",
+        arabic: "মাগরিব",
+        icon: "🌇"
       },
 
       {
-        location: "The Kaaba",
-
-        title: "Teach.",
-
-        highlight: "Inspire.",
-
-        description:
-          "Create meaningful classes and share knowledge from a workspace designed around your teaching journey."
+        key: "Isha",
+        name: "Isha",
+        arabic: "এশা",
+        icon: "🌙"
       }
 
     ];
 
 
-    const sceneLayers =
-      document.querySelectorAll(
-        ".scene-layer"
+    let prayerTimes = {};
+
+    let countdownTimer = null;
+
+
+    /* =======================================================
+       ELEMENTS
+       ======================================================= */
+
+    const prayerList =
+      document.getElementById("prayerList");
+
+    const nextPrayerName =
+      document.getElementById("nextPrayerName");
+
+    const nextPrayerTime =
+      document.getElementById("nextPrayerTime");
+
+    const countdown =
+      document.getElementById("countdown");
+
+    const dateInfo =
+      document.getElementById("dateInfo");
+
+    const refreshBtn =
+      document.getElementById("refreshBtn");
+
+
+    /* =======================================================
+       FORMAT TIME
+       ======================================================= */
+
+    function convertTo12Hour(time) {
+
+      if (!time) {
+        return "--";
+      }
+
+      const cleanTime =
+        time.split(" ")[0];
+
+      const parts =
+        cleanTime.split(":");
+
+      let hour =
+        parseInt(parts[0], 10);
+
+      const minute =
+        parts[1];
+
+      const ampm =
+        hour >= 12 ? "PM" : "AM";
+
+      hour =
+        hour % 12 || 12;
+
+      return `${hour}:${minute} ${ampm}`;
+    }
+
+
+    /* =======================================================
+       CREATE TODAY DATE
+       ======================================================= */
+
+    function getTodayDate() {
+
+      const now =
+        new Date();
+
+      return (
+        now.getFullYear() +
+        "-" +
+        String(now.getMonth() + 1).padStart(2, "0") +
+        "-" +
+        String(now.getDate()).padStart(2, "0")
       );
 
-    const sceneDots =
-      document.querySelectorAll(
-        ".scene-dot"
+    }
+
+
+    /* =======================================================
+       CREATE DATE OBJECT
+       ======================================================= */
+
+    function createPrayerDate(time) {
+
+      const [hours, minutes] =
+        time
+          .split(" ")[0]
+          .split(":")
+          .map(Number);
+
+      const now =
+        new Date();
+
+      const date =
+        new Date();
+
+      date.setHours(
+        hours,
+        minutes,
+        0,
+        0
       );
 
-    const sceneLocation =
-      document.getElementById(
-        "sceneLocation"
+      return date;
+    }
+
+
+    /* =======================================================
+       LOAD PRAYER TIMES
+       ======================================================= */
+
+    async function loadPrayerTimes() {
+
+      prayerList.innerHTML = `
+        <div class="loading">
+          নামাজের সময় লোড হচ্ছে...
+        </div>
+      `;
+
+      try {
+
+        const response =
+          await fetch(API_URL, {
+            cache: "no-store"
+          });
+
+        if (!response.ok) {
+          throw new Error(
+            "Prayer API request failed"
+          );
+        }
+
+        const data =
+          await response.json();
+
+        if (
+          !data ||
+          data.code !== 200 ||
+          !data.data
+        ) {
+          throw new Error(
+            "Invalid prayer time data"
+          );
+        }
+
+        prayerTimes =
+          data.data.timings || {};
+
+        renderPrayerList(
+          data.data
+        );
+
+        updateNextPrayer();
+
+      } catch (error) {
+
+        console.error(
+          "Salat API Error:",
+          error
+        );
+
+        prayerList.innerHTML = `
+          <div class="error">
+            নামাজের সময় লোড করা যাচ্ছে না।<br>
+            Internet connection check করে আবার Refresh চাপুন।
+          </div>
+        `;
+
+        nextPrayerName.textContent =
+          "Unavailable";
+
+        nextPrayerTime.textContent =
+          "--";
+
+        countdown.textContent =
+          "--:--:--";
+      }
+
+    }
+
+
+    /* =======================================================
+       RENDER PRAYER LIST
+       ======================================================= */
+
+    function renderPrayerList(data) {
+
+      prayerList.innerHTML = "";
+
+      prayerDefinitions.forEach(
+        prayer => {
+
+          const time =
+            prayerTimes[prayer.key];
+
+          if (!time) {
+            return;
+          }
+
+          const row =
+            document.createElement("div");
+
+          row.className =
+            "prayer-row";
+
+          row.dataset.prayer =
+            prayer.key;
+
+          row.innerHTML = `
+
+            <div class="prayer-icon">
+              ${prayer.icon}
+            </div>
+
+            <div>
+
+              <div class="prayer-name">
+                ${prayer.name}
+              </div>
+
+              <div class="prayer-arabic">
+                ${prayer.arabic}
+              </div>
+
+            </div>
+
+            <div class="prayer-time">
+              ${convertTo12Hour(time)}
+            </div>
+
+          `;
+
+          prayerList.appendChild(row);
+
+        }
       );
 
-    const heroTitle =
-      document.getElementById(
-        "heroTitle"
-      );
 
-    const heroDescription =
-      document.getElementById(
-        "heroDescription"
-      );
-
-    const sceneCounter =
-      document.getElementById(
-        "sceneCounter"
-      );
-
-    const progressLine =
-      document.getElementById(
-        "progressLine"
-      );
-
-
-    let currentScene = 0;
-
-    let sceneTimer = null;
-
-    let progressTimer = null;
-
-    const SCENE_DURATION =
-      8000;
-
-
-    /* =========================================================
-       UPDATE SCENE
-       ========================================================= */
-
-    function updateScene(
-      index,
-      restartTimer = true
-    ) {
+      /* API DATE */
 
       if (
-        index < 0 ||
-        index >= scenes.length
+        data.date &&
+        data.date.readable
       ) {
+
+        dateInfo.textContent =
+          `${data.date.readable} • ${CITY}`;
+
+      } else {
+
+        dateInfo.textContent =
+          `Today • ${CITY}`;
+
+      }
+
+    }
+
+
+    /* =======================================================
+       FIND NEXT PRAYER
+       ======================================================= */
+
+    function getNextPrayer() {
+
+      const now =
+        new Date();
+
+      const prayersToday = [];
+
+      prayerDefinitions.forEach(
+        prayer => {
+
+          const raw =
+            prayerTimes[prayer.key];
+
+          if (!raw) {
+            return;
+          }
+
+          const time =
+            raw.split(" ")[0];
+
+          const date =
+            createPrayerDate(time);
+
+          prayersToday.push({
+            ...prayer,
+            rawTime: time,
+            date
+          });
+
+        }
+      );
+
+
+      for (
+        const prayer of prayersToday
+      ) {
+
+        if (
+          prayer.date > now
+        ) {
+
+          return prayer;
+
+        }
+
+      }
+
+
+      /*
+        If all prayers have passed,
+        next prayer = tomorrow's Fajr
+      */
+
+      if (prayersToday.length > 0) {
+
+        const first =
+          prayersToday[0];
+
+        const tomorrow =
+          new Date(
+            first.date
+          );
+
+        tomorrow.setDate(
+          tomorrow.getDate() + 1
+        );
+
+        return {
+          ...first,
+          date: tomorrow,
+          tomorrow: true
+        };
+
+      }
+
+      return null;
+
+    }
+
+
+    /* =======================================================
+       UPDATE NEXT PRAYER
+       ======================================================= */
+
+    function updateNextPrayer() {
+
+      const next =
+        getNextPrayer();
+
+      if (!next) {
+
+        nextPrayerName.textContent =
+          "No prayer data";
+
+        nextPrayerTime.textContent =
+          "--";
+
+        countdown.textContent =
+          "--:--:--";
+
         return;
       }
 
 
-      currentScene = index;
+      nextPrayerName.textContent =
+        `${next.name}${next.tomorrow ? " • Tomorrow" : ""}`;
+
+      nextPrayerTime.textContent =
+        convertTo12Hour(
+          next.rawTime
+        );
 
 
-      const scene =
-        scenes[index];
+      /*
+        Highlight active/next prayer
+      */
 
+      document
+        .querySelectorAll(".prayer-row")
+        .forEach(row => {
 
-      /* Background */
-
-      sceneLayers.forEach(
-        (layer, layerIndex) => {
-
-          layer.classList.toggle(
-            "active",
-            layerIndex === index
+          row.classList.remove(
+            "active"
           );
 
-        }
-      );
+          if (
+            row.dataset.prayer ===
+            next.key
+          ) {
 
-
-      /* Dots */
-
-      sceneDots.forEach(
-        (dot, dotIndex) => {
-
-          dot.classList.toggle(
-            "active",
-            dotIndex === index
-          );
-
-        }
-      );
-
-
-      /* Text */
-
-      sceneLocation.textContent =
-        scene.location;
-
-
-      heroTitle.innerHTML =
-        scene.title +
-        "<span>" +
-        scene.highlight +
-        "</span>" +
-        "Teach.";
-
-
-      heroDescription.textContent =
-        scene.description;
-
-
-      /* Counter */
-
-      sceneCounter.textContent =
-        String(index + 1).padStart(2, "0") +
-        " / " +
-        String(scenes.length).padStart(2, "0");
-
-
-      /* Restart progress */
-
-      if (restartTimer) {
-
-        startSceneTimer();
-
-      }
-
-    }
-
-
-    /* =========================================================
-       SCENE TIMER
-       ========================================================= */
-
-    function startSceneTimer() {
-
-      clearTimeout(sceneTimer);
-
-      clearInterval(progressTimer);
-
-
-      progressLine.style.width =
-        "0%";
-
-
-      let startedAt =
-        Date.now();
-
-
-      progressTimer =
-        setInterval(() => {
-
-          const elapsed =
-            Date.now() -
-            startedAt;
-
-
-          let percentage =
-            (elapsed /
-              SCENE_DURATION) *
-            100;
-
-
-          if (percentage > 100) {
-            percentage = 100;
-          }
-
-
-          progressLine.style.width =
-            percentage + "%";
-
-        }, 50);
-
-
-      sceneTimer =
-        setTimeout(() => {
-
-          clearInterval(
-            progressTimer
-          );
-
-
-          const nextScene =
-            (currentScene + 1) %
-            scenes.length;
-
-
-          updateScene(
-            nextScene,
-            true
-          );
-
-        }, SCENE_DURATION);
-
-    }
-
-
-    /* =========================================================
-       DOT NAVIGATION
-       ========================================================= */
-
-    sceneDots.forEach(
-      (dot) => {
-
-        dot.addEventListener(
-          "click",
-          () => {
-
-            const index =
-              Number(
-                dot.dataset.index
-              );
-
-            updateScene(
-              index,
-              true
+            row.classList.add(
+              "active"
             );
 
           }
+
+        });
+
+
+      if (countdownTimer) {
+
+        clearInterval(
+          countdownTimer
         );
 
       }
-    );
 
 
-    /* =========================================================
-       KEYBOARD NAVIGATION
-       ========================================================= */
-
-    document.addEventListener(
-      "keydown",
-      (event) => {
-
-        if (
-          event.key === "ArrowRight"
-        ) {
-
-          const next =
-            (currentScene + 1) %
-            scenes.length;
-
-          updateScene(next);
-
-        }
-
-
-        if (
-          event.key === "ArrowLeft"
-        ) {
-
-          const previous =
-            (currentScene - 1 +
-              scenes.length) %
-            scenes.length;
-
-          updateScene(previous);
-
-        }
-
-      }
-    );
-
-
-    /* =========================================================
-       TOUCH SWIPE
-       ========================================================= */
-
-    let touchStartX = 0;
-
-    let touchEndX = 0;
-
-
-    document.addEventListener(
-      "touchstart",
-      (event) => {
-
-        touchStartX =
-          event.changedTouches[0].screenX;
-
-      },
-      {
-        passive: true
-      }
-    );
-
-
-    document.addEventListener(
-      "touchend",
-      (event) => {
-
-        touchEndX =
-          event.changedTouches[0].screenX;
-
-
-        const distance =
-          touchEndX -
-          touchStartX;
-
-
-        if (
-          Math.abs(distance) < 60
-        ) {
-          return;
-        }
-
-
-        if (distance < 0) {
-
-          const next =
-            (currentScene + 1) %
-            scenes.length;
-
-          updateScene(next);
-
-        } else {
-
-          const previous =
-            (currentScene - 1 +
-              scenes.length) %
-            scenes.length;
-
-          updateScene(previous);
-
-        }
-
-      },
-      {
-        passive: true
-      }
-    );
-
-
-    /* =========================================================
-       AMBIENT SOUND
-       ========================================================= */
-
-    const soundButton =
-      document.getElementById(
-        "soundButton"
+      updateCountdown(
+        next.date
       );
 
+      countdownTimer =
+        setInterval(
+          () => {
 
-    let soundEnabled = false;
+            updateCountdown(
+              next.date
+            );
+
+          },
+          1000
+        );
+
+    }
 
 
-    soundButton.addEventListener(
+    /* =======================================================
+       COUNTDOWN
+       ======================================================= */
+
+    function updateCountdown(targetDate) {
+
+      const now =
+        new Date();
+
+      let difference =
+        targetDate.getTime() -
+        now.getTime();
+
+
+      /*
+        Target passed.
+        Recalculate next prayer.
+      */
+
+      if (
+        difference <= 0
+      ) {
+
+        updateNextPrayer();
+        return;
+
+      }
+
+
+      const totalSeconds =
+        Math.floor(
+          difference / 1000
+        );
+
+      const hours =
+        Math.floor(
+          totalSeconds / 3600
+        );
+
+      const minutes =
+        Math.floor(
+          (totalSeconds % 3600) /
+          60
+        );
+
+      const seconds =
+        totalSeconds % 60;
+
+
+      countdown.textContent =
+        `${String(hours).padStart(2, "0")}:` +
+        `${String(minutes).padStart(2, "0")}:` +
+        `${String(seconds).padStart(2, "0")}`;
+
+    }
+
+
+    /* =======================================================
+       REFRESH BUTTON
+       ======================================================= */
+
+    refreshBtn.addEventListener(
       "click",
       () => {
 
-        soundEnabled =
-          !soundEnabled;
-
-
-        if (soundEnabled) {
-
-          soundButton.textContent =
-            "🔊";
-
-          soundButton.title =
-            "Ambient sound enabled";
-
-        } else {
-
-          soundButton.textContent =
-            "🔇";
-
-          soundButton.title =
-            "Ambient sound";
-
-        }
+        loadPrayerTimes();
 
       }
     );
 
 
-    /* =========================================================
-       PRELOAD BACKGROUND IMAGES
-       ========================================================= */
+    /* =======================================================
+       AUTO REFRESH
+       Every 30 minutes
+       ======================================================= */
 
-    function preloadImages() {
+    setInterval(
+      () => {
 
-      sceneLayers.forEach(
-        (layer) => {
+        loadPrayerTimes();
 
-          const background =
-            getComputedStyle(layer)
-              .backgroundImage;
+      },
+      30 * 60 * 1000
+    );
 
 
-          const match =
-            background.match(
-              /url\(["']?(.*?)["']?\)/
+    /* =======================================================
+       START
+       ======================================================= */
+
+    loadPrayerTimes();
+
+
+    /* =======================================================
+       SERVICE WORKER
+       ======================================================= */
+
+    if (
+      "serviceWorker" in navigator
+    ) {
+
+      window.addEventListener(
+        "load",
+        () => {
+
+          navigator.serviceWorker
+            .register("./sw.js")
+            .catch(
+              error => {
+
+                console.log(
+                  "Service Worker:",
+                  error
+                );
+
+              }
             );
-
-
-          if (!match) {
-            return;
-          }
-
-
-          const image =
-            new Image();
-
-          image.src =
-            match[1];
 
         }
       );
 
     }
-
-
-    /* =========================================================
-       INITIALIZE
-       ========================================================= */
-
-    updateScene(
-      0,
-      false
-    );
-
-    startSceneTimer();
-
-    preloadImages();
-
 
   </script>
 
