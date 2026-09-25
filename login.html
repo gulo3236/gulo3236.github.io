@@ -1,314 +1,597 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Sign In — Personal Course Studio</title>
+  <title>Personal Course Studio</title>
 
   <style>
-    :root {
-      --bg: #f5f8fb;
-      --card: #ffffff;
-      --border: #e1e7ed;
-      --text: #20252b;
-      --muted: #7b858f;
-      --blue: #dceefe;
-      --blue-dark: #356886;
-      --danger: #c95858;
-      --shadow: 0 18px 55px rgba(25, 50, 70, 0.10);
-    }
-
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
     }
 
-    html,
-    body {
-      width: 100%;
-      min-height: 100%;
-      font-family:
-        Inter,
-        "Segoe UI",
-        Arial,
-        "Noto Sans Bengali",
-        sans-serif;
+    :root {
+      --white: #ffffff;
+      --soft: rgba(255,255,255,.14);
+      --border: rgba(255,255,255,.24);
+      --text-soft: rgba(255,255,255,.82);
+      --dark: #101820;
+      --accent: #f5b642;
+      --danger: #ff6b6b;
     }
 
     body {
       min-height: 100vh;
+      font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+      overflow: hidden;
+      color: var(--white);
+      background: #101820;
+    }
+
+    /* =====================================================
+       BACKGROUND
+    ===================================================== */
+
+    .background {
+      position: fixed;
+      inset: 0;
+      z-index: -5;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(5, 16, 28, .18),
+          rgba(5, 13, 22, .76)
+        ),
+        url("https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=2200&q=90")
+        center center / cover no-repeat;
+
+      transform: scale(1.03);
+      animation: slowZoom 18s ease-in-out infinite alternate;
+    }
+
+    @keyframes slowZoom {
+      from {
+        transform: scale(1.03);
+      }
+
+      to {
+        transform: scale(1.09);
+      }
+    }
+
+    .background-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: -4;
+
+      background:
+        radial-gradient(
+          circle at 50% 35%,
+          rgba(255,255,255,.08),
+          transparent 34%
+        ),
+        linear-gradient(
+          90deg,
+          rgba(3,10,18,.78),
+          rgba(3,10,18,.25),
+          rgba(3,10,18,.70)
+        );
+    }
+
+    /* =====================================================
+       DECORATIVE LIGHT
+    ===================================================== */
+
+    .light {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: .12;
+      z-index: -3;
+      pointer-events: none;
+    }
+
+    .light.one {
+      top: -180px;
+      left: -120px;
+      background: #f5b642;
+    }
+
+    .light.two {
+      right: -180px;
+      bottom: -200px;
+      background: #4da3ff;
+    }
+
+    /* =====================================================
+       MAIN
+    ===================================================== */
+
+    .page {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+    }
+
+    .login-shell {
+      width: min(1080px, 100%);
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      border: 1px solid rgba(255,255,255,.20);
+      border-radius: 30px;
+      overflow: hidden;
+
+      background: rgba(8, 18, 29, .48);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+
+      box-shadow:
+        0 35px 100px rgba(0,0,0,.42),
+        inset 0 1px 0 rgba(255,255,255,.12);
+    }
+
+    /* =====================================================
+       LEFT SIDE
+    ===================================================== */
+
+    .visual {
+      min-height: 650px;
+      padding: 50px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      border-right: 1px solid rgba(255,255,255,.13);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+    }
+
+    .brand-logo {
+      width: 50px;
+      height: 50px;
+      border-radius: 15px;
+
       display: flex;
       align-items: center;
       justify-content: center;
 
-      padding: 20px;
-
       background:
-        radial-gradient(
-          circle at top left,
-          #eaf5ff 0,
-          transparent 35%
-        ),
-        radial-gradient(
-          circle at bottom right,
-          #eef8f4 0,
-          transparent 35%
-        ),
-        var(--bg);
+        linear-gradient(
+          135deg,
+          rgba(245,182,66,.98),
+          rgba(255,215,120,.75)
+        );
+
+      color: #18202a;
+      font-size: 20px;
+      font-weight: 900;
+
+      box-shadow:
+        0 12px 30px rgba(245,182,66,.18);
     }
 
-    button,
-    input {
-      font: inherit;
+    .brand-text strong {
+      display: block;
+      font-size: 17px;
+      letter-spacing: .2px;
+    }
+
+    .brand-text span {
+      display: block;
+      margin-top: 3px;
+      color: var(--text-soft);
+      font-size: 12px;
+    }
+
+    .visual-content {
+      max-width: 520px;
+    }
+
+    .location-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 8px 13px;
+      border-radius: 999px;
+
+      background: rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.17);
+
+      color: rgba(255,255,255,.88);
+      font-size: 12px;
+      margin-bottom: 18px;
+    }
+
+    .location-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #68e09a;
+      box-shadow: 0 0 12px rgba(104,224,154,.75);
+    }
+
+    .visual h1 {
+      font-size: clamp(36px, 5vw, 62px);
+      line-height: 1.02;
+      letter-spacing: -2px;
+      margin-bottom: 18px;
+    }
+
+    .visual h1 span {
+      color: var(--accent);
+    }
+
+    .visual p {
+      max-width: 470px;
+      color: rgba(255,255,255,.78);
+      font-size: 15px;
+      line-height: 1.75;
+    }
+
+    .scene-note {
+      margin-top: 25px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      color: rgba(255,255,255,.58);
+      font-size: 12px;
+    }
+
+    /* =====================================================
+       RIGHT SIDE
+    ===================================================== */
+
+    .login-panel {
+      padding: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: rgba(4, 11, 18, .32);
     }
 
     .login-card {
       width: 100%;
       max-width: 390px;
-
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 18px;
-
-      padding: 30px;
-
-      box-shadow: var(--shadow);
     }
 
-    .logo {
-      width: 62px;
-      height: 62px;
-
-      margin: 0 auto 18px;
-
-      border-radius: 17px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background: var(--blue);
-      color: var(--blue-dark);
-
-      font-size: 22px;
-      font-weight: 700;
-
-      overflow: hidden;
+    .login-heading {
+      margin-bottom: 28px;
     }
 
-    .logo img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: none;
+    .login-heading h2 {
+      font-size: 30px;
+      letter-spacing: -.7px;
+      margin-bottom: 8px;
     }
 
-    .title {
-      text-align: center;
-    }
-
-    .title h1 {
-      font-size: 21px;
-      font-weight: 600;
-      color: var(--text);
-    }
-
-    .title p {
-      margin-top: 7px;
-
-      color: var(--muted);
-      font-size: 12px;
+    .login-heading p {
+      color: rgba(255,255,255,.63);
+      font-size: 13px;
       line-height: 1.6;
     }
 
-    .form {
-      margin-top: 25px;
+    /* =====================================================
+       ROLE SELECTOR
+    ===================================================== */
+
+    .roles {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 8px;
+
+      padding: 6px;
+      margin-bottom: 23px;
+
+      border-radius: 15px;
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.10);
     }
 
+    .role-btn {
+      border: 0;
+      border-radius: 10px;
+      padding: 11px 7px;
+
+      background: transparent;
+      color: rgba(255,255,255,.58);
+
+      cursor: pointer;
+      font-size: 12px;
+      font-weight: 700;
+
+      transition:
+        .2s ease;
+    }
+
+    .role-btn:hover {
+      color: white;
+      background: rgba(255,255,255,.06);
+    }
+
+    .role-btn.active {
+      color: #1b2027;
+      background: #ffffff;
+      box-shadow: 0 6px 18px rgba(0,0,0,.18);
+    }
+
+    /* =====================================================
+       FORM
+    ===================================================== */
+
     .field {
-      margin-bottom: 15px;
+      margin-bottom: 17px;
     }
 
     .field label {
       display: block;
+      margin-bottom: 8px;
 
-      margin-bottom: 6px;
-
-      color: #606a73;
-      font-size: 11px;
+      color: rgba(255,255,255,.76);
+      font-size: 12px;
+      font-weight: 700;
     }
 
     .input-wrap {
       position: relative;
     }
 
-    .input {
+    .input-icon {
+      position: absolute;
+      left: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+
+      font-size: 15px;
+      opacity: .58;
+    }
+
+    input {
       width: 100%;
-      height: 43px;
+      height: 50px;
 
-      border: 1px solid var(--border);
-      border-radius: 9px;
+      padding: 0 15px 0 44px;
 
-      padding: 0 12px;
+      border-radius: 13px;
+      border: 1px solid rgba(255,255,255,.14);
 
       outline: none;
 
-      background: #fff;
-      color: var(--text);
+      background: rgba(255,255,255,.075);
+      color: #ffffff;
 
-      font-size: 12px;
+      font-size: 14px;
 
-      transition: 0.2s ease;
+      transition:
+        border .2s ease,
+        background .2s ease,
+        box-shadow .2s ease;
     }
 
-    .input:focus {
-      border-color: #b7d8ef;
+    input::placeholder {
+      color: rgba(255,255,255,.36);
+    }
+
+    input:focus {
+      border-color: rgba(245,182,66,.72);
+      background: rgba(255,255,255,.10);
 
       box-shadow:
-        0 0 0 3px
-        rgba(183, 216, 239, 0.18);
+        0 0 0 4px rgba(245,182,66,.08);
     }
 
-    .password-input {
-      padding-right: 70px;
-    }
-
-    .show-password {
+    .password-toggle {
       position: absolute;
-
-      right: 8px;
+      right: 13px;
       top: 50%;
-
       transform: translateY(-50%);
 
       border: 0;
       background: transparent;
-
-      color: #78838d;
-
-      font-size: 10px;
-      padding: 5px;
+      color: rgba(255,255,255,.55);
 
       cursor: pointer;
+      font-size: 13px;
     }
+
+    .password-toggle:hover {
+      color: #ffffff;
+    }
+
+    /* =====================================================
+       LOGIN BUTTON
+    ===================================================== */
 
     .login-btn {
       width: 100%;
-      height: 43px;
+      height: 52px;
 
-      border: 1px solid #c5dff1;
-      border-radius: 9px;
+      border: 0;
+      border-radius: 14px;
 
-      background: #e6f3fd;
-      color: #376681;
+      background:
+        linear-gradient(
+          135deg,
+          #ffffff,
+          #e9edf2
+        );
 
-      font-size: 12px;
-      font-weight: 600;
+      color: #111820;
+
+      font-size: 14px;
+      font-weight: 800;
 
       cursor: pointer;
 
-      transition: 0.2s ease;
+      box-shadow:
+        0 12px 30px rgba(0,0,0,.22);
+
+      transition:
+        transform .2s ease,
+        box-shadow .2s ease;
     }
 
     .login-btn:hover {
-      background: #dceefb;
-      transform: translateY(-1px);
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 16px 35px rgba(0,0,0,.28);
     }
 
-    .login-btn:disabled {
-      opacity: 0.65;
-      cursor: wait;
-      transform: none;
+    .login-btn:active {
+      transform: translateY(0);
     }
 
-    .error {
-      min-height: 18px;
+    /* =====================================================
+       MESSAGE
+    ===================================================== */
 
-      margin-top: 11px;
+    .message {
+      display: none;
+      margin-top: 14px;
+      padding: 11px 13px;
 
-      text-align: center;
+      border-radius: 11px;
 
-      color: var(--danger);
-
-      font-size: 10px;
+      font-size: 12px;
       line-height: 1.5;
     }
 
-    .footer {
+    .message.error {
+      display: block;
+
+      color: #ffd1d1;
+      background: rgba(255,70,70,.10);
+      border: 1px solid rgba(255,100,100,.22);
+    }
+
+    .message.success {
+      display: block;
+
+      color: #caffdf;
+      background: rgba(60,220,130,.10);
+      border: 1px solid rgba(80,230,150,.20);
+    }
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    .login-footer {
       margin-top: 22px;
 
-      text-align: center;
-
-      color: #9aa2aa;
-
-      font-size: 9px;
-    }
-
-    .footer strong {
-      color: #6f7a84;
-      font-weight: 500;
-    }
-
-    .loading {
-      display: none;
-      align-items: center;
-      justify-content: center;
-      gap: 7px;
-    }
-
-    .loading.show {
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      color: rgba(255,255,255,.38);
+      font-size: 11px;
     }
 
-    .loading-dot {
-      width: 5px;
-      height: 5px;
-
-      border-radius: 50%;
-
-      background: #648aa3;
-
-      animation: loading 0.9s infinite;
+    .secure {
+      display: flex;
+      align-items: center;
+      gap: 6px;
     }
 
-    .loading-dot:nth-child(2) {
-      animation-delay: 0.15s;
-    }
+    /* =====================================================
+       RESPONSIVE
+    ===================================================== */
 
-    .loading-dot:nth-child(3) {
-      animation-delay: 0.3s;
-    }
+    @media (max-width: 850px) {
 
-    @keyframes loading {
-      0%,
-      100% {
-        opacity: 0.3;
-        transform: translateY(0);
+      body {
+        overflow: auto;
       }
 
-      50% {
-        opacity: 1;
-        transform: translateY(-3px);
+      .page {
+        padding: 18px;
+      }
+
+      .login-shell {
+        grid-template-columns: 1fr;
+        max-width: 520px;
+      }
+
+      .visual {
+        min-height: 350px;
+        padding: 30px;
+        border-right: 0;
+        border-bottom: 1px solid rgba(255,255,255,.13);
+      }
+
+      .visual-content {
+        margin-top: 55px;
+      }
+
+      .visual h1 {
+        font-size: 42px;
+      }
+
+      .login-panel {
+        padding: 32px 26px;
       }
     }
 
     @media (max-width: 480px) {
-      body {
-        padding: 14px;
+
+      .page {
+        padding: 10px;
       }
 
-      .login-card {
-        padding: 24px 20px;
-        border-radius: 15px;
+      .login-shell {
+        border-radius: 22px;
       }
 
-      .title h1 {
-        font-size: 19px;
+      .visual {
+        min-height: 310px;
+        padding: 23px;
+      }
+
+      .visual h1 {
+        font-size: 35px;
+        letter-spacing: -1.2px;
+      }
+
+      .visual p {
+        font-size: 13px;
+      }
+
+      .login-panel {
+        padding: 28px 20px;
+      }
+
+      .login-heading h2 {
+        font-size: 26px;
+      }
+
+      .roles {
+        gap: 5px;
+      }
+
+      .role-btn {
+        font-size: 11px;
+      }
+
+      .login-footer {
+        flex-direction: column;
+        gap: 8px;
+        align-items: flex-start;
       }
     }
   </style>
@@ -316,340 +599,630 @@
 
 <body>
 
-  <main class="login-card">
+  <!-- =====================================================
+       TURKISH SCENERY
+  ====================================================== -->
 
-    <div class="logo">
-      <span id="logoText">CS</span>
+  <div class="background"></div>
+  <div class="background-overlay"></div>
 
-      <img
-        id="logoImage"
-        alt="Studio Logo"
-      />
-    </div>
-
-    <div class="title">
-
-      <h1 id="studioName">
-        Personal Course Studio
-      </h1>
-
-      <p id="studioSubtitle">
-        নিজের ক্লাস ও কোর্স ভিডিও তৈরির জন্য
-      </p>
-
-    </div>
+  <div class="light one"></div>
+  <div class="light two"></div>
 
 
-    <form
-      class="form"
-      id="loginForm"
-    >
+  <!-- =====================================================
+       PAGE
+  ====================================================== -->
 
-      <div class="field">
+  <main class="page">
 
-        <label for="username">
-          Username
-        </label>
+    <section class="login-shell">
 
-        <input
-          id="username"
-          class="input"
-          type="text"
-          autocomplete="username"
-          placeholder="Username লিখুন"
-          required
-        />
+      <!-- =================================================
+           LEFT VISUAL
+      ================================================== -->
 
-      </div>
+      <div class="visual">
+
+        <div class="brand">
+
+          <div class="brand-logo">
+            CS
+          </div>
+
+          <div class="brand-text">
+            <strong>Personal Course Studio</strong>
+            <span>Private Learning Workspace</span>
+          </div>
+
+        </div>
 
 
-      <div class="field">
+        <div class="visual-content">
 
-        <label for="password">
-          Password
-        </label>
+          <div class="location-pill">
+            <span class="location-dot"></span>
+            Turkish Scenery • Private Studio
+          </div>
 
-        <div class="input-wrap">
+          <h1>
+            Learn.<br>
+            Create.<br>
+            <span>Grow.</span>
+          </h1>
 
-          <input
-            id="password"
-            class="input password-input"
-            type="password"
-            autocomplete="current-password"
-            placeholder="Password লিখুন"
-            required
-          />
+          <p>
+            Your private space for creating classes,
+            recording lessons and managing your learning
+            workspace.
+          </p>
 
-          <button
-            type="button"
-            class="show-password"
-            id="showPassword"
-          >
-            Show
-          </button>
+          <div class="scene-note">
+            <span>✦</span>
+            <span>Personal Course Studio</span>
+          </div>
 
         </div>
 
       </div>
 
 
-      <button
-        type="submit"
-        class="login-btn"
-        id="loginButton"
-      >
+      <!-- =================================================
+           LOGIN PANEL
+      ================================================== -->
 
-        <span id="loginText">
-          Sign In
-        </span>
+      <div class="login-panel">
 
-        <span
-          class="loading"
-          id="loading"
-        >
+        <div class="login-card">
 
-          <span class="loading-dot"></span>
-          <span class="loading-dot"></span>
-          <span class="loading-dot"></span>
+          <div class="login-heading">
 
-        </span>
+            <h2>Welcome back</h2>
 
-      </button>
+            <p>
+              Select your role and sign in to continue
+              to your workspace.
+            </p>
+
+          </div>
 
 
-      <div
-        class="error"
-        id="errorMessage"
-      ></div>
+          <!-- ROLE -->
 
-    </form>
+          <div class="roles">
+
+            <button
+              type="button"
+              class="role-btn active"
+              data-role="user">
+              User
+            </button>
+
+            <button
+              type="button"
+              class="role-btn"
+              data-role="mentor">
+              Mentor
+            </button>
+
+            <button
+              type="button"
+              class="role-btn"
+              data-role="admin">
+              Admin
+            </button>
+
+          </div>
 
 
-    <div class="footer">
-      Private Studio ·
-      <strong>Authorized Access Only</strong>
-    </div>
+          <!-- LOGIN FORM -->
+
+          <form id="loginForm">
+
+            <div class="field">
+
+              <label for="username">
+                Username
+              </label>
+
+              <div class="input-wrap">
+
+                <span class="input-icon">
+                  ◉
+                </span>
+
+                <input
+                  id="username"
+                  type="text"
+                  autocomplete="username"
+                  placeholder="Enter username"
+                  required>
+
+              </div>
+
+            </div>
+
+
+            <div class="field">
+
+              <label for="password">
+                Password
+              </label>
+
+              <div class="input-wrap">
+
+                <span class="input-icon">
+                  ◆
+                </span>
+
+                <input
+                  id="password"
+                  type="password"
+                  autocomplete="current-password"
+                  placeholder="Enter password"
+                  required>
+
+                <button
+                  type="button"
+                  class="password-toggle"
+                  id="passwordToggle">
+                  Show
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <button
+              type="submit"
+              class="login-btn"
+              id="loginButton">
+
+              Continue
+
+            </button>
+
+            <div
+              id="message"
+              class="message">
+            </div>
+
+          </form>
+
+
+          <div class="login-footer">
+
+            <div class="secure">
+              <span>🔒</span>
+              <span>Private workspace</span>
+            </div>
+
+            <span id="roleHint">
+              Student / User access
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
 
   </main>
 
 
   <script>
-    /* =========================================================
-       PERSONAL COURSE STUDIO
-       LOGIN SYSTEM — 01.1
-       ========================================================= */
 
+    /* =====================================================
+       SESSION KEYS
+    ===================================================== */
 
-    /* =========================================================
-       LOGIN CONFIG
-       ========================================================= */
+    const USER_SESSION_KEY =
+      "personalCourseStudioUserLoggedIn";
 
-    /*
-      IMPORTANT:
+    const MENTOR_SESSION_KEY =
+      "personalCourseStudioMentorLoggedIn";
 
-      এই credentials এখন demo/local version-এর জন্য।
-
-      পরের ধাপে Admin Panel তৈরি হলে
-      এগুলো Admin থেকে পরিবর্তন করা যাবে।
-
-      এই username/password production security-এর জন্য
-      ব্যবহার করবেন না যতক্ষণ না server-side authentication
-      যোগ করা হয়।
-    */
-
-    const LOGIN_USERNAME = "admin";
-    const LOGIN_PASSWORD = "123456";
-
-
-    /* =========================================================
-       SESSION KEY
-       ========================================================= */
-
-    const SESSION_KEY =
+    const ADMIN_SESSION_KEY =
       "personalCourseStudioLoggedIn";
 
 
-    /* =========================================================
-       ELEMENTS
-       ========================================================= */
+    /* =====================================================
+       ROLE
+    ===================================================== */
 
-    const loginForm =
-      document.getElementById("loginForm");
+    let selectedRole = "user";
 
-    const usernameInput =
-      document.getElementById("username");
 
-    const passwordInput =
-      document.getElementById("password");
+    const roleButtons =
+      document.querySelectorAll(".role-btn");
+
+    const roleHint =
+      document.getElementById("roleHint");
 
     const loginButton =
       document.getElementById("loginButton");
 
-    const loginText =
-      document.getElementById("loginText");
 
-    const loading =
-      document.getElementById("loading");
+    roleButtons.forEach(button => {
 
-    const errorMessage =
-      document.getElementById("errorMessage");
+      button.addEventListener("click", () => {
 
-    const showPassword =
-      document.getElementById("showPassword");
+        roleButtons.forEach(btn => {
+          btn.classList.remove("active");
+        });
+
+        button.classList.add("active");
+
+        selectedRole =
+          button.dataset.role;
+
+        updateRoleUI();
+
+        clearMessage();
+
+      });
+
+    });
 
 
-    /* =========================================================
-       IF ALREADY LOGGED IN
-       ========================================================= */
+    function updateRoleUI() {
 
-    if (
-      sessionStorage.getItem(SESSION_KEY) === "true"
-    ) {
+      if (selectedRole === "user") {
 
-      window.location.href = "index.html";
+        roleHint.textContent =
+          "Student / User access";
+
+        loginButton.textContent =
+          "Enter Studio";
+
+      }
+
+      else if (selectedRole === "mentor") {
+
+        roleHint.textContent =
+          "Mentor Studio access";
+
+        loginButton.textContent =
+          "Open Mentor Studio";
+
+      }
+
+      else if (selectedRole === "admin") {
+
+        roleHint.textContent =
+          "Administrator access";
+
+        loginButton.textContent =
+          "Open Admin Panel";
+
+      }
 
     }
 
 
-    /* =========================================================
-       SHOW / HIDE PASSWORD
-       ========================================================= */
+    /* =====================================================
+       PASSWORD SHOW / HIDE
+    ===================================================== */
 
-    showPassword.addEventListener(
+    const passwordInput =
+      document.getElementById("password");
+
+    const passwordToggle =
+      document.getElementById("passwordToggle");
+
+
+    passwordToggle.addEventListener(
       "click",
-      function () {
+      () => {
 
-        const isPassword =
-          passwordInput.type === "password";
+        if (
+          passwordInput.type === "password"
+        ) {
 
-        passwordInput.type =
-          isPassword
-            ? "text"
-            : "password";
+          passwordInput.type = "text";
 
-        showPassword.textContent =
-          isPassword
-            ? "Hide"
-            : "Show";
+          passwordToggle.textContent =
+            "Hide";
+
+        } else {
+
+          passwordInput.type = "password";
+
+          passwordToggle.textContent =
+            "Show";
+
+        }
 
       }
     );
 
 
-    /* =========================================================
+    /* =====================================================
+       MESSAGE
+    ===================================================== */
+
+    const message =
+      document.getElementById("message");
+
+
+    function showMessage(
+      text,
+      type = "error"
+    ) {
+
+      message.textContent = text;
+
+      message.className =
+        "message " + type;
+
+    }
+
+
+    function clearMessage() {
+
+      message.textContent = "";
+
+      message.className =
+        "message";
+
+    }
+
+
+    /* =====================================================
        LOGIN
-       ========================================================= */
+    ===================================================== */
+
+    const loginForm =
+      document.getElementById("loginForm");
+
 
     loginForm.addEventListener(
       "submit",
-      function (event) {
+      function(event) {
 
         event.preventDefault();
 
+        clearMessage();
+
         const username =
-          usernameInput.value.trim();
+          document
+            .getElementById("username")
+            .value
+            .trim();
 
         const password =
-          passwordInput.value;
-
-
-        errorMessage.textContent = "";
+          document
+            .getElementById("password")
+            .value
+            .trim();
 
 
         if (!username || !password) {
 
-          errorMessage.textContent =
-            "Username এবং Password দিন।";
+          showMessage(
+            "Please enter username and password."
+          );
 
           return;
 
         }
 
 
-        loginButton.disabled = true;
+        /* ================================================
+           USER LOGIN
+        ================================================= */
 
-        loginText.style.display = "none";
+        if (selectedRole === "user") {
 
-        loading.classList.add("show");
+          /*
+            Demo User account
+
+            Username:
+            student
+
+            Password:
+            123456
+          */
+
+          if (
+            username === "student" &&
+            password === "123456"
+          ) {
+
+            sessionStorage.setItem(
+              USER_SESSION_KEY,
+              "true"
+            );
+
+            sessionStorage.setItem(
+              "personalCourseStudioRole",
+              "user"
+            );
+
+            sessionStorage.setItem(
+              "personalCourseStudioUsername",
+              username
+            );
+
+            showMessage(
+              "Login successful. Opening your studio...",
+              "success"
+            );
+
+            setTimeout(() => {
+
+              window.location.href =
+                "user.html";
+
+            }, 500);
+
+            return;
+
+          }
 
 
-        /*
-          ছোট delay রাখা হয়েছে যাতে login
-          transition natural লাগে।
-        */
+          showMessage(
+            "Invalid User username or password."
+          );
 
-        setTimeout(
-          function () {
+          return;
 
-            if (
-              username === LOGIN_USERNAME &&
-              password === LOGIN_PASSWORD
-            ) {
+        }
 
-              sessionStorage.setItem(
-                SESSION_KEY,
-                "true"
-              );
 
-              sessionStorage.setItem(
-                "personalCourseStudioLoginTime",
-                Date.now().toString()
-              );
+        /* ================================================
+           MENTOR LOGIN
+        ================================================= */
 
+        if (selectedRole === "mentor") {
+
+          /*
+            Demo Mentor account
+
+            Username:
+            mentor
+
+            Password:
+            123456
+          */
+
+          if (
+            username === "mentor" &&
+            password === "123456"
+          ) {
+
+            sessionStorage.setItem(
+              MENTOR_SESSION_KEY,
+              "true"
+            );
+
+            sessionStorage.setItem(
+              "personalCourseStudioRole",
+              "mentor"
+            );
+
+            sessionStorage.setItem(
+              "personalCourseStudioUsername",
+              username
+            );
+
+            showMessage(
+              "Login successful. Opening Mentor Studio...",
+              "success"
+            );
+
+            setTimeout(() => {
 
               window.location.href =
                 "index.html";
 
+            }, 500);
 
-              return;
+            return;
 
-            }
+          }
 
 
-            /* WRONG LOGIN */
+          showMessage(
+            "Invalid Mentor username or password."
+          );
 
-            loginButton.disabled = false;
+          return;
 
-            loginText.style.display =
-              "inline";
+        }
 
-            loading.classList.remove(
-              "show"
+
+        /* ================================================
+           ADMIN LOGIN
+        ================================================= */
+
+        if (selectedRole === "admin") {
+
+          /*
+            Demo Admin account
+
+            Username:
+            admin
+
+            Password:
+            123456
+          */
+
+          if (
+            username === "admin" &&
+            password === "123456"
+          ) {
+
+            sessionStorage.setItem(
+              ADMIN_SESSION_KEY,
+              "true"
             );
 
-            errorMessage.textContent =
-              "Username অথবা Password সঠিক নয়।";
+            sessionStorage.setItem(
+              "personalCourseStudioRole",
+              "admin"
+            );
 
-            passwordInput.value = "";
+            sessionStorage.setItem(
+              "personalCourseStudioUsername",
+              username
+            );
 
-            passwordInput.focus();
+            showMessage(
+              "Login successful. Opening Admin Panel...",
+              "success"
+            );
 
-          },
-          650
-        );
+            setTimeout(() => {
 
-      }
-    );
+              window.location.href =
+                "admin.html";
+
+            }, 500);
+
+            return;
+
+          }
 
 
-    /* =========================================================
-       ENTER KEY
-       ========================================================= */
-
-    passwordInput.addEventListener(
-      "keydown",
-      function (event) {
-
-        if (
-          event.key === "Enter"
-        ) {
-
-          loginForm.requestSubmit();
+          showMessage(
+            "Invalid Admin username or password."
+          );
 
         }
 
       }
     );
+
+
+    /* =====================================================
+       START
+    ===================================================== */
+
+    updateRoleUI();
+
+
+    /* =====================================================
+       PREVENT ALREADY LOGGED-IN USERS FROM SEEING LOGIN
+    ===================================================== */
+
+    const currentRole =
+      sessionStorage.getItem(
+        "personalCourseStudioRole"
+      );
+
+
+    if (currentRole === "admin") {
+
+      /*
+        Keep login page accessible manually,
+        but do not automatically redirect here.
+      */
+
+    }
 
   </script>
 
