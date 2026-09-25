@@ -1,49 +1,52 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="bn">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>SNK AI Academy — Administrator Panel</title>
+  <title>Admin Studio | Personal Course Studio</title>
 
-  <meta name="theme-color" content="#070a12" />
+  <!-- Favicon -->
+  <link id="favicon" rel="icon" href="" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
 
   <style>
     /* =========================================================
-       SNK AI ACADEMY
-       ADMINISTRATOR PANEL
+       PERSONAL COURSE STUDIO
+       ADMIN PANEL
+       STUDENT + LOGO MANAGEMENT ONLY
        ========================================================= */
 
     :root {
-      --bg: #070a12;
-      --bg-2: #0b1020;
-      --card: rgba(16, 22, 38, 0.88);
-      --card-2: rgba(20, 27, 46, 0.92);
+      --bg: #07090d;
+      --bg-soft: #0d1016;
+      --card: #11151c;
+      --card-2: #151a22;
+      --border: rgba(255,255,255,.08);
+      --border-hover: rgba(255,255,255,.16);
 
-      --border: rgba(255, 255, 255, 0.09);
-      --border-light: rgba(255, 255, 255, 0.14);
+      --text: #f5f7fb;
+      --muted: #8e98a8;
 
-      --text: #f7f9ff;
-      --muted: #98a2b8;
+      --accent: #4f8cff;
+      --accent-2: #6ea3ff;
 
-      --primary: #6c63ff;
-      --primary-2: #8b7cff;
+      --success: #35d07f;
+      --danger: #ff5c6c;
 
-      --green: #21d07a;
-      --orange: #ffb020;
-      --red: #ff5c6c;
-      --blue: #43a5ff;
-
-      --shadow:
-        0 20px 60px rgba(0, 0, 0, 0.35);
-
-      --radius: 20px;
+      --radius: 18px;
     }
 
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     html {
@@ -51,299 +54,868 @@
     }
 
     body {
-      font-family:
-        Inter,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
-
+      min-height: 100vh;
+      font-family: "Inter", sans-serif;
       background:
         radial-gradient(
-          circle at 10% 0%,
-          rgba(108, 99, 255, 0.13),
-          transparent 28%
+          circle at 20% 10%,
+          rgba(79,140,255,.08),
+          transparent 30%
         ),
         radial-gradient(
-          circle at 90% 10%,
-          rgba(67, 165, 255, 0.08),
-          transparent 25%
+          circle at 90% 90%,
+          rgba(79,140,255,.05),
+          transparent 30%
         ),
         var(--bg);
-
       color: var(--text);
-      min-height: 100vh;
     }
 
     button,
-    input,
-    textarea,
-    select {
-      font: inherit;
+    input {
+      font-family: inherit;
     }
 
     button {
+      border: 0;
       cursor: pointer;
-    }
-
-    a {
-      color: inherit;
-      text-decoration: none;
     }
 
     /* =========================================================
        LAYOUT
        ========================================================= */
 
-    .app {
+    .admin-shell {
       min-height: 100vh;
       display: flex;
     }
 
+    /* =========================================================
+       SIDEBAR
+       ========================================================= */
+
     .sidebar {
-      width: 275px;
+      width: 260px;
       min-height: 100vh;
+      background: rgba(9,11,15,.96);
+      border-right: 1px solid var(--border);
+      padding: 22px 16px;
+
       position: fixed;
       left: 0;
       top: 0;
       bottom: 0;
 
-      background:
-        linear-gradient(
-          180deg,
-          rgba(11, 16, 31, 0.98),
-          rgba(6, 9, 18, 0.98)
-        );
-
-      border-right: 1px solid var(--border);
-
-      padding: 24px 18px;
-
+      z-index: 100;
       display: flex;
       flex-direction: column;
-
-      z-index: 100;
     }
-
-    .main {
-      width: calc(100% - 275px);
-      margin-left: 275px;
-      min-height: 100vh;
-      padding: 30px;
-    }
-
-    /* =========================================================
-       BRAND
-       ========================================================= */
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 13px;
-      padding: 8px 8px 25px;
-      border-bottom: 1px solid var(--border);
-      margin-bottom: 25px;
+      gap: 12px;
+      padding: 5px 8px 24px;
     }
 
     .brand-logo {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-
-      background:
-        linear-gradient(
-          135deg,
-          var(--primary),
-          #3e8cff
-        );
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
 
       display: flex;
       align-items: center;
       justify-content: center;
 
+      background: #151b25;
+      border: 1px solid var(--border);
+
       overflow: hidden;
-
-      font-weight: 900;
-      font-size: 16px;
-
-      box-shadow:
-        0 10px 30px rgba(108, 99, 255, 0.25);
+      flex-shrink: 0;
     }
 
     .brand-logo img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: none;
     }
 
-    .brand-text h2 {
-      font-size: 16px;
-      line-height: 1.2;
+    .brand-logo span {
+      font-size: 13px;
+      font-weight: 800;
+      color: #fff;
     }
 
-    .brand-text p {
+    .brand-text strong {
+      display: block;
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .brand-text small {
+      display: block;
+      margin-top: 3px;
       color: var(--muted);
-      font-size: 12px;
-      margin-top: 4px;
-    }
-
-    /* =========================================================
-       NAVIGATION
-       ========================================================= */
-
-    .nav-section {
-      margin-bottom: 25px;
+      font-size: 11px;
     }
 
     .nav-title {
-      color: #68738c;
-      text-transform: uppercase;
-      letter-spacing: 1.4px;
+      color: #606a79;
       font-size: 10px;
-      font-weight: 800;
-      padding: 0 12px 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      padding: 10px 10px 8px;
     }
 
-    .nav-item {
+    .nav {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .nav-btn {
       width: 100%;
-      border: 0;
-      background: transparent;
-      color: #aeb7ca;
+      padding: 12px 13px;
+      border-radius: 12px;
 
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 11px;
 
-      padding: 12px 13px;
-      margin: 3px 0;
-
-      border-radius: 12px;
-
-      font-size: 14px;
+      background: transparent;
+      color: #aeb7c5;
       text-align: left;
 
-      transition: 0.2s ease;
+      transition: .2s ease;
     }
 
-    .nav-item:hover {
-      background: rgba(255, 255, 255, 0.05);
+    .nav-btn:hover {
+      background: rgba(255,255,255,.05);
       color: #fff;
     }
 
-    .nav-item.active {
+    .nav-btn.active {
+      background: rgba(79,140,255,.13);
       color: #fff;
-
-      background:
-        linear-gradient(
-          90deg,
-          rgba(108, 99, 255, 0.22),
-          rgba(108, 99, 255, 0.08)
-        );
-
-      box-shadow:
-        inset 3px 0 0 var(--primary);
     }
 
     .nav-icon {
-      width: 22px;
+      width: 20px;
       text-align: center;
-      font-size: 17px;
+      font-size: 16px;
     }
 
     .sidebar-bottom {
       margin-top: auto;
+      border-top: 1px solid var(--border);
+      padding-top: 15px;
     }
 
-    .logout-btn {
-      width: 100%;
-      border: 1px solid rgba(255, 92, 108, 0.2);
-      background: rgba(255, 92, 108, 0.06);
-      color: #ff8995;
-
-      padding: 12px;
-      border-radius: 12px;
-
-      transition: 0.2s;
-    }
-
-    .logout-btn:hover {
-      background: rgba(255, 92, 108, 0.12);
-    }
-
-    /* =========================================================
-       MOBILE TOPBAR
-       ========================================================= */
-
-    .mobile-topbar {
-      display: none;
-    }
-
-    /* =========================================================
-       TOP HEADER
-       ========================================================= */
-
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      margin-bottom: 28px;
-    }
-
-    .page-heading h1 {
-      font-size: 27px;
-      font-weight: 800;
-      letter-spacing: -0.5px;
-    }
-
-    .page-heading p {
-      margin-top: 5px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    .admin-status {
+    .mentor-link {
       display: flex;
       align-items: center;
       gap: 10px;
 
-      padding: 8px 13px;
+      width: 100%;
+      padding: 12px;
 
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.03);
+      border-radius: 12px;
+      background: rgba(255,255,255,.035);
+      color: #c8d0dc;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 600;
 
-      border-radius: 100px;
-
-      font-size: 12px;
-      color: #cbd3e5;
+      margin-bottom: 8px;
     }
 
-    .status-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--green);
-      border-radius: 50%;
-      box-shadow: 0 0 12px var(--green);
+    .mentor-link:hover {
+      background: rgba(255,255,255,.07);
+      color: #fff;
+    }
+
+    .logout-btn {
+      width: 100%;
+      padding: 12px;
+
+      border-radius: 12px;
+      background: rgba(255,92,108,.08);
+      color: #ff8290;
+
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .logout-btn:hover {
+      background: rgba(255,92,108,.15);
     }
 
     /* =========================================================
-       PAGE
+       MAIN
        ========================================================= */
 
-    .page {
+    .main {
+      width: calc(100% - 260px);
+      margin-left: 260px;
+      min-height: 100vh;
+    }
+
+    .topbar {
+      height: 72px;
+      padding: 0 30px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      border-bottom: 1px solid var(--border);
+      background: rgba(7,9,13,.82);
+
+      position: sticky;
+      top: 0;
+      z-index: 50;
+
+      backdrop-filter: blur(18px);
+    }
+
+    .topbar-left h1 {
+      font-size: 20px;
+      font-weight: 800;
+    }
+
+    .topbar-left p {
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .admin-badge {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+
+      padding: 8px 12px;
+      border-radius: 999px;
+
+      background: rgba(53,208,127,.08);
+      border: 1px solid rgba(53,208,127,.14);
+
+      color: #65df9b;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .online-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--success);
+      box-shadow: 0 0 10px rgba(53,208,127,.6);
+    }
+
+    .content {
+      padding: 30px;
+      max-width: 1250px;
+      margin: auto;
+    }
+
+    /* =========================================================
+       SECTIONS
+       ========================================================= */
+
+    .section {
       display: none;
-      animation: pageIn 0.25s ease;
     }
 
-    .page.active {
+    .section.active {
       display: block;
+      animation: sectionIn .25s ease;
     }
 
-    @keyframes pageIn {
+    @keyframes sectionIn {
       from {
         opacity: 0;
-        transform: translateY(7px);
+        transform: translateY(5px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .section-header {
+      margin-bottom: 22px;
+    }
+
+    .section-header h2 {
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .section-header p {
+      margin-top: 7px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* =========================================================
+       CARDS
+       ========================================================= */
+
+    .card {
+      background: rgba(17,21,28,.9);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 22px;
+    }
+
+    .card + .card {
+      margin-top: 18px;
+    }
+
+    .card-title {
+      font-size: 16px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .card-subtitle {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.6;
+    }
+
+    /* =========================================================
+       LOGO
+       ========================================================= */
+
+    .logo-layout {
+      display: grid;
+      grid-template-columns: 250px 1fr;
+      gap: 25px;
+      align-items: start;
+    }
+
+    .logo-preview-box {
+      height: 220px;
+      border-radius: 18px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.04),
+          rgba(255,255,255,.015)
+        );
+
+      border: 1px solid var(--border);
+
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
+      overflow: hidden;
+    }
+
+    .logo-preview {
+      width: 120px;
+      height: 120px;
+      border-radius: 25px;
+
+      background: #151b25;
+      border: 1px solid var(--border);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      overflow: hidden;
+    }
+
+    .logo-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: none;
+    }
+
+    .logo-preview span {
+      font-size: 30px;
+      font-weight: 900;
+    }
+
+    .logo-preview-label {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .logo-actions {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    .upload-area {
+      border: 1px dashed rgba(255,255,255,.16);
+      border-radius: 16px;
+      padding: 24px;
+      text-align: center;
+      transition: .2s ease;
+    }
+
+    .upload-area:hover {
+      border-color: rgba(79,140,255,.5);
+      background: rgba(79,140,255,.035);
+    }
+
+    .upload-icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+
+      margin: auto auto 12px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(79,140,255,.1);
+      color: var(--accent);
+      font-size: 20px;
+    }
+
+    .upload-area strong {
+      display: block;
+      font-size: 13px;
+    }
+
+    .upload-area small {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 11px;
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 11px 16px;
+      border-radius: 11px;
+
+      font-size: 12px;
+      font-weight: 700;
+
+      transition: .2s ease;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover {
+      background: var(--accent-2);
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,.06);
+      color: #dce2ea;
+      border: 1px solid var(--border);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,.09);
+    }
+
+    .btn-danger {
+      background: rgba(255,92,108,.09);
+      color: #ff8290;
+      border: 1px solid rgba(255,92,108,.12);
+    }
+
+    .btn-danger:hover {
+      background: rgba(255,92,108,.15);
+    }
+
+    /* =========================================================
+       STUDENT MANAGER
+       ========================================================= */
+
+    .student-toolbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+
+      margin-bottom: 18px;
+    }
+
+    .student-count {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .students-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0,1fr));
+      gap: 14px;
+    }
+
+    .student-card {
+      padding: 16px;
+
+      background: rgba(255,255,255,.025);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+
+      display: flex;
+      align-items: center;
+      gap: 14px;
+
+      transition: .2s ease;
+    }
+
+    .student-card:hover {
+      border-color: var(--border-hover);
+      background: rgba(255,255,255,.04);
+    }
+
+    .student-image {
+      width: 58px;
+      height: 58px;
+      flex: 0 0 58px;
+
+      border-radius: 15px;
+      overflow: hidden;
+
+      background: #1a2029;
+      border: 1px solid var(--border);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: #8792a2;
+      font-size: 19px;
+      font-weight: 800;
+    }
+
+    .student-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .student-info {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .student-info strong {
+      display: block;
+
+      font-size: 14px;
+      font-weight: 700;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .student-info small {
+      display: block;
+      margin-top: 5px;
+      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .student-actions {
+      display: flex;
+      gap: 7px;
+      flex-shrink: 0;
+    }
+
+    .icon-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(255,255,255,.055);
+      color: #bac3d0;
+
+      border: 1px solid var(--border);
+    }
+
+    .icon-btn:hover {
+      background: rgba(255,255,255,.09);
+      color: #fff;
+    }
+
+    .icon-btn.delete:hover {
+      color: #ff8290;
+      background: rgba(255,92,108,.1);
+    }
+
+    .empty-state {
+      padding: 60px 20px;
+      text-align: center;
+
+      border: 1px dashed var(--border);
+      border-radius: 18px;
+
+      color: var(--muted);
+    }
+
+    .empty-icon {
+      font-size: 35px;
+      margin-bottom: 13px;
+      opacity: .55;
+    }
+
+    .empty-state strong {
+      display: block;
+      color: #d7dce4;
+      margin-bottom: 5px;
+    }
+
+    .empty-state p {
+      font-size: 12px;
+    }
+
+    /* =========================================================
+       MODAL
+       ========================================================= */
+
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+
+      background: rgba(0,0,0,.72);
+      backdrop-filter: blur(9px);
+
+      display: none;
+      align-items: center;
+      justify-content: center;
+
+      padding: 20px;
+      z-index: 500;
+    }
+
+    .modal-backdrop.show {
+      display: flex;
+    }
+
+    .modal {
+      width: min(500px, 100%);
+
+      background: #11151c;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+
+      box-shadow: 0 30px 100px rgba(0,0,0,.5);
+
+      overflow: hidden;
+
+      animation: modalIn .2s ease;
+    }
+
+    @keyframes modalIn {
+      from {
+        opacity: 0;
+        transform: scale(.97) translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    .modal-head {
+      padding: 19px 20px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      border-bottom: 1px solid var(--border);
+    }
+
+    .modal-head h3 {
+      font-size: 16px;
+    }
+
+    .close-modal {
+      width: 34px;
+      height: 34px;
+
+      border-radius: 10px;
+      background: rgba(255,255,255,.05);
+      color: #9ba5b3;
+      font-size: 18px;
+    }
+
+    .close-modal:hover {
+      color: #fff;
+    }
+
+    .modal-body {
+      padding: 20px;
+    }
+
+    .form-group {
+      margin-bottom: 17px;
+    }
+
+    .form-label {
+      display: block;
+      margin-bottom: 8px;
+
+      color: #c8d0db;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .input {
+      width: 100%;
+
+      padding: 12px 13px;
+
+      border-radius: 11px;
+      border: 1px solid var(--border);
+
+      outline: none;
+
+      background: #0b0e13;
+      color: #fff;
+
+      font-size: 13px;
+    }
+
+    .input:focus {
+      border-color: rgba(79,140,255,.6);
+      box-shadow: 0 0 0 3px rgba(79,140,255,.08);
+    }
+
+    .image-editor {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .edit-image-preview {
+      width: 75px;
+      height: 75px;
+
+      border-radius: 17px;
+      overflow: hidden;
+
+      background: #1a2029;
+      border: 1px solid var(--border);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-weight: 800;
+      color: #8994a3;
+
+      flex-shrink: 0;
+    }
+
+    .edit-image-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .image-editor-info {
+      min-width: 0;
+    }
+
+    .image-editor-info strong {
+      display: block;
+      font-size: 12px;
+    }
+
+    .image-editor-info small {
+      display: block;
+      color: var(--muted);
+      margin-top: 5px;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .modal-footer {
+      padding: 15px 20px;
+
+      display: flex;
+      justify-content: flex-end;
+      gap: 9px;
+
+      border-top: 1px solid var(--border);
+    }
+
+    /* =========================================================
+       TOAST
+       ========================================================= */
+
+    .toast-container {
+      position: fixed;
+      right: 22px;
+      bottom: 22px;
+
+      z-index: 1000;
+
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+
+    .toast {
+      min-width: 260px;
+      max-width: 360px;
+
+      padding: 13px 15px;
+
+      background: #151a22;
+      border: 1px solid var(--border);
+      border-radius: 13px;
+
+      box-shadow: 0 20px 50px rgba(0,0,0,.4);
+
+      font-size: 12px;
+      color: #e9edf3;
+
+      animation: toastIn .25s ease;
+    }
+
+    .toast.success {
+      border-color: rgba(53,208,127,.25);
+    }
+
+    .toast.error {
+      border-color: rgba(255,92,108,.25);
+    }
+
+    @keyframes toastIn {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
       }
 
       to {
@@ -353,708 +925,138 @@
     }
 
     /* =========================================================
-       STATS
+       MOBILE
        ========================================================= */
 
-    .stats-grid {
-      display: grid;
-      grid-template-columns:
-        repeat(4, minmax(0, 1fr));
-
-      gap: 16px;
-      margin-bottom: 20px;
-    }
-
-    .stat-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-
-      padding: 20px;
-
-      box-shadow: var(--shadow);
-    }
-
-    .stat-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .stat-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background: rgba(108, 99, 255, 0.12);
-      color: #9a92ff;
-
-      font-size: 18px;
-    }
-
-    .stat-label {
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 16px;
-    }
-
-    .stat-value {
-      font-size: 26px;
-      font-weight: 800;
-      margin-top: 4px;
-    }
-
-    /* =========================================================
-       CARDS
-       ========================================================= */
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-
-      box-shadow: var(--shadow);
-
-      padding: 22px;
-      margin-bottom: 20px;
-    }
-
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      gap: 15px;
-      margin-bottom: 18px;
-    }
-
-    .card-header h2 {
-      font-size: 17px;
-    }
-
-    .card-header p {
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 4px;
-    }
-
-    /* =========================================================
-       BUTTONS
-       ========================================================= */
-
-    .btn {
-      border: 0;
-      border-radius: 11px;
-
-      padding: 11px 16px;
-
-      color: #fff;
-      background: var(--primary);
-
-      font-weight: 700;
-      font-size: 13px;
-
-      transition: 0.2s;
-    }
-
-    .btn:hover {
-      transform: translateY(-1px);
-
-      box-shadow:
-        0 10px 25px rgba(108, 99, 255, 0.2);
-    }
-
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.06);
-      border: 1px solid var(--border);
-    }
-
-    .btn-danger {
-      background: rgba(255, 92, 108, 0.1);
-      color: #ff8490;
-      border: 1px solid rgba(255, 92, 108, 0.15);
-    }
-
-    .btn-success {
-      background: rgba(33, 208, 122, 0.12);
-      color: #5ff0a5;
-      border: 1px solid rgba(33, 208, 122, 0.15);
-    }
-
-    /* =========================================================
-       FORMS
-       ========================================================= */
-
-    .form-grid {
-      display: grid;
-      grid-template-columns:
-        repeat(2, minmax(0, 1fr));
-
-      gap: 16px;
-    }
-
-    .form-group {
-      margin-bottom: 16px;
-    }
-
-    .form-group.full {
-      grid-column: 1 / -1;
-    }
-
-    label {
-      display: block;
-
-      color: #cdd4e5;
-      font-size: 12px;
-      font-weight: 700;
-
-      margin-bottom: 7px;
-    }
-
-    input,
-    textarea,
-    select {
-      width: 100%;
-
-      background: rgba(0, 0, 0, 0.2);
-      border: 1px solid var(--border);
-
-      color: #fff;
-
-      border-radius: 11px;
-
-      padding: 12px 13px;
-
-      outline: none;
-
-      transition: 0.2s;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      border-color: rgba(108, 99, 255, 0.65);
-
-      box-shadow:
-        0 0 0 3px rgba(108, 99, 255, 0.08);
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 100px;
-    }
-
-    select option {
-      background: #111625;
-      color: #fff;
-    }
-
-    .form-note {
-      color: var(--muted);
-      font-size: 11px;
-      margin-top: 6px;
-      line-height: 1.6;
-    }
-
-    /* =========================================================
-       QUICK ACTIONS
-       ========================================================= */
-
-    .quick-grid {
-      display: grid;
-
-      grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-      gap: 14px;
-    }
-
-    .quick-card {
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.025);
-
-      padding: 18px;
-      border-radius: 16px;
-
-      transition: 0.2s;
-    }
-
-    .quick-card:hover {
-      background: rgba(255, 255, 255, 0.05);
-      transform: translateY(-2px);
-    }
-
-    .quick-card-icon {
-      font-size: 22px;
-      margin-bottom: 12px;
-    }
-
-    .quick-card h3 {
-      font-size: 14px;
-      margin-bottom: 5px;
-    }
-
-    .quick-card p {
-      color: var(--muted);
-      font-size: 11px;
-      line-height: 1.5;
-      margin-bottom: 13px;
-    }
-
-    /* =========================================================
-       BRAND LIST
-       ========================================================= */
-
-    .brand-list,
-    .student-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .brand-row,
-    .student-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-
-      gap: 12px;
-
-      padding: 13px 15px;
-
-      border-radius: 13px;
-
-      background: rgba(255, 255, 255, 0.025);
-      border: 1px solid var(--border);
-    }
-
-    .brand-name {
-      font-weight: 700;
-      font-size: 13px;
-    }
-
-    .student-info strong {
-      display: block;
-      font-size: 13px;
-    }
-
-    .student-info span {
-      display: block;
-      color: var(--muted);
-      font-size: 11px;
-      margin-top: 3px;
-    }
-
-    .row-actions {
-      display: flex;
-      gap: 7px;
-      flex-wrap: wrap;
-    }
-
-    .small-btn {
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.04);
-
-      color: #dce3f3;
-
-      border-radius: 9px;
-      padding: 7px 10px;
-
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .small-btn.delete {
-      color: #ff7e8b;
-      border-color: rgba(255, 92, 108, 0.15);
-    }
-
-    /* =========================================================
-       PROFILE
-       ========================================================= */
-
-    .profile-layout {
-      display: grid;
-
-      grid-template-columns:
-        310px minmax(0, 1fr);
-
-      gap: 20px;
-
-      align-items: start;
-    }
-
-    .profile-card {
-      text-align: center;
-    }
-
-    .profile-avatar-wrap {
-      position: relative;
-
-      width: 150px;
-      height: 150px;
-
-      margin: 5px auto 18px;
-    }
-
-    .profile-avatar {
-      width: 150px;
-      height: 150px;
-
-      border-radius: 36px;
-
-      overflow: hidden;
-
-      border: 1px solid var(--border-light);
-
-      background:
-        linear-gradient(
-          135deg,
-          var(--primary),
-          #3f8cff
-        );
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 42px;
-      font-weight: 900;
-
-      box-shadow:
-        0 20px 50px rgba(0, 0, 0, 0.35);
-    }
-
-    .profile-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .profile-upload {
-      position: absolute;
-
-      right: -5px;
-      bottom: -5px;
-
-      width: 44px;
-      height: 44px;
-
-      border-radius: 50%;
-
-      background: var(--primary);
-
-      border: 4px solid #101522;
-
-      color: #fff;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      font-size: 17px;
-
-      cursor: pointer;
-    }
-
-    .profile-upload input {
+    .mobile-top {
       display: none;
     }
 
-    .profile-card h2 {
-      font-size: 18px;
-    }
+    @media (max-width: 900px) {
 
-    .profile-card p {
-      color: var(--muted);
-      font-size: 12px;
-      margin-top: 5px;
-    }
-
-    .profile-role {
-      display: inline-flex;
-
-      margin-top: 13px;
-
-      padding: 6px 10px;
-
-      border-radius: 100px;
-
-      background: rgba(108, 99, 255, 0.1);
-      color: #aaa3ff;
-
-      font-size: 10px;
-      font-weight: 800;
-
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    .profile-actions {
-      display: flex;
-      gap: 10px;
-      margin-top: 8px;
-    }
-
-    /* =========================================================
-       EMPTY
-       ========================================================= */
-
-    .empty {
-      text-align: center;
-      padding: 30px 15px;
-      color: var(--muted);
-      font-size: 13px;
-    }
-
-    /* =========================================================
-       TOAST
-       ========================================================= */
-
-    .toast {
-      position: fixed;
-
-      right: 25px;
-      bottom: 25px;
-
-      z-index: 9999;
-
-      min-width: 260px;
-
-      padding: 14px 17px;
-
-      border-radius: 13px;
-
-      background: #111827;
-      border: 1px solid var(--border-light);
-
-      box-shadow: var(--shadow);
-
-      display: flex;
-      align-items: center;
-      gap: 10px;
-
-      transform: translateY(120px);
-      opacity: 0;
-
-      pointer-events: none;
-
-      transition: 0.3s;
-    }
-
-    .toast.show {
-      transform: translateY(0);
-      opacity: 1;
-    }
-
-    .toast-icon {
-      width: 28px;
-      height: 28px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 8px;
-
-      background: rgba(33, 208, 122, 0.12);
-      color: var(--green);
-    }
-
-    .toast-text {
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    /* =========================================================
-       OVERLAY / MOBILE
-       ========================================================= */
-
-    .sidebar-overlay {
-      display: none;
-    }
-
-    @media (max-width: 1100px) {
-      .stats-grid {
-        grid-template-columns:
-          repeat(2, minmax(0, 1fr));
-      }
-
-      .profile-layout {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 850px) {
       .sidebar {
         transform: translateX(-100%);
-        transition: 0.3s ease;
+        transition: transform .25s ease;
       }
 
       .sidebar.open {
         transform: translateX(0);
       }
 
-      .sidebar-overlay {
-        position: fixed;
-        inset: 0;
-
-        background: rgba(0, 0, 0, 0.65);
-
-        z-index: 90;
-      }
-
-      .sidebar-overlay.show {
-        display: block;
-      }
-
       .main {
         width: 100%;
         margin-left: 0;
-
-        padding: 20px 15px 35px;
       }
 
-      .mobile-topbar {
+      .mobile-top {
         display: flex;
-
-        justify-content: space-between;
         align-items: center;
-
-        margin-bottom: 22px;
+        gap: 12px;
       }
 
       .mobile-menu {
-        width: 42px;
-        height: 42px;
-
-        border: 1px solid var(--border);
-        background: rgba(255, 255, 255, 0.04);
-
-        color: #fff;
-
-        border-radius: 11px;
-
-        font-size: 20px;
-      }
-
-      .mobile-logo {
-        display: flex;
-        align-items: center;
-        gap: 8px;
-
-        font-size: 14px;
-        font-weight: 800;
-      }
-
-      .mobile-logo span {
-        width: 34px;
-        height: 34px;
+        width: 40px;
+        height: 40px;
 
         border-radius: 10px;
 
-        background: var(--primary);
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        font-size: 11px;
+        background: rgba(255,255,255,.06);
+        color: #fff;
+        border: 1px solid var(--border);
       }
 
       .topbar {
-        align-items: flex-start;
+        padding: 0 18px;
       }
 
-      .admin-status {
+      .topbar-left {
         display: none;
       }
 
-      .quick-grid {
+      .content {
+        padding: 20px 16px;
+      }
+
+      .logo-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .students-grid {
         grid-template-columns: 1fr;
       }
     }
 
-    @media (max-width: 600px) {
-      .stats-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 10px;
-      }
+    @media (max-width: 550px) {
 
-      .stat-card {
-        padding: 15px;
-      }
-
-      .stat-value {
+      .section-header h2 {
         font-size: 21px;
-      }
-
-      .stat-icon {
-        width: 34px;
-        height: 34px;
-        font-size: 15px;
-      }
-
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .form-group.full {
-        grid-column: auto;
       }
 
       .card {
         padding: 16px;
-        border-radius: 16px;
       }
 
-      .card-header {
+      .student-card {
         align-items: flex-start;
+      }
+
+      .student-actions {
         flex-direction: column;
       }
 
-      .brand-row,
-      .student-row {
-        align-items: flex-start;
-        flex-direction: column;
+      .student-image {
+        width: 52px;
+        height: 52px;
+        flex-basis: 52px;
       }
 
-      .row-actions {
+      .admin-badge {
+        padding: 7px 9px;
+      }
+
+      .logo-preview-box {
+        height: 190px;
+      }
+
+      .button-row .btn {
         width: 100%;
       }
 
-      .small-btn {
-        flex: 1;
-      }
-
-      .profile-actions {
-        flex-direction: column;
-      }
-
-      .profile-actions .btn {
-        width: 100%;
+      .toast-container {
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
       }
 
       .toast {
-        left: 15px;
-        right: 15px;
-        bottom: 15px;
-        min-width: auto;
+        min-width: 0;
+        width: 100%;
       }
     }
+
   </style>
 </head>
 
 <body>
 
   <!-- =========================================================
+       AUTH CHECK
+       ========================================================= -->
+
+  <script>
+    if (
+      sessionStorage.getItem("personalCourseStudioAdminLoggedIn") !== "true"
+    ) {
+      window.location.replace("../login/");
+    }
+  </script>
+
+
+  <!-- =========================================================
        APP
        ========================================================= -->
 
-  <div class="app">
+  <div class="admin-shell">
 
     <!-- =======================================================
          SIDEBAR
@@ -1065,113 +1067,64 @@
       <div class="brand">
 
         <div class="brand-logo" id="sidebarLogo">
-          SNK
+          <img id="sidebarLogoImage" alt="Studio Logo">
+          <span id="sidebarLogoText">CS</span>
         </div>
 
         <div class="brand-text">
-          <h2>SNK</h2>
-          <p>SNK AI Academy</p>
+          <strong>Personal Course</strong>
+          <small>Admin Studio</small>
         </div>
 
       </div>
 
-
-      <!-- MANAGEMENT -->
-
-      <div class="nav-section">
-
-        <div class="nav-title">
-          Management
-        </div>
-
-        <button
-          class="nav-item active"
-          data-page="dashboard"
-        >
-          <span class="nav-icon">⌂</span>
-          <span>Dashboard</span>
-        </button>
-
-        <button
-          class="nav-item"
-          data-page="settings"
-        >
-          <span class="nav-icon">⚙</span>
-          <span>Studio Settings</span>
-        </button>
-
-        <button
-          class="nav-item"
-          data-page="brands"
-        >
-          <span class="nav-icon">◆</span>
-          <span>Brand Manager</span>
-        </button>
-
-        <button
-          class="nav-item"
-          data-page="students"
-        >
-          <span class="nav-icon">♙</span>
-          <span>Student Manager</span>
-        </button>
-
-        <button
-          class="nav-item"
-          data-page="profile"
-        >
-          <span class="nav-icon">👤</span>
-          <span>Profile</span>
-        </button>
-
+      <div class="nav-title">
+        Management
       </div>
 
-
-      <!-- STUDIO -->
-
-      <div class="nav-section">
-
-        <div class="nav-title">
-          Studio
-        </div>
+      <nav class="nav">
 
         <button
-          class="nav-item"
-          id="mentorBtn"
+          class="nav-btn active"
+          data-section="students"
+          type="button"
         >
-          <span class="nav-icon">▶</span>
-          <span>Open Mentor Studio</span>
+          <span class="nav-icon">👨‍🎓</span>
+          <span>Students</span>
         </button>
 
         <button
-          class="nav-item"
-          id="homeBtn"
+          class="nav-btn"
+          data-section="logo"
+          type="button"
         >
-          <span class="nav-icon">◉</span>
-          <span>Public Home</span>
+          <span class="nav-icon">◈</span>
+          <span>Studio Logo</span>
         </button>
 
-      </div>
-
+      </nav>
 
       <div class="sidebar-bottom">
+
+        <a
+          class="mentor-link"
+          href="../mentor/"
+        >
+          <span>🎥</span>
+          <span>Open Mentor Studio</span>
+        </a>
 
         <button
           class="logout-btn"
           id="logoutBtn"
+          type="button"
         >
-          ⇥ &nbsp; Logout
+          Logout
         </button>
 
       </div>
 
     </aside>
-
-
-    <div
-      class="sidebar-overlay"
-      id="sidebarOverlay"
-    ></div>
 
 
     <!-- =======================================================
@@ -1180,817 +1133,306 @@
 
     <main class="main">
 
-      <!-- MOBILE TOPBAR -->
-
-      <div class="mobile-topbar">
-
-        <button
-          class="mobile-menu"
-          id="mobileMenu"
-        >
-          ☰
-        </button>
-
-        <div class="mobile-logo">
-          <span id="mobileLogo">
-            SNK
-          </span>
-
-          SNK AI Academy
-        </div>
-
-      </div>
-
-
       <!-- TOPBAR -->
 
       <header class="topbar">
 
-        <div class="page-heading">
+        <div class="mobile-top">
+
+          <button
+            class="mobile-menu"
+            id="mobileMenuBtn"
+            type="button"
+          >
+            ☰
+          </button>
+
+        </div>
+
+        <div class="topbar-left">
 
           <h1 id="pageTitle">
-            Dashboard
+            Student Manager
           </h1>
 
           <p id="pageSubtitle">
-            Manage your personal course studio.
+            Manage student name and profile image.
           </p>
 
         </div>
 
-        <div class="admin-status">
-
-          <span class="status-dot"></span>
-
-          Administrator
-
+        <div class="admin-badge">
+          <span class="online-dot"></span>
+          ADMIN MODE
         </div>
 
       </header>
 
 
-      <!-- =====================================================
-           DASHBOARD
-           ===================================================== -->
+      <!-- CONTENT -->
 
-      <section
-        class="page active"
-        id="page-dashboard"
-      >
+      <div class="content">
 
-        <div class="stats-grid">
 
-          <div class="stat-card">
+        <!-- ===================================================
+             STUDENTS
+             =================================================== -->
 
-            <div class="stat-top">
+        <section
+          class="section active"
+          id="studentsSection"
+        >
 
-              <div class="stat-icon">
-                🎓
-              </div>
+          <div class="section-header">
 
-            </div>
-
-            <div class="stat-label">
-              Students
-            </div>
-
-            <div
-              class="stat-value"
-              id="studentCount"
-            >
-              0
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-top">
-
-              <div class="stat-icon">
-                ◆
-              </div>
-
-            </div>
-
-            <div class="stat-label">
-              Brands
-            </div>
-
-            <div
-              class="stat-value"
-              id="brandCount"
-            >
-              0
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-top">
-
-              <div class="stat-icon">
-                🎥
-              </div>
-
-            </div>
-
-            <div class="stat-label">
-              Studio
-            </div>
-
-            <div class="stat-value">
-              Ready
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-top">
-
-              <div class="stat-icon">
-                👤
-              </div>
-
-            </div>
-
-            <div class="stat-label">
-              Current Role
-            </div>
-
-            <div class="stat-value">
-              Admin
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- QUICK ACTIONS -->
-
-        <div class="card">
-
-          <div class="card-header">
-
-            <div>
-              <h2>Quick Actions</h2>
-              <p>
-                Frequently used administrator tools.
-              </p>
-            </div>
-
-          </div>
-
-
-          <div class="quick-grid">
-
-            <div class="quick-card">
-
-              <div class="quick-card-icon">
-                ▶
-              </div>
-
-              <h3>
-                Mentor Studio
-              </h3>
-
-              <p>
-                Open your class recording studio.
-              </p>
-
-              <button
-                class="btn"
-                onclick="openMentorStudio()"
-              >
-                Open Studio
-              </button>
-
-            </div>
-
-
-            <div class="quick-card">
-
-              <div class="quick-card-icon">
-                👤
-              </div>
-
-              <h3>
-                Profile
-              </h3>
-
-              <p>
-                Manage administrator information and logo.
-              </p>
-
-              <button
-                class="btn btn-secondary"
-                onclick="showPage('profile')"
-              >
-                Open Profile
-              </button>
-
-            </div>
-
-
-            <div class="quick-card">
-
-              <div class="quick-card-icon">
-                ◉
-              </div>
-
-              <h3>
-                Public Home
-              </h3>
-
-              <p>
-                Preview the public Personal Course Studio.
-              </p>
-
-              <button
-                class="btn btn-secondary"
-                onclick="openPublicHome()"
-              >
-                Open Home
-              </button>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- CURRENT PROFILE -->
-
-        <div class="card">
-
-          <div class="card-header">
-
-            <div>
-              <h2>Administrator Profile</h2>
-
-              <p>
-                Current administrator information.
-              </p>
-            </div>
-
-            <button
-              class="btn btn-secondary"
-              onclick="showPage('profile')"
-            >
-              Edit Profile
-            </button>
-
-          </div>
-
-
-          <div class="student-row">
-
-            <div class="student-info">
-
-              <strong id="dashboardAdminName">
-                Administrator
-              </strong>
-
-              <span id="dashboardAdminEmail">
-                admin@snkacademy.local
-              </span>
-
-            </div>
-
-            <span class="profile-role">
-              Administrator
-            </span>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- =====================================================
-           STUDIO SETTINGS
-           ===================================================== -->
-
-      <section
-        class="page"
-        id="page-settings"
-      >
-
-        <div class="card">
-
-          <div class="card-header">
-
-            <div>
-              <h2>Studio Settings</h2>
-
-              <p>
-                Control the name and basic identity of your studio.
-              </p>
-            </div>
-
-          </div>
-
-
-          <div class="form-grid">
-
-            <div class="form-group">
-
-              <label>
-                Studio Name
-              </label>
-
-              <input
-                type="text"
-                id="studioName"
-                placeholder="Personal Course Studio"
-              />
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                Studio Logo / Short Name
-              </label>
-
-              <input
-                type="text"
-                id="studioLogo"
-                placeholder="CS"
-              />
-
-            </div>
-
-
-            <div class="form-group full">
-
-              <label>
-                Studio Subtitle
-              </label>
-
-              <input
-                type="text"
-                id="studioSubtitle"
-                placeholder="নিজের ক্লাস ও কোর্স ভিডিও তৈরির জন্য"
-              />
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                Selected Brand
-              </label>
-
-              <select id="selectedBrand">
-              </select>
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                Zoom Title
-              </label>
-
-              <input
-                type="text"
-                id="zoomTitle"
-                placeholder="Zoom Demo"
-              />
-
-            </div>
-
-
-            <div class="form-group full">
-
-              <label>
-                Welcome Text
-              </label>
-
-              <textarea
-                id="welcomeText"
-                placeholder="আপনার ক্লাস শুরু করার জন্য প্রস্তুত?"
-              ></textarea>
-
-            </div>
-
-          </div>
-
-
-          <button
-            class="btn"
-            id="saveSettingsBtn"
-          >
-            Save Studio Settings
-          </button>
-
-        </div>
-
-      </section>
-
-
-      <!-- =====================================================
-           BRAND MANAGER
-           ===================================================== -->
-
-      <section
-        class="page"
-        id="page-brands"
-      >
-
-        <div class="card">
-
-          <div class="card-header">
-
-            <div>
-              <h2>Brand Manager</h2>
-
-              <p>
-                Manage the brands available inside Mentor Studio.
-              </p>
-            </div>
-
-          </div>
-
-
-          <div class="form-grid">
-
-            <div class="form-group">
-
-              <label>
-                New Brand Name
-              </label>
-
-              <input
-                type="text"
-                id="brandInput"
-                placeholder="Example: SNK AI Academy"
-              />
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                &nbsp;
-              </label>
-
-              <button
-                class="btn"
-                id="addBrandBtn"
-              >
-                + Add Brand
-              </button>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <div class="card">
-
-          <div class="card-header">
-
-            <div>
-              <h2>Available Brands</h2>
-
-              <p>
-                These brands can be selected from Studio Settings.
-              </p>
-            </div>
-
-          </div>
-
-
-          <div
-            class="brand-list"
-            id="brandList"
-          ></div>
-
-        </div>
-
-      </section>
-
-
-      <!-- =====================================================
-           STUDENT MANAGER
-           ===================================================== -->
-
-      <section
-        class="page"
-        id="page-students"
-      >
-
-        <div class="card">
-
-          <div class="card-header">
-
-            <div>
-              <h2>Student Manager</h2>
-
-              <p>
-                Add and manage students for your personal studio.
-              </p>
-            </div>
-
-          </div>
-
-
-          <div class="form-grid">
-
-            <div class="form-group">
-
-              <label>
-                Student Name
-              </label>
-
-              <input
-                type="text"
-                id="studentName"
-                placeholder="Student Name"
-              />
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                Student ID
-              </label>
-
-              <input
-                type="text"
-                id="studentId"
-                placeholder="SNK001"
-              />
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                Email
-              </label>
-
-              <input
-                type="email"
-                id="studentEmail"
-                placeholder="student@example.com"
-              />
-
-            </div>
-
-
-            <div class="form-group">
-
-              <label>
-                Phone
-              </label>
-
-              <input
-                type="text"
-                id="studentPhone"
-                placeholder="+880..."
-              />
-
-            </div>
-
-          </div>
-
-
-          <button
-            class="btn"
-            id="addStudentBtn"
-          >
-            + Add Student
-          </button>
-
-        </div>
-
-
-        <div class="card">
-
-          <div class="card-header">
-
-            <div>
-              <h2>Students</h2>
-
-              <p>
-                Current students registered in this browser.
-              </p>
-            </div>
-
-          </div>
-
-
-          <div
-            class="student-list"
-            id="studentList"
-          ></div>
-
-        </div>
-
-      </section>
-
-
-      <!-- =====================================================
-           PROFILE
-           ===================================================== -->
-
-      <section
-        class="page"
-        id="page-profile"
-      >
-
-        <div class="profile-layout">
-
-          <!-- PROFILE PREVIEW -->
-
-          <div class="card profile-card">
-
-            <div class="profile-avatar-wrap">
-
-              <div
-                class="profile-avatar"
-                id="profileAvatar"
-              >
-                SNK
-              </div>
-
-
-              <label
-                class="profile-upload"
-                title="Change Logo"
-              >
-
-                📷
-
-                <input
-                  type="file"
-                  id="logoInput"
-                  accept="image/png,image/jpeg,image/webp,image/svg+xml"
-                />
-
-              </label>
-
-            </div>
-
-
-            <h2 id="profilePreviewName">
-              Administrator
+            <h2>
+              Student Manager
             </h2>
 
-            <p id="profilePreviewEmail">
-              admin@snkacademy.local
-            </p>
-
-            <div class="profile-role">
-              Administrator
-            </div>
-
-
-            <p style="margin-top:16px;">
-              Click the camera button to change your profile logo.
+            <p>
+              Student name এবং image এখান থেকে edit করুন।
             </p>
 
           </div>
 
-
-          <!-- PROFILE FORM -->
 
           <div class="card">
 
-            <div class="card-header">
+            <div class="student-toolbar">
 
               <div>
+                <div class="card-title">
+                  Students
+                </div>
 
-                <h2>
-                  Profile Information
-                </h2>
-
-                <p>
-                  Update your administrator profile.
-                </p>
-
+                <div class="student-count" id="studentCount">
+                  0 students
+                </div>
               </div>
+
+              <button
+                class="btn btn-primary"
+                id="addStudentBtn"
+                type="button"
+              >
+                + Add Student
+              </button>
 
             </div>
 
 
-            <div class="form-grid">
+            <div
+              class="students-grid"
+              id="studentsGrid"
+            ></div>
 
-              <div class="form-group">
+          </div>
 
-                <label>
-                  Admin Name
-                </label>
-
-                <input
-                  type="text"
-                  id="profileName"
-                  placeholder="Administrator"
-                />
-
-              </div>
+        </section>
 
 
-              <div class="form-group">
+        <!-- ===================================================
+             LOGO
+             =================================================== -->
 
-                <label>
-                  Username
-                </label>
+        <section
+          class="section"
+          id="logoSection"
+        >
 
-                <input
-                  type="text"
-                  id="profileUsername"
-                  placeholder="admin"
-                  readonly
-                />
+          <div class="section-header">
 
-                <div class="form-note">
-                  Username is controlled by the login system.
+            <h2>
+              Studio Logo
+            </h2>
+
+            <p>
+              এখানে logo change করলে Mentor Studio-তেও একই logo দেখাবে।
+            </p>
+
+          </div>
+
+
+          <div class="card">
+
+            <div class="logo-layout">
+
+              <!-- PREVIEW -->
+
+              <div class="logo-preview-box">
+
+                <div class="logo-preview">
+
+                  <img
+                    id="logoPreviewImage"
+                    alt="Studio Logo"
+                  >
+
+                  <span id="logoPreviewText">
+                    CS
+                  </span>
+
+                </div>
+
+                <div class="logo-preview-label">
+                  Current Studio Logo
                 </div>
 
               </div>
 
 
-              <div class="form-group">
+              <!-- ACTIONS -->
 
-                <label>
-                  Email
-                </label>
+              <div class="logo-actions">
 
-                <input
-                  type="email"
-                  id="profileEmail"
-                  placeholder="admin@snkacademy.local"
-                />
+                <div>
 
-              </div>
+                  <div class="card-title">
+                    Studio Logo
+                  </div>
 
+                  <div class="card-subtitle">
+                    আপনার logo upload করুন।
+                    এই logo localStorage-এ save হবে এবং
+                    Mentor Studio একই logo ব্যবহার করবে।
+                  </div>
 
-              <div class="form-group">
-
-                <label>
-                  Phone
-                </label>
-
-                <input
-                  type="text"
-                  id="profilePhone"
-                  placeholder="+880..."
-                />
-
-              </div>
+                </div>
 
 
-              <div class="form-group full">
+                <div class="upload-area">
 
-                <label>
-                  Profile Bio
-                </label>
+                  <div class="upload-icon">
+                    ↑
+                  </div>
 
-                <textarea
-                  id="profileBio"
-                  placeholder="Write a short profile description..."
-                ></textarea>
+                  <strong>
+                    Upload Studio Logo
+                  </strong>
+
+                  <small>
+                    PNG, JPG, WEBP অথবা SVG
+                  </small>
+
+                  <input
+                    type="file"
+                    id="logoInput"
+                    accept="image/png,image/jpeg,image/webp,image/svg+xml"
+                    hidden
+                  >
+
+                  <div
+                    class="button-row"
+                    style="justify-content:center;margin-top:15px;"
+                  >
+
+                    <button
+                      class="btn btn-primary"
+                      id="chooseLogoBtn"
+                      type="button"
+                    >
+                      Choose Logo
+                    </button>
+
+                    <button
+                      class="btn btn-danger"
+                      id="removeLogoBtn"
+                      type="button"
+                    >
+                      Remove Logo
+                    </button>
+
+                  </div>
+
+                </div>
 
               </div>
 
             </div>
 
+          </div>
 
-            <div class="profile-actions">
+        </section>
 
-              <button
-                class="btn"
-                id="saveProfileBtn"
-              >
-                Save Profile
-              </button>
+
+      </div>
+
+    </main>
+
+  </div>
+
+
+  <!-- =========================================================
+       STUDENT MODAL
+       ========================================================= -->
+
+  <div
+    class="modal-backdrop"
+    id="studentModal"
+  >
+
+    <div class="modal">
+
+      <div class="modal-head">
+
+        <h3 id="studentModalTitle">
+          Add Student
+        </h3>
+
+        <button
+          class="close-modal"
+          id="closeStudentModal"
+          type="button"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <div class="modal-body">
+
+        <!-- IMAGE -->
+
+        <div class="image-editor">
+
+          <div
+            class="edit-image-preview"
+            id="studentImagePreview"
+          >
+            👨‍🎓
+          </div>
+
+          <div class="image-editor-info">
+
+            <strong>
+              Student Image
+            </strong>
+
+            <small>
+              Student-এর ছবি upload করুন।
+              3MB-এর মধ্যে রাখুন।
+            </small>
+
+            <div
+              class="button-row"
+              style="margin-top:10px;"
+            >
 
               <button
                 class="btn btn-secondary"
-                id="resetProfileBtn"
+                id="chooseStudentImageBtn"
+                type="button"
               >
-                Reset
+                Change Image
+              </button>
+
+              <button
+                class="btn btn-danger"
+                id="removeStudentImageBtn"
+                type="button"
+              >
+                Remove
               </button>
 
             </div>
@@ -1999,57 +1441,56 @@
 
         </div>
 
-
-        <!-- LOGO INFORMATION -->
-
-        <div class="card">
-
-          <div class="card-header">
-
-            <div>
-
-              <h2>
-                Profile Logo
-              </h2>
-
-              <p>
-                Your selected logo is saved locally in this browser.
-              </p>
-
-            </div>
-
-          </div>
+        <input
+          type="file"
+          id="studentImageInput"
+          accept="image/png,image/jpeg,image/webp"
+          hidden
+        >
 
 
-          <div class="student-row">
+        <!-- NAME -->
 
-            <div class="student-info">
+        <div class="form-group">
 
-              <strong>
-                Logo Storage
-              </strong>
+          <label class="form-label">
+            Student Name
+          </label>
 
-              <span>
-                personalCourseStudioProfile
-              </span>
-
-            </div>
-
-
-            <button
-              class="small-btn delete"
-              id="removeLogoBtn"
-            >
-              Remove Logo
-            </button>
-
-          </div>
+          <input
+            class="input"
+            id="studentNameInput"
+            type="text"
+            placeholder="Student name"
+            maxlength="100"
+          >
 
         </div>
 
-      </section>
+      </div>
 
-    </main>
+
+      <div class="modal-footer">
+
+        <button
+          class="btn btn-secondary"
+          id="cancelStudentBtn"
+          type="button"
+        >
+          Cancel
+        </button>
+
+        <button
+          class="btn btn-primary"
+          id="saveStudentBtn"
+          type="button"
+        >
+          Save Student
+        </button>
+
+      </div>
+
+    </div>
 
   </div>
 
@@ -2059,40 +1500,20 @@
        ========================================================= -->
 
   <div
-    class="toast"
-    id="toast"
-  >
+    class="toast-container"
+    id="toastContainer"
+  ></div>
 
-    <div class="toast-icon">
-      ✓
-    </div>
 
-    <div
-      class="toast-text"
-      id="toastText"
-    >
-      Saved successfully.
-    </div>
-
-  </div>
-
+  <!-- =========================================================
+       JAVASCRIPT
+       ========================================================= -->
 
   <script>
-    /* =========================================================
-       SNK AI ACADEMY
-       ADMIN PANEL JAVASCRIPT
-       ========================================================= */
-
 
     /* =========================================================
        STORAGE KEYS
        ========================================================= */
-
-    const SETTINGS_KEY =
-      "personalCourseStudioSettings";
-
-    const BRANDS_KEY =
-      "personalCourseStudioBrands";
 
     const STUDENTS_KEY =
       "personalCourseStudioStudents";
@@ -2102,127 +1523,210 @@
 
 
     /* =========================================================
-       ADMIN SESSION PROTECTION
+       DEFAULT PROFILE
        ========================================================= */
 
-    const adminLoggedIn =
-      sessionStorage.getItem(
-        "personalCourseStudioAdminLoggedIn"
-      );
-
-    if (adminLoggedIn !== "true") {
-
-      window.location.replace("../login/");
-
-    }
-
-
-    /* =========================================================
-       DEFAULT DATA
-       ========================================================= */
-
-    const DEFAULT_SETTINGS = {
-
-      studioName:
-        "Personal Course Studio",
-
-      studioSubtitle:
-        "নিজের ক্লাস ও কোর্স ভিডিও তৈরির জন্য",
-
-      studioLogo:
-        "CS",
-
-      selectedBrand:
-        "Shah Neil Khan / USHA.AI",
-
-      zoomTitle:
-        "Zoom Demo",
-
-      welcomeText:
-        "আপনার ক্লাস শুরু করার জন্য প্রস্তুত?"
-
-    };
-
-
-    const DEFAULT_BRANDS = [
-
-      "Shah Neil Khan / USHA.AI",
-
-      "SNK AI Academy",
-
-      "SNK IT Institute",
-
-      "My Personal Studio",
-
-      "Custom Brand"
-
-    ];
-
-
-    const DEFAULT_PROFILE = {
-
-      name:
-        "Administrator",
-
+    const defaultProfile = {
+      name: "Administrator",
       username:
         sessionStorage.getItem(
           "personalCourseStudioUsername"
         ) || "admin",
-
-      email:
-        "admin@snkacademy.local",
-
-      phone:
-        "",
-
-      bio:
-        "SNK AI Academy Administrator.",
-
-      logo:
-        ""
-
+      email: "admin@snkacademy.local",
+      phone: "",
+      bio: "Personal Course Studio Administrator.",
+      logo: ""
     };
 
 
     /* =========================================================
-       HELPERS
+       ELEMENTS
        ========================================================= */
 
-    function getStorage(key, fallback) {
+    const sidebar =
+      document.getElementById("sidebar");
+
+    const mobileMenuBtn =
+      document.getElementById("mobileMenuBtn");
+
+    const navButtons =
+      document.querySelectorAll(".nav-btn");
+
+    const studentsSection =
+      document.getElementById("studentsSection");
+
+    const logoSection =
+      document.getElementById("logoSection");
+
+    const pageTitle =
+      document.getElementById("pageTitle");
+
+    const pageSubtitle =
+      document.getElementById("pageSubtitle");
+
+    const studentsGrid =
+      document.getElementById("studentsGrid");
+
+    const studentCount =
+      document.getElementById("studentCount");
+
+    const studentModal =
+      document.getElementById("studentModal");
+
+    const studentModalTitle =
+      document.getElementById("studentModalTitle");
+
+    const studentNameInput =
+      document.getElementById("studentNameInput");
+
+    const studentImageInput =
+      document.getElementById("studentImageInput");
+
+    const studentImagePreview =
+      document.getElementById("studentImagePreview");
+
+    const logoInput =
+      document.getElementById("logoInput");
+
+    const logoPreviewImage =
+      document.getElementById("logoPreviewImage");
+
+    const logoPreviewText =
+      document.getElementById("logoPreviewText");
+
+    const sidebarLogoImage =
+      document.getElementById("sidebarLogoImage");
+
+    const sidebarLogoText =
+      document.getElementById("sidebarLogoText");
+
+    const favicon =
+      document.getElementById("favicon");
+
+
+    /* =========================================================
+       STATE
+       ========================================================= */
+
+    let students = [];
+
+    let editingStudentId = null;
+
+    let currentStudentImage = "";
+
+
+    /* =========================================================
+       LOAD PROFILE
+       ========================================================= */
+
+    function getProfile() {
 
       try {
 
-        const data =
-          localStorage.getItem(key);
+        const saved =
+          JSON.parse(
+            localStorage.getItem(PROFILE_KEY)
+          );
 
-        if (!data) {
-
-          return fallback;
-
-        }
-
-        return JSON.parse(data);
+        return {
+          ...defaultProfile,
+          ...(saved || {})
+        };
 
       } catch (error) {
 
-        return fallback;
+        return {
+          ...defaultProfile
+        };
 
       }
 
     }
 
 
-    function saveStorage(key, value) {
+    /* =========================================================
+       SAVE PROFILE
+       ========================================================= */
+
+    function saveProfile(profile) {
 
       localStorage.setItem(
-        key,
-        JSON.stringify(value)
+        PROFILE_KEY,
+        JSON.stringify(profile)
       );
 
     }
 
 
-    function escapeHTML(value) {
+    /* =========================================================
+       LOAD STUDENTS
+       ========================================================= */
+
+    function loadStudents() {
+
+      try {
+
+        const saved =
+          JSON.parse(
+            localStorage.getItem(STUDENTS_KEY)
+          );
+
+        if (Array.isArray(saved)) {
+
+          students = saved;
+
+        } else {
+
+          students = [];
+
+        }
+
+      } catch (error) {
+
+        students = [];
+
+      }
+
+    }
+
+
+    /* =========================================================
+       SAVE STUDENTS
+       ========================================================= */
+
+    function saveStudents() {
+
+      localStorage.setItem(
+        STUDENTS_KEY,
+        JSON.stringify(students)
+      );
+
+    }
+
+
+    /* =========================================================
+       CREATE ID
+       ========================================================= */
+
+    function createStudentId() {
+
+      return (
+        "student_" +
+        Date.now() +
+        "_" +
+        Math.random()
+          .toString(36)
+          .substring(2, 8)
+      );
+
+    }
+
+
+    /* =========================================================
+       ESCAPE HTML
+       ========================================================= */
+
+    function escapeHtml(value) {
 
       return String(value || "")
         .replace(/&/g, "&amp;")
@@ -2235,1248 +1739,893 @@
 
 
     /* =========================================================
-       TOAST
+       RENDER STUDENTS
        ========================================================= */
 
-    let toastTimer;
+    function renderStudents() {
+
+      studentCount.textContent =
+        students.length +
+        (students.length === 1
+          ? " student"
+          : " students");
 
 
-    function showToast(message) {
+      if (!students.length) {
 
-      const toast =
-        document.getElementById("toast");
+        studentsGrid.innerHTML = `
 
-      const text =
-        document.getElementById("toastText");
+          <div
+            class="empty-state"
+            style="grid-column:1/-1;"
+          >
 
-      text.textContent = message;
+            <div class="empty-icon">
+              👨‍🎓
+            </div>
 
-      toast.classList.add("show");
+            <strong>
+              No students added yet
+            </strong>
 
-      clearTimeout(toastTimer);
+            <p>
+              Add a student to show them in Mentor Studio.
+            </p>
 
-      toastTimer =
-        setTimeout(() => {
+          </div>
 
-          toast.classList.remove("show");
+        `;
 
-        }, 2500);
+        return;
+
+      }
+
+
+      studentsGrid.innerHTML =
+        students.map((student) => {
+
+          const name =
+            escapeHtml(
+              student.name || "Unnamed Student"
+            );
+
+          const firstLetter =
+            escapeHtml(
+              (student.name || "S")
+                .charAt(0)
+                .toUpperCase()
+            );
+
+          const image =
+            student.image
+              ? `
+                <img
+                  src="${student.image}"
+                  alt="${name}"
+                >
+              `
+              : firstLetter;
+
+
+          return `
+
+            <div
+              class="student-card"
+              data-id="${student.id}"
+            >
+
+              <div class="student-image">
+                ${image}
+              </div>
+
+              <div class="student-info">
+
+                <strong>
+                  ${name}
+                </strong>
+
+                <small>
+                  Student
+                </small>
+
+              </div>
+
+              <div class="student-actions">
+
+                <button
+                  class="icon-btn edit-student"
+                  type="button"
+                  title="Edit"
+                  data-id="${student.id}"
+                >
+                  ✎
+                </button>
+
+                <button
+                  class="icon-btn delete delete-student"
+                  type="button"
+                  title="Delete"
+                  data-id="${student.id}"
+                >
+                  ×
+                </button>
+
+              </div>
+
+            </div>
+
+          `;
+
+        }).join("");
+
+
+      document
+        .querySelectorAll(".edit-student")
+        .forEach((button) => {
+
+          button.addEventListener(
+            "click",
+            () => {
+
+              editStudent(
+                button.dataset.id
+              );
+
+            }
+          );
+
+        });
+
+
+      document
+        .querySelectorAll(".delete-student")
+        .forEach((button) => {
+
+          button.addEventListener(
+            "click",
+            () => {
+
+              deleteStudent(
+                button.dataset.id
+              );
+
+            }
+          );
+
+        });
 
     }
 
 
     /* =========================================================
-       PROFILE
+       OPEN ADD STUDENT
        ========================================================= */
 
-    function getProfile() {
+    function openAddStudent() {
 
-      const saved =
-        getStorage(
-          PROFILE_KEY,
-          null
-        );
+      editingStudentId = null;
 
-      if (!saved) {
+      currentStudentImage = "";
 
-        saveStorage(
-          PROFILE_KEY,
-          DEFAULT_PROFILE
-        );
+      studentModalTitle.textContent =
+        "Add Student";
 
-        return {
-          ...DEFAULT_PROFILE
-        };
+      studentNameInput.value = "";
 
-      }
+      updateStudentImagePreview();
 
-      return {
-        ...DEFAULT_PROFILE,
-        ...saved
-      };
+      studentModal.classList.add("show");
+
+      setTimeout(() => {
+
+        studentNameInput.focus();
+
+      }, 100);
 
     }
 
 
-    function loadProfile() {
+    /* =========================================================
+       EDIT STUDENT
+       ========================================================= */
+
+    function editStudent(id) {
+
+      const student =
+        students.find(
+          item => item.id === id
+        );
+
+      if (!student) return;
+
+      editingStudentId = id;
+
+      currentStudentImage =
+        student.image || "";
+
+      studentModalTitle.textContent =
+        "Edit Student";
+
+      studentNameInput.value =
+        student.name || "";
+
+      updateStudentImagePreview();
+
+      studentModal.classList.add("show");
+
+    }
+
+
+    /* =========================================================
+       SAVE STUDENT
+       ========================================================= */
+
+    function saveStudent() {
+
+      const name =
+        studentNameInput.value.trim();
+
+      if (!name) {
+
+        showToast(
+          "Student name দিন।",
+          "error"
+        );
+
+        studentNameInput.focus();
+
+        return;
+
+      }
+
+
+      if (editingStudentId) {
+
+        const index =
+          students.findIndex(
+            item =>
+              item.id === editingStudentId
+          );
+
+        if (index !== -1) {
+
+          students[index] = {
+            ...students[index],
+            name,
+            image: currentStudentImage
+          };
+
+        }
+
+        showToast(
+          "Student updated successfully.",
+          "success"
+        );
+
+      } else {
+
+        students.push({
+
+          id: createStudentId(),
+
+          name,
+
+          image: currentStudentImage,
+
+          createdAt:
+            new Date().toISOString()
+
+        });
+
+        showToast(
+          "Student added successfully.",
+          "success"
+        );
+
+      }
+
+
+      saveStudents();
+
+      renderStudents();
+
+      closeStudentModal();
+
+    }
+
+
+    /* =========================================================
+       DELETE STUDENT
+       ========================================================= */
+
+    function deleteStudent(id) {
+
+      const student =
+        students.find(
+          item => item.id === id
+        );
+
+      if (!student) return;
+
+
+      const confirmed =
+        confirm(
+          `"${student.name}" কে delete করতে চান?`
+        );
+
+      if (!confirmed) return;
+
+
+      students =
+        students.filter(
+          item => item.id !== id
+        );
+
+      saveStudents();
+
+      renderStudents();
+
+      showToast(
+        "Student deleted.",
+        "success"
+      );
+
+    }
+
+
+    /* =========================================================
+       STUDENT IMAGE PREVIEW
+       ========================================================= */
+
+    function updateStudentImagePreview() {
+
+      if (currentStudentImage) {
+
+        studentImagePreview.innerHTML = `
+
+          <img
+            src="${currentStudentImage}"
+            alt="Student"
+          >
+
+        `;
+
+      } else {
+
+        studentImagePreview.innerHTML =
+          "👨‍🎓";
+
+      }
+
+    }
+
+
+    /* =========================================================
+       HANDLE STUDENT IMAGE
+       ========================================================= */
+
+    function handleStudentImage(file) {
+
+      if (!file) return;
+
+
+      if (file.size > 3 * 1024 * 1024) {
+
+        showToast(
+          "Image size 3MB-এর বেশি হতে পারবে না।",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      if (!file.type.startsWith("image/")) {
+
+        showToast(
+          "শুধু image file দিন।",
+          "error"
+        );
+
+        return;
+
+      }
+
+
+      const reader =
+        new FileReader();
+
+
+      reader.onload = function(event) {
+
+        currentStudentImage =
+          event.target.result;
+
+        updateStudentImagePreview();
+
+      };
+
+
+      reader.readAsDataURL(file);
+
+    }
+
+
+    /* =========================================================
+       CLOSE STUDENT MODAL
+       ========================================================= */
+
+    function closeStudentModal() {
+
+      studentModal.classList.remove("show");
+
+      editingStudentId = null;
+
+      currentStudentImage = "";
+
+    }
+
+
+    /* =========================================================
+       LOGO
+       ========================================================= */
+
+    function loadLogo() {
 
       const profile =
         getProfile();
 
-
-      document.getElementById(
-        "profileName"
-      ).value =
-        profile.name || "";
+      const logo =
+        profile.logo || "";
 
 
-      document.getElementById(
-        "profileUsername"
-      ).value =
-        profile.username || "admin";
+      if (logo) {
+
+        logoPreviewImage.src =
+          logo;
+
+        logoPreviewImage.style.display =
+          "block";
+
+        logoPreviewText.style.display =
+          "none";
 
 
-      document.getElementById(
-        "profileEmail"
-      ).value =
-        profile.email || "";
+        sidebarLogoImage.src =
+          logo;
+
+        sidebarLogoImage.style.display =
+          "block";
+
+        sidebarLogoText.style.display =
+          "none";
 
 
-      document.getElementById(
-        "profilePhone"
-      ).value =
-        profile.phone || "";
-
-
-      document.getElementById(
-        "profileBio"
-      ).value =
-        profile.bio || "";
-
-
-      updateProfilePreview(profile);
-
-    }
-
-
-    function updateProfilePreview(profile) {
-
-      const avatar =
-        document.getElementById(
-          "profileAvatar"
-        );
-
-      const sidebarLogo =
-        document.getElementById(
-          "sidebarLogo"
-        );
-
-      const mobileLogo =
-        document.getElementById(
-          "mobileLogo"
-        );
-
-
-      if (profile.logo) {
-
-        avatar.innerHTML =
-          `<img src="${profile.logo}" alt="Profile Logo">`;
-
-        sidebarLogo.innerHTML =
-          `<img src="${profile.logo}" alt="Logo">`;
-
-        mobileLogo.innerHTML =
-          `<img src="${profile.logo}" alt="Logo"
-          style="width:100%;height:100%;object-fit:cover;border-radius:10px;">`;
+        favicon.href =
+          logo;
 
       } else {
 
-        const initials =
-          getInitials(
-            profile.name || "SNK"
-          );
+        logoPreviewImage.removeAttribute(
+          "src"
+        );
 
-        avatar.textContent =
-          initials;
+        logoPreviewImage.style.display =
+          "none";
 
-        sidebarLogo.textContent =
-          "SNK";
-
-        mobileLogo.textContent =
-          "SNK";
-
-      }
+        logoPreviewText.style.display =
+          "block";
 
 
-      document.getElementById(
-        "profilePreviewName"
-      ).textContent =
-        profile.name || "Administrator";
+        sidebarLogoImage.removeAttribute(
+          "src"
+        );
+
+        sidebarLogoImage.style.display =
+          "none";
+
+        sidebarLogoText.style.display =
+          "block";
 
 
-      document.getElementById(
-        "profilePreviewEmail"
-      ).textContent =
-        profile.email ||
-        "admin@snkacademy.local";
-
-
-      document.getElementById(
-        "dashboardAdminName"
-      ).textContent =
-        profile.name ||
-        "Administrator";
-
-
-      document.getElementById(
-        "dashboardAdminEmail"
-      ).textContent =
-        profile.email ||
-        "admin@snkacademy.local";
-
-    }
-
-
-    function getInitials(name) {
-
-      const parts =
-        String(name)
-          .trim()
-          .split(/\s+/)
-          .filter(Boolean);
-
-      if (!parts.length) {
-
-        return "SNK";
+        favicon.removeAttribute(
+          "href"
+        );
 
       }
-
-      if (parts.length === 1) {
-
-        return parts[0]
-          .substring(0, 3)
-          .toUpperCase();
-
-      }
-
-      return (
-        parts[0].charAt(0) +
-        parts[parts.length - 1].charAt(0)
-      ).toUpperCase();
 
     }
 
 
     /* =========================================================
-       SAVE PROFILE
+       HANDLE LOGO FILE
        ========================================================= */
 
-    document
-      .getElementById("saveProfileBtn")
-      .addEventListener(
-        "click",
-        function () {
+    function handleLogoFile(file) {
 
-          const oldProfile =
-            getProfile();
+      if (!file) return;
 
 
-          const profile = {
+      if (file.size > 3 * 1024 * 1024) {
 
-            name:
-              document.getElementById(
-                "profileName"
-              ).value.trim() ||
-              "Administrator",
+        showToast(
+          "Logo size 3MB-এর বেশি হতে পারবে না।",
+          "error"
+        );
 
-            username:
-              oldProfile.username ||
-              "admin",
+        return;
 
-            email:
-              document.getElementById(
-                "profileEmail"
-              ).value.trim() ||
-              "admin@snkacademy.local",
-
-            phone:
-              document.getElementById(
-                "profilePhone"
-              ).value.trim(),
-
-            bio:
-              document.getElementById(
-                "profileBio"
-              ).value.trim(),
-
-            logo:
-              oldProfile.logo || ""
-
-          };
+      }
 
 
-          saveStorage(
-            PROFILE_KEY,
-            profile
-          );
+      if (!file.type.startsWith("image/")) {
+
+        showToast(
+          "শুধু image logo ব্যবহার করুন।",
+          "error"
+        );
+
+        return;
+
+      }
 
 
-          updateProfilePreview(
-            profile
-          );
+      const reader =
+        new FileReader();
 
 
-          showToast(
-            "Profile saved successfully."
-          );
+      reader.onload = function(event) {
 
-        }
-      );
+        const logoData =
+          event.target.result;
 
 
-    /* =========================================================
-       PROFILE RESET
-       ========================================================= */
-
-    document
-      .getElementById("resetProfileBtn")
-      .addEventListener(
-        "click",
-        function () {
-
-          loadProfile();
-
-          showToast(
-            "Profile form reset."
-          );
-
-        }
-      );
+        const profile =
+          getProfile();
 
 
-    /* =========================================================
-       LOGO UPLOAD
-       ========================================================= */
-
-    document
-      .getElementById("logoInput")
-      .addEventListener(
-        "change",
-        function (event) {
-
-          const file =
-            event.target.files[0];
-
-          if (!file) {
-
-            return;
-
-          }
+        profile.logo =
+          logoData;
 
 
-          if (!file.type.startsWith("image/")) {
+        saveProfile(profile);
 
-            showToast(
-              "Please select an image file."
-            );
-
-            return;
-
-          }
+        loadLogo();
 
 
-          const maxSize =
-            3 * 1024 * 1024;
+        showToast(
+          "Logo saved. Mentor Studio-তেও এই logo ব্যবহার হবে।",
+          "success"
+        );
+
+      };
 
 
-          if (file.size > maxSize) {
+      reader.readAsDataURL(file);
 
-            showToast(
-              "Logo must be smaller than 3MB."
-            );
-
-            return;
-
-          }
-
-
-          const reader =
-            new FileReader();
-
-
-          reader.onload =
-            function (e) {
-
-              const profile =
-                getProfile();
-
-              profile.logo =
-                e.target.result;
-
-
-              saveStorage(
-                PROFILE_KEY,
-                profile
-              );
-
-
-              updateProfilePreview(
-                profile
-              );
-
-
-              showToast(
-                "Profile logo updated."
-              );
-
-            };
-
-
-          reader.readAsDataURL(file);
-
-        }
-      );
+    }
 
 
     /* =========================================================
        REMOVE LOGO
        ========================================================= */
 
-    document
-      .getElementById("removeLogoBtn")
-      .addEventListener(
-        "click",
-        function () {
+    function removeLogo() {
 
-          const profile =
-            getProfile();
+      const profile =
+        getProfile();
 
-          profile.logo = "";
+      profile.logo = "";
 
-          saveStorage(
-            PROFILE_KEY,
-            profile
-          );
+      saveProfile(profile);
 
-          updateProfilePreview(
-            profile
-          );
-
-          document.getElementById(
-            "logoInput"
-          ).value = "";
-
-          showToast(
-            "Profile logo removed."
-          );
-
-        }
-      );
-
-
-    /* =========================================================
-       SETTINGS
-       ========================================================= */
-
-    function getSettings() {
-
-      return {
-        ...DEFAULT_SETTINGS,
-        ...getStorage(
-          SETTINGS_KEY,
-          {}
-        )
-      };
-
-    }
-
-
-    function loadSettings() {
-
-      const settings =
-        getSettings();
-
-
-      document.getElementById(
-        "studioName"
-      ).value =
-        settings.studioName || "";
-
-
-      document.getElementById(
-        "studioLogo"
-      ).value =
-        settings.studioLogo || "";
-
-
-      document.getElementById(
-        "studioSubtitle"
-      ).value =
-        settings.studioSubtitle || "";
-
-
-      document.getElementById(
-        "zoomTitle"
-      ).value =
-        settings.zoomTitle || "";
-
-
-      document.getElementById(
-        "welcomeText"
-      ).value =
-        settings.welcomeText || "";
-
-
-      renderBrandSelect(
-        settings.selectedBrand
-      );
-
-    }
-
-
-    document
-      .getElementById("saveSettingsBtn")
-      .addEventListener(
-        "click",
-        function () {
-
-          const settings = {
-
-            studioName:
-              document.getElementById(
-                "studioName"
-              ).value.trim(),
-
-            studioLogo:
-              document.getElementById(
-                "studioLogo"
-              ).value.trim(),
-
-            studioSubtitle:
-              document.getElementById(
-                "studioSubtitle"
-              ).value.trim(),
-
-            selectedBrand:
-              document.getElementById(
-                "selectedBrand"
-              ).value,
-
-            zoomTitle:
-              document.getElementById(
-                "zoomTitle"
-              ).value.trim(),
-
-            welcomeText:
-              document.getElementById(
-                "welcomeText"
-              ).value.trim()
-
-          };
-
-
-          saveStorage(
-            SETTINGS_KEY,
-            settings
-          );
-
-
-          showToast(
-            "Studio settings saved."
-          );
-
-        }
-      );
-
-
-    /* =========================================================
-       BRANDS
-       ========================================================= */
-
-    function getBrands() {
-
-      const saved =
-        getStorage(
-          BRANDS_KEY,
-          null
-        );
-
-
-      if (!Array.isArray(saved)) {
-
-        saveStorage(
-          BRANDS_KEY,
-          DEFAULT_BRANDS
-        );
-
-        return [
-          ...DEFAULT_BRANDS
-        ];
-
-      }
-
-
-      return saved;
-
-    }
-
-
-    function renderBrands() {
-
-      const brands =
-        getBrands();
-
-      const list =
-        document.getElementById(
-          "brandList"
-        );
-
-
-      document.getElementById(
-        "brandCount"
-      ).textContent =
-        brands.length;
-
-
-      if (!brands.length) {
-
-        list.innerHTML =
-          `<div class="empty">
-            No brands added yet.
-          </div>`;
-
-        renderBrandSelect();
-
-        return;
-
-      }
-
-
-      list.innerHTML =
-        brands.map(
-          (brand, index) => {
-
-            return `
-              <div class="brand-row">
-
-                <div class="brand-name">
-                  ${escapeHTML(brand)}
-                </div>
-
-                <div class="row-actions">
-
-                  <button
-                    class="small-btn delete"
-                    onclick="deleteBrand(${index})"
-                  >
-                    Delete
-                  </button>
-
-                </div>
-
-              </div>
-            `;
-
-          }
-        ).join("");
-
-
-      renderBrandSelect();
-
-    }
-
-
-    function renderBrandSelect(selected) {
-
-      const select =
-        document.getElementById(
-          "selectedBrand"
-        );
-
-
-      if (!select) {
-
-        return;
-
-      }
-
-
-      const brands =
-        getBrands();
-
-
-      const current =
-        selected ||
-        getSettings().selectedBrand;
-
-
-      select.innerHTML =
-        brands.map(
-          brand => {
-
-            return `
-              <option
-                value="${escapeHTML(brand)}"
-                ${brand === current ? "selected" : ""}
-              >
-                ${escapeHTML(brand)}
-              </option>
-            `;
-
-          }
-        ).join("");
-
-    }
-
-
-    document
-      .getElementById("addBrandBtn")
-      .addEventListener(
-        "click",
-        function () {
-
-          const input =
-            document.getElementById(
-              "brandInput"
-            );
-
-          const name =
-            input.value.trim();
-
-
-          if (!name) {
-
-            showToast(
-              "Please enter a brand name."
-            );
-
-            return;
-
-          }
-
-
-          const brands =
-            getBrands();
-
-
-          const exists =
-            brands.some(
-              brand =>
-                brand.toLowerCase() ===
-                name.toLowerCase()
-            );
-
-
-          if (exists) {
-
-            showToast(
-              "This brand already exists."
-            );
-
-            return;
-
-          }
-
-
-          brands.push(name);
-
-
-          saveStorage(
-            BRANDS_KEY,
-            brands
-          );
-
-
-          input.value = "";
-
-
-          renderBrands();
-
-          loadSettings();
-
-
-          showToast(
-            "Brand added successfully."
-          );
-
-        }
-      );
-
-
-    function deleteBrand(index) {
-
-      const brands =
-        getBrands();
-
-
-      if (brands.length <= 1) {
-
-        showToast(
-          "At least one brand should remain."
-        );
-
-        return;
-
-      }
-
-
-      const brand =
-        brands[index];
-
-
-      if (
-        !confirm(
-          `Delete "${brand}"?`
-        )
-      ) {
-
-        return;
-
-      }
-
-
-      brands.splice(
-        index,
-        1
-      );
-
-
-      saveStorage(
-        BRANDS_KEY,
-        brands
-      );
-
-
-      renderBrands();
-
-      loadSettings();
-
+      loadLogo();
 
       showToast(
-        "Brand deleted."
+        "Logo removed.",
+        "success"
       );
 
     }
 
 
     /* =========================================================
-       STUDENTS
+       NAVIGATION
        ========================================================= */
 
-    function getStudents() {
+    function showSection(sectionName) {
 
-      const saved =
-        getStorage(
-          STUDENTS_KEY,
-          []
+      navButtons.forEach(button => {
+
+        button.classList.toggle(
+          "active",
+          button.dataset.section === sectionName
         );
 
-
-      return Array.isArray(saved)
-        ? saved
-        : [];
-
-    }
+      });
 
 
-    function renderStudents() {
+      if (sectionName === "students") {
 
-      const students =
-        getStudents();
-
-
-      const list =
-        document.getElementById(
-          "studentList"
+        studentsSection.classList.add(
+          "active"
         );
 
+        logoSection.classList.remove(
+          "active"
+        );
 
-      document.getElementById(
-        "studentCount"
-      ).textContent =
-        students.length;
+        pageTitle.textContent =
+          "Student Manager";
 
-
-      if (!students.length) {
-
-        list.innerHTML =
-          `<div class="empty">
-            No students added yet.
-          </div>`;
-
-        return;
+        pageSubtitle.textContent =
+          "Manage student name and profile image.";
 
       }
 
 
-      list.innerHTML =
-        students.map(
-          (student, index) => {
+      if (sectionName === "logo") {
 
-            return `
-              <div class="student-row">
+        studentsSection.classList.remove(
+          "active"
+        );
 
-                <div class="student-info">
+        logoSection.classList.add(
+          "active"
+        );
 
-                  <strong>
-                    ${escapeHTML(
-                      student.name ||
-                      "Unnamed Student"
-                    )}
-                  </strong>
+        pageTitle.textContent =
+          "Studio Logo";
 
-                  <span>
-                    ID:
-                    ${escapeHTML(
-                      student.id ||
-                      "-"
-                    )}
-                    ${
-                      student.email
-                        ? " • " +
-                          escapeHTML(
-                            student.email
-                          )
-                        : ""
-                    }
-                  </span>
+        pageSubtitle.textContent =
+          "Change the logo used across the studio.";
 
-                </div>
+        loadLogo();
+
+      }
 
 
-                <div class="row-actions">
-
-                  <button
-                    class="small-btn delete"
-                    onclick="deleteStudent(${index})"
-                  >
-                    Delete
-                  </button>
-
-                </div>
-
-              </div>
-            `;
-
-          }
-        ).join("");
+      sidebar.classList.remove(
+        "open"
+      );
 
     }
+
+
+    /* =========================================================
+       TOAST
+       ========================================================= */
+
+    function showToast(
+      message,
+      type = "success"
+    ) {
+
+      const container =
+        document.getElementById(
+          "toastContainer"
+        );
+
+
+      const toast =
+        document.createElement(
+          "div"
+        );
+
+      toast.className =
+        "toast " + type;
+
+      toast.textContent =
+        message;
+
+
+      container.appendChild(
+        toast
+      );
+
+
+      setTimeout(() => {
+
+        toast.style.opacity =
+          "0";
+
+        toast.style.transform =
+          "translateY(10px)";
+
+        setTimeout(() => {
+
+          toast.remove();
+
+        }, 250);
+
+      }, 3000);
+
+    }
+
+
+    /* =========================================================
+       EVENTS
+       ========================================================= */
+
+    navButtons.forEach(button => {
+
+      button.addEventListener(
+        "click",
+        () => {
+
+          showSection(
+            button.dataset.section
+          );
+
+        }
+      );
+
+    });
 
 
     document
       .getElementById("addStudentBtn")
       .addEventListener(
         "click",
-        function () {
-
-          const name =
-            document.getElementById(
-              "studentName"
-            ).value.trim();
-
-          const id =
-            document.getElementById(
-              "studentId"
-            ).value.trim();
-
-          const email =
-            document.getElementById(
-              "studentEmail"
-            ).value.trim();
-
-          const phone =
-            document.getElementById(
-              "studentPhone"
-            ).value.trim();
+        openAddStudent
+      );
 
 
-          if (!name) {
-
-            showToast(
-              "Please enter student name."
-            );
-
-            return;
-
-          }
+    document
+      .getElementById("saveStudentBtn")
+      .addEventListener(
+        "click",
+        saveStudent
+      );
 
 
-          const students =
-            getStudents();
+    document
+      .getElementById("cancelStudentBtn")
+      .addEventListener(
+        "click",
+        closeStudentModal
+      );
 
 
-          students.push({
-
-            name,
-            id:
-              id ||
-              "STU-" +
-              Date.now(),
-
-            email,
-
-            phone,
-
-            createdAt:
-              new Date().toISOString()
-
-          });
+    document
+      .getElementById("closeStudentModal")
+      .addEventListener(
+        "click",
+        closeStudentModal
+      );
 
 
-          saveStorage(
-            STUDENTS_KEY,
-            students
-          );
+    document
+      .getElementById("chooseStudentImageBtn")
+      .addEventListener(
+        "click",
+        () => {
 
-
-          document.getElementById(
-            "studentName"
-          ).value = "";
-
-          document.getElementById(
-            "studentId"
-          ).value = "";
-
-          document.getElementById(
-            "studentEmail"
-          ).value = "";
-
-          document.getElementById(
-            "studentPhone"
-          ).value = "";
-
-
-          renderStudents();
-
-
-          showToast(
-            "Student added successfully."
-          );
+          studentImageInput.click();
 
         }
       );
 
 
-    function deleteStudent(index) {
-
-      const students =
-        getStudents();
-
-
-      const student =
-        students[index];
-
-
-      if (
-        !confirm(
-          `Delete ${
-            student?.name ||
-            "this student"
-          }?`
-        )
-      ) {
-
-        return;
-
-      }
-
-
-      students.splice(
-        index,
-        1
-      );
-
-
-      saveStorage(
-        STUDENTS_KEY,
-        students
-      );
-
-
-      renderStudents();
-
-
-      showToast(
-        "Student deleted."
-      );
-
-    }
-
-
-    /* =========================================================
-       PAGE NAVIGATION
-       ========================================================= */
-
-    const pageTitles = {
-
-      dashboard: {
-
-        title:
-          "Dashboard",
-
-        subtitle:
-          "Manage your personal course studio."
-
-      },
-
-      settings: {
-
-        title:
-          "Studio Settings",
-
-        subtitle:
-          "Configure your studio identity and preferences."
-
-      },
-
-      brands: {
-
-        title:
-          "Brand Manager",
-
-        subtitle:
-          "Manage brands used inside your studio."
-
-      },
-
-      students: {
-
-        title:
-          "Student Manager",
-
-        subtitle:
-          "Manage students for your personal studio."
-
-      },
-
-      profile: {
-
-        title:
-          "Profile",
-
-        subtitle:
-          "Manage administrator information and logo."
-
-      }
-
-    };
-
-
-    function showPage(pageName) {
-
-      document
-        .querySelectorAll(".page")
-        .forEach(
-          page => {
-
-            page.classList.remove(
-              "active"
-            );
-
-          }
-        );
-
-
-      const target =
-        document.getElementById(
-          "page-" + pageName
-        );
-
-
-      if (target) {
-
-        target.classList.add(
-          "active"
-        );
-
-      }
-
-
-      document
-        .querySelectorAll(".nav-item[data-page]")
-        .forEach(
-          item => {
-
-            item.classList.toggle(
-              "active",
-              item.dataset.page ===
-                pageName
-            );
-
-          }
-        );
-
-
-      const info =
-        pageTitles[pageName];
-
-
-      if (info) {
-
-        document.getElementById(
-          "pageTitle"
-        ).textContent =
-          info.title;
-
-
-        document.getElementById(
-          "pageSubtitle"
-        ).textContent =
-          info.subtitle;
-
-      }
-
-
-      closeMobileSidebar();
-
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth"
-      });
-
-    }
-
-
     document
-      .querySelectorAll(".nav-item[data-page]")
-      .forEach(
-        item => {
+      .getElementById("removeStudentImageBtn")
+      .addEventListener(
+        "click",
+        () => {
 
-          item.addEventListener(
-            "click",
-            function () {
+          currentStudentImage = "";
 
-              showPage(
-                this.dataset.page
-              );
-
-            }
-          );
+          updateStudentImagePreview();
 
         }
       );
 
 
-    /* =========================================================
-       OPEN MENTOR STUDIO
-       ========================================================= */
+    studentImageInput.addEventListener(
+      "change",
+      () => {
 
-    function openMentorStudio() {
+        const file =
+          studentImageInput.files?.[0];
 
-      window.location.href =
-        "../mentor/";
+        handleStudentImage(file);
 
-    }
+        studentImageInput.value = "";
+
+      }
+    );
 
 
     document
-      .getElementById("mentorBtn")
+      .getElementById("chooseLogoBtn")
       .addEventListener(
         "click",
-        openMentorStudio
+        () => {
+
+          logoInput.click();
+
+        }
+      );
+
+
+    logoInput.addEventListener(
+      "change",
+      () => {
+
+        const file =
+          logoInput.files?.[0];
+
+        handleLogoFile(file);
+
+        logoInput.value = "";
+
+      }
+    );
+
+
+    document
+      .getElementById("removeLogoBtn")
+      .addEventListener(
+        "click",
+        removeLogo
       );
 
 
     /* =========================================================
-       OPEN PUBLIC HOME
+       MODAL OUTSIDE CLICK
        ========================================================= */
 
-    function openPublicHome() {
+    studentModal.addEventListener(
+      "click",
+      (event) => {
 
-      window.location.href =
-        "../";
+        if (
+          event.target === studentModal
+        ) {
 
-    }
+          closeStudentModal();
+
+        }
+
+      }
+    );
 
 
-    document
-      .getElementById("homeBtn")
-      .addEventListener(
-        "click",
-        openPublicHome
-      );
+    /* =========================================================
+       ESC KEY
+       ========================================================= */
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (
+          event.key === "Escape"
+        ) {
+
+          closeStudentModal();
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       MOBILE MENU
+       ========================================================= */
+
+    mobileMenuBtn.addEventListener(
+      "click",
+      () => {
+
+        sidebar.classList.toggle(
+          "open"
+        );
+
+      }
+    );
 
 
     /* =========================================================
@@ -3487,7 +2636,7 @@
       .getElementById("logoutBtn")
       .addEventListener(
         "click",
-        function () {
+        () => {
 
           sessionStorage.removeItem(
             "personalCourseStudioAdminLoggedIn"
@@ -3501,7 +2650,6 @@
             "personalCourseStudioUsername"
           );
 
-
           window.location.replace(
             "../login/"
           );
@@ -3511,71 +2659,14 @@
 
 
     /* =========================================================
-       MOBILE SIDEBAR
-       ========================================================= */
-
-    const sidebar =
-      document.getElementById(
-        "sidebar"
-      );
-
-    const overlay =
-      document.getElementById(
-        "sidebarOverlay"
-      );
-
-
-    function openMobileSidebar() {
-
-      sidebar.classList.add(
-        "open"
-      );
-
-      overlay.classList.add(
-        "show"
-      );
-
-    }
-
-
-    function closeMobileSidebar() {
-
-      sidebar.classList.remove(
-        "open"
-      );
-
-      overlay.classList.remove(
-        "show"
-      );
-
-    }
-
-
-    document
-      .getElementById("mobileMenu")
-      .addEventListener(
-        "click",
-        openMobileSidebar
-      );
-
-
-    overlay.addEventListener(
-      "click",
-      closeMobileSidebar
-    );
-
-
-    /* =========================================================
        INITIALIZE
        ========================================================= */
 
-    loadProfile();
-
-    loadSettings();
-
-    renderBrands();
+    loadStudents();
 
     renderStudents();
+
+    loadLogo();
 
   </script>
 
