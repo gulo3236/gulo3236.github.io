@@ -1,47 +1,53 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Admin Studio | Personal Course Studio</title>
+  <title>Admin Studio — Personal Course Studio</title>
 
-  <link id="favicon" rel="icon" href="" />
+  <meta name="theme-color" content="#05070d" />
 
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-  <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  />
+  <link rel="icon" id="favicon" href="" />
 
   <style>
-
     /* =========================================================
        PERSONAL COURSE STUDIO
-       ADMIN PANEL
-       FIREBASE STUDENT + LOGO MANAGEMENT
+       ULTRA PREMIUM ADMIN STUDIO
        ========================================================= */
 
     :root {
-      --bg: #07090d;
-      --bg-soft: #0d1016;
-      --card: #11151c;
-      --card-2: #151a22;
-      --border: rgba(255,255,255,.08);
-      --border-hover: rgba(255,255,255,.16);
+      --bg: #05070d;
+      --bg-2: #080c14;
+      --surface: rgba(13, 18, 29, 0.76);
+      --surface-strong: rgba(17, 23, 36, 0.94);
+      --surface-soft: rgba(255,255,255,.035);
 
-      --text: #f5f7fb;
-      --muted: #8e98a8;
+      --line: rgba(255,255,255,.075);
+      --line-strong: rgba(255,255,255,.13);
 
-      --accent: #4f8cff;
-      --accent-2: #6ea3ff;
+      --text: #f7f9fc;
+      --text-soft: #c8d1df;
+      --muted: #7e8ba0;
 
-      --success: #35d07f;
-      --danger: #ff5c6c;
+      --blue: #4da3ff;
+      --blue-2: #1677ff;
+      --cyan: #5ce1e6;
 
-      --radius: 18px;
+      --green: #35d483;
+      --red: #ff6674;
+      --orange: #ffb84d;
+
+      --shadow:
+        0 30px 90px rgba(0,0,0,.42);
+
+      --shadow-soft:
+        0 15px 45px rgba(0,0,0,.25);
+
+      --radius: 24px;
+      --radius-small: 15px;
+
+      --sidebar-width: 286px;
     }
 
     * {
@@ -56,41 +62,149 @@
 
     body {
       min-height: 100vh;
-      font-family: "Inter", sans-serif;
+      color: var(--text);
+
+      font-family:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
 
       background:
         radial-gradient(
-          circle at 20% 10%,
-          rgba(79,140,255,.08),
-          transparent 30%
+          circle at 12% 8%,
+          rgba(29, 119, 255, .14),
+          transparent 28%
         ),
         radial-gradient(
-          circle at 90% 90%,
-          rgba(79,140,255,.05),
+          circle at 88% 12%,
+          rgba(92, 225, 230, .07),
+          transparent 24%
+        ),
+        radial-gradient(
+          circle at 70% 90%,
+          rgba(25, 118, 255, .08),
           transparent 30%
         ),
-        var(--bg);
+        linear-gradient(
+          135deg,
+          #04060b,
+          #070b13 50%,
+          #05080f
+        );
 
-      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+
+      pointer-events: none;
+
+      background-image:
+        linear-gradient(
+          rgba(255,255,255,.018) 1px,
+          transparent 1px
+        ),
+        linear-gradient(
+          90deg,
+          rgba(255,255,255,.018) 1px,
+          transparent 1px
+        );
+
+      background-size: 55px 55px;
+
+      mask-image:
+        linear-gradient(
+          to bottom,
+          black,
+          transparent 90%
+        );
+
+      opacity: .35;
+
+      z-index: -1;
     }
 
     button,
     input {
-      font-family: inherit;
+      font: inherit;
     }
 
     button {
-      border: 0;
       cursor: pointer;
     }
 
     /* =========================================================
-       LAYOUT
+       AMBIENT LIGHT
        ========================================================= */
 
-    .admin-shell {
-      min-height: 100vh;
-      display: flex;
+    .ambient {
+      position: fixed;
+      width: 500px;
+      height: 500px;
+
+      border-radius: 50%;
+
+      filter: blur(100px);
+
+      pointer-events: none;
+
+      opacity: .07;
+
+      z-index: -1;
+
+      animation:
+        ambientFloat 12s ease-in-out infinite;
+    }
+
+    .ambient.one {
+      top: -220px;
+      left: 180px;
+      background: #1b7cff;
+    }
+
+    .ambient.two {
+      right: -230px;
+      bottom: -180px;
+      background: #37d5ff;
+      animation-delay: -5s;
+    }
+
+    @keyframes ambientFloat {
+      0%,
+      100% {
+        transform: translate3d(0,0,0);
+      }
+
+      50% {
+        transform: translate3d(25px,-18px,0);
+      }
+    }
+
+    /* =========================================================
+       MOBILE OVERLAY
+       ========================================================= */
+
+    .mobile-overlay {
+      position: fixed;
+      inset: 0;
+
+      background: rgba(0,0,0,.68);
+      backdrop-filter: blur(7px);
+
+      display: none;
+
+      z-index: 90;
+    }
+
+    .mobile-overlay.show {
+      display: block;
     }
 
     /* =========================================================
@@ -98,48 +212,119 @@
        ========================================================= */
 
     .sidebar {
-      width: 260px;
-      min-height: 100vh;
-
-      background: rgba(9,11,15,.96);
-      border-right: 1px solid var(--border);
-
-      padding: 22px 16px;
-
       position: fixed;
-      left: 0;
-      top: 0;
-      bottom: 0;
 
-      z-index: 100;
+      top: 14px;
+      left: 14px;
+      bottom: 14px;
+
+      width: var(--sidebar-width);
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 26px;
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(14,20,32,.92),
+          rgba(7,11,18,.94)
+        );
+
+      backdrop-filter: blur(25px);
+
+      box-shadow:
+        0 25px 80px rgba(0,0,0,.35);
 
       display: flex;
       flex-direction: column;
+
+      z-index: 100;
+
+      overflow: hidden;
+
+      transition:
+        transform .35s cubic-bezier(.22,.61,.36,1);
     }
 
+    .sidebar::after {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      top: 0;
+      right: 0;
+
+      height: 1px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(77,163,255,.7),
+          transparent
+        );
+
+      opacity: .7;
+    }
+
+    /* =========================================================
+       BRAND
+       ========================================================= */
+
     .brand {
+      padding: 22px 19px;
+
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 13px;
 
-      padding: 5px 8px 24px;
+      border-bottom: 1px solid var(--line);
     }
 
     .brand-logo {
-      width: 44px;
-      height: 44px;
+      width: 47px;
+      height: 47px;
 
-      border-radius: 12px;
+      flex: 0 0 47px;
+
+      border-radius: 15px;
+
+      background:
+        linear-gradient(
+          145deg,
+          #1976ff,
+          #53b4ff
+        );
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      background: #151b25;
-      border: 1px solid var(--border);
-
       overflow: hidden;
-      flex-shrink: 0;
+
+      position: relative;
+
+      box-shadow:
+        0 12px 35px rgba(25,118,255,.28);
+    }
+
+    .brand-logo::after {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          130deg,
+          rgba(255,255,255,.22),
+          transparent 45%
+        );
+
+      pointer-events: none;
     }
 
     .brand-logo img {
@@ -149,134 +334,252 @@
       object-fit: cover;
 
       display: none;
+
+      position: relative;
+      z-index: 2;
     }
 
     .brand-logo span {
-      font-size: 13px;
-      font-weight: 800;
-      color: #fff;
+      font-size: 14px;
+      font-weight: 950;
+
+      position: relative;
+      z-index: 1;
+    }
+
+    .brand-text {
+      min-width: 0;
     }
 
     .brand-text strong {
       display: block;
 
-      font-size: 14px;
-      font-weight: 800;
+      font-size: 13px;
+      font-weight: 850;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      letter-spacing: -.01em;
     }
 
     .brand-text small {
-      display: block;
-
-      margin-top: 3px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
 
       color: var(--muted);
-      font-size: 11px;
-    }
-
-    .nav-title {
-      color: #606a79;
 
       font-size: 10px;
-      font-weight: 700;
 
-      text-transform: uppercase;
-      letter-spacing: .12em;
-
-      padding: 10px 10px 8px;
+      margin-top: 5px;
     }
+
+    .brand-text small::before {
+      content: "";
+
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: var(--green);
+
+      box-shadow:
+        0 0 10px rgba(53,212,131,.7);
+    }
+
+    /* =========================================================
+       NAV
+       ========================================================= */
 
     .nav {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
+      padding: 22px 12px;
+
+      flex: 1;
     }
 
-    .nav-btn {
+    .nav-label {
+      color: #58667a;
+
+      font-size: 9px;
+      font-weight: 900;
+
+      text-transform: uppercase;
+
+      letter-spacing: .18em;
+
+      padding:
+        0 12px 10px;
+    }
+
+    .nav-item {
       width: 100%;
 
-      padding: 12px 13px;
+      border: 1px solid transparent;
 
-      border-radius: 12px;
+      background: transparent;
+
+      color: #8e9bad;
+
+      padding: 11px 11px;
+
+      border-radius: 14px;
 
       display: flex;
       align-items: center;
-      gap: 11px;
 
-      background: transparent;
-      color: #aeb7c5;
+      gap: 11px;
 
       text-align: left;
 
-      transition: .2s ease;
+      margin-bottom: 5px;
+
+      transition:
+        .22s ease;
     }
 
-    .nav-btn:hover {
-      background: rgba(255,255,255,.05);
-      color: #fff;
+    .nav-item:hover {
+      color: white;
+
+      background:
+        rgba(255,255,255,.035);
+
+      border-color:
+        rgba(255,255,255,.05);
+
+      transform:
+        translateX(2px);
     }
 
-    .nav-btn.active {
-      background: rgba(79,140,255,.13);
-      color: #fff;
+    .nav-item.active {
+      color: white;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(35,126,255,.17),
+          rgba(35,126,255,.045)
+        );
+
+      border-color:
+        rgba(77,163,255,.13);
+
+      box-shadow:
+        inset 3px 0 0 var(--blue);
     }
 
     .nav-icon {
-      width: 20px;
-      text-align: center;
-      font-size: 16px;
-    }
+      width: 34px;
+      height: 34px;
 
-    .sidebar-bottom {
-      margin-top: auto;
+      border-radius: 11px;
 
-      border-top: 1px solid var(--border);
-
-      padding-top: 15px;
-    }
-
-    .mentor-link {
       display: flex;
       align-items: center;
-      gap: 10px;
+      justify-content: center;
 
-      width: 100%;
+      background:
+        rgba(255,255,255,.035);
 
-      padding: 12px;
+      font-size: 15px;
 
-      border-radius: 12px;
+      flex: 0 0 34px;
 
-      background: rgba(255,255,255,.035);
-      color: #c8d0dc;
-
-      text-decoration: none;
-
-      font-size: 13px;
-      font-weight: 600;
-
-      margin-bottom: 8px;
+      transition: .2s;
     }
 
-    .mentor-link:hover {
-      background: rgba(255,255,255,.07);
-      color: #fff;
+    .nav-item.active .nav-icon {
+      background:
+        rgba(77,163,255,.15);
+
+      box-shadow:
+        0 6px 20px rgba(25,118,255,.12);
+    }
+
+    .nav-text {
+      font-size: 12px;
+      font-weight: 750;
+    }
+
+    .nav-arrow {
+      margin-left: auto;
+      color: #566378;
+      font-size: 13px;
+    }
+
+    /* =========================================================
+       SIDEBAR BOTTOM
+       ========================================================= */
+
+    .sidebar-bottom {
+      padding: 14px;
+
+      border-top:
+        1px solid var(--line);
+    }
+
+    .admin-mini-card {
+      padding: 12px;
+
+      border-radius: 16px;
+
+      background:
+        rgba(255,255,255,.025);
+
+      border:
+        1px solid var(--line);
+
+      margin-bottom: 10px;
+    }
+
+    .admin-mini-card span {
+      display: block;
+
+      color: #627086;
+
+      font-size: 9px;
+
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    .admin-mini-card strong {
+      display: block;
+
+      margin-top: 5px;
+
+      font-size: 11px;
     }
 
     .logout-btn {
       width: 100%;
 
+      border:
+        1px solid rgba(255,102,116,.15);
+
+      background:
+        rgba(255,102,116,.055);
+
+      color: #ff9ba4;
+
       padding: 12px;
 
-      border-radius: 12px;
+      border-radius: 13px;
 
-      background: rgba(255,92,108,.08);
-      color: #ff8290;
+      font-size: 11px;
+      font-weight: 800;
 
-      font-weight: 700;
-      font-size: 13px;
+      transition: .2s;
     }
 
     .logout-btn:hover {
-      background: rgba(255,92,108,.15);
+      background:
+        rgba(255,102,116,.11);
+
+      border-color:
+        rgba(255,102,116,.25);
     }
 
     /* =========================================================
@@ -284,423 +587,862 @@
        ========================================================= */
 
     .main {
-      width: calc(100% - 260px);
-      margin-left: 260px;
+      margin-left:
+        calc(var(--sidebar-width) + 28px);
 
       min-height: 100vh;
+
+      padding-right: 14px;
     }
 
+    /* =========================================================
+       TOPBAR
+       ========================================================= */
+
     .topbar {
+      position: sticky;
+
+      top: 14px;
+
       height: 72px;
 
-      padding: 0 30px;
+      margin:
+        14px 14px 0 0;
+
+      padding:
+        0 19px;
+
+      border:
+        1px solid var(--line);
+
+      border-radius: 20px;
+
+      background:
+        rgba(8,13,21,.72);
+
+      backdrop-filter:
+        blur(24px);
+
+      box-shadow:
+        0 15px 45px rgba(0,0,0,.18);
 
       display: flex;
       align-items: center;
       justify-content: space-between;
 
-      border-bottom: 1px solid var(--border);
-
-      background: rgba(7,9,13,.82);
-
-      position: sticky;
-      top: 0;
-
       z-index: 50;
-
-      backdrop-filter: blur(18px);
     }
 
-    .topbar-left h1 {
-      font-size: 20px;
-      font-weight: 800;
-    }
-
-    .topbar-left p {
-      margin-top: 4px;
-
-      color: var(--muted);
-
-      font-size: 12px;
-    }
-
-    .admin-badge {
+    .topbar-left {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 13px;
+    }
 
-      padding: 8px 12px;
+    .mobile-menu-btn {
+      display: none;
+
+      width: 42px;
+      height: 42px;
+
+      border-radius: 12px;
+
+      border:
+        1px solid var(--line);
+
+      background:
+        rgba(255,255,255,.035);
+
+      color: white;
+
+      font-size: 18px;
+    }
+
+    .page-title h1 {
+      font-size: 17px;
+      font-weight: 850;
+
+      letter-spacing: -.035em;
+    }
+
+    .page-title p {
+      color: var(--muted);
+
+      font-size: 10px;
+
+      margin-top: 3px;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .sync-status {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+
+      padding:
+        8px 11px;
 
       border-radius: 999px;
 
-      background: rgba(53,208,127,.08);
-      border: 1px solid rgba(53,208,127,.14);
+      background:
+        rgba(53,212,131,.055);
 
-      color: #65df9b;
+      border:
+        1px solid rgba(53,212,131,.12);
 
-      font-size: 11px;
-      font-weight: 700;
+      color: #8be6ad;
+
+      font-size: 9px;
+      font-weight: 850;
+
+      letter-spacing: .03em;
     }
 
-    .online-dot {
-      width: 7px;
-      height: 7px;
+    .sync-dot {
+      width: 6px;
+      height: 6px;
 
       border-radius: 50%;
 
-      background: var(--success);
+      background:
+        var(--green);
 
       box-shadow:
-        0 0 10px rgba(53,208,127,.6);
+        0 0 12px rgba(53,212,131,.7);
     }
 
-    .content {
-      padding: 30px;
+    .admin-pill {
+      width: 35px;
+      height: 35px;
 
-      max-width: 1250px;
-
-      margin: auto;
-    }
-
-    /* =========================================================
-       SECTIONS
-       ========================================================= */
-
-    .section {
-      display: none;
-    }
-
-    .section.active {
-      display: block;
-
-      animation: sectionIn .25s ease;
-    }
-
-    @keyframes sectionIn {
-
-      from {
-        opacity: 0;
-        transform: translateY(5px);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-    }
-
-    .section-header {
-      margin-bottom: 22px;
-    }
-
-    .section-header h2 {
-      font-size: 25px;
-      font-weight: 800;
-    }
-
-    .section-header p {
-      margin-top: 7px;
-
-      color: var(--muted);
-
-      font-size: 13px;
-    }
-
-    /* =========================================================
-       CARDS
-       ========================================================= */
-
-    .card {
-      background: rgba(17,21,28,.9);
-
-      border: 1px solid var(--border);
-
-      border-radius: var(--radius);
-
-      padding: 22px;
-    }
-
-    .card + .card {
-      margin-top: 18px;
-    }
-
-    .card-title {
-      font-size: 16px;
-      font-weight: 800;
-
-      margin-bottom: 6px;
-    }
-
-    .card-subtitle {
-      color: var(--muted);
-
-      font-size: 12px;
-      line-height: 1.6;
-    }
-
-    /* =========================================================
-       LOGO
-       ========================================================= */
-
-    .logo-layout {
-      display: grid;
-
-      grid-template-columns: 250px 1fr;
-
-      gap: 25px;
-
-      align-items: start;
-    }
-
-    .logo-preview-box {
-      height: 220px;
-
-      border-radius: 18px;
+      border-radius: 12px;
 
       background:
         linear-gradient(
           145deg,
-          rgba(255,255,255,.04),
-          rgba(255,255,255,.015)
+          rgba(77,163,255,.18),
+          rgba(255,255,255,.035)
         );
 
-      border: 1px solid var(--border);
+      border:
+        1px solid var(--line);
 
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
+
+      font-size: 14px;
+    }
+
+    /* =========================================================
+       CONTENT
+       ========================================================= */
+
+    .content {
+      width: 100%;
+      max-width: 1450px;
+
+      margin: 0 auto;
+
+      padding:
+        28px 14px 55px 0;
+    }
+
+    /* =========================================================
+       HERO
+       ========================================================= */
+
+    .hero-card {
+      position: relative;
+
+      min-height: 205px;
+
+      border-radius: 27px;
+
+      overflow: hidden;
+
+      border:
+        1px solid var(--line);
+
+      background:
+        radial-gradient(
+          circle at 82% 25%,
+          rgba(66,157,255,.18),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          rgba(17,28,45,.93),
+          rgba(7,12,20,.94)
+        );
+
+      box-shadow:
+        var(--shadow);
+
+      margin-bottom: 23px;
+
+      display: flex;
+      align-items: center;
+
+      padding:
+        32px 34px;
+    }
+
+    .hero-card::before {
+      content: "";
+
+      position: absolute;
+
+      width: 300px;
+      height: 300px;
+
+      right: -100px;
+      top: -130px;
+
+      border-radius: 50%;
+
+      border:
+        1px solid rgba(77,163,255,.12);
+
+      box-shadow:
+        0 0 0 35px rgba(77,163,255,.025),
+        0 0 0 70px rgba(77,163,255,.018);
+    }
+
+    .hero-card::after {
+      content: "";
+
+      position: absolute;
+
+      left: 0;
+      right: 0;
+      bottom: 0;
+
+      height: 1px;
+
+      background:
+        linear-gradient(
+          90deg,
+          transparent,
+          rgba(77,163,255,.55),
+          transparent
+        );
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+
+      max-width: 700px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+
+      color: #82bfff;
+
+      font-size: 9px;
+      font-weight: 900;
+
+      text-transform: uppercase;
+      letter-spacing: .16em;
+
+      margin-bottom: 11px;
+    }
+
+    .eyebrow span {
+      width: 5px;
+      height: 5px;
+
+      border-radius: 50%;
+
+      background:
+        var(--blue);
+
+      box-shadow:
+        0 0 12px rgba(77,163,255,.8);
+    }
+
+    .hero-content h2 {
+      font-size:
+        clamp(25px, 3vw, 38px);
+
+      line-height: 1.04;
+
+      letter-spacing: -.055em;
+
+      max-width: 650px;
+    }
+
+    .hero-content h2 em {
+      font-style: normal;
+
+      background:
+        linear-gradient(
+          90deg,
+          #fff,
+          #69b8ff
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      color: transparent;
+    }
+
+    .hero-content p {
+      color: #8e9bad;
+
+      font-size: 12px;
+
+      line-height: 1.7;
+
+      margin-top: 11px;
+
+      max-width: 570px;
+    }
+
+    .hero-badge {
+      position: absolute;
+
+      right: 42px;
+      bottom: 30px;
+
+      width: 105px;
+      height: 105px;
+
+      border-radius: 31px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(77,163,255,.16),
+          rgba(255,255,255,.025)
+        );
+
+      border:
+        1px solid rgba(77,163,255,.15);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 38px;
+
+      box-shadow:
+        0 20px 50px rgba(0,0,0,.2);
+
+      transform:
+        rotate(5deg);
+    }
+
+    .hero-badge span {
+      transform:
+        rotate(-5deg);
+    }
+
+    /* =========================================================
+       SECTION
+       ========================================================= */
+
+    .section {
+      margin-bottom: 25px;
+
+      scroll-margin-top: 100px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+
+      gap: 15px;
+
+      margin-bottom: 13px;
+
+      padding:
+        0 3px;
+    }
+
+    .section-kicker {
+      color: #58708c;
+
+      font-size: 8px;
+      font-weight: 900;
+
+      text-transform: uppercase;
+
+      letter-spacing: .17em;
+
+      margin-bottom: 5px;
+    }
+
+    .section-head h2 {
+      font-size: 17px;
+
+      letter-spacing: -.035em;
+
+      font-weight: 850;
+    }
+
+    .section-head p {
+      color: var(--muted);
+
+      font-size: 10px;
+
+      margin-top: 4px;
+    }
+
+    /* =========================================================
+       LOGO CARD
+       ========================================================= */
+
+    .logo-card {
+      position: relative;
+
+      display: grid;
+
+      grid-template-columns:
+        190px 1fr;
+
+      gap: 28px;
+
+      padding: 24px;
+
+      border-radius: 25px;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(16,24,37,.84),
+          rgba(9,14,23,.78)
+        );
+
+      border:
+        1px solid var(--line);
+
+      box-shadow:
+        var(--shadow-soft);
 
       overflow: hidden;
     }
 
+    .logo-card::before {
+      content: "";
+
+      position: absolute;
+
+      width: 280px;
+      height: 280px;
+
+      left: -170px;
+      top: -170px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(25,118,255,.08);
+
+      filter: blur(15px);
+    }
+
     .logo-preview {
-      width: 120px;
-      height: 120px;
+      width: 190px;
+      height: 190px;
 
-      border-radius: 25px;
+      border-radius: 28px;
 
-      background: #151b25;
+      position: relative;
 
-      border: 1px solid var(--border);
+      overflow: hidden;
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      overflow: hidden;
+      background:
+        radial-gradient(
+          circle at 35% 25%,
+          rgba(77,163,255,.17),
+          transparent 34%
+        ),
+        rgba(255,255,255,.025);
+
+      border:
+        1px solid rgba(255,255,255,.1);
+
+      box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.05),
+        0 20px 50px rgba(0,0,0,.18);
+    }
+
+    .logo-preview::after {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(255,255,255,.07),
+          transparent 38%
+        );
+
+      pointer-events: none;
     }
 
     .logo-preview img {
       width: 100%;
       height: 100%;
 
-      object-fit: contain;
+      object-fit: cover;
 
       display: none;
+
+      position: relative;
+      z-index: 2;
     }
 
-    .logo-preview span {
-      font-size: 30px;
+    .logo-preview-text {
+      font-size: 42px;
+      font-weight: 950;
+
+      color: #79bfff;
+
+      text-shadow:
+        0 0 35px rgba(77,163,255,.35);
+    }
+
+    .logo-info {
+      position: relative;
+      z-index: 2;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .logo-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+
+      width: fit-content;
+
+      padding:
+        6px 9px;
+
+      border-radius: 999px;
+
+      background:
+        rgba(53,212,131,.05);
+
+      border:
+        1px solid rgba(53,212,131,.1);
+
+      color: #7fe3a5;
+
+      font-size: 8px;
       font-weight: 900;
+
+      text-transform: uppercase;
+      letter-spacing: .1em;
+
+      margin-bottom: 12px;
     }
 
-    .logo-preview-label {
-      margin-top: 12px;
+    .logo-status i {
+      width: 5px;
+      height: 5px;
 
-      color: var(--muted);
+      border-radius: 50%;
+
+      background: var(--green);
+    }
+
+    .logo-info h3 {
+      font-size: 20px;
+
+      letter-spacing: -.04em;
+
+      margin-bottom: 7px;
+    }
+
+    .logo-info p {
+      color: #8996a8;
 
       font-size: 11px;
+
+      line-height: 1.75;
+
+      max-width: 680px;
     }
 
     .logo-actions {
       display: flex;
-      flex-direction: column;
-
-      gap: 15px;
-    }
-
-    .upload-area {
-      border: 1px dashed rgba(255,255,255,.16);
-
-      border-radius: 16px;
-
-      padding: 24px;
-
-      text-align: center;
-
-      transition: .2s ease;
-    }
-
-    .upload-area:hover {
-      border-color: rgba(79,140,255,.5);
-
-      background: rgba(79,140,255,.035);
-    }
-
-    .upload-icon {
-      width: 46px;
-      height: 46px;
-
-      border-radius: 14px;
-
-      margin: auto auto 12px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      background: rgba(79,140,255,.1);
-
-      color: var(--accent);
-
-      font-size: 20px;
-    }
-
-    .upload-area strong {
-      display: block;
-
-      font-size: 13px;
-    }
-
-    .upload-area small {
-      display: block;
-
-      margin-top: 6px;
-
-      color: var(--muted);
-
-      font-size: 11px;
-    }
-
-    .button-row {
-      display: flex;
       flex-wrap: wrap;
 
-      gap: 10px;
-    }
+      gap: 8px;
 
-    .btn {
-      padding: 11px 16px;
-
-      border-radius: 11px;
-
-      font-size: 12px;
-      font-weight: 700;
-
-      transition: .2s ease;
-    }
-
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
-    }
-
-    .btn-primary:hover {
-      background: var(--accent-2);
-
-      transform: translateY(-1px);
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,.06);
-
-      color: #dce2ea;
-
-      border: 1px solid var(--border);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(255,255,255,.09);
-    }
-
-    .btn-danger {
-      background: rgba(255,92,108,.09);
-
-      color: #ff8290;
-
-      border: 1px solid rgba(255,92,108,.12);
-    }
-
-    .btn-danger:hover {
-      background: rgba(255,92,108,.15);
+      margin-top: 17px;
     }
 
     /* =========================================================
-       STUDENT MANAGER
+       BUTTONS
+       ========================================================= */
+
+    .btn {
+      border: 0;
+
+      border-radius: 12px;
+
+      padding:
+        10px 14px;
+
+      font-size: 10px;
+      font-weight: 850;
+
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 7px;
+
+      transition:
+        transform .2s,
+        box-shadow .2s,
+        background .2s,
+        border .2s;
+    }
+
+    .btn:disabled {
+      opacity: .55;
+      cursor: not-allowed;
+      transform: none !important;
+    }
+
+    .btn-primary {
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          #1976ff,
+          #55afff
+        );
+
+      box-shadow:
+        0 10px 28px rgba(25,118,255,.2);
+    }
+
+    .btn-primary:hover {
+      transform:
+        translateY(-2px);
+
+      box-shadow:
+        0 15px 35px rgba(25,118,255,.28);
+    }
+
+    .btn-secondary {
+      color: #dce4ef;
+
+      background:
+        rgba(255,255,255,.035);
+
+      border:
+        1px solid var(--line);
+    }
+
+    .btn-secondary:hover {
+      background:
+        rgba(255,255,255,.065);
+
+      border-color:
+        var(--line-strong);
+
+      transform:
+        translateY(-1px);
+    }
+
+    .btn-danger {
+      color: #ff9aa3;
+
+      background:
+        rgba(255,102,116,.055);
+
+      border:
+        1px solid rgba(255,102,116,.12);
+    }
+
+    .btn-danger:hover {
+      background:
+        rgba(255,102,116,.1);
+
+      border-color:
+        rgba(255,102,116,.2);
+    }
+
+    input[type="file"] {
+      display: none;
+    }
+
+    /* =========================================================
+       STUDENT HEADER
        ========================================================= */
 
     .student-toolbar {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-
-      gap: 15px;
-
-      margin-bottom: 18px;
+      gap: 8px;
     }
 
     .student-count {
-      color: var(--muted);
+      padding:
+        7px 10px;
 
-      font-size: 12px;
+      border-radius: 999px;
+
+      background:
+        rgba(255,255,255,.035);
+
+      border:
+        1px solid var(--line);
+
+      color: #94a3b8;
+
+      font-size: 9px;
+      font-weight: 800;
     }
+
+    /* =========================================================
+       STUDENTS GRID
+       ========================================================= */
 
     .students-grid {
       display: grid;
 
       grid-template-columns:
-        repeat(2, minmax(0,1fr));
+        repeat(
+          auto-fill,
+          minmax(245px, 1fr)
+        );
 
-      gap: 14px;
+      gap: 13px;
     }
 
     .student-card {
-      padding: 16px;
+      position: relative;
 
-      background: rgba(255,255,255,.025);
+      padding: 13px;
 
-      border: 1px solid var(--border);
+      border-radius: 20px;
 
-      border-radius: 16px;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(15,22,34,.86),
+          rgba(8,13,21,.84)
+        );
 
-      display: flex;
-      align-items: center;
+      border:
+        1px solid var(--line);
 
-      gap: 14px;
+      box-shadow:
+        0 14px 40px rgba(0,0,0,.17);
 
-      transition: .2s ease;
+      overflow: hidden;
+
+      transition:
+        transform .25s,
+        border .25s,
+        box-shadow .25s;
+    }
+
+    .student-card::before {
+      content: "";
+
+      position: absolute;
+
+      width: 120px;
+      height: 120px;
+
+      right: -70px;
+      top: -70px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(77,163,255,.06);
+
+      filter: blur(15px);
+
+      transition: .3s;
     }
 
     .student-card:hover {
-      border-color: var(--border-hover);
+      transform:
+        translateY(-4px);
 
-      background: rgba(255,255,255,.04);
+      border-color:
+        rgba(77,163,255,.16);
+
+      box-shadow:
+        0 25px 60px rgba(0,0,0,.27);
+    }
+
+    .student-card:hover::before {
+      background:
+        rgba(77,163,255,.12);
     }
 
     .student-image {
-      width: 58px;
-      height: 58px;
+      width: 100%;
 
-      flex: 0 0 58px;
+      aspect-ratio: 16 / 10;
 
       border-radius: 15px;
 
       overflow: hidden;
 
-      background: #1a2029;
-
-      border: 1px solid var(--border);
-
       display: flex;
       align-items: center;
       justify-content: center;
 
-      color: #8792a2;
+      background:
+        linear-gradient(
+          145deg,
+          rgba(77,163,255,.08),
+          rgba(255,255,255,.025)
+        );
 
-      font-size: 19px;
-      font-weight: 800;
+      border:
+        1px solid rgba(255,255,255,.06);
+
+      position: relative;
+    }
+
+    .student-image::after {
+      content: "";
+
+      position: absolute;
+      inset: 0;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(255,255,255,.07),
+          transparent 32%
+        );
+
+      pointer-events: none;
     }
 
     .student-image img {
@@ -708,118 +1450,154 @@
       height: 100%;
 
       object-fit: cover;
+
+      transition:
+        transform .45s ease;
+    }
+
+    .student-card:hover
+    .student-image img {
+      transform:
+        scale(1.035);
+    }
+
+    .student-placeholder {
+      color: #4f6077;
+
+      font-size: 34px;
+      font-weight: 950;
     }
 
     .student-info {
-      min-width: 0;
-
-      flex: 1;
+      padding:
+        13px 3px 2px;
     }
 
-    .student-info strong {
-      display: block;
-
-      font-size: 14px;
-      font-weight: 700;
-
-      overflow: hidden;
-
-      text-overflow: ellipsis;
+    .student-name {
+      font-size: 13px;
+      font-weight: 850;
 
       white-space: nowrap;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+
+      letter-spacing: -.015em;
     }
 
-    .student-info small {
-      display: block;
+    .student-meta {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      color: #69778a;
+
+      font-size: 9px;
 
       margin-top: 5px;
+    }
 
-      color: var(--muted);
+    .student-meta::before {
+      content: "";
 
-      font-size: 10px;
+      width: 4px;
+      height: 4px;
+
+      border-radius: 50%;
+
+      background:
+        var(--blue);
     }
 
     .student-actions {
-      display: flex;
+      display: grid;
 
-      gap: 7px;
+      grid-template-columns:
+        1fr 1fr;
 
-      flex-shrink: 0;
+      gap: 6px;
+
+      margin-top: 11px;
     }
 
-    .icon-btn {
-      width: 36px;
-      height: 36px;
+    .student-actions .btn {
+      padding:
+        8px 9px;
+    }
 
-      border-radius: 10px;
+    /* =========================================================
+       EMPTY
+       ========================================================= */
+
+    .empty-state {
+      grid-column: 1 / -1;
+
+      min-height: 260px;
+
+      border:
+        1px dashed rgba(255,255,255,.11);
+
+      border-radius: 23px;
+
+      display: flex;
+      flex-direction: column;
+
+      align-items: center;
+      justify-content: center;
+
+      text-align: center;
+
+      background:
+        rgba(255,255,255,.012);
+    }
+
+    .empty-icon {
+      width: 62px;
+      height: 62px;
+
+      border-radius: 20px;
+
+      background:
+        rgba(77,163,255,.07);
+
+      border:
+        1px solid rgba(77,163,255,.1);
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      background: rgba(255,255,255,.055);
-
-      color: #bac3d0;
-
-      border: 1px solid var(--border);
-    }
-
-    .icon-btn:hover {
-      background: rgba(255,255,255,.09);
-
-      color: #fff;
-    }
-
-    .icon-btn.delete:hover {
-      color: #ff8290;
-
-      background: rgba(255,92,108,.1);
-    }
-
-    .empty-state {
-      padding: 60px 20px;
-
-      text-align: center;
-
-      border: 1px dashed var(--border);
-
-      border-radius: 18px;
-
-      color: var(--muted);
-    }
-
-    .empty-icon {
-      font-size: 35px;
+      font-size: 23px;
 
       margin-bottom: 13px;
-
-      opacity: .55;
     }
 
-    .empty-state strong {
-      display: block;
-
-      color: #d7dce4;
-
-      margin-bottom: 5px;
+    .empty-state h3 {
+      font-size: 15px;
     }
 
     .empty-state p {
-      font-size: 12px;
+      color: #667488;
+
+      font-size: 10px;
+
+      margin-top: 6px;
     }
 
     /* =========================================================
        MODAL
        ========================================================= */
 
-    .modal-backdrop {
+    .modal {
       position: fixed;
 
       inset: 0;
 
-      background: rgba(0,0,0,.72);
+      background:
+        rgba(0,0,0,.76);
 
-      backdrop-filter: blur(9px);
+      backdrop-filter:
+        blur(13px);
 
       display: none;
 
@@ -828,62 +1606,83 @@
 
       padding: 20px;
 
-      z-index: 500;
+      z-index: 300;
     }
 
-    .modal-backdrop.show {
+    .modal.show {
       display: flex;
     }
 
-    .modal {
-      width: min(500px, 100%);
+    .modal-box {
+      width:
+        min(520px, 100%);
 
-      background: #11151c;
+      border-radius: 25px;
 
-      border: 1px solid var(--border);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(19,27,42,.98),
+          rgba(7,11,18,.99)
+        );
 
-      border-radius: 20px;
+      border:
+        1px solid var(--line-strong);
 
       box-shadow:
-        0 30px 100px rgba(0,0,0,.5);
+        0 45px 120px rgba(0,0,0,.65);
 
       overflow: hidden;
 
-      animation: modalIn .2s ease;
+      animation:
+        modalIn .25s
+        cubic-bezier(.22,.61,.36,1);
     }
 
     @keyframes modalIn {
-
       from {
         opacity: 0;
-
         transform:
-          scale(.97)
-          translateY(8px);
+          translateY(20px)
+          scale(.97);
       }
 
       to {
         opacity: 1;
-
         transform:
-          scale(1)
-          translateY(0);
+          translateY(0)
+          scale(1);
       }
-
     }
 
     .modal-head {
-      padding: 19px 20px;
+      padding:
+        19px 21px;
 
       display: flex;
       align-items: center;
       justify-content: space-between;
 
-      border-bottom: 1px solid var(--border);
+      border-bottom:
+        1px solid var(--line);
+    }
+
+    .modal-title-wrap span {
+      color: #607188;
+
+      font-size: 8px;
+      font-weight: 900;
+
+      text-transform: uppercase;
+      letter-spacing: .14em;
     }
 
     .modal-head h3 {
       font-size: 16px;
+
+      margin-top: 4px;
+
+      letter-spacing: -.03em;
     }
 
     .close-modal {
@@ -892,137 +1691,244 @@
 
       border-radius: 10px;
 
-      background: rgba(255,255,255,.05);
+      border:
+        1px solid var(--line);
 
-      color: #9ba5b3;
+      background:
+        rgba(255,255,255,.035);
 
-      font-size: 18px;
+      color: #c9d3e1;
+
+      font-size: 17px;
+
+      transition: .2s;
     }
 
     .close-modal:hover {
-      color: #fff;
+      color: white;
+
+      background:
+        rgba(255,255,255,.08);
     }
 
     .modal-body {
-      padding: 20px;
+      padding: 21px;
     }
 
-    .form-group {
+    .field {
       margin-bottom: 17px;
     }
 
-    .form-label {
+    .field label {
       display: block;
 
-      margin-bottom: 8px;
+      color: #b8c4d3;
 
-      color: #c8d0db;
+      font-size: 10px;
+      font-weight: 800;
 
-      font-size: 11px;
-
-      font-weight: 700;
+      margin-bottom: 7px;
     }
 
-    .input {
+    .field input[type="text"] {
       width: 100%;
 
-      padding: 12px 13px;
+      padding:
+        12px 13px;
 
-      border-radius: 11px;
+      border-radius: 12px;
 
-      border: 1px solid var(--border);
+      border:
+        1px solid var(--line-strong);
+
+      background:
+        rgba(0,0,0,.2);
+
+      color: white;
 
       outline: none;
 
-      background: #0b0e13;
+      font-size: 12px;
 
-      color: #fff;
-
-      font-size: 13px;
+      transition: .2s;
     }
 
-    .input:focus {
+    .field input[type="text"]:focus {
       border-color:
-        rgba(79,140,255,.6);
+        rgba(77,163,255,.5);
 
       box-shadow:
         0 0 0 3px
-        rgba(79,140,255,.08);
+        rgba(77,163,255,.07);
     }
 
-    .image-editor {
+    .image-upload-box {
+      padding: 13px;
+
+      border:
+        1px dashed rgba(255,255,255,.13);
+
+      border-radius: 16px;
+
+      background:
+        rgba(255,255,255,.018);
+
       display: flex;
 
       align-items: center;
 
-      gap: 15px;
-
-      margin-bottom: 20px;
+      gap: 13px;
     }
 
-    .edit-image-preview {
-      width: 75px;
-      height: 75px;
+    .modal-image-preview {
+      width: 72px;
+      height: 72px;
 
-      border-radius: 17px;
+      border-radius: 14px;
+
+      flex: 0 0 72px;
 
       overflow: hidden;
 
-      background: #1a2029;
-
-      border: 1px solid var(--border);
-
       display: flex;
-
       align-items: center;
       justify-content: center;
 
-      font-weight: 800;
+      background:
+        rgba(255,255,255,.035);
 
-      color: #8994a3;
-
-      flex-shrink: 0;
+      border:
+        1px solid var(--line);
     }
 
-    .edit-image-preview img {
+    .modal-image-preview img {
       width: 100%;
       height: 100%;
 
       object-fit: cover;
+
+      display: none;
     }
 
-    .image-editor-info {
+    .modal-image-placeholder {
+      color: #55667d;
+
+      font-size: 20px;
+    }
+
+    .upload-content {
       min-width: 0;
     }
 
-    .image-editor-info strong {
+    .upload-content strong {
       display: block;
 
-      font-size: 12px;
+      font-size: 11px;
     }
 
-    .image-editor-info small {
+    .upload-content span {
       display: block;
 
-      color: var(--muted);
+      color: #69778b;
 
-      margin-top: 5px;
+      font-size: 9px;
 
-      font-size: 10px;
-
-      line-height: 1.5;
+      margin:
+        4px 0 8px;
     }
 
     .modal-footer {
-      padding: 15px 20px;
+      padding:
+        16px 21px;
+
+      border-top:
+        1px solid var(--line);
 
       display: flex;
 
       justify-content: flex-end;
 
-      gap: 9px;
+      gap: 8px;
+    }
 
-      border-top: 1px solid var(--border);
+    /* =========================================================
+       LOADING
+       ========================================================= */
+
+    .loading-overlay {
+      position: fixed;
+
+      inset: 0;
+
+      background:
+        rgba(2,5,9,.72);
+
+      backdrop-filter:
+        blur(8px);
+
+      display: none;
+
+      align-items: center;
+      justify-content: center;
+
+      z-index: 500;
+    }
+
+    .loading-overlay.show {
+      display: flex;
+    }
+
+    .loading-box {
+      width:
+        min(300px, calc(100% - 40px));
+
+      padding:
+        24px;
+
+      border-radius: 20px;
+
+      background:
+        rgba(13,20,31,.96);
+
+      border:
+        1px solid var(--line-strong);
+
+      box-shadow:
+        var(--shadow);
+
+      text-align: center;
+    }
+
+    .spinner {
+      width: 34px;
+      height: 34px;
+
+      border:
+        3px solid
+        rgba(255,255,255,.08);
+
+      border-top-color:
+        var(--blue);
+
+      border-radius: 50%;
+
+      animation:
+        spin .8s linear infinite;
+
+      margin:
+        0 auto 12px;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    .loading-box p {
+      color: #cbd5e1;
+
+      font-size: 10px;
     }
 
     /* =========================================================
@@ -1032,84 +1938,106 @@
     .toast-container {
       position: fixed;
 
-      right: 22px;
-      bottom: 22px;
+      right: 20px;
+      bottom: 20px;
 
-      z-index: 1000;
+      z-index: 600;
 
       display: flex;
 
       flex-direction: column;
 
-      gap: 9px;
+      gap: 8px;
     }
 
     .toast {
-      min-width: 260px;
-      max-width: 360px;
+      min-width: 270px;
 
-      padding: 13px 15px;
-
-      background: #151a22;
-
-      border: 1px solid var(--border);
+      padding:
+        12px 14px;
 
       border-radius: 13px;
 
+      background:
+        rgba(13,20,31,.96);
+
+      border:
+        1px solid var(--line-strong);
+
       box-shadow:
-        0 20px 50px rgba(0,0,0,.4);
+        0 20px 55px rgba(0,0,0,.35);
 
-      font-size: 12px;
+      display: flex;
+      align-items: center;
 
-      color: #e9edf3;
+      gap: 9px;
 
-      animation: toastIn .25s ease;
+      font-size: 10px;
+
+      animation:
+        toastIn .25s ease;
     }
 
     .toast.success {
       border-color:
-        rgba(53,208,127,.25);
+        rgba(53,212,131,.18);
     }
 
     .toast.error {
       border-color:
-        rgba(255,92,108,.25);
+        rgba(255,102,116,.2);
+    }
+
+    .toast strong {
+      font-size: 12px;
     }
 
     @keyframes toastIn {
-
       from {
         opacity: 0;
-
         transform:
           translateY(10px);
       }
 
       to {
         opacity: 1;
-
         transform:
           translateY(0);
       }
-
     }
 
     /* =========================================================
-       MOBILE
+       RESPONSIVE
        ========================================================= */
 
-    .mobile-top {
-      display: none;
+    @media (max-width: 1050px) {
+
+      :root {
+        --sidebar-width: 250px;
+      }
+
+      .hero-badge {
+        right: 25px;
+      }
+
+      .logo-card {
+        grid-template-columns:
+          155px 1fr;
+      }
+
+      .logo-preview {
+        width: 155px;
+        height: 155px;
+      }
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 850px) {
 
       .sidebar {
         transform:
-          translateX(-100%);
-
-        transition:
-          transform .25s ease;
+          translateX(
+            calc(-100% - 25px)
+          );
       }
 
       .sidebar.open {
@@ -1118,494 +2046,563 @@
       }
 
       .main {
-        width: 100%;
-
         margin-left: 0;
-      }
 
-      .mobile-top {
-        display: flex;
-
-        align-items: center;
-
-        gap: 12px;
-      }
-
-      .mobile-menu {
-        width: 40px;
-        height: 40px;
-
-        border-radius: 10px;
-
-        background:
-          rgba(255,255,255,.06);
-
-        color: #fff;
-
-        border:
-          1px solid var(--border);
+        padding-left: 14px;
       }
 
       .topbar {
-        padding: 0 18px;
-      }
-
-      .topbar-left {
-        display: none;
+        margin-left: 0;
       }
 
       .content {
-        padding: 20px 16px;
+        padding-left: 0;
       }
 
-      .logo-layout {
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .hero-badge {
+        display: none;
+      }
+
+      .hero-card {
+        min-height: 190px;
+      }
+    }
+
+    @media (max-width: 650px) {
+
+      :root {
+        --sidebar-width: 280px;
+      }
+
+      .main {
+        padding:
+          0 10px;
+      }
+
+      .topbar {
+        top: 10px;
+
+        height: 65px;
+
+        margin:
+          10px 0 0;
+      }
+
+      .content {
+        padding:
+          20px 0 45px;
+      }
+
+      .topbar-right {
+        gap: 5px;
+      }
+
+      .sync-status {
+        padding:
+          7px 8px;
+      }
+
+      .sync-status span:last-child {
+        display: none;
+      }
+
+      .admin-pill {
+        display: none;
+      }
+
+      .hero-card {
+        padding:
+          25px 22px;
+
+        min-height: 185px;
+
+        border-radius: 22px;
+      }
+
+      .hero-content h2 {
+        font-size: 27px;
+      }
+
+      .hero-content p {
+        font-size: 10px;
+      }
+
+      .logo-card {
         grid-template-columns: 1fr;
+
+        padding: 18px;
+      }
+
+      .logo-preview {
+        width: 135px;
+        height: 135px;
+
+        border-radius: 21px;
+      }
+
+      .logo-info h3 {
+        font-size: 18px;
       }
 
       .students-grid {
         grid-template-columns: 1fr;
       }
 
-    }
+      .section-head {
+        align-items:
+          flex-start;
 
-    @media (max-width: 550px) {
-
-      .section-header h2 {
-        font-size: 21px;
+        flex-direction:
+          column;
       }
 
-      .card {
-        padding: 16px;
+      .student-toolbar {
+        width: 100%;
       }
 
-      .student-card {
-        align-items: flex-start;
-      }
-
-      .student-actions {
-        flex-direction: column;
-      }
-
-      .student-image {
-        width: 52px;
-        height: 52px;
-
-        flex-basis: 52px;
-      }
-
-      .admin-badge {
-        padding: 7px 9px;
-      }
-
-      .logo-preview-box {
-        height: 190px;
-      }
-
-      .button-row .btn {
+      .student-toolbar .btn {
         width: 100%;
       }
 
       .toast-container {
-        left: 14px;
-        right: 14px;
-        bottom: 14px;
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
       }
 
       .toast {
         min-width: 0;
-
         width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+
+      *,
+      *::before,
+      *::after {
+        animation-duration: .01ms !important;
+        animation-iteration-count: 1 !important;
+        scroll-behavior: auto !important;
+        transition-duration: .01ms !important;
       }
 
     }
-
   </style>
 </head>
 
 <body>
 
+  <div class="ambient one"></div>
+  <div class="ambient two"></div>
+
   <!-- =========================================================
-       AUTH CHECK
+       MOBILE OVERLAY
        ========================================================= -->
 
-  <script>
-
-    if (
-      sessionStorage.getItem(
-        "personalCourseStudioAdminLoggedIn"
-      ) !== "true"
-    ) {
-
-      window.location.replace("../login/");
-
-    }
-
-  </script>
+  <div
+    class="mobile-overlay"
+    id="mobileOverlay">
+  </div>
 
 
   <!-- =========================================================
-       APP
+       SIDEBAR
        ========================================================= -->
 
-  <div class="admin-shell">
+  <aside
+    class="sidebar"
+    id="sidebar">
+
+    <div class="brand">
+
+      <div class="brand-logo">
+
+        <img
+          id="sidebarLogoImage"
+          alt="Studio Logo"
+        />
+
+        <span id="sidebarLogoText">
+          CS
+        </span>
+
+      </div>
+
+      <div class="brand-text">
+
+        <strong>
+          Personal Course Studio
+        </strong>
+
+        <small>
+          Secure Admin Workspace
+        </small>
+
+      </div>
+
+    </div>
+
+
+    <nav class="nav">
+
+      <div class="nav-label">
+        Workspace
+      </div>
+
+
+      <button
+        class="nav-item active"
+        id="studentsNav"
+        type="button">
+
+        <span class="nav-icon">
+          👨‍🎓
+        </span>
+
+        <span class="nav-text">
+          Students
+        </span>
+
+        <span class="nav-arrow">
+          ›
+        </span>
+
+      </button>
+
+
+      <button
+        class="nav-item"
+        id="logoNav"
+        type="button">
+
+        <span class="nav-icon">
+          ✦
+        </span>
+
+        <span class="nav-text">
+          Studio Logo
+        </span>
+
+        <span class="nav-arrow">
+          ›
+        </span>
+
+      </button>
+
+    </nav>
+
+
+    <div class="sidebar-bottom">
+
+      <div class="admin-mini-card">
+
+        <span>
+          Current Access
+        </span>
+
+        <strong>
+          Super Admin
+        </strong>
+
+      </div>
+
+
+      <button
+        class="logout-btn"
+        id="logoutBtn"
+        type="button">
+
+        ⇥ &nbsp; Logout
+
+      </button>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =========================================================
+       MAIN
+       ========================================================= -->
+
+  <main class="main">
+
 
     <!-- =======================================================
-         SIDEBAR
+         TOPBAR
          ======================================================= -->
 
-    <aside
-      class="sidebar"
-      id="sidebar"
-    >
+    <header class="topbar">
 
-      <div class="brand">
+      <div class="topbar-left">
 
-        <div
-          class="brand-logo"
-          id="sidebarLogo"
-        >
+        <button
+          class="mobile-menu-btn"
+          id="mobileMenuBtn"
+          type="button">
 
-          <img
-            id="sidebarLogoImage"
-            alt="Studio Logo"
-          >
+          ☰
 
-          <span id="sidebarLogoText">
-            CS
-          </span>
+        </button>
 
-        </div>
 
-        <div class="brand-text">
+        <div class="page-title">
 
-          <strong>
-            Personal Course
-          </strong>
-
-          <small>
+          <h1>
             Admin Studio
-          </small>
-
-        </div>
-
-      </div>
-
-
-      <div class="nav-title">
-        Management
-      </div>
-
-
-      <nav class="nav">
-
-        <button
-          class="nav-btn active"
-          data-section="students"
-          type="button"
-        >
-
-          <span class="nav-icon">
-            👨‍🎓
-          </span>
-
-          <span>
-            Students
-          </span>
-
-        </button>
-
-
-        <button
-          class="nav-btn"
-          data-section="logo"
-          type="button"
-        >
-
-          <span class="nav-icon">
-            ◈
-          </span>
-
-          <span>
-            Studio Logo
-          </span>
-
-        </button>
-
-      </nav>
-
-
-      <div class="sidebar-bottom">
-
-        <a
-          class="mentor-link"
-          href="../mentor/"
-        >
-
-          <span>
-            🎥
-          </span>
-
-          <span>
-            Open Mentor Studio
-          </span>
-
-        </a>
-
-
-        <button
-          class="logout-btn"
-          id="logoutBtn"
-          type="button"
-        >
-          Logout
-        </button>
-
-      </div>
-
-    </aside>
-
-
-    <!-- =======================================================
-         MAIN
-         ======================================================= -->
-
-    <main class="main">
-
-      <header class="topbar">
-
-        <div class="mobile-top">
-
-          <button
-            class="mobile-menu"
-            id="mobileMenuBtn"
-            type="button"
-          >
-            ☰
-          </button>
-
-        </div>
-
-
-        <div class="topbar-left">
-
-          <h1 id="pageTitle">
-            Student Manager
           </h1>
 
-          <p id="pageSubtitle">
-            Manage student name and profile image.
+          <p>
+            Personal Course Studio · Control Center
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="topbar-right">
+
+        <div class="sync-status">
+
+          <span class="sync-dot"></span>
+
+          <span>
+            Firebase Live
+          </span>
+
+        </div>
+
+
+        <div class="admin-pill">
+          👑
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- =======================================================
+         CONTENT
+         ======================================================= -->
+
+    <div class="content">
+
+
+      <!-- =====================================================
+           HERO
+           ===================================================== -->
+
+      <section class="hero-card">
+
+        <div class="hero-content">
+
+          <div class="eyebrow">
+            <span></span>
+            Personal Course Studio
+          </div>
+
+          <h2>
+            Your private
+            <em>teaching workspace.</em>
+          </h2>
+
+          <p>
+            Manage your students and studio identity
+            from one premium control center. Changes
+            are synchronized through Firebase in real time.
           </p>
 
         </div>
 
 
-        <div class="admin-badge">
-
-          <span class="online-dot"></span>
-
-          ADMIN MODE
-
+        <div class="hero-badge">
+          <span>✦</span>
         </div>
 
-      </header>
+      </section>
 
 
-      <div class="content">
+      <!-- =====================================================
+           LOGO SECTION
+           ===================================================== -->
 
-        <!-- ===================================================
-             STUDENTS
-             =================================================== -->
+      <section
+        class="section"
+        id="logoSection">
 
-        <section
-          class="section active"
-          id="studentsSection"
-        >
+        <div class="section-head">
 
-          <div class="section-header">
+          <div>
 
-            <h2>
-              Student Manager
-            </h2>
-
-            <p>
-              Student name এবং image এখান থেকে edit করুন।
-            </p>
-
-          </div>
-
-
-          <div class="card">
-
-            <div class="student-toolbar">
-
-              <div>
-
-                <div class="card-title">
-                  Students
-                </div>
-
-                <div
-                  class="student-count"
-                  id="studentCount"
-                >
-                  Loading...
-                </div>
-
-              </div>
-
-
-              <button
-                class="btn btn-primary"
-                id="addStudentBtn"
-                type="button"
-              >
-                + Add Student
-              </button>
-
+            <div class="section-kicker">
+              Brand Identity
             </div>
-
-
-            <div
-              class="students-grid"
-              id="studentsGrid"
-            ></div>
-
-          </div>
-
-        </section>
-
-
-        <!-- ===================================================
-             LOGO
-             =================================================== -->
-
-        <section
-          class="section"
-          id="logoSection"
-        >
-
-          <div class="section-header">
 
             <h2>
               Studio Logo
             </h2>
 
             <p>
-              এখানে logo change করলে Mentor Studio-তেও একই logo দেখাবে।
+              Your official identity across the studio.
             </p>
 
           </div>
 
-
-          <div class="card">
-
-            <div class="logo-layout">
-
-              <div class="logo-preview-box">
-
-                <div class="logo-preview">
-
-                  <img
-                    id="logoPreviewImage"
-                    alt="Studio Logo"
-                  >
-
-                  <span id="logoPreviewText">
-                    CS
-                  </span>
-
-                </div>
+        </div>
 
 
-                <div class="logo-preview-label">
-                  Current Studio Logo
-                </div>
+        <div class="logo-card">
 
-              </div>
+          <div class="logo-preview">
 
+            <img
+              id="logoPreviewImage"
+              alt="Studio Logo"
+            />
 
-              <div class="logo-actions">
+            <div
+              class="logo-preview-text"
+              id="logoPreviewText">
 
-                <div>
-
-                  <div class="card-title">
-                    Studio Logo
-                  </div>
-
-                  <div class="card-subtitle">
-
-                    আপনার logo upload করুন।
-                    Logo Firebase Storage-এ save হবে।
-                    Mentor Studio যেকোনো browser/device থেকে
-                    একই logo load করতে পারবে।
-
-                  </div>
-
-                </div>
-
-
-                <div class="upload-area">
-
-                  <div class="upload-icon">
-                    ↑
-                  </div>
-
-                  <strong>
-                    Upload Studio Logo
-                  </strong>
-
-                  <small>
-                    PNG, JPG, WEBP অথবা SVG
-                  </small>
-
-
-                  <input
-                    type="file"
-                    id="logoInput"
-                    accept="image/png,image/jpeg,image/webp,image/svg+xml"
-                    hidden
-                  >
-
-
-                  <div
-                    class="button-row"
-                    style="justify-content:center;margin-top:15px;"
-                  >
-
-                    <button
-                      class="btn btn-primary"
-                      id="chooseLogoBtn"
-                      type="button"
-                    >
-                      Choose Logo
-                    </button>
-
-
-                    <button
-                      class="btn btn-danger"
-                      id="removeLogoBtn"
-                      type="button"
-                    >
-                      Remove Logo
-                    </button>
-
-                  </div>
-
-                </div>
-
-              </div>
+              CS
 
             </div>
 
           </div>
 
-        </section>
 
-      </div>
+          <div class="logo-info">
 
-    </main>
+            <div class="logo-status">
 
-  </div>
+              <i></i>
+
+              Firebase Synced
+
+            </div>
+
+
+            <h3>
+              Personal Course Studio
+            </h3>
+
+
+            <p>
+              Upload your official studio logo.
+              The image will be stored in Firebase Storage
+              and its secure URL will be synchronized through
+              Firestore for your Mentor Studio and other devices.
+            </p>
+
+
+            <div class="logo-actions">
+
+              <label
+                for="logoInput"
+                class="btn btn-primary">
+
+                ↑
+                Upload New Logo
+
+              </label>
+
+
+              <input
+                type="file"
+                id="logoInput"
+                accept="image/*"
+              />
+
+
+              <button
+                class="btn btn-danger"
+                id="removeLogoBtn"
+                type="button">
+
+                ×
+                Remove Logo
+
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           STUDENTS SECTION
+           ===================================================== -->
+
+      <section
+        class="section"
+        id="studentsSection">
+
+        <div class="section-head">
+
+          <div>
+
+            <div class="section-kicker">
+              People Management
+            </div>
+
+            <h2>
+              Student Manager
+            </h2>
+
+            <p>
+              Manage student names and profile images.
+            </p>
+
+          </div>
+
+
+          <div class="student-toolbar">
+
+            <div
+              class="student-count"
+              id="studentCount">
+
+              0 Students
+
+            </div>
+
+
+            <button
+              class="btn btn-primary"
+              id="addStudentBtn"
+              type="button">
+
+              ＋
+              Add Student
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <div
+          class="students-grid"
+          id="studentsGrid">
+        </div>
+
+      </section>
+
+    </div>
+
+  </main>
 
 
   <!-- =========================================================
@@ -1613,25 +2610,35 @@
        ========================================================= -->
 
   <div
-    class="modal-backdrop"
+    class="modal"
     id="studentModal"
-  >
+    aria-hidden="true">
 
-    <div class="modal">
+    <div class="modal-box">
+
 
       <div class="modal-head">
 
-        <h3 id="studentModalTitle">
-          Add Student
-        </h3>
+        <div class="modal-title-wrap">
+
+          <span>
+            Student Workspace
+          </span>
+
+          <h3 id="modalTitle">
+            Add Student
+          </h3>
+
+        </div>
 
 
         <button
           class="close-modal"
-          id="closeStudentModal"
-          type="button"
-        >
+          id="closeModalBtn"
+          type="button">
+
           ×
+
         </button>
 
       </div>
@@ -1639,79 +2646,79 @@
 
       <div class="modal-body">
 
-        <div class="image-editor">
 
-          <div
-            class="edit-image-preview"
-            id="studentImagePreview"
-          >
-            👨‍🎓
-          </div>
+        <div class="field">
 
+          <label for="studentName">
+            Student Name
+          </label>
 
-          <div class="image-editor-info">
-
-            <strong>
-              Student Image
-            </strong>
-
-            <small>
-              Student-এর ছবি upload করুন।
-              3MB-এর মধ্যে রাখুন।
-            </small>
-
-
-            <div
-              class="button-row"
-              style="margin-top:10px;"
-            >
-
-              <button
-                class="btn btn-secondary"
-                id="chooseStudentImageBtn"
-                type="button"
-              >
-                Change Image
-              </button>
-
-
-              <button
-                class="btn btn-danger"
-                id="removeStudentImageBtn"
-                type="button"
-              >
-                Remove
-              </button>
-
-            </div>
-
-          </div>
+          <input
+            type="text"
+            id="studentName"
+            placeholder="Enter student name..."
+            autocomplete="off"
+          />
 
         </div>
 
 
-        <input
-          type="file"
-          id="studentImageInput"
-          accept="image/png,image/jpeg,image/webp"
-          hidden
-        >
+        <div class="field">
 
-
-        <div class="form-group">
-
-          <label class="form-label">
-            Student Name
+          <label>
+            Student Image
           </label>
 
 
-          <input
-            class="input"
-            id="studentNameInput"
-            type="text"
-            placeholder="Student name"
-            maxlength="100"
-          >
+          <div class="image-upload-box">
+
+            <div class="modal-image-preview">
+
+              <img
+                id="studentImagePreview"
+                alt="Student Preview"
+              />
+
+              <div
+                class="modal-image-placeholder"
+                id="studentImagePlaceholder">
+
+                👤
+
+              </div>
+
+            </div>
+
+
+            <div class="upload-content">
+
+              <strong>
+                Profile Image
+              </strong>
+
+              <span id="selectedFileName">
+                JPG, PNG or WEBP
+              </span>
+
+
+              <label
+                for="studentImageInput"
+                class="btn btn-secondary">
+
+                Choose Image
+
+              </label>
+
+
+              <input
+                type="file"
+                id="studentImageInput"
+                accept="image/*"
+              />
+
+            </div>
+
+          </div>
 
         </div>
 
@@ -1722,22 +2729,45 @@
 
         <button
           class="btn btn-secondary"
-          id="cancelStudentBtn"
-          type="button"
-        >
+          id="cancelModalBtn"
+          type="button">
+
           Cancel
+
         </button>
 
 
         <button
           class="btn btn-primary"
           id="saveStudentBtn"
-          type="button"
-        >
+          type="button">
+
           Save Student
+
         </button>
 
       </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================================================
+       LOADING
+       ========================================================= -->
+
+  <div
+    class="loading-overlay"
+    id="loadingOverlay">
+
+    <div class="loading-box">
+
+      <div class="spinner"></div>
+
+      <p id="loadingText">
+        Firebase-এ save হচ্ছে...
+      </p>
 
     </div>
 
@@ -1750,18 +2780,38 @@
 
   <div
     class="toast-container"
-    id="toastContainer"
-  ></div>
+    id="toastContainer">
+  </div>
 
 
   <!-- =========================================================
-       FIREBASE + APPLICATION JAVASCRIPT
+       FIREBASE + ADMIN LOGIC
        ========================================================= -->
 
   <script type="module">
 
     /* =========================================================
-       FIREBASE IMPORT
+       AUTH
+       ========================================================= */
+
+    const ADMIN_SESSION_KEY =
+      "personalCourseStudioAdminLoggedIn";
+
+    if (
+      sessionStorage.getItem(
+        ADMIN_SESSION_KEY
+      ) !== "true"
+    ) {
+
+      window.location.replace(
+        "../login/"
+      );
+
+    }
+
+
+    /* =========================================================
+       FIREBASE
        ========================================================= */
 
     import {
@@ -1778,14 +2828,16 @@
       deleteDoc,
       onSnapshot,
       serverTimestamp
-    } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
+    } from
+      "https://www.gstatic.com/firebasejs/12.2.1/firebase-firestore.js";
 
 
     import {
       ref,
       uploadBytes,
       getDownloadURL
-    } from "https://www.gstatic.com/firebasejs/12.2.1/firebase-storage.js";
+    } from
+      "https://www.gstatic.com/firebasejs/12.2.1/firebase-storage.js";
 
 
     /* =========================================================
@@ -1802,44 +2854,8 @@
       "personalCourseStudioSettings";
 
 
-    /* =========================================================
-       FIREBASE COLLECTION / DOCUMENT
-       ========================================================= */
-
     const STUDENTS_COLLECTION =
       "students";
-
-    const STUDIO_COLLECTION =
-      "studio";
-
-    const STUDIO_SETTINGS_DOC =
-      "settings";
-
-
-    /* =========================================================
-       DEFAULT PROFILE
-       ========================================================= */
-
-    const defaultProfile = {
-
-      name: "Administrator",
-
-      username:
-        sessionStorage.getItem(
-          "personalCourseStudioUsername"
-        ) || "admin",
-
-      email:
-        "admin@snkacademy.local",
-
-      phone: "",
-
-      bio:
-        "Personal Course Studio Administrator.",
-
-      logo: ""
-
-    };
 
 
     /* =========================================================
@@ -1851,118 +2867,154 @@
         "sidebar"
       );
 
+    const mobileOverlay =
+      document.getElementById(
+        "mobileOverlay"
+      );
 
     const mobileMenuBtn =
       document.getElementById(
         "mobileMenuBtn"
       );
 
-
-    const navButtons =
-      document.querySelectorAll(
-        ".nav-btn"
-      );
-
-
-    const studentsSection =
+    const logoutBtn =
       document.getElementById(
-        "studentsSection"
+        "logoutBtn"
       );
-
-
-    const logoSection =
-      document.getElementById(
-        "logoSection"
-      );
-
-
-    const pageTitle =
-      document.getElementById(
-        "pageTitle"
-      );
-
-
-    const pageSubtitle =
-      document.getElementById(
-        "pageSubtitle"
-      );
-
 
     const studentsGrid =
       document.getElementById(
         "studentsGrid"
       );
 
-
     const studentCount =
       document.getElementById(
         "studentCount"
       );
 
+    const addStudentBtn =
+      document.getElementById(
+        "addStudentBtn"
+      );
 
     const studentModal =
       document.getElementById(
         "studentModal"
       );
 
-
-    const studentModalTitle =
+    const closeModalBtn =
       document.getElementById(
-        "studentModalTitle"
+        "closeModalBtn"
       );
 
-
-    const studentNameInput =
+    const cancelModalBtn =
       document.getElementById(
-        "studentNameInput"
+        "cancelModalBtn"
       );
 
+    const saveStudentBtn =
+      document.getElementById(
+        "saveStudentBtn"
+      );
+
+    const studentName =
+      document.getElementById(
+        "studentName"
+      );
 
     const studentImageInput =
       document.getElementById(
         "studentImageInput"
       );
 
-
     const studentImagePreview =
       document.getElementById(
         "studentImagePreview"
       );
 
+    const studentImagePlaceholder =
+      document.getElementById(
+        "studentImagePlaceholder"
+      );
+
+    const selectedFileName =
+      document.getElementById(
+        "selectedFileName"
+      );
+
+    const modalTitle =
+      document.getElementById(
+        "modalTitle"
+      );
 
     const logoInput =
       document.getElementById(
         "logoInput"
       );
 
-
     const logoPreviewImage =
       document.getElementById(
         "logoPreviewImage"
       );
-
 
     const logoPreviewText =
       document.getElementById(
         "logoPreviewText"
       );
 
-
     const sidebarLogoImage =
       document.getElementById(
         "sidebarLogoImage"
       );
-
 
     const sidebarLogoText =
       document.getElementById(
         "sidebarLogoText"
       );
 
+    const removeLogoBtn =
+      document.getElementById(
+        "removeLogoBtn"
+      );
 
     const favicon =
       document.getElementById(
         "favicon"
+      );
+
+    const loadingOverlay =
+      document.getElementById(
+        "loadingOverlay"
+      );
+
+    const loadingText =
+      document.getElementById(
+        "loadingText"
+      );
+
+    const toastContainer =
+      document.getElementById(
+        "toastContainer"
+      );
+
+    const studentsNav =
+      document.getElementById(
+        "studentsNav"
+      );
+
+    const logoNav =
+      document.getElementById(
+        "logoNav"
+      );
+
+    const studentsSection =
+      document.getElementById(
+        "studentsSection"
+      );
+
+    const logoSection =
+      document.getElementById(
+        "logoSection"
       );
 
 
@@ -1974,9 +3026,13 @@
 
     let editingStudentId = null;
 
-    let currentStudentImage = "";
+    let selectedStudentFile = null;
 
-    let currentStudentImageFile = null;
+    let savingStudent = false;
+
+    let unsubscribeStudents = null;
+
+    let unsubscribeStudio = null;
 
 
     /* =========================================================
@@ -1994,19 +3050,15 @@
             )
           );
 
-
         return {
-
-          ...defaultProfile,
-
+          logo: "",
           ...(saved || {})
-
         };
 
-      } catch (error) {
+      } catch {
 
         return {
-          ...defaultProfile
+          logo: ""
         };
 
       }
@@ -2014,7 +3066,9 @@
     }
 
 
-    function saveProfile(profile) {
+    function saveProfile(
+      profile
+    ) {
 
       localStorage.setItem(
         PROFILE_KEY,
@@ -2025,10 +3079,46 @@
 
 
     /* =========================================================
+       LOCAL SETTINGS
+       ========================================================= */
+
+    function updateLocalSettings(
+      logo
+    ) {
+
+      let settings = {};
+
+      try {
+
+        settings =
+          JSON.parse(
+            localStorage.getItem(
+              SETTINGS_KEY
+            )
+          ) || {};
+
+      } catch {
+
+        settings = {};
+
+      }
+
+      settings.studioLogo =
+        logo || "";
+
+      localStorage.setItem(
+        SETTINGS_KEY,
+        JSON.stringify(settings)
+      );
+
+    }
+
+
+    /* =========================================================
        LOCAL STUDENTS
        ========================================================= */
 
-    function getLocalStudents() {
+    function loadLocalStudents() {
 
       try {
 
@@ -2039,14 +3129,14 @@
             )
           );
 
+        students =
+          Array.isArray(saved)
+            ? saved
+            : [];
 
-        return Array.isArray(saved)
-          ? saved
-          : [];
+      } catch {
 
-      } catch (error) {
-
-        return [];
+        students = [];
 
       }
 
@@ -2057,63 +3147,41 @@
 
       localStorage.setItem(
         STUDENTS_KEY,
-        JSON.stringify(students)
+        JSON.stringify(
+          students
+        )
       );
 
     }
 
 
     /* =========================================================
-       CREATE ID
+       ESCAPE
        ========================================================= */
 
-    function createStudentId() {
+    function escapeHtml(
+      value
+    ) {
 
-      return (
-
-        "student_" +
-
-        Date.now() +
-
-        "_" +
-
-        Math.random()
-          .toString(36)
-          .substring(2, 8)
-
-      );
-
-    }
-
-
-    /* =========================================================
-       ESCAPE HTML
-       ========================================================= */
-
-    function escapeHtml(value) {
-
-      return String(value || "")
-
+      return String(
+        value || ""
+      )
         .replace(
           /&/g,
           "&amp;"
         )
-
         .replace(
           /</g,
           "&lt;"
         )
-
         .replace(
           />/g,
           "&gt;"
         )
-
         .replace(
           /"/g,
           "&quot;"
         )
-
         .replace(
           /'/g,
           "&#039;"
@@ -2123,396 +3191,183 @@
 
 
     /* =========================================================
-       FIREBASE IMAGE UPLOAD
+       TOAST
        ========================================================= */
 
-    async function uploadImageToFirebase(
-      file,
-      folder,
-      oldUrl = ""
+    function showToast(
+      message,
+      type = "success"
     ) {
 
-      if (!file) {
+      const toast =
+        document.createElement(
+          "div"
+        );
 
-        return oldUrl || "";
+      toast.className =
+        `toast ${type}`;
 
-      }
+      toast.innerHTML = `
+        <strong>
+          ${
+            type === "error"
+              ? "⚠"
+              : "✓"
+          }
+        </strong>
 
+        <span>
+          ${escapeHtml(message)}
+        </span>
+      `;
 
-      const safeName =
-        file.name
-          .replace(
-            /[^a-zA-Z0-9._-]/g,
-            "_"
+      toastContainer.appendChild(
+        toast
+      );
+
+      setTimeout(
+        () => {
+
+          toast.style.opacity =
+            "0";
+
+          toast.style.transform =
+            "translateY(10px)";
+
+          setTimeout(
+            () => {
+              toast.remove();
+            },
+            220
           );
 
+        },
+        3000
+      );
 
-      const storagePath =
+    }
 
-        folder +
 
-        "/" +
+    /* =========================================================
+       LOADING
+       ========================================================= */
 
+    function showLoading(
+      message
+    ) {
+
+      loadingText.textContent =
+        message ||
+        "Please wait...";
+
+      loadingOverlay.classList.add(
+        "show"
+      );
+
+    }
+
+
+    function hideLoading() {
+
+      loadingOverlay.classList.remove(
+        "show"
+      );
+
+    }
+
+
+    /* =========================================================
+       ID
+       ========================================================= */
+
+    function generateId() {
+
+      return (
+        "student_" +
         Date.now() +
-
         "_" +
-
-        safeName;
-
-
-      const storageRef =
-        ref(
-          storage,
-          storagePath
-        );
-
-
-      await uploadBytes(
-        storageRef,
-        file,
-        {
-          contentType:
-            file.type
-        }
+        Math.random()
+          .toString(36)
+          .slice(2, 8)
       );
-
-
-      const downloadUrl =
-        await getDownloadURL(
-          storageRef
-        );
-
-
-      return downloadUrl;
 
     }
 
 
     /* =========================================================
-       LOAD STUDENTS FROM FIRESTORE
+       DATE
        ========================================================= */
 
-    async function loadStudentsFromFirebase() {
+    function formatDate(
+      value
+    ) {
+
+      if (!value) {
+        return "";
+      }
+
+      let date;
 
       try {
 
-        const snapshot =
-          await getDocs(
-            collection(
-              db,
-              STUDENTS_COLLECTION
-            )
-          );
-
-
-        const firebaseStudents =
-          snapshot.docs.map(
-            document => ({
-
-              id: document.id,
-
-              ...document.data()
-
-            })
-          );
-
-
-        /*
-         * If Firebase has students,
-         * use Firebase as the main source.
-         */
-
         if (
-          firebaseStudents.length > 0
+          typeof value.toDate ===
+          "function"
         ) {
 
-          students =
-            firebaseStudents
-              .sort(
-                (a, b) =>
-                  String(
-                    b.createdAt || ""
-                  ).localeCompare(
-                    String(
-                      a.createdAt || ""
-                    )
-                  )
-              );
+          date =
+            value.toDate();
 
+        } else {
 
-          saveLocalStudents();
-
-          renderStudents();
-
-          return;
+          date =
+            new Date(value);
 
         }
 
+      } catch {
 
-        /*
-         * Firebase is empty.
-         * Try migrating existing local students.
-         */
-
-        const localStudents =
-          getLocalStudents();
-
-
-        if (
-          localStudents.length > 0
-        ) {
-
-          showToast(
-            "পুরোনো student data Firebase-এ sync হচ্ছে...",
-            "success"
-          );
-
-
-          for (
-            const student of localStudents
-          ) {
-
-            await migrateStudentToFirebase(
-              student
-            );
-
-          }
-
-
-          await loadStudentsFromFirebase();
-
-          return;
-
-        }
-
-
-        students = [];
-
-        renderStudents();
-
-      } catch (error) {
-
-        console.error(
-          "Firebase student load error:",
-          error
-        );
-
-
-        students =
-          getLocalStudents();
-
-
-        renderStudents();
-
-
-        showToast(
-          "Firebase student data load করা যায়নি।",
-          "error"
-        );
+        return "";
 
       }
 
-    }
-
-
-    /* =========================================================
-       MIGRATE LOCAL STUDENT
-       ========================================================= */
-
-    async function migrateStudentToFirebase(
-      student
-    ) {
-
-      const id =
-        student.id ||
-        createStudentId();
-
-
-      let imageUrl =
-        student.image ||
-        student.photo ||
-        student.avatar ||
-        "";
-
-
-      /*
-       * Existing Data URL image
-       * is not uploaded automatically here.
-       *
-       * We preserve it temporarily.
-       */
-
-      await setDoc(
-        doc(
-          db,
-          STUDENTS_COLLECTION,
-          id
-        ),
-        {
-
-          name:
-            student.name ||
-            "Unnamed Student",
-
-          image:
-            imageUrl,
-
-          status:
-            student.status ||
-            "Active",
-
-          createdAt:
-            student.createdAt ||
-            new Date().toISOString(),
-
-          migrated:
-            true,
-
-          updatedAt:
-            serverTimestamp()
-
-        },
-        {
-          merge: true
-        }
-      );
-
-    }
-
-
-    /* =========================================================
-       SAVE STUDENT TO FIREBASE
-       ========================================================= */
-
-    async function saveStudentToFirebase(
-      student
-    ) {
-
-      await setDoc(
-
-        doc(
-          db,
-          STUDENTS_COLLECTION,
-          student.id
-        ),
-
-        {
-
-          name:
-            student.name,
-
-          image:
-            student.image || "",
-
-          status:
-            student.status ||
-            "Active",
-
-          createdAt:
-            student.createdAt ||
-            new Date().toISOString(),
-
-          updatedAt:
-            serverTimestamp()
-
-        },
-
-        {
-          merge: true
-        }
-
-      );
-
-    }
-
-
-    /* =========================================================
-       DELETE STUDENT FROM FIREBASE
-       ========================================================= */
-
-    async function deleteStudentFromFirebase(
-      id
-    ) {
-
-      await deleteDoc(
-
-        doc(
-          db,
-          STUDENTS_COLLECTION,
-          id
+      if (
+        Number.isNaN(
+          date.getTime()
         )
+      ) {
 
+        return "";
+
+      }
+
+      return date.toLocaleDateString(
+        "en-US",
+        {
+          year: "numeric",
+          month: "short",
+          day: "numeric"
+        }
       );
 
     }
 
 
     /* =========================================================
-       REAL-TIME STUDENT LISTENER
+       UPDATE STUDENT COUNT
        ========================================================= */
 
-    function startStudentListener() {
+    function updateStudentCount() {
 
-      try {
+      const count =
+        students.length;
 
-        onSnapshot(
-
-          collection(
-            db,
-            STUDENTS_COLLECTION
-          ),
-
-          snapshot => {
-
-            students =
-              snapshot.docs.map(
-                document => ({
-
-                  id:
-                    document.id,
-
-                  ...document.data()
-
-                })
-              );
-
-
-            students.sort(
-              (a, b) =>
-                String(
-                  b.createdAt || ""
-                ).localeCompare(
-                  String(
-                    a.createdAt || ""
-                  )
-                )
-            );
-
-
-            saveLocalStudents();
-
-            renderStudents();
-
-          },
-
-          error => {
-
-            console.error(
-              "Student realtime error:",
-              error
-            );
-
-          }
-
-        );
-
-      } catch (error) {
-
-        console.error(
-          error
-        );
-
-      }
+      studentCount.textContent =
+        `${count} ${
+          count === 1
+            ? "Student"
+            : "Students"
+        }`;
 
     }
 
@@ -2523,36 +3378,26 @@
 
     function renderStudents() {
 
-      studentCount.textContent =
-
-        students.length +
-
-        (
-          students.length === 1
-            ? " student"
-            : " students"
-        );
+      updateStudentCount();
 
 
       if (!students.length) {
 
         studentsGrid.innerHTML = `
 
-          <div
-            class="empty-state"
-            style="grid-column:1/-1;"
-          >
+          <div class="empty-state">
 
             <div class="empty-icon">
               👨‍🎓
             </div>
 
-            <strong>
-              No students added yet
-            </strong>
+            <h3>
+              No students yet
+            </h3>
 
             <p>
-              Add a student to show them in Mentor Studio.
+              Add your first student to
+              start building your studio.
             </p>
 
           </div>
@@ -2565,110 +3410,137 @@
 
 
       studentsGrid.innerHTML =
+        students
+          .map(
+            student => {
 
-        students.map(
-          student => {
+              const image =
+                student.imageUrl ||
+                student.image ||
+                student.photo ||
+                student.avatar ||
+                "";
 
-            const name =
-              escapeHtml(
+              const name =
                 student.name ||
-                "Unnamed Student"
-              );
+                "Unnamed Student";
+
+              const date =
+                student.createdAt
+                  ? formatDate(
+                      student.createdAt
+                    )
+                  : "";
 
 
-            const firstLetter =
-              escapeHtml(
+              return `
 
-                (
-                  student.name ||
-                  "S"
-                )
-                  .charAt(0)
-                  .toUpperCase()
+                <article
+                  class="student-card"
+                  data-id="${escapeHtml(
+                    student.id
+                  )}">
 
-              );
+                  <div
+                    class="student-image">
 
+                    ${
+                      image
 
-            const imageUrl =
-              student.image ||
-              student.photo ||
-              student.avatar ||
-              "";
+                      ? `
 
+                        <img
+                          src="${escapeHtml(
+                            image
+                          )}"
+                          alt="${escapeHtml(
+                            name
+                          )}"
+                          loading="lazy"
+                        />
 
-            const image =
-              imageUrl
+                      `
 
-                ? `
+                      : `
 
-                  <img
-                    src="${escapeHtml(imageUrl)}"
-                    alt="${name}"
-                    loading="lazy"
-                  >
+                        <div
+                          class="student-placeholder">
 
-                `
+                          👤
 
-                : firstLetter;
+                        </div>
 
+                      `
+                    }
 
-            return `
-
-              <div
-                class="student-card"
-                data-id="${escapeHtml(student.id)}"
-              >
-
-                <div class="student-image">
-
-                  ${image}
-
-                </div>
+                  </div>
 
 
-                <div class="student-info">
+                  <div class="student-info">
 
-                  <strong>
-                    ${name}
-                  </strong>
+                    <div
+                      class="student-name">
 
-                  <small>
-                    Student
-                  </small>
+                      ${escapeHtml(
+                        name
+                      )}
 
-                </div>
-
-
-                <div class="student-actions">
-
-                  <button
-                    class="icon-btn edit-student"
-                    type="button"
-                    title="Edit"
-                    data-id="${escapeHtml(student.id)}"
-                  >
-                    ✎
-                  </button>
+                    </div>
 
 
-                  <button
-                    class="icon-btn delete delete-student"
-                    type="button"
-                    title="Delete"
-                    data-id="${escapeHtml(student.id)}"
-                  >
-                    ×
-                  </button>
+                    <div
+                      class="student-meta">
 
-                </div>
+                      ${
+                        date
+                          ? `Added ${escapeHtml(
+                              date
+                            )}`
+                          : "Student Profile"
+                      }
 
-              </div>
+                    </div>
 
-            `;
 
-          }
+                    <div
+                      class="student-actions">
 
-        ).join("");
+                      <button
+                        class="btn btn-secondary edit-student"
+                        type="button"
+                        data-id="${escapeHtml(
+                          student.id
+                        )}">
+
+                        ✎
+                        Edit
+
+                      </button>
+
+
+                      <button
+                        class="btn btn-danger delete-student"
+                        type="button"
+                        data-id="${escapeHtml(
+                          student.id
+                        )}">
+
+                        ×
+                        Delete
+
+                      </button>
+
+                    </div>
+
+                  </div>
+
+                </article>
+
+              `;
+
+            }
+          )
+          .join("");
 
 
       document
@@ -2718,38 +3590,668 @@
 
 
     /* =========================================================
-       OPEN ADD STUDENT
+       APPLY LOGO
+       ========================================================= */
+
+    function applyLogo(
+      logo
+    ) {
+
+      const logoUrl =
+        logo || "";
+
+
+      const profile =
+        getProfile();
+
+      profile.logo =
+        logoUrl;
+
+      saveProfile(
+        profile
+      );
+
+
+      updateLocalSettings(
+        logoUrl
+      );
+
+
+      /* Main Preview */
+
+      if (logoUrl) {
+
+        logoPreviewImage.src =
+          logoUrl;
+
+        logoPreviewImage.style.display =
+          "block";
+
+        logoPreviewText.style.display =
+          "none";
+
+      } else {
+
+        logoPreviewImage.removeAttribute(
+          "src"
+        );
+
+        logoPreviewImage.style.display =
+          "none";
+
+        logoPreviewText.style.display =
+          "block";
+
+      }
+
+
+      /* Sidebar */
+
+      if (logoUrl) {
+
+        sidebarLogoImage.src =
+          logoUrl;
+
+        sidebarLogoImage.style.display =
+          "block";
+
+        sidebarLogoText.style.display =
+          "none";
+
+      } else {
+
+        sidebarLogoImage.removeAttribute(
+          "src"
+        );
+
+        sidebarLogoImage.style.display =
+          "none";
+
+        sidebarLogoText.style.display =
+          "block";
+
+      }
+
+
+      /* Favicon */
+
+      if (logoUrl) {
+
+        favicon.href =
+          logoUrl;
+
+      } else {
+
+        favicon.removeAttribute(
+          "href"
+        );
+
+      }
+
+    }
+
+
+    /* =========================================================
+       DATA URL → BLOB
+       ========================================================= */
+
+    async function dataUrlToBlob(
+      dataUrl
+    ) {
+
+      const response =
+        await fetch(
+          dataUrl
+        );
+
+      return await response.blob();
+
+    }
+
+
+    /* =========================================================
+       SAFE FILE NAME
+       ========================================================= */
+
+    function safeFileName(
+      name
+    ) {
+
+      return String(
+        name ||
+        "image"
+      )
+        .replace(
+          /[^a-zA-Z0-9._-]/g,
+          "_"
+        );
+
+    }
+
+
+    /* =========================================================
+       UPLOAD
+       ========================================================= */
+
+    async function uploadImageFile(
+      file,
+      path
+    ) {
+
+      const storageRef =
+        ref(
+          storage,
+          path
+        );
+
+      await uploadBytes(
+        storageRef,
+        file
+      );
+
+      return await getDownloadURL(
+        storageRef
+      );
+
+    }
+
+
+    /* =========================================================
+       MIGRATE LOCAL STUDENTS
+       ========================================================= */
+
+    async function migrateLocalStudentsToFirebase(
+      localStudents
+    ) {
+
+      if (
+        !Array.isArray(
+          localStudents
+        ) ||
+        !localStudents.length
+      ) {
+
+        return;
+
+      }
+
+
+      showLoading(
+        "Migrating student data..."
+      );
+
+
+      try {
+
+        for (
+          const student
+          of localStudents
+        ) {
+
+          const studentId =
+            student.id ||
+            generateId();
+
+
+          let imageUrl =
+            student.imageUrl ||
+            "";
+
+
+          const oldImage =
+            student.image ||
+            student.photo ||
+            student.avatar ||
+            "";
+
+
+          if (
+            !imageUrl &&
+            oldImage
+          ) {
+
+            if (
+              oldImage.startsWith(
+                "data:"
+              )
+            ) {
+
+              try {
+
+                const blob =
+                  await dataUrlToBlob(
+                    oldImage
+                  );
+
+
+                const storagePath =
+                  `students/${studentId}/${Date.now()}_student`;
+
+
+                imageUrl =
+                  await uploadImageFile(
+                    blob,
+                    storagePath
+                  );
+
+              } catch (
+                error
+              ) {
+
+                console.error(
+                  error
+                );
+
+              }
+
+            } else {
+
+              imageUrl =
+                oldImage;
+
+            }
+
+          }
+
+
+          await setDoc(
+
+            doc(
+              db,
+              STUDENTS_COLLECTION,
+              studentId
+            ),
+
+            {
+              id:
+                studentId,
+
+              name:
+                student.name ||
+                "Unnamed Student",
+
+              imageUrl:
+                imageUrl,
+
+              createdAt:
+                student.createdAt ||
+                new Date()
+                  .toISOString(),
+
+              updatedAt:
+                serverTimestamp()
+            },
+
+            {
+              merge: true
+            }
+
+          );
+
+        }
+
+
+        showToast(
+          "Existing students migrated to Firebase."
+        );
+
+      } catch (
+        error
+      ) {
+
+        console.error(
+          "Migration error:",
+          error
+        );
+
+        showToast(
+          "Student migration failed.",
+          "error"
+        );
+
+      } finally {
+
+        hideLoading();
+
+      }
+
+    }
+
+
+    /* =========================================================
+       STUDENT REALTIME
+       ========================================================= */
+
+    function startStudentRealtimeSync() {
+
+      if (
+        unsubscribeStudents
+      ) {
+
+        unsubscribeStudents();
+
+      }
+
+
+      unsubscribeStudents =
+        onSnapshot(
+
+          collection(
+            db,
+            STUDENTS_COLLECTION
+          ),
+
+          snapshot => {
+
+            students =
+              snapshot.docs
+                .map(
+                  item => {
+
+                    const data =
+                      item.data();
+
+                    return {
+
+                      id:
+                        data.id ||
+                        item.id,
+
+                      name:
+                        data.name ||
+                        "Unnamed Student",
+
+                      imageUrl:
+                        data.imageUrl ||
+                        data.image ||
+                        "",
+
+                      image:
+                        data.imageUrl ||
+                        data.image ||
+                        "",
+
+                      createdAt:
+                        data.createdAt ||
+                        "",
+
+                      updatedAt:
+                        data.updatedAt ||
+                        ""
+
+                    };
+
+                  }
+                );
+
+
+            saveLocalStudents();
+
+            renderStudents();
+
+          },
+
+          error => {
+
+            console.error(
+              "Student realtime error:",
+              error
+            );
+
+            showToast(
+              "Firebase student sync unavailable.",
+              "error"
+            );
+
+          }
+
+        );
+
+    }
+
+
+    /* =========================================================
+       STUDIO REALTIME
+       ========================================================= */
+
+    function startStudioRealtimeSync() {
+
+      if (
+        unsubscribeStudio
+      ) {
+
+        unsubscribeStudio();
+
+      }
+
+
+      unsubscribeStudio =
+        onSnapshot(
+
+          doc(
+            db,
+            "studio",
+            "settings"
+          ),
+
+          snapshot => {
+
+            if (
+              snapshot.exists()
+            ) {
+
+              const data =
+                snapshot.data();
+
+              applyLogo(
+                data.studioLogo ||
+                ""
+              );
+
+            } else {
+
+              const profile =
+                getProfile();
+
+              applyLogo(
+                profile.logo ||
+                ""
+              );
+
+            }
+
+          },
+
+          error => {
+
+            console.error(
+              "Studio realtime error:",
+              error
+            );
+
+            const profile =
+              getProfile();
+
+            applyLogo(
+              profile.logo ||
+              ""
+            );
+
+          }
+
+        );
+
+    }
+
+
+    /* =========================================================
+       INITIALIZE FIREBASE
+       ========================================================= */
+
+    async function initializeFirebaseData() {
+
+      try {
+
+        const snapshot =
+          await getDocs(
+
+            collection(
+              db,
+              STUDENTS_COLLECTION
+            )
+
+          );
+
+
+        if (
+          !snapshot.empty
+        ) {
+
+          students =
+            snapshot.docs
+              .map(
+                item => {
+
+                  const data =
+                    item.data();
+
+                  return {
+
+                    id:
+                      data.id ||
+                      item.id,
+
+                    name:
+                      data.name ||
+                      "Unnamed Student",
+
+                    imageUrl:
+                      data.imageUrl ||
+                      data.image ||
+                      "",
+
+                    image:
+                      data.imageUrl ||
+                      data.image ||
+                      "",
+
+                    createdAt:
+                      data.createdAt ||
+                      "",
+
+                    updatedAt:
+                      data.updatedAt ||
+                      ""
+
+                  };
+
+                }
+              );
+
+
+          saveLocalStudents();
+
+          renderStudents();
+
+        } else {
+
+          await migrateLocalStudentsToFirebase(
+            students
+          );
+
+        }
+
+
+        startStudentRealtimeSync();
+
+        startStudioRealtimeSync();
+
+
+      } catch (
+        error
+      ) {
+
+        console.error(
+          "Firebase initialization:",
+          error
+        );
+
+
+        renderStudents();
+
+
+        const profile =
+          getProfile();
+
+        applyLogo(
+          profile.logo ||
+          ""
+        );
+
+
+        showToast(
+          "Firebase unavailable. Local data is active.",
+          "error"
+        );
+
+      }
+
+    }
+
+
+    /* =========================================================
+       ADD STUDENT
        ========================================================= */
 
     function openAddStudent() {
 
-      editingStudentId = null;
+      editingStudentId =
+        null;
 
-      currentStudentImage = "";
+      selectedStudentFile =
+        null;
 
-      currentStudentImageFile = null;
 
-
-      studentModalTitle.textContent =
+      modalTitle.textContent =
         "Add Student";
 
 
-      studentNameInput.value = "";
+      studentName.value =
+        "";
 
 
-      updateStudentImagePreview();
+      studentImageInput.value =
+        "";
+
+
+      selectedFileName.textContent =
+        "JPG, PNG or WEBP";
+
+
+      studentImagePreview.removeAttribute(
+        "src"
+      );
+
+      studentImagePreview.style.display =
+        "none";
+
+      studentImagePlaceholder.style.display =
+        "block";
 
 
       studentModal.classList.add(
         "show"
       );
 
+      studentModal.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
 
       setTimeout(
         () => {
-
-          studentNameInput.focus();
-
+          studentName.focus();
         },
         100
       );
@@ -2761,19 +4263,26 @@
        EDIT STUDENT
        ========================================================= */
 
-    function editStudent(id) {
+    function editStudent(
+      studentId
+    ) {
 
       const student =
         students.find(
           item =>
-            item.id === id
+            String(
+              item.id
+            ) ===
+            String(
+              studentId
+            )
         );
 
 
       if (!student) {
 
         showToast(
-          "Student পাওয়া যায়নি।",
+          "Student not found.",
           "error"
         );
 
@@ -2783,35 +4292,105 @@
 
 
       editingStudentId =
-        id;
+        student.id;
+
+      selectedStudentFile =
+        null;
 
 
-      currentStudentImage =
+      modalTitle.textContent =
+        "Edit Student";
+
+
+      studentName.value =
+        student.name ||
+        "";
+
+
+      studentImageInput.value =
+        "";
+
+
+      selectedFileName.textContent =
+        "Choose a new image if needed";
+
+
+      const image =
+        student.imageUrl ||
         student.image ||
         student.photo ||
         student.avatar ||
         "";
 
 
-      currentStudentImageFile =
-        null;
+      if (image) {
 
+        studentImagePreview.src =
+          image;
 
-      studentModalTitle.textContent =
-        "Edit Student";
+        studentImagePreview.style.display =
+          "block";
 
+        studentImagePlaceholder.style.display =
+          "none";
 
-      studentNameInput.value =
-        student.name ||
-        "";
+      } else {
 
+        studentImagePreview.removeAttribute(
+          "src"
+        );
 
-      updateStudentImagePreview();
+        studentImagePreview.style.display =
+          "none";
+
+        studentImagePlaceholder.style.display =
+          "block";
+
+      }
 
 
       studentModal.classList.add(
         "show"
       );
+
+      studentModal.setAttribute(
+        "aria-hidden",
+        "false"
+      );
+
+    }
+
+
+    /* =========================================================
+       CLOSE MODAL
+       ========================================================= */
+
+    function closeStudentModal() {
+
+      if (
+        savingStudent
+      ) {
+
+        return;
+
+      }
+
+
+      studentModal.classList.remove(
+        "show"
+      );
+
+      studentModal.setAttribute(
+        "aria-hidden",
+        "true"
+      );
+
+
+      editingStudentId =
+        null;
+
+      selectedStudentFile =
+        null;
 
     }
 
@@ -2822,181 +4401,198 @@
 
     async function saveStudent() {
 
-      const name =
-        studentNameInput.value.trim();
-
-
-      if (!name) {
-
-        showToast(
-          "Student name দিন।",
-          "error"
-        );
-
-        studentNameInput.focus();
+      if (
+        savingStudent
+      ) {
 
         return;
 
       }
 
 
-      const saveButton =
-        document.getElementById(
-          "saveStudentBtn"
+      const name =
+        studentName.value.trim();
+
+
+      if (!name) {
+
+        showToast(
+          "Please enter student name.",
+          "error"
         );
 
+        studentName.focus();
 
-      const originalText =
-        saveButton.textContent;
+        return;
+
+      }
+
+
+      savingStudent =
+        true;
+
+      saveStudentBtn.disabled =
+        true;
 
 
       try {
 
-        saveButton.disabled =
-          true;
-
-        saveButton.textContent =
-          "Saving...";
+        const studentId =
+          editingStudentId ||
+          generateId();
 
 
         let imageUrl =
-          currentStudentImage;
+          "";
 
-
-        /*
-         * If user selected a new image,
-         * upload it to Firebase Storage.
-         */
 
         if (
-          currentStudentImageFile
+          editingStudentId
         ) {
 
-          imageUrl =
-            await uploadImageToFirebase(
-
-              currentStudentImageFile,
-
-              "students"
-
-            );
-
-        }
-
-
-        if (editingStudentId) {
-
-          const index =
-            students.findIndex(
+          const oldStudent =
+            students.find(
               item =>
-                item.id ===
-                editingStudentId
+                String(
+                  item.id
+                ) ===
+                String(
+                  editingStudentId
+                )
             );
 
 
-          if (index === -1) {
-
-            throw new Error(
-              "Student not found."
-            );
-
-          }
-
-
-          const updatedStudent = {
-
-            ...students[index],
-
-            name,
-
-            image:
-              imageUrl,
-
-            updatedAt:
-              new Date().toISOString()
-
-          };
-
-
-          await saveStudentToFirebase(
-            updatedStudent
-          );
-
-
-          students[index] =
-            updatedStudent;
-
-
-          showToast(
-            "Student updated successfully.",
-            "success"
-          );
-
-        } else {
-
-          const newStudent = {
-
-            id:
-              createStudentId(),
-
-            name,
-
-            image:
-              imageUrl,
-
-            status:
-              "Active",
-
-            createdAt:
-              new Date().toISOString()
-
-          };
-
-
-          await saveStudentToFirebase(
-            newStudent
-          );
-
-
-          students.push(
-            newStudent
-          );
-
-
-          showToast(
-            "Student added successfully.",
-            "success"
-          );
+          imageUrl =
+            oldStudent?.imageUrl ||
+            oldStudent?.image ||
+            oldStudent?.photo ||
+            oldStudent?.avatar ||
+            "";
 
         }
 
 
-        saveLocalStudents();
+        if (
+          selectedStudentFile
+        ) {
 
-        renderStudents();
+          showLoading(
+            "Uploading student image..."
+          );
 
-        closeStudentModal();
 
-      } catch (error) {
+          const fileName =
+            safeFileName(
+              selectedStudentFile.name
+            );
 
-        console.error(
-          "Save student error:",
-          error
+
+          const storagePath =
+            `students/${studentId}/${Date.now()}_${fileName}`;
+
+
+          imageUrl =
+            await uploadImageFile(
+              selectedStudentFile,
+              storagePath
+            );
+
+
+          hideLoading();
+
+        }
+
+
+        const payload = {
+
+          id:
+            studentId,
+
+          name:
+            name,
+
+          imageUrl:
+            imageUrl,
+
+          updatedAt:
+            serverTimestamp()
+
+        };
+
+
+        if (
+          !editingStudentId
+        ) {
+
+          payload.createdAt =
+            new Date()
+              .toISOString();
+
+        }
+
+
+        showLoading(
+          "Saving student..."
         );
 
 
+        await setDoc(
+
+          doc(
+            db,
+            STUDENTS_COLLECTION,
+            studentId
+          ),
+
+          payload,
+
+          {
+            merge: true
+          }
+
+        );
+
+
+        hideLoading();
+
+
+        closeStudentModal();
+
+
         showToast(
-          "Student save করা যায়নি। Firebase Storage/Firestore Rules check করুন।",
+          editingStudentId
+            ? "Student updated."
+            : "Student added."
+        );
+
+
+      } catch (
+        error
+      ) {
+
+        console.error(
+          error
+        );
+
+        hideLoading();
+
+
+        showToast(
+          "Student save failed: " +
+          (
+            error?.message ||
+            "Unknown error"
+          ),
           "error"
         );
 
       } finally {
 
-        saveButton.disabled =
+        savingStudent =
           false;
 
-        saveButton.textContent =
-          originalText;
+        saveStudentBtn.disabled =
+          false;
 
       }
 
@@ -3007,61 +4603,81 @@
        DELETE STUDENT
        ========================================================= */
 
-    async function deleteStudent(id) {
+    async function deleteStudent(
+      studentId
+    ) {
 
       const student =
         students.find(
           item =>
-            item.id === id
+            String(
+              item.id
+            ) ===
+            String(
+              studentId
+            )
         );
 
 
-      if (!student) return;
+      if (!student) {
+        return;
+      }
 
 
       const confirmed =
         confirm(
-          `"${student.name}" কে delete করতে চান?`
+          `Delete "${student.name}"?`
         );
 
 
-      if (!confirmed) return;
+      if (!confirmed) {
+        return;
+      }
 
 
       try {
 
-        await deleteStudentFromFirebase(
-          id
+        showLoading(
+          "Deleting student..."
         );
 
 
-        students =
-          students.filter(
-            item =>
-              item.id !== id
-          );
+        await deleteDoc(
+
+          doc(
+            db,
+            STUDENTS_COLLECTION,
+            studentId
+          )
+
+        );
 
 
-        saveLocalStudents();
-
-        renderStudents();
+        hideLoading();
 
 
         showToast(
-          "Student deleted.",
-          "success"
+          "Student deleted."
         );
 
-      } catch (error) {
+
+      } catch (
+        error
+      ) {
 
         console.error(
-          "Delete student error:",
           error
         );
 
+        hideLoading();
+
 
         showToast(
-          "Student delete করা যায়নি।",
+          "Delete failed: " +
+          (
+            error?.message ||
+            "Unknown error"
+          ),
           "error"
         );
 
@@ -3071,841 +4687,240 @@
 
 
     /* =========================================================
-       STUDENT IMAGE PREVIEW
+       LOGO UPLOAD
        ========================================================= */
 
-    function updateStudentImagePreview() {
+    logoInput.addEventListener(
+      "change",
+      async () => {
 
-      if (
-        currentStudentImage
-      ) {
+        const file =
+          logoInput.files?.[0];
 
-        studentImagePreview.innerHTML = `
 
-          <img
-            src="${escapeHtml(currentStudentImage)}"
-            alt="Student"
-          >
+        if (!file) {
+          return;
+        }
 
-        `;
 
-      } else {
+        if (
+          !file.type.startsWith(
+            "image/"
+          )
+        ) {
 
-        studentImagePreview.innerHTML =
-          "👨‍🎓";
-
-      }
-
-    }
-
-
-    /* =========================================================
-       HANDLE STUDENT IMAGE
-       ========================================================= */
-
-    function handleStudentImage(file) {
-
-      if (!file) return;
-
-
-      if (
-        file.size >
-        3 * 1024 * 1024
-      ) {
-
-        showToast(
-          "Image size 3MB-এর বেশি হতে পারবে না।",
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      if (
-        !file.type.startsWith(
-          "image/"
-        )
-      ) {
-
-        showToast(
-          "শুধু image file দিন।",
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      currentStudentImageFile =
-        file;
-
-
-      /*
-       * Local preview only.
-       * Actual upload happens when Save Student is clicked.
-       */
-
-      const reader =
-        new FileReader();
-
-
-      reader.onload =
-        event => {
-
-          currentStudentImage =
-            event.target.result;
-
-          updateStudentImagePreview();
-
-        };
-
-
-      reader.readAsDataURL(
-        file
-      );
-
-    }
-
-
-    /* =========================================================
-       CLOSE STUDENT MODAL
-       ========================================================= */
-
-    function closeStudentModal() {
-
-      studentModal.classList.remove(
-        "show"
-      );
-
-
-      editingStudentId =
-        null;
-
-
-      currentStudentImage =
-        "";
-
-
-      currentStudentImageFile =
-        null;
-
-    }
-
-
-    /* =========================================================
-       APPLY LOGO
-       ========================================================= */
-
-    function applyLogo(
-      logo
-    ) {
-
-      if (logo) {
-
-        logoPreviewImage.src =
-          logo;
-
-        logoPreviewImage.style.display =
-          "block";
-
-
-        logoPreviewText.style.display =
-          "none";
-
-
-        sidebarLogoImage.src =
-          logo;
-
-        sidebarLogoImage.style.display =
-          "block";
-
-
-        sidebarLogoText.style.display =
-          "none";
-
-
-        favicon.href =
-          logo;
-
-
-        /*
-         * Keep a local cache as well.
-         */
-
-        try {
-
-          localStorage.setItem(
-            "personalCourseStudioFirebaseLogo",
-            logo
+          showToast(
+            "Please choose an image file.",
+            "error"
           );
 
-        } catch (error) {
+          logoInput.value =
+            "";
 
-          console.warn(
-            "Logo local cache unavailable."
-          );
+          return;
 
         }
 
-      } else {
 
-        logoPreviewImage.removeAttribute(
-          "src"
-        );
-
-        logoPreviewImage.style.display =
-          "none";
+        const reader =
+          new FileReader();
 
 
-        logoPreviewText.style.display =
-          "block";
+        reader.onload =
+          () => {
+
+            applyLogo(
+              reader.result
+            );
+
+          };
 
 
-        sidebarLogoImage.removeAttribute(
-          "src"
-        );
-
-        sidebarLogoImage.style.display =
-          "none";
-
-
-        sidebarLogoText.style.display =
-          "block";
-
-
-        favicon.removeAttribute(
-          "href"
+        reader.readAsDataURL(
+          file
         );
 
 
-        localStorage.removeItem(
-          "personalCourseStudioFirebaseLogo"
-        );
+        try {
 
-      }
-
-    }
-
-
-    /* =========================================================
-       LOAD LOGO FROM FIRESTORE
-       ========================================================= */
-
-    async function loadLogoFromFirebase() {
-
-      try {
-
-        const settingsRef =
-          doc(
-            db,
-            STUDIO_COLLECTION,
-            STUDIO_SETTINGS_DOC
+          showLoading(
+            "Uploading studio logo..."
           );
 
 
-        onSnapshot(
-
-          settingsRef,
-
-          snapshot => {
-
-            if (
-              snapshot.exists()
-            ) {
-
-              const data =
-                snapshot.data();
+          const fileName =
+            safeFileName(
+              file.name
+            );
 
 
-              const logo =
-                data.studioLogo ||
-                "";
+          const storagePath =
+            `studio/logo/${Date.now()}_${fileName}`;
 
 
-              applyLogo(
-                logo
-              );
+          const logoUrl =
+            await uploadImageFile(
+              file,
+              storagePath
+            );
 
 
-              /*
-               * Also keep old local profile
-               * compatible with the existing UI.
-               */
+          await setDoc(
 
-              const profile =
-                getProfile();
+            doc(
+              db,
+              "studio",
+              "settings"
+            ),
 
+            {
+              studioLogo:
+                logoUrl,
 
-              profile.logo =
-                logo;
+              updatedAt:
+                serverTimestamp()
 
+            },
 
-              saveProfile(
-                profile
-              );
-
-            } else {
-
-              applyLogo("");
-
+            {
+              merge: true
             }
 
-          },
+          );
 
-          error => {
 
-            console.error(
-              "Logo realtime error:",
-              error
-            );
+          applyLogo(
+            logoUrl
+          );
 
-          }
 
-        );
+          hideLoading();
 
-      } catch (error) {
 
-        console.error(
-          "Logo load error:",
+          showToast(
+            "Studio logo synced."
+          );
+
+
+        } catch (
           error
-        );
+        ) {
 
-
-        /*
-         * Fallback to existing local logo.
-         */
-
-        const profile =
-          getProfile();
-
-
-        applyLogo(
-          profile.logo ||
-          localStorage.getItem(
-            "personalCourseStudioFirebaseLogo"
-          ) ||
-          ""
-        );
-
-      }
-
-    }
-
-
-    /* =========================================================
-       SAVE LOGO TO FIREBASE
-       ========================================================= */
-
-    async function saveLogoToFirebase(
-      file
-    ) {
-
-      if (!file) return;
-
-
-      if (
-        file.size >
-        3 * 1024 * 1024
-      ) {
-
-        showToast(
-          "Logo size 3MB-এর বেশি হতে পারবে না।",
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      if (
-        !file.type.startsWith(
-          "image/"
-        )
-      ) {
-
-        showToast(
-          "শুধু image logo ব্যবহার করুন।",
-          "error"
-        );
-
-        return;
-
-      }
-
-
-      const button =
-        document.getElementById(
-          "chooseLogoBtn"
-        );
-
-
-      const originalText =
-        button.textContent;
-
-
-      try {
-
-        button.disabled =
-          true;
-
-        button.textContent =
-          "Uploading...";
-
-
-        /*
-         * Upload logo to Firebase Storage.
-         */
-
-        const logoUrl =
-          await uploadImageToFirebase(
-
-            file,
-
-            "studio/logo"
-
+          console.error(
+            error
           );
 
-
-        /*
-         * Save logo URL to Firestore.
-         */
-
-        await setDoc(
-
-          doc(
-            db,
-            STUDIO_COLLECTION,
-            STUDIO_SETTINGS_DOC
-          ),
-
-          {
-
-            studioLogo:
-              logoUrl,
-
-            updatedAt:
-              serverTimestamp()
-
-          },
-
-          {
-            merge: true
-          }
-
-        );
+          hideLoading();
 
 
-        /*
-         * Existing local profile compatibility.
-         */
-
-        const profile =
-          getProfile();
-
-
-        profile.logo =
-          logoUrl;
-
-
-        saveProfile(
-          profile
-        );
-
-
-        /*
-         * Existing local settings compatibility.
-         */
-
-        try {
-
-          const currentSettings =
-            JSON.parse(
-              localStorage.getItem(
-                SETTINGS_KEY
-              ) || "{}"
-            );
-
-
-          currentSettings.studioLogo =
-            logoUrl;
-
-
-          localStorage.setItem(
-            SETTINGS_KEY,
-            JSON.stringify(
-              currentSettings
-            )
+          showToast(
+            "Logo upload failed: " +
+            (
+              error?.message ||
+              "Unknown error"
+            ),
+            "error"
           );
 
-        } catch (error) {
+        } finally {
 
-          console.warn(
-            "Local settings update failed."
-          );
+          logoInput.value =
+            "";
 
         }
 
-
-        applyLogo(
-          logoUrl
-        );
-
-
-        showToast(
-          "Logo Firebase-এ save হয়েছে। Mentor Studio-তেও sync হবে।",
-          "success"
-        );
-
-      } catch (error) {
-
-        console.error(
-          "Logo upload error:",
-          error
-        );
-
-
-        showToast(
-          "Logo upload হয়নি। Firebase Storage Rules check করুন।",
-          "error"
-        );
-
-      } finally {
-
-        button.disabled =
-          false;
-
-        button.textContent =
-          originalText;
-
       }
-
-    }
+    );
 
 
     /* =========================================================
        REMOVE LOGO
        ========================================================= */
 
-    async function removeLogo() {
+    removeLogoBtn.addEventListener(
+      "click",
+      async () => {
 
-      const confirmed =
-        confirm(
-          "Studio Logo remove করতে চান?"
-        );
-
-
-      if (!confirmed) return;
-
-
-      try {
-
-        await setDoc(
-
-          doc(
-            db,
-            STUDIO_COLLECTION,
-            STUDIO_SETTINGS_DOC
-          ),
-
-          {
-
-            studioLogo:
-              "",
-
-            updatedAt:
-              serverTimestamp()
-
-          },
-
-          {
-            merge: true
-          }
-
-        );
+        const confirmed =
+          confirm(
+            "Remove the studio logo?"
+          );
 
 
-        const profile =
-          getProfile();
+        if (!confirmed) {
+          return;
+        }
 
 
-        profile.logo =
-          "";
+        try {
+
+          showLoading(
+            "Removing logo..."
+          );
 
 
-        saveProfile(
-          profile
-        );
+          await setDoc(
+
+            doc(
+              db,
+              "studio",
+              "settings"
+            ),
+
+            {
+              studioLogo:
+                "",
+
+              updatedAt:
+                serverTimestamp()
+
+            },
+
+            {
+              merge: true
+            }
+
+          );
 
 
-        applyLogo(
-          ""
-        );
+          applyLogo(
+            ""
+          );
 
 
-        showToast(
-          "Logo removed.",
-          "success"
-        );
+          hideLoading();
 
-      } catch (error) {
 
-        console.error(
-          "Remove logo error:",
+          showToast(
+            "Studio logo removed."
+          );
+
+
+        } catch (
           error
-        );
+        ) {
+
+          console.error(
+            error
+          );
+
+          hideLoading();
 
 
-        showToast(
-          "Logo remove করা যায়নি।",
-          "error"
-        );
-
-      }
-
-    }
-
-
-    /* =========================================================
-       NAVIGATION
-       ========================================================= */
-
-    function showSection(
-      sectionName
-    ) {
-
-      navButtons.forEach(
-        button => {
-
-          button.classList.toggle(
-
-            "active",
-
-            button.dataset.section ===
-              sectionName
-
+          showToast(
+            "Logo remove failed.",
+            "error"
           );
 
         }
-      );
-
-
-      if (
-        sectionName ===
-        "students"
-      ) {
-
-        studentsSection.classList.add(
-          "active"
-        );
-
-
-        logoSection.classList.remove(
-          "active"
-        );
-
-
-        pageTitle.textContent =
-          "Student Manager";
-
-
-        pageSubtitle.textContent =
-          "Manage student name and profile image.";
-
-      }
-
-
-      if (
-        sectionName ===
-        "logo"
-      ) {
-
-        studentsSection.classList.remove(
-          "active"
-        );
-
-
-        logoSection.classList.add(
-          "active"
-        );
-
-
-        pageTitle.textContent =
-          "Studio Logo";
-
-
-        pageSubtitle.textContent =
-          "Change the logo used across the studio.";
-
-      }
-
-
-      sidebar.classList.remove(
-        "open"
-      );
-
-    }
-
-
-    /* =========================================================
-       TOAST
-       ========================================================= */
-
-    function showToast(
-      message,
-      type = "success"
-    ) {
-
-      const container =
-        document.getElementById(
-          "toastContainer"
-        );
-
-
-      const toast =
-        document.createElement(
-          "div"
-        );
-
-
-      toast.className =
-        "toast " + type;
-
-
-      toast.textContent =
-        message;
-
-
-      container.appendChild(
-        toast
-      );
-
-
-      setTimeout(
-        () => {
-
-          toast.style.opacity =
-            "0";
-
-
-          toast.style.transform =
-            "translateY(10px)";
-
-
-          setTimeout(
-            () => {
-
-              toast.remove();
-
-            },
-            250
-          );
-
-        },
-        3000
-      );
-
-    }
-
-
-    /* =========================================================
-       EVENTS
-       ========================================================= */
-
-    navButtons.forEach(
-      button => {
-
-        button.addEventListener(
-          "click",
-          () => {
-
-            showSection(
-              button.dataset.section
-            );
-
-          }
-        );
 
       }
     );
 
 
-    document
-      .getElementById(
-        "addStudentBtn"
-      )
-      .addEventListener(
-        "click",
-        openAddStudent
-      );
-
-
-    document
-      .getElementById(
-        "saveStudentBtn"
-      )
-      .addEventListener(
-        "click",
-        saveStudent
-      );
-
-
-    document
-      .getElementById(
-        "cancelStudentBtn"
-      )
-      .addEventListener(
-        "click",
-        closeStudentModal
-      );
-
-
-    document
-      .getElementById(
-        "closeStudentModal"
-      )
-      .addEventListener(
-        "click",
-        closeStudentModal
-      );
-
-
-    document
-      .getElementById(
-        "chooseStudentImageBtn"
-      )
-      .addEventListener(
-        "click",
-        () => {
-
-          studentImageInput.click();
-
-        }
-      );
-
-
-    document
-      .getElementById(
-        "removeStudentImageBtn"
-      )
-      .addEventListener(
-        "click",
-        () => {
-
-          currentStudentImage =
-            "";
-
-          currentStudentImageFile =
-            null;
-
-          updateStudentImagePreview();
-
-        }
-      );
-
+    /* =========================================================
+       STUDENT IMAGE
+       ========================================================= */
 
     studentImageInput.addEventListener(
       "change",
@@ -3915,65 +4930,92 @@
           studentImageInput.files?.[0];
 
 
-        handleStudentImage(
-          file
-        );
+        if (!file) {
+          return;
+        }
 
 
-        studentImageInput.value =
-          "";
+        if (
+          !file.type.startsWith(
+            "image/"
+          )
+        ) {
 
-      }
-    );
+          showToast(
+            "Please choose an image file.",
+            "error"
+          );
 
+          studentImageInput.value =
+            "";
 
-    document
-      .getElementById(
-        "chooseLogoBtn"
-      )
-      .addEventListener(
-        "click",
-        () => {
-
-          logoInput.click();
+          return;
 
         }
-      );
 
 
-    logoInput.addEventListener(
-      "change",
-      () => {
-
-        const file =
-          logoInput.files?.[0];
+        selectedStudentFile =
+          file;
 
 
-        saveLogoToFirebase(
+        selectedFileName.textContent =
+          file.name;
+
+
+        const reader =
+          new FileReader();
+
+
+        reader.onload =
+          () => {
+
+            studentImagePreview.src =
+              reader.result;
+
+            studentImagePreview.style.display =
+              "block";
+
+            studentImagePlaceholder.style.display =
+              "none";
+
+          };
+
+
+        reader.readAsDataURL(
           file
         );
 
-
-        logoInput.value =
-          "";
-
       }
     );
-
-
-    document
-      .getElementById(
-        "removeLogoBtn"
-      )
-      .addEventListener(
-        "click",
-        removeLogo
-      );
 
 
     /* =========================================================
-       MODAL OUTSIDE CLICK
+       BUTTONS
        ========================================================= */
+
+    addStudentBtn.addEventListener(
+      "click",
+      openAddStudent
+    );
+
+
+    closeModalBtn.addEventListener(
+      "click",
+      closeStudentModal
+    );
+
+
+    cancelModalBtn.addEventListener(
+      "click",
+      closeStudentModal
+    );
+
+
+    saveStudentBtn.addEventListener(
+      "click",
+      saveStudent
+    );
+
 
     studentModal.addEventListener(
       "click",
@@ -3991,10 +5033,6 @@
       }
     );
 
-
-    /* =========================================================
-       ESC KEY
-       ========================================================= */
 
     document.addEventListener(
       "keydown",
@@ -4017,13 +5055,97 @@
        MOBILE MENU
        ========================================================= */
 
+    function openMobileMenu() {
+
+      sidebar.classList.add(
+        "open"
+      );
+
+      mobileOverlay.classList.add(
+        "show"
+      );
+
+    }
+
+
+    function closeMobileMenu() {
+
+      sidebar.classList.remove(
+        "open"
+      );
+
+      mobileOverlay.classList.remove(
+        "show"
+      );
+
+    }
+
+
     mobileMenuBtn.addEventListener(
+      "click",
+      openMobileMenu
+    );
+
+
+    mobileOverlay.addEventListener(
+      "click",
+      closeMobileMenu
+    );
+
+
+    /* =========================================================
+       NAV
+       ========================================================= */
+
+    studentsNav.addEventListener(
       "click",
       () => {
 
-        sidebar.classList.toggle(
-          "open"
+        studentsNav.classList.add(
+          "active"
         );
+
+        logoNav.classList.remove(
+          "active"
+        );
+
+
+        studentsSection.scrollIntoView({
+          behavior:
+            "smooth",
+          block:
+            "start"
+        });
+
+
+        closeMobileMenu();
+
+      }
+    );
+
+
+    logoNav.addEventListener(
+      "click",
+      () => {
+
+        logoNav.classList.add(
+          "active"
+        );
+
+        studentsNav.classList.remove(
+          "active"
+        );
+
+
+        logoSection.scrollIntoView({
+          behavior:
+            "smooth",
+          block:
+            "start"
+        });
+
+
+        closeMobileMenu();
 
       }
     );
@@ -4033,78 +5155,79 @@
        LOGOUT
        ========================================================= */
 
-    document
-      .getElementById(
-        "logoutBtn"
-      )
-      .addEventListener(
-        "click",
-        () => {
+    logoutBtn.addEventListener(
+      "click",
+      () => {
 
-          sessionStorage.removeItem(
-            "personalCourseStudioAdminLoggedIn"
-          );
+        sessionStorage.removeItem(
+          ADMIN_SESSION_KEY
+        );
 
+        sessionStorage.removeItem(
+          "personalCourseStudioRole"
+        );
 
-          sessionStorage.removeItem(
-            "personalCourseStudioRole"
-          );
-
-
-          sessionStorage.removeItem(
-            "personalCourseStudioUsername"
-          );
+        sessionStorage.removeItem(
+          "personalCourseStudioUsername"
+        );
 
 
-          window.location.replace(
-            "../login/"
-          );
+        window.location.replace(
+          "../login/"
+        );
 
-        }
-      );
+      }
+    );
 
 
     /* =========================================================
-       INITIALIZE
+       CLEANUP
        ========================================================= */
 
-    async function initializeAdmin() {
+    window.addEventListener(
+      "beforeunload",
+      () => {
 
-      /*
-       * First show local data if available.
-       */
+        if (
+          unsubscribeStudents
+        ) {
 
-      students =
-        getLocalStudents();
+          unsubscribeStudents();
 
+        }
 
-      renderStudents();
+        if (
+          unsubscribeStudio
+        ) {
 
+          unsubscribeStudio();
 
-      /*
-       * Then Firebase becomes the main source.
-       */
+        }
 
-      await loadStudentsFromFirebase();
-
-
-      /*
-       * Start realtime student sync.
-       */
-
-      startStudentListener();
+      }
+    );
 
 
-      /*
-       * Start realtime logo sync.
-       */
+    /* =========================================================
+       INITIAL LOAD
+       ========================================================= */
 
-      await loadLogoFromFirebase();
+    loadLocalStudents();
 
-    }
+    renderStudents();
 
 
-    initializeAdmin();
+    const initialProfile =
+      getProfile();
+
+
+    applyLogo(
+      initialProfile.logo ||
+      ""
+    );
+
+
+    initializeFirebaseData();
 
   </script>
 
