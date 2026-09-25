@@ -2,52 +2,48 @@
 <html lang="bn">
 <head>
   <meta charset="UTF-8" />
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0, maximum-scale=1.0"
-  />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <title>Mentor Studio | Personal Course Studio</title>
 
-  <meta
-    name="description"
-    content="Personal Course Studio Mentor Recording Studio"
+  <link id="favicon" rel="icon" href="" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
   />
 
-  <link rel="manifest" href="../manifest.json" />
-
   <style>
+
     /* =========================================================
        PERSONAL COURSE STUDIO
-       MENTOR STUDIO — ZOOM STYLE UI
-       STEP 3 — MENTOR VOICE CLONE
+       MENTOR STUDIO
+       ZOOM STYLE
        ========================================================= */
 
     :root {
-      --bg: #080b10;
-      --bg2: #0d1118;
-      --panel: #111720;
-      --panel2: #151c26;
-      --panel3: #1b2430;
+      --bg: #07080b;
+      --panel: #0d1015;
+      --panel-2: #11151c;
+      --panel-3: #171c24;
 
-      --border: rgba(255, 255, 255, 0.09);
-      --border2: rgba(255, 255, 255, 0.14);
+      --border: rgba(255,255,255,.08);
+      --border-hover: rgba(255,255,255,.15);
 
-      --text: #f7f9fc;
-      --muted: #9da8b7;
+      --text: #f5f7fa;
+      --muted: #8d97a7;
 
-      --blue: #2d8cff;
-      --blue2: #1266d8;
-      --green: #24c77b;
-      --red: #ff4d5a;
-      --yellow: #f5b942;
-      --purple: #9b6cff;
+      --blue: #4f8cff;
+      --blue-2: #6da1ff;
 
-      --shadow: 0 20px 60px rgba(0, 0, 0, 0.45);
+      --green: #32d583;
+      --red: #ff5364;
+      --yellow: #f6c85f;
 
-      --radius: 18px;
-      --topbar: 68px;
-      --sidebar: 350px;
+      --radius: 16px;
     }
 
     * {
@@ -61,563 +57,723 @@
       width: 100%;
       height: 100%;
       overflow: hidden;
+    }
+
+    body {
+      font-family: "Inter", sans-serif;
       background: var(--bg);
       color: var(--text);
-      font-family:
-        Inter,
-        system-ui,
-        -apple-system,
-        BlinkMacSystemFont,
-        "Segoe UI",
-        sans-serif;
     }
 
     button,
     input,
     select {
-      font: inherit;
+      font-family: inherit;
     }
 
     button {
+      border: 0;
       cursor: pointer;
     }
 
     /* =========================================================
-       TOP BAR
+       APP
+       ========================================================= */
+
+    .app {
+      width: 100%;
+      height: 100vh;
+
+      display: flex;
+      flex-direction: column;
+
+      background:
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(79,140,255,.055),
+          transparent 30%
+        ),
+        #07080b;
+    }
+
+    /* =========================================================
+       TOPBAR
        ========================================================= */
 
     .topbar {
-      height: var(--topbar);
-      width: 100%;
-      background:
-        linear-gradient(
-          180deg,
-          rgba(20, 27, 37, 0.98),
-          rgba(10, 14, 20, 0.98)
-        );
-      border-bottom: 1px solid var(--border);
+      height: 64px;
+      flex: 0 0 64px;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
+
       padding: 0 18px;
-      position: relative;
-      z-index: 1000;
+
+      background: rgba(10,12,16,.96);
+      border-bottom: 1px solid var(--border);
+
+      z-index: 100;
     }
 
-    .brand-area {
+    .top-left {
       display: flex;
       align-items: center;
       gap: 12px;
+
       min-width: 0;
     }
 
-    .brand-logo {
-      width: 40px;
-      height: 40px;
-      border-radius: 12px;
-      background:
-        linear-gradient(
-          135deg,
-          var(--blue),
-          #6b5cff
-        );
+    .studio-logo {
+      width: 38px;
+      height: 38px;
+
+      border-radius: 11px;
+
+      background: #151a22;
+      border: 1px solid var(--border);
+
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 900;
-      font-size: 15px;
-      box-shadow: 0 8px 25px rgba(45, 140, 255, 0.3);
+
+      overflow: hidden;
       flex-shrink: 0;
     }
 
-    .brand-text {
+    .studio-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: none;
+    }
+
+    .studio-logo span {
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .studio-title {
       min-width: 0;
     }
 
-    .brand-title {
-      font-size: 15px;
+    .studio-title strong {
+      display: block;
+
+      font-size: 13px;
       font-weight: 800;
+
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
 
-    .brand-subtitle {
-      font-size: 11px;
+    .studio-title small {
+      display: block;
+
+      margin-top: 3px;
+
       color: var(--muted);
-      margin-top: 2px;
+      font-size: 10px;
+
       white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .mode-badge {
-      margin-left: 10px;
-      padding: 6px 10px;
+      padding: 6px 9px;
+
       border-radius: 999px;
-      background: rgba(36, 199, 123, 0.12);
-      border: 1px solid rgba(36, 199, 123, 0.25);
-      color: #6df0ad;
-      font-size: 10px;
+
+      background: rgba(79,140,255,.1);
+      border: 1px solid rgba(79,140,255,.16);
+
+      color: #80adff;
+
+      font-size: 9px;
       font-weight: 800;
-      letter-spacing: 0.7px;
+      letter-spacing: .08em;
+
       white-space: nowrap;
     }
 
-    .top-actions {
+    .top-right {
       display: flex;
       align-items: center;
       gap: 8px;
     }
 
     .top-btn {
-      height: 38px;
+      height: 36px;
+      padding: 0 12px;
+
       border-radius: 10px;
+
+      background: rgba(255,255,255,.045);
       border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.045);
-      color: var(--text);
-      padding: 0 13px;
-      transition: 0.2s;
+
+      color: #bdc6d2;
+
+      font-size: 11px;
+      font-weight: 700;
     }
 
     .top-btn:hover {
-      background: rgba(255, 255, 255, 0.09);
-      border-color: var(--border2);
+      background: rgba(255,255,255,.08);
+      color: #fff;
     }
 
     .top-btn.logout {
-      color: #ff8991;
+      color: #ff7e8b;
+      background: rgba(255,83,100,.07);
     }
 
     /* =========================================================
-       MAIN LAYOUT
+       WORKSPACE
        ========================================================= */
 
-    .app {
-      height: calc(100vh - var(--topbar));
+    .workspace {
+      flex: 1;
+      min-height: 0;
+
       display: grid;
-      grid-template-columns: minmax(0, 1fr) var(--sidebar);
-      overflow: hidden;
+      grid-template-columns: minmax(0, 1fr) 350px;
     }
 
     /* =========================================================
-       STAGE
+       STAGE AREA
        ========================================================= */
 
     .stage-area {
+      position: relative;
+
       min-width: 0;
       min-height: 0;
-      background:
-        radial-gradient(
-          circle at 50% 30%,
-          rgba(45, 140, 255, 0.08),
-          transparent 35%
-        ),
-        #070a0f;
-      position: relative;
+
+      background: #050608;
+
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+
       overflow: hidden;
     }
 
-    .stage-header {
-      height: 52px;
+    .stage {
+      position: relative;
+
+      width: min(
+        calc(100% - 40px),
+        1180px
+      );
+
+      aspect-ratio: 16 / 9;
+
+      max-height: calc(100% - 40px);
+
+      background: #000;
+
+      border: 1px solid rgba(255,255,255,.08);
+      border-radius: 20px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 30px 80px rgba(0,0,0,.45);
+    }
+
+    .stage.welcome-mode {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .welcome {
+      text-align: center;
+      padding: 30px;
+    }
+
+    .welcome-logo {
+      width: 76px;
+      height: 76px;
+
+      margin: 0 auto 18px;
+
+      border-radius: 22px;
+
+      background: #121721;
+      border: 1px solid var(--border);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      overflow: hidden;
+    }
+
+    .welcome-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: none;
+    }
+
+    .welcome-logo span {
+      font-size: 22px;
+      font-weight: 900;
+    }
+
+    .welcome h1 {
+      font-size: clamp(20px, 3vw, 34px);
+      font-weight: 800;
+    }
+
+    .welcome p {
+      margin-top: 8px;
+
+      color: #8993a2;
+      font-size: 12px;
+    }
+
+    .stage-content {
+      position: absolute;
+      inset: 0;
+      display: none;
+    }
+
+    .stage-content.show {
+      display: block;
+    }
+
+    /* =========================================================
+       SLIDE IMAGE
+       ========================================================= */
+
+    #slideImage {
+      position: absolute;
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: contain;
+
+      display: none;
+
+      background: #000;
+    }
+
+    #slideImage.show {
+      display: block;
+    }
+
+    /* =========================================================
+       MAIN VIDEO
+       ========================================================= */
+
+    #mainVideo {
+      position: absolute;
+      inset: 0;
+
+      width: 100%;
+      height: 100%;
+
+      object-fit: contain;
+
+      display: none;
+
+      background: #000;
+    }
+
+    #mainVideo.show {
+      display: block;
+    }
+
+    /* =========================================================
+       STAGE LABEL
+       ========================================================= */
+
+    .stage-label {
+      position: absolute;
+
+      top: 16px;
+      left: 16px;
+
+      z-index: 20;
+
+      padding: 9px 12px;
+
+      border-radius: 11px;
+
+      background: rgba(0,0,0,.58);
+      border: 1px solid rgba(255,255,255,.1);
+
+      backdrop-filter: blur(10px);
+
+      cursor: grab;
+
+      user-select: none;
+    }
+
+    .stage-label:active {
+      cursor: grabbing;
+    }
+
+    .stage-label strong {
+      display: block;
+      font-size: 11px;
+    }
+
+    .stage-label small {
+      display: block;
+
+      margin-top: 3px;
+
+      color: #a2adbd;
+      font-size: 8px;
+    }
+
+    /* =========================================================
+       BRAND BADGE
+       ========================================================= */
+
+    .brand-badge {
+      position: absolute;
+
+      top: 16px;
+      right: 16px;
+
+      z-index: 20;
+
+      padding: 7px 10px;
+
+      border-radius: 999px;
+
+      background: rgba(0,0,0,.58);
+      border: 1px solid rgba(255,255,255,.1);
+
+      color: #cbd4df;
+
+      font-size: 9px;
+      font-weight: 700;
+
+      max-width: 240px;
+
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* =========================================================
+       MENTOR CAMERA TILE
+       ========================================================= */
+
+    .mentor-tile {
+      position: absolute;
+
+      width: 210px;
+      height: 125px;
+
+      right: 20px;
+      bottom: 20px;
+
+      z-index: 40;
+
+      background: #080a0e;
+
+      border: 1px solid rgba(255,255,255,.12);
+
+      border-radius: 15px;
+
+      overflow: hidden;
+
+      box-shadow:
+        0 15px 40px rgba(0,0,0,.45);
+
+      cursor: grab;
+    }
+
+    .mentor-tile:active {
+      cursor: grabbing;
+    }
+
+    #mentorVideo {
+      width: 100%;
+      height: 100%;
+
+      object-fit: cover;
+
+      background: #111;
+    }
+
+    .mentor-name {
+      position: absolute;
+
+      left: 9px;
+      bottom: 8px;
+
+      padding: 5px 7px;
+
+      border-radius: 7px;
+
+      background: rgba(0,0,0,.58);
+
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .mentor-mic {
+      position: absolute;
+
+      top: 8px;
+      right: 8px;
+
+      width: 25px;
+      height: 25px;
+
+      border-radius: 7px;
+
+      background: rgba(0,0,0,.58);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 11px;
+    }
+
+    /* =========================================================
+       RECORDING BADGE
+       ========================================================= */
+
+    .recording-indicator {
+      position: absolute;
+
+      left: 50%;
+      top: 16px;
+
+      transform: translateX(-50%);
+
+      z-index: 60;
+
+      padding: 7px 11px;
+
+      border-radius: 999px;
+
+      background: rgba(255,83,100,.12);
+      border: 1px solid rgba(255,83,100,.22);
+
+      color: #ff8290;
+
+      font-size: 9px;
+      font-weight: 800;
+
+      display: none;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .recording-indicator.show {
+      display: flex;
+    }
+
+    .record-dot {
+      width: 7px;
+      height: 7px;
+
+      border-radius: 50%;
+
+      background: var(--red);
+
+      animation: blink 1s infinite;
+    }
+
+    @keyframes blink {
+      50% {
+        opacity: .25;
+      }
+    }
+
+    /* =========================================================
+       RIGHT SIDEBAR
+       ========================================================= */
+
+    .control-panel {
+      min-height: 0;
+
+      background: #0d1015;
+
+      border-left: 1px solid var(--border);
+
+      display: flex;
+      flex-direction: column;
+
+      overflow: hidden;
+    }
+
+    .panel-scroll {
+      flex: 1;
+
+      overflow-y: auto;
+
+      padding: 15px;
+
+      scrollbar-width: thin;
+    }
+
+    .panel-section {
+      margin-bottom: 16px;
+    }
+
+    .panel-heading {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 16px;
-      border-bottom: 1px solid var(--border);
-      background: rgba(8, 11, 16, 0.85);
-      flex-shrink: 0;
+
+      margin-bottom: 9px;
     }
 
-    .stage-header-left {
+    .panel-heading strong {
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .panel-heading span {
+      color: #6f7a8a;
+      font-size: 9px;
+    }
+
+    /* =========================================================
+       UPLOAD CARDS
+       ========================================================= */
+
+    .upload-card {
+      padding: 12px;
+
+      border-radius: 13px;
+
+      background: rgba(255,255,255,.025);
+      border: 1px solid var(--border);
+
+      margin-bottom: 8px;
+    }
+
+    .upload-card:hover {
+      border-color: var(--border-hover);
+    }
+
+    .upload-card-row {
       display: flex;
       align-items: center;
       gap: 10px;
     }
 
-    .live-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: #555;
-    }
+    .upload-icon-box {
+      width: 35px;
+      height: 35px;
 
-    .live-dot.active {
-      background: var(--red);
-      box-shadow: 0 0 0 5px rgba(255, 77, 90, 0.12);
-      animation: livePulse 1.5s infinite;
-    }
+      flex: 0 0 35px;
 
-    @keyframes livePulse {
-      50% {
-        box-shadow: 0 0 0 9px rgba(255, 77, 90, 0);
-      }
-    }
-
-    .stage-title {
-      font-size: 13px;
-      font-weight: 700;
-    }
-
-    .stage-status {
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .stage {
-      position: relative;
-      flex: 1;
-      min-height: 0;
-      margin: 14px;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      overflow: hidden;
-      background:
-        radial-gradient(
-          circle at 50% 45%,
-          rgba(255, 255, 255, 0.035),
-          transparent 45%
-        ),
-        #020406;
-      box-shadow: var(--shadow);
-    }
-
-    .stage-empty {
-      position: absolute;
-      inset: 0;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      pointer-events: none;
-      padding: 30px;
-      z-index: 1;
-    }
-
-    .stage-empty-inner {
-      max-width: 430px;
-    }
-
-    .stage-empty-icon {
-      width: 68px;
-      height: 68px;
-      border-radius: 20px;
-      margin: 0 auto 16px;
-      background: rgba(45, 140, 255, 0.1);
-      border: 1px solid rgba(45, 140, 255, 0.22);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 29px;
-    }
-
-    .stage-empty h2 {
-      font-size: 21px;
-      margin-bottom: 8px;
-    }
-
-    .stage-empty p {
-      color: var(--muted);
-      line-height: 1.6;
-      font-size: 13px;
-    }
-
-    #mainVideo {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: none;
-      background: #000;
-      z-index: 2;
-    }
-
-    #mainImage {
-      position: absolute;
-      inset: 0;
-      width: 100%;
-      height: 100%;
-      object-fit: contain;
-      display: none;
-      z-index: 2;
-    }
-
-    .stage-brand-label {
-      position: absolute;
-      top: 18px;
-      left: 18px;
-      z-index: 20;
-      max-width: calc(100% - 36px);
-      display: none;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
       border-radius: 10px;
-      background: rgba(5, 8, 12, 0.76);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      backdrop-filter: blur(14px);
-      font-size: 11px;
-      font-weight: 800;
+
+      background: rgba(79,140,255,.09);
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      color: #78a8ff;
+      font-size: 15px;
     }
 
-    .stage-brand-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--blue);
+    .upload-info {
+      min-width: 0;
+      flex: 1;
     }
 
-    /* =========================================================
-       MENTOR CAMERA
-       ========================================================= */
-
-    .mentor-camera-card {
-      position: absolute;
-      width: 220px;
-      height: 145px;
-      right: 20px;
-      bottom: 20px;
-      z-index: 50;
-      border-radius: 14px;
-      overflow: hidden;
-      background: #030507;
-      border: 1px solid rgba(255, 255, 255, 0.17);
-      box-shadow: 0 15px 45px rgba(0, 0, 0, 0.55);
-      display: none;
-      user-select: none;
-      touch-action: none;
-    }
-
-    .mentor-camera-card.active {
+    .upload-info strong {
       display: block;
-    }
 
-    .mentor-camera-card.dragging {
-      opacity: 0.86;
-      transform: scale(1.02);
-    }
-
-    #mentorCamera {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transform: scaleX(-1);
-      background: #000;
-    }
-
-    .camera-label {
-      position: absolute;
-      left: 8px;
-      bottom: 8px;
-      z-index: 3;
-      padding: 5px 8px;
-      border-radius: 7px;
-      background: rgba(0, 0, 0, 0.68);
       font-size: 10px;
       font-weight: 700;
     }
 
-    .camera-mic {
-      position: absolute;
-      right: 8px;
-      bottom: 8px;
-      z-index: 3;
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: rgba(36, 199, 123, 0.9);
-      font-size: 11px;
+    .upload-info small {
+      display: block;
+
+      margin-top: 3px;
+
+      color: #6f7a8a;
+      font-size: 8px;
+    }
+
+    .mini-btn {
+      padding: 7px 9px;
+
+      border-radius: 8px;
+
+      background: rgba(255,255,255,.06);
+      border: 1px solid var(--border);
+
+      color: #c7cfdb;
+
+      font-size: 8px;
+      font-weight: 700;
+    }
+
+    .mini-btn:hover {
+      background: rgba(255,255,255,.1);
+      color: #fff;
     }
 
     /* =========================================================
-       STAGE CONTROLS
+       STATUS
        ========================================================= */
 
-    .stage-controls {
-      min-height: 76px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 9px;
-      padding: 10px 14px;
-      background:
-        linear-gradient(
-          180deg,
-          rgba(16, 21, 29, 0.98),
-          rgba(9, 13, 18, 0.98)
-        );
-      border-top: 1px solid var(--border);
-      flex-wrap: wrap;
-      flex-shrink: 0;
-    }
+    .status-card {
+      padding: 12px;
 
-    .control-btn {
-      min-width: 68px;
-      height: 50px;
-      border-radius: 12px;
+      border-radius: 13px;
+
+      background: rgba(255,255,255,.025);
       border: 1px solid var(--border);
-      background: #151b24;
-      color: var(--text);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 3px;
-      transition: 0.2s;
     }
 
-    .control-btn:hover {
-      background: #202936;
-      border-color: rgba(255, 255, 255, 0.17);
-      transform: translateY(-1px);
-    }
-
-    .control-icon {
-      font-size: 16px;
-      line-height: 1;
-    }
-
-    .control-text {
-      font-size: 9px;
-      color: var(--muted);
-    }
-
-    .control-btn.primary {
-      background: rgba(45, 140, 255, 0.14);
-      border-color: rgba(45, 140, 255, 0.35);
-    }
-
-    .control-btn.record {
-      background: rgba(255, 77, 90, 0.11);
-      border-color: rgba(255, 77, 90, 0.28);
-    }
-
-    .control-btn.record.recording {
-      background: rgba(255, 77, 90, 0.22);
-      color: #ff9299;
-      animation: recordGlow 1.3s infinite;
-    }
-
-    @keyframes recordGlow {
-      50% {
-        box-shadow: 0 0 0 7px rgba(255, 77, 90, 0.06);
-      }
-    }
-
-    /* =========================================================
-       SIDEBAR
-       ========================================================= */
-
-    .sidebar {
-      min-width: 0;
-      min-height: 0;
-      background:
-        linear-gradient(
-          180deg,
-          #0e131a,
-          #090d12
-        );
-      border-left: 1px solid var(--border);
-      overflow-y: auto;
-      overflow-x: hidden;
-      padding: 14px;
-    }
-
-    .sidebar::-webkit-scrollbar {
-      width: 5px;
-    }
-
-    .sidebar::-webkit-scrollbar-thumb {
-      background: #2a3340;
-      border-radius: 20px;
-    }
-
-    .side-card {
-      background:
-        linear-gradient(
-          180deg,
-          rgba(22, 29, 39, 0.96),
-          rgba(14, 19, 26, 0.96)
-        );
-      border: 1px solid var(--border);
-      border-radius: 15px;
-      margin-bottom: 12px;
-      overflow: hidden;
-    }
-
-    .side-card-header {
-      padding: 13px 14px;
+    .status-row {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      border-bottom: 1px solid var(--border);
+
+      gap: 10px;
+
+      padding: 6px 0;
     }
 
-    .side-card-title {
-      font-size: 12px;
-      font-weight: 800;
+    .status-row + .status-row {
+      border-top: 1px solid rgba(255,255,255,.045);
     }
 
-    .side-card-badge {
-      font-size: 9px;
-      padding: 4px 7px;
-      border-radius: 999px;
-      background: rgba(45, 140, 255, 0.11);
-      border: 1px solid rgba(45, 140, 255, 0.22);
-      color: #79b6ff;
-      font-weight: 800;
-    }
-
-    .side-card-body {
-      padding: 13px;
-    }
-
-    /* =========================================================
-       UPLOAD
-       ========================================================= */
-
-    .upload-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
-
-    .upload-btn {
-      min-height: 74px;
-      border-radius: 12px;
-      border: 1px dashed rgba(255, 255, 255, 0.17);
-      background: rgba(255, 255, 255, 0.025);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 5px;
-      color: var(--text);
-      text-align: center;
-      transition: 0.2s;
-      padding: 8px;
-    }
-
-    .upload-btn:hover {
-      border-color: rgba(45, 140, 255, 0.5);
-      background: rgba(45, 140, 255, 0.07);
-    }
-
-    .upload-btn span:first-child {
-      font-size: 20px;
-    }
-
-    .upload-btn small {
-      color: var(--muted);
+    .status-row span {
+      color: #818c9c;
       font-size: 9px;
     }
 
-    input[type="file"] {
-      display: none;
+    .status-row strong {
+      font-size: 9px;
+      text-align: right;
+    }
+
+    .green {
+      color: #54df96 !important;
+    }
+
+    .yellow {
+      color: #f6ca69 !important;
+    }
+
+    .red {
+      color: #ff7b88 !important;
     }
 
     /* =========================================================
@@ -625,520 +781,564 @@
        ========================================================= */
 
     .voice-card {
-      border-color: rgba(155, 108, 255, 0.25);
+      padding: 13px;
+
+      border-radius: 14px;
+
       background:
-        radial-gradient(
-          circle at 100% 0%,
-          rgba(155, 108, 255, 0.09),
-          transparent 45%
-        ),
         linear-gradient(
-          180deg,
-          rgba(22, 29, 39, 0.98),
-          rgba(13, 17, 24, 0.98)
+          145deg,
+          rgba(79,140,255,.07),
+          rgba(255,255,255,.02)
         );
+
+      border: 1px solid rgba(79,140,255,.15);
     }
 
-    .voice-header-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 9px;
-      background: rgba(155, 108, 255, 0.13);
-      border: 1px solid rgba(155, 108, 255, 0.25);
+    .voice-header {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+
+      margin-bottom: 11px;
+    }
+
+    .voice-icon {
+      width: 34px;
+      height: 34px;
+
+      border-radius: 10px;
+
+      background: rgba(79,140,255,.1);
+
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 14px;
+
+      color: #7daaff;
+      font-size: 15px;
     }
 
-    .voice-intro {
-      padding: 10px;
-      border-radius: 11px;
-      background: rgba(155, 108, 255, 0.07);
-      border: 1px solid rgba(155, 108, 255, 0.13);
-      color: #c9bcff;
-      font-size: 10px;
-      line-height: 1.55;
-      margin-bottom: 10px;
-    }
-
-    .field {
-      margin-bottom: 10px;
-    }
-
-    .field label {
+    .voice-header strong {
       display: block;
-      font-size: 9px;
-      color: var(--muted);
+      font-size: 10px;
+    }
+
+    .voice-header small {
+      display: block;
+      margin-top: 3px;
+      color: #748092;
+      font-size: 8px;
+    }
+
+    .voice-field {
+      margin-bottom: 9px;
+    }
+
+    .voice-field label {
+      display: block;
+
       margin-bottom: 5px;
+
+      color: #929dac;
+      font-size: 8px;
       font-weight: 700;
     }
 
-    .field input[type="text"] {
+    .voice-input {
       width: 100%;
-      height: 36px;
-      padding: 0 10px;
-      border-radius: 9px;
+
+      padding: 8px 9px;
+
+      border-radius: 8px;
+
+      background: #090c11;
       border: 1px solid var(--border);
-      background: #090d12;
-      color: var(--text);
+
+      color: #dfe5ed;
+
       outline: none;
-      font-size: 10px;
+
+      font-size: 9px;
     }
 
-    .field input[type="text"]:focus {
-      border-color: rgba(45, 140, 255, 0.55);
+    .voice-input:focus {
+      border-color: rgba(79,140,255,.5);
     }
 
     .voice-actions {
       display: grid;
       grid-template-columns: 1fr 1fr;
+
       gap: 7px;
-      margin-bottom: 9px;
-    }
 
-    .small-btn {
-      height: 38px;
-      border-radius: 9px;
-      border: 1px solid var(--border);
-      background: rgba(255, 255, 255, 0.045);
-      color: var(--text);
-      font-size: 10px;
-      font-weight: 700;
-    }
-
-    .small-btn:hover {
-      background: rgba(255, 255, 255, 0.08);
-    }
-
-    .small-btn.blue {
-      background: rgba(45, 140, 255, 0.12);
-      border-color: rgba(45, 140, 255, 0.3);
-    }
-
-    .small-btn.purple {
-      background: rgba(155, 108, 255, 0.12);
-      border-color: rgba(155, 108, 255, 0.3);
-      color: #d2c3ff;
-    }
-
-    .small-btn.red {
-      background: rgba(255, 77, 90, 0.11);
-      border-color: rgba(255, 77, 90, 0.27);
-      color: #ff9aa1;
-    }
-
-    .voice-file-info {
-      display: none;
-      padding: 8px 9px;
-      background: rgba(255, 255, 255, 0.035);
-      border: 1px solid var(--border);
-      border-radius: 9px;
-      margin-bottom: 9px;
-    }
-
-    .voice-file-info.show {
-      display: block;
-    }
-
-    .voice-file-name {
-      font-size: 10px;
-      font-weight: 700;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-
-    .voice-file-duration {
-      color: var(--muted);
-      font-size: 9px;
-      margin-top: 3px;
-    }
-
-    audio {
-      width: 100%;
-      height: 32px;
-      margin: 5px 0;
-    }
-
-    .clone-btn {
-      width: 100%;
-      height: 43px;
-      border: none;
-      border-radius: 10px;
-      background:
-        linear-gradient(
-          135deg,
-          #7454df,
-          #9b6cff
-        );
-      color: white;
-      font-weight: 900;
-      font-size: 11px;
-      box-shadow: 0 10px 28px rgba(122, 84, 223, 0.2);
-      transition: 0.2s;
-    }
-
-    .clone-btn:hover {
-      transform: translateY(-1px);
-      filter: brightness(1.08);
-    }
-
-    .clone-btn:disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .clone-status {
-      margin-top: 10px;
-      padding: 9px;
-      border-radius: 9px;
-      background: rgba(255, 255, 255, 0.035);
-      border: 1px solid var(--border);
-      font-size: 9px;
-      color: var(--muted);
-      line-height: 1.5;
-      display: none;
-    }
-
-    .clone-status.show {
-      display: block;
-    }
-
-    .clone-status.success {
-      color: #77e5ad;
-      border-color: rgba(36, 199, 123, 0.2);
-      background: rgba(36, 199, 123, 0.06);
-    }
-
-    .clone-status.error {
-      color: #ff989f;
-      border-color: rgba(255, 77, 90, 0.2);
-      background: rgba(255, 77, 90, 0.06);
-    }
-
-    .progress-wrap {
-      display: none;
       margin-top: 8px;
     }
 
-    .progress-wrap.show {
+    .voice-btn {
+      padding: 9px 7px;
+
+      border-radius: 9px;
+
+      background: rgba(255,255,255,.055);
+      border: 1px solid var(--border);
+
+      color: #cbd3df;
+
+      font-size: 8px;
+      font-weight: 700;
+    }
+
+    .voice-btn:hover {
+      background: rgba(255,255,255,.09);
+      color: #fff;
+    }
+
+    .voice-btn.primary {
+      background: var(--blue);
+      border-color: var(--blue);
+      color: #fff;
+    }
+
+    .voice-btn.primary:hover {
+      background: var(--blue-2);
+    }
+
+    .voice-btn.danger {
+      color: #ff8490;
+      background: rgba(255,83,100,.07);
+    }
+
+    .voice-progress {
+      height: 4px;
+
+      background: rgba(255,255,255,.06);
+
+      border-radius: 99px;
+
+      overflow: hidden;
+
+      margin-top: 10px;
+
+      display: none;
+    }
+
+    .voice-progress.show {
       display: block;
     }
 
-    .progress-track {
-      height: 5px;
-      background: #252c36;
-      border-radius: 999px;
-      overflow: hidden;
-    }
-
-    .progress-bar {
+    .voice-progress-bar {
       width: 0%;
       height: 100%;
-      background: linear-gradient(90deg, #7454df, #9b6cff);
-      border-radius: 999px;
-      transition: width 0.25s;
+
+      background: var(--blue);
+
+      transition: width .3s ease;
     }
 
-    .clone-result {
-      display: none;
-      margin-top: 10px;
-      padding-top: 10px;
-      border-top: 1px solid var(--border);
+    .voice-status {
+      margin-top: 8px;
+
+      padding: 8px;
+
+      border-radius: 8px;
+
+      background: rgba(0,0,0,.22);
+
+      color: #8f9aaa;
+
+      font-size: 8px;
+      line-height: 1.5;
     }
 
-    .clone-result.show {
-      display: block;
-    }
-
-    .clone-result-title {
-      font-size: 10px;
-      font-weight: 800;
-      margin-bottom: 5px;
+    .voice-status.active {
+      color: #69e09d;
     }
 
     .voice-note {
-      font-size: 8px;
-      color: #778392;
-      line-height: 1.5;
       margin-top: 8px;
+
+      color: #697587;
+
+      font-size: 7px;
+      line-height: 1.5;
     }
 
-    /* =========================================================
-       TOGGLE
-       ========================================================= */
+    #voicePreview,
+    #clonedVoiceAudio {
+      width: 100%;
+      height: 30px;
 
-    .toggle-row {
-      min-height: 40px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
+      margin-top: 7px;
 
-    .toggle-row:last-child {
-      border-bottom: 0;
-    }
-
-    .toggle-info strong {
-      display: block;
-      font-size: 10px;
-    }
-
-    .toggle-info small {
-      display: block;
-      font-size: 8px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
-
-    .switch {
-      position: relative;
-      width: 40px;
-      height: 22px;
-      flex-shrink: 0;
-    }
-
-    .switch input {
       display: none;
     }
 
-    .slider {
-      position: absolute;
-      inset: 0;
-      border-radius: 999px;
-      background: #2b333e;
-      cursor: pointer;
-      transition: 0.2s;
-    }
-
-    .slider::before {
-      content: "";
-      position: absolute;
-      width: 16px;
-      height: 16px;
-      left: 3px;
-      top: 3px;
-      border-radius: 50%;
-      background: white;
-      transition: 0.2s;
-    }
-
-    .switch input:checked + .slider {
-      background: var(--blue);
-    }
-
-    .switch input:checked + .slider::before {
-      transform: translateX(18px);
+    #voicePreview.show,
+    #clonedVoiceAudio.show {
+      display: block;
     }
 
     /* =========================================================
        STUDENTS
        ========================================================= */
 
-    .student-list {
+    .students-list {
       display: flex;
       flex-direction: column;
-      gap: 7px;
+      gap: 6px;
     }
 
-    .student-item {
+    .student-row {
+      padding: 8px;
+
+      border-radius: 10px;
+
+      background: rgba(255,255,255,.025);
+      border: 1px solid rgba(255,255,255,.045);
+
       display: flex;
       align-items: center;
       gap: 8px;
-      padding: 8px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.035);
-      border: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .student-avatar {
       width: 30px;
       height: 30px;
-      border-radius: 50%;
-      background:
-        linear-gradient(
-          135deg,
-          #276ef1,
-          #8c5cff
-        );
+
+      border-radius: 9px;
+
+      overflow: hidden;
+
+      background: #181e27;
+
       display: flex;
       align-items: center;
       justify-content: center;
+
+      color: #8d99a9;
+
       font-size: 10px;
       font-weight: 800;
+
       flex-shrink: 0;
     }
 
-    .student-name {
-      font-size: 10px;
-      font-weight: 700;
+    .student-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
-    .student-meta {
-      color: var(--muted);
-      font-size: 8px;
-      margin-top: 2px;
+    .student-row-info {
+      min-width: 0;
+      flex: 1;
     }
 
-    .empty-students {
-      color: var(--muted);
-      text-align: center;
+    .student-row-info strong {
+      display: block;
+
       font-size: 9px;
-      padding: 14px 5px;
+
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .student-row-info small {
+      display: block;
+
+      margin-top: 3px;
+
+      color: #677282;
+      font-size: 7px;
+    }
+
+    .student-online {
+      width: 6px;
+      height: 6px;
+
+      border-radius: 50%;
+
+      background: #37d486;
+    }
+
+    .no-students {
+      padding: 15px;
+
+      border: 1px dashed var(--border);
+      border-radius: 10px;
+
+      text-align: center;
+
+      color: #687486;
+
+      font-size: 8px;
     }
 
     /* =========================================================
-       TOAST
+       BOTTOM TOOLBAR
        ========================================================= */
 
-    .toast {
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      z-index: 5000;
-      min-width: 250px;
-      max-width: 380px;
-      padding: 12px 14px;
-      border-radius: 12px;
-      background: rgba(18, 24, 32, 0.97);
-      border: 1px solid var(--border2);
-      box-shadow: var(--shadow);
-      transform: translateY(30px);
-      opacity: 0;
-      pointer-events: none;
-      transition: 0.25s;
-      font-size: 11px;
-      line-height: 1.45;
+    .bottom-toolbar {
+      position: absolute;
+
+      left: 50%;
+      bottom: 18px;
+
+      transform: translateX(-50%);
+
+      z-index: 100;
+
+      padding: 8px;
+
+      border-radius: 17px;
+
+      background: rgba(13,16,21,.94);
+      border: 1px solid rgba(255,255,255,.1);
+
+      box-shadow:
+        0 20px 50px rgba(0,0,0,.45);
+
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      backdrop-filter: blur(18px);
     }
 
-    .toast.show {
-      transform: translateY(0);
+    .tool-btn {
+      width: 43px;
+      height: 43px;
+
+      border-radius: 12px;
+
+      background: rgba(255,255,255,.055);
+      border: 1px solid transparent;
+
+      color: #c7cfdb;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 15px;
+
+      position: relative;
+    }
+
+    .tool-btn:hover {
+      background: rgba(255,255,255,.1);
+      color: #fff;
+    }
+
+    .tool-btn span {
+      position: absolute;
+
+      left: 50%;
+      bottom: -18px;
+
+      transform: translateX(-50%);
+
+      white-space: nowrap;
+
+      color: #6f7a89;
+
+      font-size: 7px;
+
+      opacity: 0;
+
+      pointer-events: none;
+
+      transition: .15s ease;
+    }
+
+    .tool-btn:hover span {
       opacity: 1;
     }
 
-    .toast.success {
-      border-color: rgba(36, 199, 123, 0.35);
+    .tool-btn.record {
+      color: #ff7583;
     }
 
-    .toast.error {
-      border-color: rgba(255, 77, 90, 0.35);
+    .tool-btn.record.active {
+      background: rgba(255,83,100,.15);
+      border-color: rgba(255,83,100,.22);
+    }
+
+    .tool-btn.active {
+      background: rgba(79,140,255,.13);
+      border-color: rgba(79,140,255,.18);
+      color: #82aeff;
+    }
+
+    .tool-divider {
+      width: 1px;
+      height: 27px;
+
+      background: rgba(255,255,255,.08);
+
+      margin: 0 3px;
     }
 
     /* =========================================================
-       MODAL
+       SETTINGS MODAL
        ========================================================= */
 
-    .modal {
+    .modal-backdrop {
       position: fixed;
       inset: 0;
-      z-index: 4000;
+
+      z-index: 500;
+
       display: none;
       align-items: center;
       justify-content: center;
+
       padding: 20px;
-      background: rgba(0, 0, 0, 0.68);
-      backdrop-filter: blur(8px);
+
+      background: rgba(0,0,0,.7);
+      backdrop-filter: blur(9px);
     }
 
-    .modal.show {
+    .modal-backdrop.show {
       display: flex;
     }
 
-    .modal-box {
-      width: min(470px, 100%);
+    .modal {
+      width: min(480px, 100%);
+
+      background: #11151c;
+
+      border: 1px solid var(--border);
+
       border-radius: 18px;
-      background: #111720;
-      border: 1px solid var(--border2);
-      box-shadow: var(--shadow);
+
+      box-shadow:
+        0 30px 100px rgba(0,0,0,.5);
+
       overflow: hidden;
     }
 
-    .modal-header {
-      padding: 16px;
-      border-bottom: 1px solid var(--border);
+    .modal-head {
+      padding: 17px 18px;
+
       display: flex;
       align-items: center;
       justify-content: space-between;
+
+      border-bottom: 1px solid var(--border);
     }
 
-    .modal-header strong {
-      font-size: 13px;
+    .modal-head h3 {
+      font-size: 14px;
     }
 
-    .modal-close {
-      width: 30px;
-      height: 30px;
-      border: 0;
-      border-radius: 8px;
-      background: rgba(255, 255, 255, 0.06);
-      color: white;
+    .close-modal {
+      width: 32px;
+      height: 32px;
+
+      border-radius: 9px;
+
+      background: rgba(255,255,255,.05);
+
+      color: #9ca6b4;
+
+      font-size: 18px;
     }
 
     .modal-body {
-      padding: 16px;
+      padding: 18px;
     }
 
-    .settings-field {
-      margin-bottom: 13px;
+    .form-group {
+      margin-bottom: 14px;
     }
 
-    .settings-field label {
+    .form-group label {
       display: block;
-      font-size: 10px;
-      color: var(--muted);
+
       margin-bottom: 6px;
-    }
 
-    .settings-field input {
-      width: 100%;
-      height: 40px;
-      padding: 0 11px;
-      border-radius: 9px;
-      border: 1px solid var(--border);
-      background: #080c11;
-      color: white;
-      outline: none;
-    }
+      color: #9aa5b5;
 
-    .settings-warning {
       font-size: 9px;
-      color: #f2c56a;
-      line-height: 1.5;
-      padding: 10px;
+      font-weight: 700;
+    }
+
+    .form-input {
+      width: 100%;
+
+      padding: 10px 11px;
+
       border-radius: 9px;
-      background: rgba(245, 185, 66, 0.06);
-      border: 1px solid rgba(245, 185, 66, 0.15);
-      margin-bottom: 12px;
+
+      background: #090c11;
+      border: 1px solid var(--border);
+
+      color: #fff;
+
+      outline: none;
+
+      font-size: 10px;
     }
 
     .modal-footer {
-      padding: 13px 16px;
-      border-top: 1px solid var(--border);
+      padding: 13px 18px;
+
       display: flex;
       justify-content: flex-end;
       gap: 8px;
+
+      border-top: 1px solid var(--border);
+    }
+
+    .modal-btn {
+      padding: 9px 13px;
+
+      border-radius: 9px;
+
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .modal-btn.secondary {
+      background: rgba(255,255,255,.06);
+      color: #c6ced9;
+    }
+
+    .modal-btn.primary {
+      background: var(--blue);
+      color: #fff;
     }
 
     /* =========================================================
-       RESPONSIVE
+       HIDDEN INPUTS
        ========================================================= */
 
-    @media (max-width: 1100px) {
-      :root {
-        --sidebar: 320px;
-      }
-
-      .mentor-camera-card {
-        width: 190px;
-        height: 125px;
-      }
+    .hidden {
+      display: none !important;
     }
 
-    @media (max-width: 850px) {
+    /* =========================================================
+       MOBILE
+       ========================================================= */
+
+    @media (max-width: 1050px) {
+
+      .workspace {
+        grid-template-columns: minmax(0,1fr) 310px;
+      }
+
+      .mentor-tile {
+        width: 180px;
+        height: 108px;
+      }
+
+    }
+
+    @media (max-width: 820px) {
+
       html,
       body {
         overflow: auto;
@@ -1146,889 +1346,846 @@
 
       .app {
         height: auto;
-        min-height: calc(100vh - var(--topbar));
-        display: flex;
-        flex-direction: column;
-        overflow: visible;
+        min-height: 100vh;
+      }
+
+      .workspace {
+        display: block;
       }
 
       .stage-area {
-        min-height: 620px;
+        min-height: 65vh;
+        padding: 15px;
       }
 
-      .sidebar {
+      .stage {
         width: 100%;
+        max-height: none;
+      }
+
+      .control-panel {
         border-left: 0;
         border-top: 1px solid var(--border);
+        max-height: none;
+      }
+
+      .panel-scroll {
         overflow: visible;
       }
 
-      .mode-badge {
-        display: none;
+      .topbar {
+        position: sticky;
+        top: 0;
       }
+
+      .bottom-toolbar {
+        bottom: 10px;
+      }
+
+      .tool-btn {
+        width: 39px;
+        height: 39px;
+      }
+
     }
 
-    @media (max-width: 600px) {
-      :root {
-        --topbar: 60px;
-      }
+    @media (max-width: 520px) {
 
       .topbar {
         padding: 0 10px;
       }
 
-      .brand-logo {
-        width: 34px;
-        height: 34px;
-      }
-
-      .brand-title {
-        font-size: 12px;
-      }
-
-      .brand-subtitle {
-        font-size: 9px;
+      .mode-badge {
+        display: none;
       }
 
       .top-btn {
         padding: 0 9px;
-        height: 34px;
-        font-size: 10px;
       }
 
-      .top-btn.settings {
+      .top-btn.settings-text {
         display: none;
       }
 
       .stage-area {
-        min-height: 510px;
+        min-height: 58vh;
       }
 
       .stage {
-        margin: 8px;
         border-radius: 14px;
       }
 
-      .stage-header {
-        padding: 0 10px;
-      }
+      .mentor-tile {
+        width: 130px;
+        height: 78px;
 
-      .stage-controls {
-        gap: 5px;
-        padding: 7px;
-      }
-
-      .control-btn {
-        min-width: 58px;
-        height: 45px;
-      }
-
-      .control-text {
-        font-size: 8px;
-      }
-
-      .mentor-camera-card {
-        width: 145px;
-        height: 98px;
         right: 10px;
-        bottom: 10px;
+        bottom: 68px;
+
+        border-radius: 11px;
       }
 
-      .sidebar {
-        padding: 9px;
+      .stage-label {
+        top: 9px;
+        left: 9px;
+
+        padding: 7px 8px;
       }
 
-      .upload-grid {
-        grid-template-columns: 1fr 1fr;
+      .brand-badge {
+        top: 9px;
+        right: 9px;
+        max-width: 130px;
       }
+
+      .bottom-toolbar {
+        width: calc(100% - 20px);
+
+        justify-content: center;
+
+        overflow-x: auto;
+
+        padding: 6px;
+
+        border-radius: 14px;
+      }
+
+      .tool-btn {
+        flex: 0 0 37px;
+
+        width: 37px;
+        height: 37px;
+
+        font-size: 13px;
+      }
+
+      .tool-divider {
+        display: none;
+      }
+
     }
+
   </style>
 </head>
 
 <body>
 
   <!-- =========================================================
-       TOP BAR
+       AUTH
        ========================================================= -->
 
-  <header class="topbar">
+  <script>
 
-    <div class="brand-area">
+    if (
+      sessionStorage.getItem(
+        "personalCourseStudioMentorLoggedIn"
+      ) !== "true"
+    ) {
 
-      <div class="brand-logo" id="brandLogo">
-        CS
-      </div>
+      window.location.replace(
+        "../login/"
+      );
 
-      <div class="brand-text">
-        <div class="brand-title" id="studioName">
-          Personal Course Studio
-        </div>
+    }
 
-        <div class="brand-subtitle" id="studioSubtitle">
-          নিজের ক্লাস ও কোর্স ভিডিও তৈরির জন্য
-        </div>
-      </div>
-
-      <div class="mode-badge">
-        MENTOR MODE
-      </div>
-
-    </div>
-
-    <div class="top-actions">
-
-      <button
-        class="top-btn settings"
-        id="settingsBtn"
-        type="button"
-      >
-        ⚙️ Settings
-      </button>
-
-      <button
-        class="top-btn"
-        id="homeBtn"
-        type="button"
-      >
-        🏠 Home
-      </button>
-
-      <button
-        class="top-btn logout"
-        id="logoutBtn"
-        type="button"
-      >
-        Logout
-      </button>
-
-    </div>
-
-  </header>
+  </script>
 
 
   <!-- =========================================================
-       APPLICATION
+       APP
        ========================================================= -->
 
-  <main class="app">
+  <div class="app">
 
     <!-- =======================================================
-         LEFT — ZOOM STYLE STAGE
+         TOPBAR
          ======================================================= -->
 
-    <section class="stage-area">
+    <header class="topbar">
 
-      <div class="stage-header">
+      <div class="top-left">
 
-        <div class="stage-header-left">
+        <div class="studio-logo">
 
-          <span
-            class="live-dot"
-            id="liveDot"
-          ></span>
+          <img
+            id="topLogoImage"
+            alt="Studio Logo"
+          >
 
-          <div>
-            <div class="stage-title">
-              Mentor Studio
-            </div>
-
-            <div
-              class="stage-status"
-              id="stageStatus"
-            >
-              Ready to start your class
-            </div>
-          </div>
+          <span id="topLogoText">
+            CS
+          </span>
 
         </div>
 
-        <div
-          class="stage-status"
-          id="recordStatus"
-        >
-          Not Recording
+        <div class="studio-title">
+
+          <strong id="studioName">
+            Personal Course Studio
+          </strong>
+
+          <small id="studioSubtitle">
+            নিজের ক্লাস ও কোর্স ভিডিও তৈরির জন্য
+          </small>
+
+        </div>
+
+        <div class="mode-badge">
+          MENTOR MODE
         </div>
 
       </div>
 
 
-      <!-- MAIN STAGE -->
+      <div class="top-right">
 
-      <div
-        class="stage"
-        id="stage"
-      >
+        <button
+          class="top-btn settings-text"
+          id="settingsBtn"
+          type="button"
+        >
+          ⚙ Settings
+        </button>
+
+        <button
+          class="top-btn"
+          id="logoutBtn"
+          type="button"
+        >
+          Logout
+        </button>
+
+      </div>
+
+    </header>
+
+
+    <!-- =======================================================
+         WORKSPACE
+         ======================================================= -->
+
+    <div class="workspace">
+
+
+      <!-- =====================================================
+           STAGE
+           ===================================================== -->
+
+      <section class="stage-area">
 
         <div
-          class="stage-empty"
-          id="stageEmpty"
+          class="stage welcome-mode"
+          id="stage"
         >
 
-          <div class="stage-empty-inner">
+          <!-- WELCOME -->
 
-            <div class="stage-empty-icon">
-              🎬
+          <div
+            class="welcome"
+            id="welcome"
+          >
+
+            <div class="welcome-logo">
+
+              <img
+                id="welcomeLogoImage"
+                alt="Studio Logo"
+              >
+
+              <span id="welcomeLogoText">
+                CS
+              </span>
+
             </div>
 
-            <h2>
-              Welcome to Mentor Studio
-            </h2>
+            <h1>
+              Ready to teach?
+            </h1>
 
-            <p>
-              Main Video অথবা Slide যোগ করুন।
-              তারপর Mentor Camera চালু করে
-              Zoom-এর মতো presentation শুরু করুন।
+            <p id="welcomeText">
+              আপনার ক্লাস শুরু করার জন্য প্রস্তুত?
             </p>
 
           </div>
 
-        </div>
 
-
-        <img
-          id="mainImage"
-          alt="Course Slide"
-        />
-
-
-        <video
-          id="mainVideo"
-          playsinline
-          preload="metadata"
-        ></video>
-
-
-        <div
-          class="stage-brand-label"
-          id="stageBrandLabel"
-        >
-          <span class="stage-brand-dot"></span>
-
-          <span id="stageBrandText">
-            Shah Neil Khan / USHA.AI
-          </span>
-        </div>
-
-
-        <!-- MENTOR CAMERA -->
-
-        <div
-          class="mentor-camera-card"
-          id="mentorCameraCard"
-        >
-
-          <video
-            id="mentorCamera"
-            autoplay
-            muted
-            playsinline
-          ></video>
-
-          <div class="camera-label">
-            Mentor
-          </div>
-
-          <div class="camera-mic">
-            🎙
-          </div>
-
-        </div>
-
-      </div>
-
-
-      <!-- =====================================================
-           CONTROL BAR
-           ===================================================== -->
-
-      <div class="stage-controls">
-
-        <button
-          class="control-btn primary"
-          id="slideBtn"
-          type="button"
-        >
-          <span class="control-icon">🖼️</span>
-          <span class="control-text">Slide</span>
-        </button>
-
-        <button
-          class="control-btn primary"
-          id="videoBtn"
-          type="button"
-        >
-          <span class="control-icon">🎥</span>
-          <span class="control-text">Main Video</span>
-        </button>
-
-        <button
-          class="control-btn"
-          id="cameraBtn"
-          type="button"
-        >
-          <span class="control-icon">📷</span>
-          <span class="control-text">Mentor Camera</span>
-        </button>
-
-        <button
-          class="control-btn"
-          id="muteBtn"
-          type="button"
-        >
-          <span
-            class="control-icon"
-            id="muteIcon"
-          >
-            🔊
-          </span>
-
-          <span
-            class="control-text"
-            id="muteText"
-          >
-            Audio On
-          </span>
-        </button>
-
-        <button
-          class="control-btn"
-          id="playBtn"
-          type="button"
-        >
-          <span
-            class="control-icon"
-            id="playIcon"
-          >
-            ▶️
-          </span>
-
-          <span
-            class="control-text"
-            id="playText"
-          >
-            Play
-          </span>
-        </button>
-
-        <button
-          class="control-btn"
-          id="clearBtn"
-          type="button"
-        >
-          <span class="control-icon">
-            🧹
-          </span>
-
-          <span class="control-text">
-            Clear
-          </span>
-        </button>
-
-        <button
-          class="control-btn"
-          id="fullscreenBtn"
-          type="button"
-        >
-          <span class="control-icon">
-            ⛶
-          </span>
-
-          <span class="control-text">
-            Fullscreen
-          </span>
-        </button>
-
-        <button
-          class="control-btn record"
-          id="recordBtn"
-          type="button"
-        >
-          <span
-            class="control-icon"
-            id="recordIcon"
-          >
-            ⏺️
-          </span>
-
-          <span
-            class="control-text"
-            id="recordText"
-          >
-            Record
-          </span>
-        </button>
-
-      </div>
-
-    </section>
-
-
-    <!-- =======================================================
-         RIGHT — SIDEBAR
-         ======================================================= -->
-
-    <aside class="sidebar">
-
-
-      <!-- =====================================================
-           MEDIA
-           ===================================================== -->
-
-      <section class="side-card">
-
-        <div class="side-card-header">
-
-          <span class="side-card-title">
-            Media
-          </span>
-
-          <span class="side-card-badge">
-            STUDIO
-          </span>
-
-        </div>
-
-        <div class="side-card-body">
-
-          <div class="upload-grid">
-
-            <label
-              class="upload-btn"
-              for="videoInput"
-            >
-              <span>🎥</span>
-              <strong>Main Video</strong>
-              <small>MP4 / WebM</small>
-            </label>
-
-            <input
-              type="file"
-              id="videoInput"
-              accept="video/*"
-            />
-
-
-            <label
-              class="upload-btn"
-              for="imageInput"
-            >
-              <span>🖼️</span>
-              <strong>Slide / Image</strong>
-              <small>JPG / PNG / WEBP</small>
-            </label>
-
-            <input
-              type="file"
-              id="imageInput"
-              accept="image/*"
-            />
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- =====================================================
-           STEP 3 — VOICE CLONE
-           ===================================================== -->
-
-      <section class="side-card voice-card">
-
-        <div class="side-card-header">
+          <!-- STAGE CONTENT -->
 
           <div
-            style="
-              display:flex;
-              align-items:center;
-              gap:8px;
-            "
+            class="stage-content"
+            id="stageContent"
           >
 
-            <div class="voice-header-icon">
-              🧬
+            <!-- SLIDE -->
+
+            <img
+              id="slideImage"
+              alt="Class Slide"
+            >
+
+
+            <!-- MAIN VIDEO -->
+
+            <video
+              id="mainVideo"
+              playsinline
+              preload="metadata"
+            ></video>
+
+
+            <!-- STAGE LABEL -->
+
+            <div
+              class="stage-label"
+              id="stageLabel"
+            >
+
+              <strong id="stageLabelTitle">
+                Personal Course Studio
+              </strong>
+
+              <small>
+                Mentor Class
+              </small>
+
             </div>
 
-            <span class="side-card-title">
-              Step 3 — Mentor Voice Clone
-            </span>
 
-          </div>
+            <!-- BRAND -->
 
-          <span class="side-card-badge">
-            VOICE
-          </span>
-
-        </div>
-
-
-        <div class="side-card-body">
-
-          <div class="voice-intro">
-            Main Video-এর original narration রেখে
-            Mentor-এর নিজের voice identity/tone-এ
-            convert করার জন্য এই system।
-            <br><br>
-            শুধু নিজের voice অথবা অনুমতি থাকা voice ব্যবহার করুন।
-          </div>
-
-
-          <!-- API ENDPOINT -->
-
-          <div class="field">
-
-            <label>
-              Voice Clone Backend Endpoint
-            </label>
-
-            <input
-              type="text"
-              id="voiceApiInput"
-              placeholder="https://your-backend.com/api/voice-clone"
-            />
-
-          </div>
-
-
-          <!-- VOICE SAMPLE -->
-
-          <div class="voice-actions">
-
-            <label
-              class="small-btn blue"
-              for="voiceInput"
-              style="
-                display:flex;
-                align-items:center;
-                justify-content:center;
-              "
+            <div
+              class="brand-badge"
+              id="brandBadge"
             >
-              🎙️ Upload Voice
-            </label>
+              Shah Neil Khan / USHA.AI
+            </div>
 
-            <input
-              type="file"
-              id="voiceInput"
-              accept="audio/*"
-            />
 
+            <!-- RECORDING -->
+
+            <div
+              class="recording-indicator"
+              id="recordingIndicator"
+            >
+
+              <span class="record-dot"></span>
+
+              RECORDING
+
+            </div>
+
+
+            <!-- MENTOR CAMERA -->
+
+            <div
+              class="mentor-tile"
+              id="mentorTile"
+            >
+
+              <video
+                id="mentorVideo"
+                autoplay
+                muted
+                playsinline
+              ></video>
+
+              <div class="mentor-name">
+                Mentor
+              </div>
+
+              <div
+                class="mentor-mic"
+                id="mentorMicIcon"
+              >
+                🎙
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- =================================================
+               BOTTOM TOOLBAR
+               ================================================= -->
+
+          <div class="bottom-toolbar">
 
             <button
-              class="small-btn purple"
-              id="recordVoiceBtn"
+              class="tool-btn"
+              id="slideBtn"
               type="button"
             >
-              🎤 Record Voice
+              ▧
+              <span>Slide</span>
+            </button>
+
+            <button
+              class="tool-btn"
+              id="videoBtn"
+              type="button"
+            >
+              ▶
+              <span>Main Video</span>
+            </button>
+
+            <button
+              class="tool-btn"
+              id="cameraBtn"
+              type="button"
+            >
+              ◉
+              <span>Camera</span>
+            </button>
+
+            <button
+              class="tool-btn"
+              id="clearBtn"
+              type="button"
+            >
+              ×
+              <span>Clear</span>
+            </button>
+
+            <div class="tool-divider"></div>
+
+            <button
+              class="tool-btn"
+              id="playBtn"
+              type="button"
+            >
+              ▶
+              <span>Play</span>
+            </button>
+
+            <button
+              class="tool-btn"
+              id="fullscreenBtn"
+              type="button"
+            >
+              ⛶
+              <span>Fullscreen</span>
+            </button>
+
+            <button
+              class="tool-btn record"
+              id="recordBtn"
+              type="button"
+            >
+              ●
+              <span>Record</span>
             </button>
 
           </div>
 
+        </div>
 
-          <!-- VOICE FILE -->
-
-          <div
-            class="voice-file-info"
-            id="voiceFileInfo"
-          >
-
-            <div
-              class="voice-file-name"
-              id="voiceFileName"
-            >
-              No voice sample
-            </div>
-
-            <div
-              class="voice-file-duration"
-              id="voiceFileDuration"
-            >
-              -
-            </div>
-
-          </div>
+      </section>
 
 
-          <audio
-            id="voiceSampleAudio"
-            controls
-            style="display:none;"
-          ></audio>
+      <!-- =====================================================
+           CONTROL PANEL
+           ===================================================== -->
+
+      <aside class="control-panel">
+
+        <div class="panel-scroll">
 
 
-          <!-- MAIN AUDIO SWITCH -->
+          <!-- =================================================
+               MEDIA
+               ================================================= -->
 
-          <div class="toggle-row">
+          <section class="panel-section">
 
-            <div class="toggle-info">
+            <div class="panel-heading">
 
               <strong>
-                Mute Original Main Video Audio
+                Media
               </strong>
 
-              <small>
-                Clone voice ব্যবহার করলে এটি ON রাখুন
-              </small>
+              <span>
+                Studio
+              </span>
 
             </div>
 
-            <label class="switch">
 
-              <input
-                type="checkbox"
-                id="muteOriginalToggle"
-              />
+            <div class="upload-card">
 
-              <span class="slider"></span>
+              <div class="upload-card-row">
 
-            </label>
+                <div class="upload-icon-box">
+                  ▧
+                </div>
 
-          </div>
+                <div class="upload-info">
+
+                  <strong>
+                    Slide / Image
+                  </strong>
+
+                  <small id="slideFileName">
+                    No image selected
+                  </small>
+
+                </div>
+
+                <button
+                  class="mini-btn"
+                  id="sideSlideBtn"
+                  type="button"
+                >
+                  Upload
+                </button>
+
+              </div>
+
+            </div>
 
 
-          <!-- CLONE MODE -->
+            <div class="upload-card">
 
-          <div class="toggle-row">
+              <div class="upload-card-row">
 
-            <div class="toggle-info">
+                <div class="upload-icon-box">
+                  ▶
+                </div>
+
+                <div class="upload-info">
+
+                  <strong>
+                    Main Video
+                  </strong>
+
+                  <small id="videoFileName">
+                    No video selected
+                  </small>
+
+                </div>
+
+                <button
+                  class="mini-btn"
+                  id="sideVideoBtn"
+                  type="button"
+                >
+                  Upload
+                </button>
+
+              </div>
+
+            </div>
+
+
+            <input
+              class="hidden"
+              type="file"
+              id="slideInput"
+              accept="image/*"
+            >
+
+            <input
+              class="hidden"
+              type="file"
+              id="videoInput"
+              accept="video/*"
+            >
+
+          </section>
+
+
+          <!-- =================================================
+               AUDIO
+               ================================================= -->
+
+          <section class="panel-section">
+
+            <div class="panel-heading">
 
               <strong>
-                Mentor Voice Clone Mode
+                Main Video Audio
               </strong>
 
-              <small>
-                Generated voice track ব্যবহার করবে
-              </small>
+              <span id="audioState">
+                Original
+              </span>
 
             </div>
 
-            <label class="switch">
+            <div class="status-card">
+
+              <div class="status-row">
+
+                <span>
+                  Original Audio
+                </span>
+
+                <strong
+                  id="originalAudioStatus"
+                  class="green"
+                >
+                  ON
+                </strong>
+
+              </div>
+
+              <div class="status-row">
+
+                <span>
+                  Voice Mode
+                </span>
+
+                <strong
+                  id="voiceModeStatus"
+                >
+                  Original
+                </strong>
+
+              </div>
+
+            </div>
+
+          </section>
+
+
+          <!-- =================================================
+               STEP 3 VOICE CLONE
+               ================================================= -->
+
+          <section class="panel-section">
+
+            <div class="panel-heading">
+
+              <strong>
+                Step 3 — Mentor Voice Clone
+              </strong>
+
+              <span>
+                Voice
+              </span>
+
+            </div>
+
+
+            <div class="voice-card">
+
+              <div class="voice-header">
+
+                <div class="voice-icon">
+                  ♫
+                </div>
+
+                <div>
+
+                  <strong>
+                    Mentor Voice Clone System
+                  </strong>
+
+                  <small>
+                    Main Video narration → Mentor voice
+                  </small>
+
+                </div>
+
+              </div>
+
+
+              <!-- API -->
+
+              <div class="voice-field">
+
+                <label>
+                  Voice Clone API Endpoint
+                </label>
+
+                <input
+                  class="voice-input"
+                  id="voiceApiEndpoint"
+                  type="url"
+                  placeholder="https://your-backend.example.com/voice-clone"
+                >
+
+              </div>
+
+
+              <!-- VOICE FILE -->
+
+              <div class="upload-card">
+
+                <div class="upload-card-row">
+
+                  <div class="upload-icon-box">
+                    🎙
+                  </div>
+
+                  <div class="upload-info">
+
+                    <strong>
+                      Mentor Voice Sample
+                    </strong>
+
+                    <small id="voiceSampleName">
+                      Upload or record sample
+                    </small>
+
+                  </div>
+
+                  <button
+                    class="mini-btn"
+                    id="voiceUploadBtn"
+                    type="button"
+                  >
+                    Upload
+                  </button>
+
+                </div>
+
+              </div>
+
 
               <input
-                type="checkbox"
-                id="cloneModeToggle"
-              />
-
-              <span class="slider"></span>
-
-            </label>
-
-          </div>
+                class="hidden"
+                type="file"
+                id="voiceInput"
+                accept="audio/*"
+              >
 
 
-          <div style="height:10px;"></div>
+              <!-- RECORD SAMPLE -->
+
+              <div class="voice-actions">
+
+                <button
+                  class="voice-btn"
+                  id="recordVoiceBtn"
+                  type="button"
+                >
+                  🎙 Record Sample
+                </button>
+
+                <button
+                  class="voice-btn danger"
+                  id="stopVoiceBtn"
+                  type="button"
+                  disabled
+                >
+                  ■ Stop
+                </button>
+
+              </div>
 
 
-          <!-- CLONE BUTTON -->
-
-          <button
-            class="clone-btn"
-            id="cloneVoiceBtn"
-            type="button"
-          >
-            🧬 Clone Main Video Voice
-          </button>
+              <audio
+                id="voicePreview"
+                controls
+              ></audio>
 
 
-          <!-- PROGRESS -->
+              <!-- CLONE -->
 
-          <div
-            class="progress-wrap"
-            id="cloneProgressWrap"
-          >
+              <button
+                class="voice-btn primary"
+                id="cloneVoiceBtn"
+                type="button"
+                style="width:100%;margin-top:8px;"
+              >
+                ✨ Clone Mentor Voice
+              </button>
 
-            <div class="progress-track">
 
               <div
-                class="progress-bar"
-                id="cloneProgressBar"
-              ></div>
+                class="voice-progress"
+                id="voiceProgress"
+              >
+
+                <div
+                  class="voice-progress-bar"
+                  id="voiceProgressBar"
+                ></div>
+
+              </div>
+
+
+              <div
+                class="voice-status"
+                id="voiceCloneStatus"
+              >
+                Main Video এবং Mentor Voice Sample দিন।
+              </div>
+
+
+              <audio
+                id="clonedVoiceAudio"
+                controls
+              ></audio>
+
+
+              <div class="voice-actions">
+
+                <button
+                  class="voice-btn"
+                  id="useClonedVoiceBtn"
+                  type="button"
+                >
+                  Use Cloned Voice
+                </button>
+
+                <button
+                  class="voice-btn"
+                  id="resetVoiceBtn"
+                  type="button"
+                >
+                  Reset
+                </button>
+
+              </div>
+
+
+              <div class="voice-note">
+                শুধু নিজের বা অনুমতিপ্রাপ্ত voice ব্যবহার করুন।
+                Actual voice cloning-এর জন্য secure backend/API প্রয়োজন।
+                API key এই public GitHub file-এ রাখবেন না।
+              </div>
 
             </div>
 
-          </div>
+          </section>
 
 
-          <!-- STATUS -->
+          <!-- =================================================
+               STUDENTS
+               ================================================= -->
 
-          <div
-            class="clone-status"
-            id="cloneStatus"
-          ></div>
+          <section class="panel-section">
 
+            <div class="panel-heading">
 
-          <!-- RESULT -->
+              <strong>
+                Students
+              </strong>
 
-          <div
-            class="clone-result"
-            id="cloneResult"
-          >
+              <span id="studentPanelCount">
+                0
+              </span>
 
-            <div class="clone-result-title">
-              🎧 Generated Mentor Voice
             </div>
 
-            <audio
-              id="clonedVoiceAudio"
-              controls
-            ></audio>
 
             <div
-              style="
-                display:grid;
-                grid-template-columns:1fr 1fr;
-                gap:7px;
-                margin-top:7px;
-              "
-            >
+              class="students-list"
+              id="studentsList"
+            ></div>
 
-              <button
-                class="small-btn blue"
-                id="useClonedVoiceBtn"
-                type="button"
-              >
-                ✓ Use Voice
-              </button>
+          </section>
 
-              <button
-                class="small-btn red"
-                id="resetClonedVoiceBtn"
-                type="button"
-              >
-                ↺ Reset
-              </button>
-
-            </div>
-
-          </div>
-
-
-          <div class="voice-note">
-            API endpoint খালি থাকলে actual cloning request যাবে না।
-            Backend connect করার পর এই panel থেকে real voice conversion করা যাবে।
-          </div>
 
         </div>
 
-      </section>
+      </aside>
 
+    </div>
 
-      <!-- =====================================================
-           STUDIO CONTROLS
-           ===================================================== -->
-
-      <section class="side-card">
-
-        <div class="side-card-header">
-
-          <span class="side-card-title">
-            Studio Controls
-          </span>
-
-          <span class="side-card-badge">
-            LIVE
-          </span>
-
-        </div>
-
-        <div class="side-card-body">
-
-          <div class="toggle-row">
-
-            <div class="toggle-info">
-
-              <strong>
-                Show Mentor Camera
-              </strong>
-
-              <small>
-                Zoom-style floating camera
-              </small>
-
-            </div>
-
-            <label class="switch">
-
-              <input
-                type="checkbox"
-                id="cameraToggle"
-              />
-
-              <span class="slider"></span>
-
-            </label>
-
-          </div>
-
-
-          <div class="toggle-row">
-
-            <div class="toggle-info">
-
-              <strong>
-                Stage Brand
-              </strong>
-
-              <small id="selectedBrandSmall">
-                Shah Neil Khan / USHA.AI
-              </small>
-
-            </div>
-
-            <label class="switch">
-
-              <input
-                type="checkbox"
-                id="brandToggle"
-                checked
-              />
-
-              <span class="slider"></span>
-
-            </label>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- =====================================================
-           STUDENTS
-           ===================================================== -->
-
-      <section class="side-card">
-
-        <div class="side-card-header">
-
-          <span class="side-card-title">
-            Students
-          </span>
-
-          <span
-            class="side-card-badge"
-            id="studentCount"
-          >
-            0
-          </span>
-
-        </div>
-
-        <div class="side-card-body">
-
-          <div
-            class="student-list"
-            id="studentList"
-          ></div>
-
-        </div>
-
-      </section>
-
-    </aside>
-
-  </main>
+  </div>
 
 
   <!-- =========================================================
@@ -2036,24 +2193,24 @@
        ========================================================= -->
 
   <div
-    class="modal"
+    class="modal-backdrop"
     id="settingsModal"
   >
 
-    <div class="modal-box">
+    <div class="modal">
 
-      <div class="modal-header">
+      <div class="modal-head">
 
-        <strong>
-          ⚙️ Studio Settings
-        </strong>
+        <h3>
+          Studio Settings
+        </h3>
 
         <button
-          class="modal-close"
-          id="closeSettingsBtn"
+          class="close-modal"
+          id="closeSettings"
           type="button"
         >
-          ✕
+          ×
         </button>
 
       </div>
@@ -2061,66 +2218,59 @@
 
       <div class="modal-body">
 
-        <div class="settings-field">
+        <div class="form-group">
 
           <label>
             Studio Name
           </label>
 
           <input
-            type="text"
+            class="form-input"
             id="settingStudioName"
-          />
+          >
 
         </div>
 
 
-        <div class="settings-field">
+        <div class="form-group">
 
           <label>
             Studio Subtitle
           </label>
 
           <input
-            type="text"
+            class="form-input"
             id="settingStudioSubtitle"
-          />
+          >
 
         </div>
 
 
-        <div class="settings-field">
-
-          <label>
-            Studio Logo Text
-          </label>
-
-          <input
-            type="text"
-            id="settingStudioLogo"
-            maxlength="4"
-          />
-
-        </div>
-
-
-        <div class="settings-field">
+        <div class="form-group">
 
           <label>
             Selected Brand
           </label>
 
           <input
-            type="text"
+            class="form-input"
             id="settingBrand"
-          />
+          >
 
         </div>
 
 
-        <div class="settings-warning">
-          ⚠️ Voice Clone API key এখানে রাখবেন না।
-          শুধু নিজের secure backend endpoint ব্যবহার করুন।
+        <div class="form-group">
+
+          <label>
+            Welcome Text
+          </label>
+
+          <input
+            class="form-input"
+            id="settingWelcome"
+          >
+
         </div>
 
       </div>
@@ -2129,16 +2279,16 @@
       <div class="modal-footer">
 
         <button
-          class="small-btn"
-          id="cancelSettingsBtn"
+          class="modal-btn secondary"
+          id="cancelSettings"
           type="button"
         >
           Cancel
         </button>
 
         <button
-          class="small-btn blue"
-          id="saveSettingsBtn"
+          class="modal-btn primary"
+          id="saveSettings"
           type="button"
         >
           Save Settings
@@ -2151,37 +2301,7 @@
   </div>
 
 
-  <!-- =========================================================
-       TOAST
-       ========================================================= -->
-
-  <div
-    class="toast"
-    id="toast"
-  ></div>
-
-
   <script>
-    /* =========================================================
-       PERSONAL COURSE STUDIO
-       MENTOR STUDIO JAVASCRIPT
-       STEP 3 — MENTOR VOICE CLONE
-       ========================================================= */
-
-
-    /* =========================================================
-       AUTH
-       ========================================================= */
-
-    const mentorLoggedIn =
-      sessionStorage.getItem(
-        "personalCourseStudioMentorLoggedIn"
-      );
-
-    if (mentorLoggedIn !== "true") {
-      window.location.replace("../login/");
-    }
-
 
     /* =========================================================
        STORAGE
@@ -2192,6 +2312,9 @@
 
     const STUDENTS_KEY =
       "personalCourseStudioStudents";
+
+    const PROFILE_KEY =
+      "personalCourseStudioProfile";
 
     const VOICE_API_KEY =
       "personalCourseStudioVoiceCloneApi";
@@ -2225,89 +2348,78 @@
 
 
     /* =========================================================
-       ELEMENTS
+       STATE
        ========================================================= */
 
-    const studioName =
-      document.getElementById("studioName");
+    let settings = {};
 
-    const studioSubtitle =
-      document.getElementById("studioSubtitle");
+    let students = [];
 
-    const brandLogo =
-      document.getElementById("brandLogo");
+    let mainVideoFile = null;
 
-    const stageBrandLabel =
-      document.getElementById("stageBrandLabel");
+    let mainVideoObjectUrl = "";
 
-    const stageBrandText =
-      document.getElementById("stageBrandText");
+    let slideObjectUrl = "";
 
-    const selectedBrandSmall =
-      document.getElementById("selectedBrandSmall");
+    let mentorStream = null;
 
-    const stageStatus =
-      document.getElementById("stageStatus");
+    let voiceRecorder = null;
 
-    const stageEmpty =
-      document.getElementById("stageEmpty");
+    let voiceChunks = [];
 
-    const mainVideo =
-      document.getElementById("mainVideo");
+    let mentorVoiceBlob = null;
 
-    const mainImage =
-      document.getElementById("mainImage");
+    let mentorVoiceUrl = "";
 
-    const mentorCamera =
-      document.getElementById("mentorCamera");
+    let clonedAudioUrl = "";
 
-    const mentorCameraCard =
-      document.getElementById("mentorCameraCard");
+    let clonedVideoUrl = "";
+
+    let voiceMode =
+      "original";
+
+    let screenStream = null;
+
+    let screenRecorder = null;
+
+    let screenChunks = [];
+
+    let isScreenRecording =
+      false;
+
+
+    /* =========================================================
+       ELEMENTS
+       ========================================================= */
 
     const stage =
       document.getElementById("stage");
 
-    const liveDot =
-      document.getElementById("liveDot");
+    const welcome =
+      document.getElementById("welcome");
 
-    const recordStatus =
-      document.getElementById("recordStatus");
+    const stageContent =
+      document.getElementById("stageContent");
 
-    const toast =
-      document.getElementById("toast");
+    const mainVideo =
+      document.getElementById("mainVideo");
 
+    const slideImage =
+      document.getElementById("slideImage");
 
-    /* =========================================================
-       MEDIA VARIABLES
-       ========================================================= */
+    const mentorVideo =
+      document.getElementById("mentorVideo");
 
-    let currentVideoFile = null;
+    const mentorTile =
+      document.getElementById("mentorTile");
 
-    let currentImageFile = null;
+    const stageLabel =
+      document.getElementById("stageLabel");
 
-    let voiceSampleBlob = null;
-
-    let voiceSampleUrl = null;
-
-    let clonedVoiceBlob = null;
-
-    let clonedVoiceUrl = null;
-
-    let cameraStream = null;
-
-    let voiceRecorder = null;
-
-    let voiceRecorderChunks = [];
-
-    let screenRecorder = null;
-
-    let screenRecorderChunks = [];
-
-    let recordingStream = null;
-
-    let isRecording = false;
-
-    let settings = {};
+    const recordingIndicator =
+      document.getElementById(
+        "recordingIndicator"
+      );
 
 
     /* =========================================================
@@ -2319,18 +2431,16 @@
       try {
 
         const saved =
-          localStorage.getItem(
-            SETTINGS_KEY
+          JSON.parse(
+            localStorage.getItem(
+              SETTINGS_KEY
+            )
           );
 
-        settings = saved
-          ? {
-              ...defaultSettings,
-              ...JSON.parse(saved)
-            }
-          : {
-              ...defaultSettings
-            };
+        settings = {
+          ...defaultSettings,
+          ...(saved || {})
+        };
 
       } catch (error) {
 
@@ -2340,7 +2450,149 @@
 
       }
 
-      applySettings();
+    }
+
+
+    /* =========================================================
+       LOAD STUDENTS
+       ========================================================= */
+
+    function loadStudents() {
+
+      try {
+
+        const saved =
+          JSON.parse(
+            localStorage.getItem(
+              STUDENTS_KEY
+            )
+          );
+
+        students =
+          Array.isArray(saved)
+            ? saved
+            : [];
+
+      } catch (error) {
+
+        students = [];
+
+      }
+
+    }
+
+
+    /* =========================================================
+       LOAD LOGO FROM ADMIN
+       ========================================================= */
+
+    function loadAdminLogo() {
+
+      try {
+
+        const profile =
+          JSON.parse(
+            localStorage.getItem(
+              PROFILE_KEY
+            )
+          );
+
+        const logo =
+          profile?.logo || "";
+
+
+        const topImage =
+          document.getElementById(
+            "topLogoImage"
+          );
+
+        const topText =
+          document.getElementById(
+            "topLogoText"
+          );
+
+
+        const welcomeImage =
+          document.getElementById(
+            "welcomeLogoImage"
+          );
+
+        const welcomeText =
+          document.getElementById(
+            "welcomeLogoText"
+          );
+
+
+        const favicon =
+          document.getElementById(
+            "favicon"
+          );
+
+
+        if (logo) {
+
+          topImage.src =
+            logo;
+
+          topImage.style.display =
+            "block";
+
+          topText.style.display =
+            "none";
+
+
+          welcomeImage.src =
+            logo;
+
+          welcomeImage.style.display =
+            "block";
+
+          welcomeText.style.display =
+            "none";
+
+
+          favicon.href =
+            logo;
+
+        } else {
+
+          topImage.style.display =
+            "none";
+
+          topImage.removeAttribute(
+            "src"
+          );
+
+          topText.style.display =
+            "block";
+
+
+          welcomeImage.style.display =
+            "none";
+
+          welcomeImage.removeAttribute(
+            "src"
+          );
+
+          welcomeText.style.display =
+            "block";
+
+
+          favicon.removeAttribute(
+            "href"
+          );
+
+        }
+
+      } catch (error) {
+
+        console.log(
+          "Logo load error:",
+          error
+        );
+
+      }
+
     }
 
 
@@ -2350,192 +2602,214 @@
 
     function applySettings() {
 
-      studioName.textContent =
-        settings.studioName ||
-        defaultSettings.studioName;
+      document.getElementById(
+        "studioName"
+      ).textContent =
+        settings.studioName;
 
-      studioSubtitle.textContent =
-        settings.studioSubtitle ||
-        defaultSettings.studioSubtitle;
 
-      brandLogo.textContent =
-        settings.studioLogo ||
-        "CS";
+      document.getElementById(
+        "studioSubtitle"
+      ).textContent =
+        settings.studioSubtitle;
 
-      stageBrandText.textContent =
-        settings.selectedBrand ||
-        defaultSettings.selectedBrand;
 
-      selectedBrandSmall.textContent =
-        settings.selectedBrand ||
-        defaultSettings.selectedBrand;
+      document.getElementById(
+        "stageLabelTitle"
+      ).textContent =
+        settings.zoomTitle ||
+        settings.studioName;
 
-      updateBrandVisibility();
+
+      document.getElementById(
+        "brandBadge"
+      ).textContent =
+        settings.selectedBrand;
+
+
+      document.getElementById(
+        "welcomeText"
+      ).textContent =
+        settings.welcomeText;
+
+
+      document.title =
+        settings.studioName +
+        " | Mentor Studio";
+
     }
 
 
     /* =========================================================
-       BRAND
+       RENDER STUDENTS
        ========================================================= */
 
-    const brandToggle =
-      document.getElementById("brandToggle");
+    function renderStudents() {
 
-    function updateBrandVisibility() {
-
-      if (brandToggle.checked) {
-
-        stageBrandLabel.style.display =
-          "flex";
-
-      } else {
-
-        stageBrandLabel.style.display =
-          "none";
-
-      }
-    }
-
-    brandToggle.addEventListener(
-      "change",
-      updateBrandVisibility
-    );
-
-
-    /* =========================================================
-       TOAST
-       ========================================================= */
-
-    let toastTimer = null;
-
-    function showToast(
-      message,
-      type = ""
-    ) {
-
-      toast.textContent = message;
-
-      toast.className =
-        "toast show " + type;
-
-      clearTimeout(toastTimer);
-
-      toastTimer =
-        setTimeout(() => {
-
-          toast.className =
-            "toast";
-
-        }, 3600);
-    }
-
-
-    /* =========================================================
-       MEDIA FILE — VIDEO
-       ========================================================= */
-
-    const videoInput =
-      document.getElementById("videoInput");
-
-    videoInput.addEventListener(
-      "change",
-      () => {
-
-        const file =
-          videoInput.files[0];
-
-        if (!file) return;
-
-        currentVideoFile = file;
-
-        const url =
-          URL.createObjectURL(file);
-
-        mainVideo.src = url;
-
-        mainVideo.style.display =
-          "block";
-
-        mainImage.style.display =
-          "none";
-
-        stageEmpty.style.display =
-          "none";
-
-        stageStatus.textContent =
-          file.name;
-
-        mainVideo.load();
-
-        showToast(
-          "Main Video loaded successfully.",
-          "success"
+      const list =
+        document.getElementById(
+          "studentsList"
         );
-      }
-    );
 
-
-    /* =========================================================
-       MEDIA FILE — IMAGE
-       ========================================================= */
-
-    const imageInput =
-      document.getElementById("imageInput");
-
-    imageInput.addEventListener(
-      "change",
-      () => {
-
-        const file =
-          imageInput.files[0];
-
-        if (!file) return;
-
-        currentImageFile = file;
-
-        const url =
-          URL.createObjectURL(file);
-
-        mainImage.src = url;
-
-        mainImage.style.display =
-          "block";
-
-        mainVideo.style.display =
-          "none";
-
-        stageEmpty.style.display =
-          "none";
-
-        stageStatus.textContent =
-          file.name;
-
-        showToast(
-          "Slide / Image loaded.",
-          "success"
+      const count =
+        document.getElementById(
+          "studentPanelCount"
         );
+
+
+      count.textContent =
+        students.length;
+
+
+      if (!students.length) {
+
+        list.innerHTML = `
+
+          <div class="no-students">
+            Admin panel থেকে student add করুন।
+          </div>
+
+        `;
+
+        return;
+
       }
-    );
+
+
+      list.innerHTML =
+        students.map(student => {
+
+          const name =
+            String(
+              student.name ||
+              "Student"
+            );
+
+
+          const initial =
+            name
+              .charAt(0)
+              .toUpperCase();
+
+
+          const avatar =
+            student.image
+              ? `
+                <img
+                  src="${student.image}"
+                  alt="${escapeHtml(name)}"
+                >
+              `
+              : initial;
+
+
+          return `
+
+            <div class="student-row">
+
+              <div class="student-avatar">
+                ${avatar}
+              </div>
+
+              <div class="student-row-info">
+
+                <strong>
+                  ${escapeHtml(name)}
+                </strong>
+
+                <small>
+                  Student
+                </small>
+
+              </div>
+
+              <div
+                class="student-online"
+                title="Ready"
+              ></div>
+
+            </div>
+
+          `;
+
+        }).join("");
+
+    }
 
 
     /* =========================================================
-       VIDEO BUTTON
+       ESCAPE
        ========================================================= */
 
-    document
-      .getElementById("videoBtn")
-      .addEventListener(
-        "click",
-        () => {
+    function escapeHtml(value) {
 
-          videoInput.click();
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
-        }
+    }
+
+
+    /* =========================================================
+       SHOW STAGE
+       ========================================================= */
+
+    function showStage() {
+
+      welcome.style.display =
+        "none";
+
+      stageContent.classList.add(
+        "show"
       );
 
+      stage.classList.remove(
+        "welcome-mode"
+      );
+
+    }
+
 
     /* =========================================================
-       SLIDE BUTTON
+       HIDE STAGE
+       ========================================================= */
+
+    function clearStage() {
+
+      slideImage.classList.remove(
+        "show"
+      );
+
+      mainVideo.classList.remove(
+        "show"
+      );
+
+      mainVideo.pause();
+
+      welcome.style.display =
+        "flex";
+
+      stageContent.classList.remove(
+        "show"
+      );
+
+      stage.classList.add(
+        "welcome-mode"
+      );
+
+      voiceMode =
+        "original";
+
+      updateVoiceModeUI();
+
+    }
+
+
+    /* =========================================================
+       SLIDE
        ========================================================= */
 
     document
@@ -2544,7 +2818,198 @@
         "click",
         () => {
 
-          imageInput.click();
+          document
+            .getElementById(
+              "slideInput"
+            )
+            .click();
+
+        }
+      );
+
+
+    document
+      .getElementById("sideSlideBtn")
+      .addEventListener(
+        "click",
+        () => {
+
+          document
+            .getElementById(
+              "slideInput"
+            )
+            .click();
+
+        }
+      );
+
+
+    document
+      .getElementById("slideInput")
+      .addEventListener(
+        "change",
+        event => {
+
+          const file =
+            event.target.files?.[0];
+
+          if (!file) return;
+
+
+          if (slideObjectUrl) {
+
+            URL.revokeObjectURL(
+              slideObjectUrl
+            );
+
+          }
+
+
+          slideObjectUrl =
+            URL.createObjectURL(
+              file
+            );
+
+
+          slideImage.src =
+            slideObjectUrl;
+
+
+          slideImage.classList.add(
+            "show"
+          );
+
+
+          mainVideo.classList.remove(
+            "show"
+          );
+
+
+          showStage();
+
+
+          document.getElementById(
+            "slideFileName"
+          ).textContent =
+            file.name;
+
+        }
+      );
+
+
+    /* =========================================================
+       MAIN VIDEO
+       ========================================================= */
+
+    document
+      .getElementById("videoBtn")
+      .addEventListener(
+        "click",
+        () => {
+
+          document
+            .getElementById(
+              "videoInput"
+            )
+            .click();
+
+        }
+      );
+
+
+    document
+      .getElementById("sideVideoBtn")
+      .addEventListener(
+        "click",
+        () => {
+
+          document
+            .getElementById(
+              "videoInput"
+            )
+            .click();
+
+        }
+      );
+
+
+    document
+      .getElementById("videoInput")
+      .addEventListener(
+        "change",
+        event => {
+
+          const file =
+            event.target.files?.[0];
+
+          if (!file) return;
+
+
+          mainVideoFile =
+            file;
+
+
+          if (mainVideoObjectUrl) {
+
+            URL.revokeObjectURL(
+              mainVideoObjectUrl
+            );
+
+          }
+
+
+          mainVideoObjectUrl =
+            URL.createObjectURL(
+              file
+            );
+
+
+          mainVideo.src =
+            mainVideoObjectUrl;
+
+
+          mainVideo.load();
+
+
+          mainVideo.classList.add(
+            "show"
+          );
+
+
+          slideImage.classList.remove(
+            "show"
+          );
+
+
+          showStage();
+
+
+          document.getElementById(
+            "videoFileName"
+          ).textContent =
+            file.name;
+
+
+          document.getElementById(
+            "originalAudioStatus"
+          ).textContent =
+            "ON";
+
+
+          mainVideo.muted =
+            false;
+
+
+          voiceMode =
+            "original";
+
+
+          updateVoiceModeUI();
+
+
+          setVoiceStatus(
+            "Main Video loaded. এখন Mentor Voice Sample দিন।"
+          );
 
         }
       );
@@ -2554,330 +3019,236 @@
        PLAY / PAUSE
        ========================================================= */
 
-    const playBtn =
-      document.getElementById("playBtn");
+    document
+      .getElementById("playBtn")
+      .addEventListener(
+        "click",
+        () => {
 
-    const playIcon =
-      document.getElementById("playIcon");
+          if (
+            !mainVideo.src
+          ) {
 
-    const playText =
-      document.getElementById("playText");
+            showMessage(
+              "প্রথমে Main Video দিন।"
+            );
 
-    playBtn.addEventListener(
-      "click",
-      async () => {
+            return;
 
-        if (
-          mainVideo.style.display ===
-          "none" ||
-          !mainVideo.src
-        ) {
+          }
 
-          showToast(
-            "আগে একটি Main Video upload করুন।",
-            "error"
-          );
 
-          return;
-        }
+          if (
+            mainVideo.paused
+          ) {
 
-        try {
-
-          if (mainVideo.paused) {
-
-            await mainVideo.play();
-
-            playIcon.textContent =
-              "⏸️";
-
-            playText.textContent =
-              "Pause";
-
-            stageStatus.textContent =
-              "Playing Main Video";
+            mainVideo
+              .play()
+              .catch(() => {});
 
           } else {
 
             mainVideo.pause();
 
-            playIcon.textContent =
-              "▶️";
-
-            playText.textContent =
-              "Play";
-
-            stageStatus.textContent =
-              "Video Paused";
-
           }
 
-        } catch (error) {
-
-          showToast(
-            "Video play করা যাচ্ছে না।",
-            "error"
-          );
         }
+      );
+
+
+    mainVideo.addEventListener(
+      "play",
+      () => {
+
+        document.getElementById(
+          "playBtn"
+        ).firstChild.textContent =
+          "❚❚";
+
+
+        if (
+          voiceMode === "cloned" &&
+          clonedAudioUrl
+        ) {
+
+          clonedVoiceAudio
+            .play()
+            .catch(() => {});
+
+        }
+
       }
     );
 
 
     mainVideo.addEventListener(
-      "ended",
+      "pause",
       () => {
 
-        playIcon.textContent =
-          "▶️";
+        document.getElementById(
+          "playBtn"
+        ).firstChild.textContent =
+          "▶";
 
-        playText.textContent =
-          "Play";
 
-        stageStatus.textContent =
-          "Video Finished";
+        if (
+          clonedAudioUrl
+        ) {
+
+          const audio =
+            document.getElementById(
+              "clonedVoiceAudio"
+            );
+
+          audio.pause();
+
+        }
 
       }
     );
 
 
-    /* =========================================================
-       MUTE ORIGINAL AUDIO
-       ========================================================= */
-
-    const muteBtn =
-      document.getElementById("muteBtn");
-
-    const muteIcon =
-      document.getElementById("muteIcon");
-
-    const muteText =
-      document.getElementById("muteText");
-
-    const muteOriginalToggle =
-      document.getElementById(
-        "muteOriginalToggle"
-      );
-
-
-    function updateMainMute() {
-
-      const muted =
-        muteOriginalToggle.checked;
-
-      mainVideo.muted =
-        muted;
-
-      if (muted) {
-
-        muteIcon.textContent =
-          "🔇";
-
-        muteText.textContent =
-          "Muted";
-
-      } else {
-
-        muteIcon.textContent =
-          "🔊";
-
-        muteText.textContent =
-          "Audio On";
-
-      }
-    }
-
-
-    muteBtn.addEventListener(
-      "click",
+    mainVideo.addEventListener(
+      "timeupdate",
       () => {
 
-        muteOriginalToggle.checked =
-          !muteOriginalToggle.checked;
+        if (
+          voiceMode === "cloned" &&
+          clonedAudioUrl
+        ) {
 
-        updateMainMute();
-
-      }
-    );
-
-
-    muteOriginalToggle.addEventListener(
-      "change",
-      updateMainMute
-    );
+          const audio =
+            document.getElementById(
+              "clonedVoiceAudio"
+            );
 
 
-    /* =========================================================
-       CAMERA
-       ========================================================= */
+          if (
+            Math.abs(
+              audio.currentTime -
+              mainVideo.currentTime
+            ) > .25
+          ) {
 
-    const cameraBtn =
-      document.getElementById("cameraBtn");
+            try {
 
-    const cameraToggle =
-      document.getElementById("cameraToggle");
+              audio.currentTime =
+                mainVideo.currentTime;
 
+            } catch (error) {}
 
-    async function startCamera() {
-
-      if (cameraStream) {
-
-        cameraStream
-          .getTracks()
-          .forEach(track => track.stop());
-
-      }
-
-      try {
-
-        cameraStream =
-          await navigator.mediaDevices.getUserMedia(
-            {
-              video: {
-                width: {
-                  ideal: 1280
-                },
-                height: {
-                  ideal: 720
-                }
-              },
-              audio: true
-            }
-          );
-
-        mentorCamera.srcObject =
-          cameraStream;
-
-        mentorCameraCard.classList.add(
-          "active"
-        );
-
-        cameraToggle.checked =
-          true;
-
-        showToast(
-          "Mentor Camera চালু হয়েছে।",
-          "success"
-        );
-
-      } catch (error) {
-
-        cameraToggle.checked =
-          false;
-
-        showToast(
-          "Camera/Microphone permission দিন।",
-          "error"
-        );
-      }
-    }
-
-
-    function stopCamera() {
-
-      if (cameraStream) {
-
-        cameraStream
-          .getTracks()
-          .forEach(track => track.stop());
-
-        cameraStream = null;
-      }
-
-      mentorCamera.srcObject =
-        null;
-
-      mentorCameraCard.classList.remove(
-        "active"
-      );
-
-      cameraToggle.checked =
-        false;
-    }
-
-
-    cameraBtn.addEventListener(
-      "click",
-      async () => {
-
-        if (cameraStream) {
-
-          stopCamera();
-
-        } else {
-
-          await startCamera();
+          }
 
         }
-      }
-    );
 
-
-    cameraToggle.addEventListener(
-      "change",
-      async () => {
-
-        if (cameraToggle.checked) {
-
-          await startCamera();
-
-        } else {
-
-          stopCamera();
-
-        }
       }
     );
 
 
     /* =========================================================
-       CLEAR STAGE
+       CLEAR
        ========================================================= */
 
     document
       .getElementById("clearBtn")
       .addEventListener(
         "click",
-        () => {
+        clearStage
+      );
 
-          mainVideo.pause();
 
-          mainVideo.removeAttribute(
-            "src"
-          );
+    /* =========================================================
+       CAMERA
+       ========================================================= */
 
-          mainVideo.load();
+    document
+      .getElementById("cameraBtn")
+      .addEventListener(
+        "click",
+        async () => {
 
-          mainVideo.style.display =
-            "none";
+          try {
 
-          mainImage.removeAttribute(
-            "src"
-          );
+            if (
+              mentorStream
+            ) {
 
-          mainImage.style.display =
-            "none";
+              stopCamera();
 
-          stageEmpty.style.display =
-            "flex";
+              return;
 
-          stageStatus.textContent =
-            "Ready to start your class";
+            }
 
-          currentVideoFile = null;
 
-          currentImageFile = null;
+            mentorStream =
+              await navigator.mediaDevices
+                .getUserMedia({
+                  video: true,
+                  audio: true
+                });
 
-          playIcon.textContent =
-            "▶️";
 
-          playText.textContent =
-            "Play";
+            mentorVideo.srcObject =
+              mentorStream;
 
-          showToast(
-            "Stage cleared."
-          );
+
+            document.getElementById(
+              "cameraBtn"
+            ).classList.add(
+              "active"
+            );
+
+
+            document.getElementById(
+              "mentorMicIcon"
+            ).textContent =
+              "🎙";
+
+
+            showStage();
+
+
+          } catch (error) {
+
+            showMessage(
+              "Camera/Microphone permission দিন।"
+            );
+
+          }
 
         }
       );
+
+
+    function stopCamera() {
+
+      if (!mentorStream)
+        return;
+
+
+      mentorStream
+        .getTracks()
+        .forEach(
+          track =>
+            track.stop()
+        );
+
+
+      mentorStream =
+        null;
+
+
+      mentorVideo.srcObject =
+        null;
+
+
+      document.getElementById(
+        "cameraBtn"
+      ).classList.remove(
+        "active"
+      );
+
+    }
 
 
     /* =========================================================
@@ -2888,1254 +3259,21 @@
       .getElementById("fullscreenBtn")
       .addEventListener(
         "click",
-        async () => {
-
-          try {
-
-            if (!document.fullscreenElement) {
-
-              await stage.requestFullscreen();
-
-            } else {
-
-              await document.exitFullscreen();
-
-            }
-
-          } catch (error) {
-
-            showToast(
-              "Fullscreen supported নয়।",
-              "error"
-            );
-          }
-        }
-      );
-
-
-    /* =========================================================
-       SETTINGS
-       ========================================================= */
-
-    const settingsModal =
-      document.getElementById(
-        "settingsModal"
-      );
-
-    const settingStudioName =
-      document.getElementById(
-        "settingStudioName"
-      );
-
-    const settingStudioSubtitle =
-      document.getElementById(
-        "settingStudioSubtitle"
-      );
-
-    const settingStudioLogo =
-      document.getElementById(
-        "settingStudioLogo"
-      );
-
-    const settingBrand =
-      document.getElementById(
-        "settingBrand"
-      );
-
-
-    function openSettings() {
-
-      settingStudioName.value =
-        settings.studioName || "";
-
-      settingStudioSubtitle.value =
-        settings.studioSubtitle || "";
-
-      settingStudioLogo.value =
-        settings.studioLogo || "CS";
-
-      settingBrand.value =
-        settings.selectedBrand || "";
-
-      settingsModal.classList.add(
-        "show"
-      );
-    }
-
-
-    function closeSettings() {
-
-      settingsModal.classList.remove(
-        "show"
-      );
-    }
-
-
-    document
-      .getElementById("settingsBtn")
-      .addEventListener(
-        "click",
-        openSettings
-      );
-
-
-    document
-      .getElementById("closeSettingsBtn")
-      .addEventListener(
-        "click",
-        closeSettings
-      );
-
-
-    document
-      .getElementById("cancelSettingsBtn")
-      .addEventListener(
-        "click",
-        closeSettings
-      );
-
-
-    document
-      .getElementById("saveSettingsBtn")
-      .addEventListener(
-        "click",
         () => {
-
-          settings = {
-
-            ...settings,
-
-            studioName:
-              settingStudioName.value.trim() ||
-              defaultSettings.studioName,
-
-            studioSubtitle:
-              settingStudioSubtitle.value.trim() ||
-              defaultSettings.studioSubtitle,
-
-            studioLogo:
-              settingStudioLogo.value.trim() ||
-              "CS",
-
-            selectedBrand:
-              settingBrand.value.trim() ||
-              defaultSettings.selectedBrand
-
-          };
-
-
-          localStorage.setItem(
-            SETTINGS_KEY,
-            JSON.stringify(settings)
-          );
-
-
-          applySettings();
-
-          closeSettings();
-
-          showToast(
-            "Studio settings saved.",
-            "success"
-          );
-
-        }
-      );
-
-
-    /* =========================================================
-       HOME
-       ========================================================= */
-
-    document
-      .getElementById("homeBtn")
-      .addEventListener(
-        "click",
-        () => {
-
-          window.location.href =
-            "../";
-
-        }
-      );
-
-
-    /* =========================================================
-       LOGOUT
-       ========================================================= */
-
-    document
-      .getElementById("logoutBtn")
-      .addEventListener(
-        "click",
-        () => {
-
-          sessionStorage.removeItem(
-            "personalCourseStudioMentorLoggedIn"
-          );
-
-          sessionStorage.removeItem(
-            "personalCourseStudioRole"
-          );
-
-          sessionStorage.removeItem(
-            "personalCourseStudioUsername"
-          );
-
-          window.location.replace(
-            "../login/"
-          );
-
-        }
-      );
-
-
-    /* =========================================================
-       STUDENTS
-       ========================================================= */
-
-    const studentList =
-      document.getElementById(
-        "studentList"
-      );
-
-    const studentCount =
-      document.getElementById(
-        "studentCount"
-      );
-
-
-    function loadStudents() {
-
-      let students = [];
-
-      try {
-
-        const saved =
-          localStorage.getItem(
-            STUDENTS_KEY
-          );
-
-        students = saved
-          ? JSON.parse(saved)
-          : [];
-
-      } catch (error) {
-
-        students = [];
-
-      }
-
-
-      studentCount.textContent =
-        students.length;
-
-
-      studentList.innerHTML = "";
-
-
-      if (!students.length) {
-
-        studentList.innerHTML =
-          '<div class="empty-students">কোনো student এখনো যোগ করা হয়নি। Admin Panel থেকে student যোগ করুন।</div>';
-
-        return;
-      }
-
-
-      students
-        .slice(0, 12)
-        .forEach(
-          (student, index) => {
-
-            const name =
-              student.name ||
-              student.fullName ||
-              student.username ||
-              "Student " +
-                (index + 1);
-
-            const email =
-              student.email ||
-              student.phone ||
-              "Student";
-
-            const initials =
-              name
-                .split(" ")
-                .slice(0, 2)
-                .map(
-                  x =>
-                    x
-                      .charAt(0)
-                      .toUpperCase()
-                )
-                .join("");
-
-
-            const item =
-              document.createElement(
-                "div"
-              );
-
-            item.className =
-              "student-item";
-
-
-            item.innerHTML = `
-
-              <div class="student-avatar">
-                ${initials || "S"}
-              </div>
-
-              <div>
-                <div class="student-name">
-                  ${escapeHtml(name)}
-                </div>
-
-                <div class="student-meta">
-                  ${escapeHtml(email)}
-                </div>
-              </div>
-
-            `;
-
-
-            studentList.appendChild(
-              item
-            );
-
-          }
-        );
-    }
-
-
-    function escapeHtml(value) {
-
-      return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
-    }
-
-
-    /* =========================================================
-       VOICE API
-       ========================================================= */
-
-    const voiceApiInput =
-      document.getElementById(
-        "voiceApiInput"
-      );
-
-
-    function loadVoiceApi() {
-
-      voiceApiInput.value =
-        localStorage.getItem(
-          VOICE_API_KEY
-        ) || "";
-
-    }
-
-
-    voiceApiInput.addEventListener(
-      "change",
-      () => {
-
-        localStorage.setItem(
-          VOICE_API_KEY,
-          voiceApiInput.value.trim()
-        );
-
-      }
-    );
-
-
-    /* =========================================================
-       VOICE SAMPLE UPLOAD
-       ========================================================= */
-
-    const voiceInput =
-      document.getElementById(
-        "voiceInput"
-      );
-
-    const voiceSampleAudio =
-      document.getElementById(
-        "voiceSampleAudio"
-      );
-
-    const voiceFileInfo =
-      document.getElementById(
-        "voiceFileInfo"
-      );
-
-    const voiceFileName =
-      document.getElementById(
-        "voiceFileName"
-      );
-
-    const voiceFileDuration =
-      document.getElementById(
-        "voiceFileDuration"
-      );
-
-
-    voiceInput.addEventListener(
-      "change",
-      () => {
-
-        const file =
-          voiceInput.files[0];
-
-        if (!file) return;
-
-        setVoiceSample(
-          file,
-          file.name
-        );
-
-      }
-    );
-
-
-    function setVoiceSample(
-      blob,
-      fileName = "Mentor Voice Sample"
-    ) {
-
-      voiceSampleBlob =
-        blob;
-
-      if (voiceSampleUrl) {
-
-        URL.revokeObjectURL(
-          voiceSampleUrl
-        );
-
-      }
-
-      voiceSampleUrl =
-        URL.createObjectURL(
-          blob
-        );
-
-      voiceSampleAudio.src =
-        voiceSampleUrl;
-
-      voiceSampleAudio.style.display =
-        "block";
-
-      voiceFileInfo.classList.add(
-        "show"
-      );
-
-      voiceFileName.textContent =
-        fileName;
-
-      voiceFileDuration.textContent =
-        "Loading duration...";
-
-
-      voiceSampleAudio.onloadedmetadata =
-        () => {
-
-          const duration =
-            voiceSampleAudio.duration;
-
-          voiceFileDuration.textContent =
-            isFinite(duration)
-              ? formatTime(duration)
-              : "Audio sample ready";
-
-        };
-
-
-      showToast(
-        "Mentor voice sample ready.",
-        "success"
-      );
-
-    }
-
-
-    function formatTime(seconds) {
-
-      if (!isFinite(seconds)) {
-        return "00:00";
-      }
-
-      const mins =
-        Math.floor(
-          seconds / 60
-        );
-
-      const secs =
-        Math.floor(
-          seconds % 60
-        );
-
-      return (
-        String(mins).padStart(2, "0") +
-        ":" +
-        String(secs).padStart(2, "0")
-      );
-    }
-
-
-    /* =========================================================
-       RECORD MENTOR VOICE SAMPLE
-       ========================================================= */
-
-    const recordVoiceBtn =
-      document.getElementById(
-        "recordVoiceBtn"
-      );
-
-
-    recordVoiceBtn.addEventListener(
-      "click",
-      async () => {
-
-        if (
-          voiceRecorder &&
-          voiceRecorder.state ===
-            "recording"
-        ) {
-
-          voiceRecorder.stop();
-
-          return;
-        }
-
-
-        try {
-
-          const stream =
-            await navigator.mediaDevices.getUserMedia(
-              {
-                audio: true
-              }
-            );
-
-
-          voiceRecorderChunks = [];
-
-
-          const mimeTypes = [
-
-            "audio/webm;codecs=opus",
-
-            "audio/webm",
-
-            "audio/ogg;codecs=opus"
-
-          ];
-
-
-          let selectedMime =
-            "";
-
-
-          for (
-            const mime of mimeTypes
-          ) {
-
-            if (
-              MediaRecorder.isTypeSupported(
-                mime
-              )
-            ) {
-
-              selectedMime =
-                mime;
-
-              break;
-            }
-
-          }
-
-
-          voiceRecorder =
-            selectedMime
-              ? new MediaRecorder(
-                  stream,
-                  {
-                    mimeType:
-                      selectedMime
-                  }
-                )
-              : new MediaRecorder(
-                  stream
-                );
-
-
-          voiceRecorder.ondataavailable =
-            event => {
-
-              if (
-                event.data &&
-                event.data.size > 0
-              ) {
-
-                voiceRecorderChunks.push(
-                  event.data
-                );
-
-              }
-            };
-
-
-          voiceRecorder.onstop =
-            () => {
-
-              const blob =
-                new Blob(
-                  voiceRecorderChunks,
-                  {
-                    type:
-                      voiceRecorder.mimeType ||
-                      "audio/webm"
-                  }
-                );
-
-
-              setVoiceSample(
-                blob,
-                "Mentor Recorded Voice"
-              );
-
-
-              stream
-                .getTracks()
-                .forEach(
-                  track =>
-                    track.stop()
-                );
-
-
-              recordVoiceBtn.textContent =
-                "🎤 Record Voice";
-
-            };
-
-
-          voiceRecorder.start();
-
-
-          recordVoiceBtn.textContent =
-            "⏹ Stop Recording";
-
-
-          showToast(
-            "Voice recording চলছে... 10–30 seconds sample দিন।"
-          );
-
-        } catch (error) {
-
-          showToast(
-            "Microphone permission দিন।",
-            "error"
-          );
-        }
-
-      }
-    );
-
-
-    /* =========================================================
-       CLONE SYSTEM
-       ========================================================= */
-
-    const cloneVoiceBtn =
-      document.getElementById(
-        "cloneVoiceBtn"
-      );
-
-    const cloneStatus =
-      document.getElementById(
-        "cloneStatus"
-      );
-
-    const cloneProgressWrap =
-      document.getElementById(
-        "cloneProgressWrap"
-      );
-
-    const cloneProgressBar =
-      document.getElementById(
-        "cloneProgressBar"
-      );
-
-    const cloneResult =
-      document.getElementById(
-        "cloneResult"
-      );
-
-    const clonedVoiceAudio =
-      document.getElementById(
-        "clonedVoiceAudio"
-      );
-
-    const cloneModeToggle =
-      document.getElementById(
-        "cloneModeToggle"
-      );
-
-
-    function setCloneStatus(
-      message,
-      type = ""
-    ) {
-
-      cloneStatus.textContent =
-        message;
-
-      cloneStatus.className =
-        "clone-status show " +
-        type;
-
-    }
-
-
-    function setProgress(
-      value
-    ) {
-
-      cloneProgressWrap.classList.add(
-        "show"
-      );
-
-      cloneProgressBar.style.width =
-        Math.max(
-          0,
-          Math.min(
-            100,
-            value
-          )
-        ) +
-        "%";
-
-    }
-
-
-    function hideProgress() {
-
-      cloneProgressWrap.classList.remove(
-        "show"
-      );
-
-      cloneProgressBar.style.width =
-        "0%";
-
-    }
-
-
-    /* =========================================================
-       CLONE REQUEST
-       ========================================================= */
-
-    cloneVoiceBtn.addEventListener(
-      "click",
-      async () => {
-
-        const endpoint =
-          voiceApiInput.value.trim();
-
-
-        /* -----------------------------------
-           VALIDATION
-           ----------------------------------- */
-
-        if (!currentVideoFile) {
-
-          setCloneStatus(
-            "প্রথমে Main Video upload করুন।",
-            "error"
-          );
-
-          showToast(
-            "Main Video প্রয়োজন।",
-            "error"
-          );
-
-          return;
-        }
-
-
-        if (!voiceSampleBlob) {
-
-          setCloneStatus(
-            "প্রথমে Mentor Voice Sample upload অথবা record করুন।",
-            "error"
-          );
-
-          showToast(
-            "Mentor voice sample প্রয়োজন।",
-            "error"
-          );
-
-          return;
-        }
-
-
-        /* -----------------------------------
-           API NOT CONFIGURED
-           ----------------------------------- */
-
-        if (!endpoint) {
-
-          setCloneStatus(
-            "Voice Clone API connected নেই। Backend endpoint যোগ করলে actual voice cloning হবে। এই GitHub Pages browser নিজে থেকে আসল voice clone করছে না।",
-            "error"
-          );
-
-          showToast(
-            "Voice Clone backend এখনো connected নেই।",
-            "error"
-          );
-
-          return;
-        }
-
-
-        /* -----------------------------------
-           START
-           ----------------------------------- */
-
-        cloneVoiceBtn.disabled =
-          true;
-
-        cloneVoiceBtn.textContent =
-          "⏳ Cloning...";
-
-        setCloneStatus(
-          "Main Video এবং Mentor Voice Sample secure backend-এ পাঠানো হচ্ছে..."
-        );
-
-        setProgress(10);
-
-
-        try {
-
-          const formData =
-            new FormData();
-
-
-          /*
-            Backend should receive:
-
-            sourceVideo
-            voiceSample
-
-            Backend can then:
-
-            1. Extract original narration
-            2. Convert/clone it to mentor voice
-            3. Return generated audio
-               OR final video
-          */
-
-          formData.append(
-            "sourceVideo",
-            currentVideoFile,
-            currentVideoFile.name
-          );
-
-
-          formData.append(
-            "voiceSample",
-            voiceSampleBlob,
-            "mentor-voice-sample.webm"
-          );
-
-
-          formData.append(
-            "mode",
-            "mentor-voice-clone"
-          );
-
-
-          setProgress(25);
-
-
-          const response =
-            await fetch(
-              endpoint,
-              {
-                method: "POST",
-                body: formData
-              }
-            );
-
-
-          setProgress(65);
-
-
-          if (!response.ok) {
-
-            throw new Error(
-              "Backend returned HTTP " +
-              response.status
-            );
-          }
-
-
-          const contentType =
-            response.headers.get(
-              "content-type"
-            ) || "";
-
-
-          /* -----------------------------------
-             JSON RESPONSE
-             ----------------------------------- */
 
           if (
-            contentType.includes(
-              "application/json"
-            )
+            !document.fullscreenElement
           ) {
 
-            const data =
-              await response.json();
-
-
-            setProgress(85);
-
-
-            /*
-              Supported response examples:
-
-              {
-                "audioUrl": "https://..."
-              }
-
-              OR
-
-              {
-                "videoUrl": "https://..."
-              }
-            */
-
-
-            if (data.audioUrl) {
-
-              clonedVoiceUrl =
-                data.audioUrl;
-
-              clonedVoiceAudio.src =
-                data.audioUrl;
-
-              clonedVoiceAudio.style.display =
-                "block";
-
-              cloneResult.classList.add(
-                "show"
-              );
-
-              setProgress(100);
-
-              setCloneStatus(
-                "Mentor cloned voice successfully generated.",
-                "success"
-              );
-
-              showToast(
-                "Cloned Mentor Voice ready.",
-                "success"
-              );
-
-            } else if (
-              data.videoUrl
-            ) {
-
-              /*
-                Backend returned final video.
-              */
-
-              mainVideo.src =
-                data.videoUrl;
-
-              mainVideo.style.display =
-                "block";
-
-              mainImage.style.display =
-                "none";
-
-              stageEmpty.style.display =
-                "none";
-
-              mainVideo.load();
-
-              setProgress(100);
-
-              setCloneStatus(
-                "Final voice-cloned video received from backend.",
-                "success"
-              );
-
-              showToast(
-                "Voice-cloned video ready.",
-                "success"
-              );
-
-            } else {
-
-              throw new Error(
-                "Backend response-এ audioUrl অথবা videoUrl পাওয়া যায়নি."
-              );
-
-            }
-
+            stage
+              .requestFullscreen()
+              .catch(() => {});
 
           } else {
 
-            /* ---------------------------------
-               BLOB RESPONSE
-               --------------------------------- */
-
-            const blob =
-              await response.blob();
-
-
-            setProgress(90);
-
-
-            if (
-              blob.type.startsWith(
-                "audio/"
-              )
-            ) {
-
-              clonedVoiceBlob =
-                blob;
-
-              if (clonedVoiceUrl) {
-
-                URL.revokeObjectURL(
-                  clonedVoiceUrl
-                );
-
-              }
-
-              clonedVoiceUrl =
-                URL.createObjectURL(
-                  blob
-                );
-
-
-              clonedVoiceAudio.src =
-                clonedVoiceUrl;
-
-              clonedVoiceAudio.style.display =
-                "block";
-
-              cloneResult.classList.add(
-                "show"
-              );
-
-
-              setCloneStatus(
-                "Generated Mentor Voice received.",
-                "success"
-              );
-
-
-            } else if (
-              blob.type.startsWith(
-                "video/"
-              )
-            ) {
-
-              const finalVideoUrl =
-                URL.createObjectURL(
-                  blob
-                );
-
-              mainVideo.src =
-                finalVideoUrl;
-
-              mainVideo.style.display =
-                "block";
-
-              mainImage.style.display =
-                "none";
-
-              stageEmpty.style.display =
-                "none";
-
-              mainVideo.load();
-
-
-              setCloneStatus(
-                "Final voice-cloned video received.",
-                "success"
-              );
-
-            } else {
-
-              throw new Error(
-                "Backend returned unsupported file type."
-              );
-
-            }
-
-
-            setProgress(100);
-
-            showToast(
-              "Voice clone result received.",
-              "success"
-            );
+            document.exitFullscreen();
 
           }
-
-
-        } catch (error) {
-
-          console.error(
-            "Voice clone error:",
-            error
-          );
-
-
-          setCloneStatus(
-            "Voice Clone failed: " +
-            error.message,
-            "error"
-          );
-
-
-          showToast(
-            "Voice Clone request failed.",
-            "error"
-          );
-
-
-        } finally {
-
-          cloneVoiceBtn.disabled =
-            false;
-
-          cloneVoiceBtn.textContent =
-            "🧬 Clone Main Video Voice";
-
-
-          setTimeout(
-            hideProgress,
-            1200
-          );
-
-        }
-
-      }
-    );
-
-
-    /* =========================================================
-       USE CLONED VOICE
-       ========================================================= */
-
-    document
-      .getElementById(
-        "useClonedVoiceBtn"
-      )
-      .addEventListener(
-        "click",
-        () => {
-
-          if (
-            !clonedVoiceAudio.src
-          ) {
-
-            showToast(
-              "কোনো cloned voice নেই।",
-              "error"
-            );
-
-            return;
-          }
-
-
-          cloneModeToggle.checked =
-            true;
-
-          muteOriginalToggle.checked =
-            true;
-
-          updateMainMute();
-
-
-          setCloneStatus(
-            "Cloned Mentor Voice selected. Final recording/backend export-এ এই track ব্যবহার করুন।",
-            "success"
-          );
-
-
-          showToast(
-            "Cloned Mentor Voice selected.",
-            "success"
-          );
-
-        }
-      );
-
-
-    /* =========================================================
-       RESET CLONED VOICE
-       ========================================================= */
-
-    document
-      .getElementById(
-        "resetClonedVoiceBtn"
-      )
-      .addEventListener(
-        "click",
-        () => {
-
-          clonedVoiceBlob =
-            null;
-
-          if (clonedVoiceUrl) {
-
-            URL.revokeObjectURL(
-              clonedVoiceUrl
-            );
-
-            clonedVoiceUrl =
-              null;
-
-          }
-
-
-          clonedVoiceAudio.pause();
-
-          clonedVoiceAudio.removeAttribute(
-            "src"
-          );
-
-          clonedVoiceAudio.load();
-
-          cloneResult.classList.remove(
-            "show"
-          );
-
-          cloneModeToggle.checked =
-            false;
-
-
-          setCloneStatus(
-            "Generated cloned voice reset হয়েছে।"
-          );
-
-
-          showToast(
-            "Cloned voice reset."
-          );
 
         }
       );
@@ -4145,81 +3283,58 @@
        SCREEN RECORDING
        ========================================================= */
 
-    const recordBtn =
-      document.getElementById(
-        "recordBtn"
-      );
+    document
+      .getElementById("recordBtn")
+      .addEventListener(
+        "click",
+        async () => {
 
-    const recordIcon =
-      document.getElementById(
-        "recordIcon"
-      );
+          if (
+            isScreenRecording
+          ) {
 
-    const recordText =
-      document.getElementById(
-        "recordText"
-      );
+            stopScreenRecording();
 
+          } else {
 
-    recordBtn.addEventListener(
-      "click",
-      async () => {
+            startScreenRecording();
 
-        if (isRecording) {
-
-          stopScreenRecording();
-
-        } else {
-
-          await startScreenRecording();
+          }
 
         }
-
-      }
-    );
+      );
 
 
     async function startScreenRecording() {
 
       try {
 
-        if (
-          !navigator.mediaDevices ||
-          !navigator.mediaDevices.getDisplayMedia
-        ) {
-
-          showToast(
-            "এই browser-এ screen recording support নেই।",
-            "error"
-          );
-
-          return;
-        }
-
-
-        recordingStream =
-          await navigator.mediaDevices.getDisplayMedia(
-            {
+        screenStream =
+          await navigator.mediaDevices
+            .getDisplayMedia({
               video: true,
               audio: true
-            }
-          );
+            });
 
 
-        screenRecorderChunks = [];
+        screenChunks = [];
 
 
-        let mimeType =
-          "video/webm;codecs=vp9,opus";
+        let options = {};
 
 
         if (
-          !MediaRecorder.isTypeSupported(
-            mimeType
+          MediaRecorder.isTypeSupported(
+            "video/webm;codecs=vp9"
           )
         ) {
 
-          mimeType =
+          options.mimeType =
+            "video/webm;codecs=vp9";
+
+        } else {
+
+          options.mimeType =
             "video/webm";
 
         }
@@ -4227,10 +3342,8 @@
 
         screenRecorder =
           new MediaRecorder(
-            recordingStream,
-            {
-              mimeType
-            }
+            screenStream,
+            options
           );
 
 
@@ -4238,11 +3351,10 @@
           event => {
 
             if (
-              event.data &&
-              event.data.size > 0
+              event.data.size
             ) {
 
-              screenRecorderChunks.push(
+              screenChunks.push(
                 event.data
               );
 
@@ -4252,16 +3364,18 @@
 
 
         screenRecorder.onstop =
-          saveScreenRecording;
+          downloadScreenRecording;
 
 
-        recordingStream
+        screenStream
           .getVideoTracks()[0]
           .addEventListener(
             "ended",
             () => {
 
-              if (isRecording) {
+              if (
+                isScreenRecording
+              ) {
 
                 stopScreenRecording();
 
@@ -4276,44 +3390,28 @@
         );
 
 
-        isRecording =
+        isScreenRecording =
           true;
 
 
-        recordBtn.classList.add(
-          "recording"
+        recordingIndicator.classList.add(
+          "show"
         );
 
-        recordIcon.textContent =
-          "⏹️";
 
-        recordText.textContent =
-          "Stop";
-
-        liveDot.classList.add(
-          "active"
-        );
-
-        recordStatus.textContent =
-          "Recording";
-
-        stageStatus.textContent =
-          "Studio Recording চলছে";
-
-
-        showToast(
-          "Screen recording শুরু হয়েছে।",
-          "success"
-        );
+        document
+          .getElementById(
+            "recordBtn"
+          )
+          .classList.add(
+            "active"
+          );
 
 
       } catch (error) {
 
-        console.error(error);
-
-        showToast(
-          "Screen recording permission দেওয়া হয়নি।",
-          "error"
+        showMessage(
+          "Screen recording permission দেওয়া হয়নি।"
         );
 
       }
@@ -4334,9 +3432,9 @@
       }
 
 
-      if (recordingStream) {
+      if (screenStream) {
 
-        recordingStream
+        screenStream
           .getTracks()
           .forEach(
             track =>
@@ -4346,49 +3444,33 @@
       }
 
 
-      isRecording =
+      isScreenRecording =
         false;
 
 
-      recordBtn.classList.remove(
-        "recording"
+      recordingIndicator.classList.remove(
+        "show"
       );
 
-      recordIcon.textContent =
-        "⏺️";
 
-      recordText.textContent =
-        "Record";
-
-      liveDot.classList.remove(
-        "active"
-      );
-
-      recordStatus.textContent =
-        "Not Recording";
-
-      stageStatus.textContent =
-        "Recording stopped";
+      document
+        .getElementById(
+          "recordBtn"
+        )
+        .classList.remove(
+          "active"
+        );
 
     }
 
 
-    function saveScreenRecording() {
-
-      if (
-        !screenRecorderChunks.length
-      ) {
-
-        return;
-      }
-
+    function downloadScreenRecording() {
 
       const blob =
         new Blob(
-          screenRecorderChunks,
+          screenChunks,
           {
             type:
-              screenRecorder.mimeType ||
               "video/webm"
           }
         );
@@ -4405,17 +3487,18 @@
           "a"
         );
 
+
       a.href =
         url;
 
+
       a.download =
-        "mentor-studio-" +
+        "personal-course-studio-session-" +
         Date.now() +
         ".webm";
 
-      document.body.appendChild(
-        a
-      );
+
+      document.body.appendChild(a);
 
       a.click();
 
@@ -4423,248 +3506,200 @@
 
 
       setTimeout(
-        () => {
+        () =>
           URL.revokeObjectURL(
             url
-          );
-        },
-        3000
+          ),
+        1000
       );
 
 
-      showToast(
-        "Recording saved as WebM.",
-        "success"
+      showMessage(
+        "Recording তৈরি হয়েছে।"
       );
 
     }
 
 
     /* =========================================================
-       DRAG MENTOR CAMERA
+       DRAG STAGE LABEL
        ========================================================= */
 
-    let dragging =
-      false;
-
-    let dragOffsetX =
-      0;
-
-    let dragOffsetY =
-      0;
-
-
-    mentorCameraCard.addEventListener(
-      "pointerdown",
-      event => {
-
-        dragging =
-          true;
-
-        mentorCameraCard.setPointerCapture(
-          event.pointerId
-        );
-
-
-        const rect =
-          mentorCameraCard.getBoundingClientRect();
-
-
-        dragOffsetX =
-          event.clientX -
-          rect.left;
-
-        dragOffsetY =
-          event.clientY -
-          rect.top;
-
-
-        mentorCameraCard.classList.add(
-          "dragging"
-        );
-
-      }
+    makeDraggable(
+      stageLabel,
+      stage
     );
 
 
-    mentorCameraCard.addEventListener(
-      "pointermove",
-      event => {
+    /* =========================================================
+       DRAG MENTOR TILE
+       ========================================================= */
 
-        if (!dragging) return;
-
-
-        const stageRect =
-          stage.getBoundingClientRect();
-
-
-        let left =
-          event.clientX -
-          stageRect.left -
-          dragOffsetX;
-
-
-        let top =
-          event.clientY -
-          stageRect.top -
-          dragOffsetY;
-
-
-        const cardRect =
-          mentorCameraCard.getBoundingClientRect();
-
-
-        const maxLeft =
-          stageRect.width -
-          cardRect.width;
-
-        const maxTop =
-          stageRect.height -
-          cardRect.height;
-
-
-        left =
-          Math.max(
-            0,
-            Math.min(
-              left,
-              maxLeft
-            )
-          );
-
-
-        top =
-          Math.max(
-            0,
-            Math.min(
-              top,
-              maxTop
-            )
-          );
-
-
-        mentorCameraCard.style.left =
-          left + "px";
-
-        mentorCameraCard.style.top =
-          top + "px";
-
-        mentorCameraCard.style.right =
-          "auto";
-
-        mentorCameraCard.style.bottom =
-          "auto";
-
-      }
+    makeDraggable(
+      mentorTile,
+      stage
     );
 
 
-    mentorCameraCard.addEventListener(
-      "pointerup",
-      event => {
+    function makeDraggable(
+      element,
+      parent
+    ) {
 
-        dragging =
-          false;
+      let dragging =
+        false;
 
-        try {
+      let startX =
+        0;
 
-          mentorCameraCard.releasePointerCapture(
+      let startY =
+        0;
+
+      let startLeft =
+        0;
+
+      let startTop =
+        0;
+
+
+      element.addEventListener(
+        "pointerdown",
+        event => {
+
+          dragging =
+            true;
+
+
+          element.setPointerCapture(
             event.pointerId
           );
 
-        } catch (error) {}
 
-        mentorCameraCard.classList.remove(
-          "dragging"
-        );
+          const rect =
+            element.getBoundingClientRect();
 
-      }
-    );
+          const parentRect =
+            parent.getBoundingClientRect();
 
 
-    /* =========================================================
-       KEYBOARD SHORTCUTS
-       ========================================================= */
+          startX =
+            event.clientX;
 
-    document.addEventListener(
-      "keydown",
-      event => {
-
-        if (
-          event.target.tagName ===
-            "INPUT" ||
-          event.target.tagName ===
-            "TEXTAREA"
-        ) {
-
-          return;
-        }
+          startY =
+            event.clientY;
 
 
-        if (
-          event.code ===
-          "Space"
-        ) {
+          startLeft =
+            rect.left -
+            parentRect.left;
 
-          event.preventDefault();
-
-          playBtn.click();
-
-        }
+          startTop =
+            rect.top -
+            parentRect.top;
 
 
-        if (
-          event.key === "f" ||
-          event.key === "F"
-        ) {
+          element.style.right =
+            "auto";
 
-          document
-            .getElementById(
-              "fullscreenBtn"
-            )
-            .click();
+          element.style.bottom =
+            "auto";
+
+          element.style.left =
+            startLeft +
+            "px";
+
+          element.style.top =
+            startTop +
+            "px";
 
         }
+      );
 
 
-        if (
-          event.key === "r" ||
-          event.key === "R"
-        ) {
+      element.addEventListener(
+        "pointermove",
+        event => {
 
-          recordBtn.click();
+          if (!dragging)
+            return;
+
+
+          const dx =
+            event.clientX -
+            startX;
+
+          const dy =
+            event.clientY -
+            startY;
+
+
+          let newLeft =
+            startLeft +
+            dx;
+
+          let newTop =
+            startTop +
+            dy;
+
+
+          const maxLeft =
+            parent.clientWidth -
+            element.offsetWidth;
+
+          const maxTop =
+            parent.clientHeight -
+            element.offsetHeight;
+
+
+          newLeft =
+            Math.max(
+              0,
+              Math.min(
+                newLeft,
+                maxLeft
+              )
+            );
+
+
+          newTop =
+            Math.max(
+              0,
+              Math.min(
+                newTop,
+                maxTop
+              )
+            );
+
+
+          element.style.left =
+            newLeft +
+            "px";
+
+          element.style.top =
+            newTop +
+            "px";
 
         }
-
-      }
-    );
+      );
 
 
-    /* =========================================================
-       SERVICE WORKER
-       ========================================================= */
-
-    if (
-      "serviceWorker" in
-      navigator
-    ) {
-
-      window.addEventListener(
-        "load",
+      element.addEventListener(
+        "pointerup",
         () => {
 
-          navigator.serviceWorker
-            .register("../sw.js")
-            .catch(
-              error => {
+          dragging =
+            false;
 
-                console.log(
-                  "Service worker:",
-                  error
-                );
+        }
+      );
 
-              }
-            );
+
+      element.addEventListener(
+        "pointercancel",
+        () => {
+
+          dragging =
+            false;
 
         }
       );
@@ -4673,39 +3708,1206 @@
 
 
     /* =========================================================
-       CLEANUP
+       VOICE SAMPLE UPLOAD
+       ========================================================= */
+
+    const voiceInput =
+      document.getElementById(
+        "voiceInput"
+      );
+
+    const voicePreview =
+      document.getElementById(
+        "voicePreview"
+      );
+
+    const voiceSampleName =
+      document.getElementById(
+        "voiceSampleName"
+      );
+
+
+    document
+      .getElementById(
+        "voiceUploadBtn"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          voiceInput.click();
+
+        }
+      );
+
+
+    voiceInput.addEventListener(
+      "change",
+      event => {
+
+        const file =
+          event.target.files?.[0];
+
+        if (!file)
+          return;
+
+
+        mentorVoiceBlob =
+          file;
+
+
+        if (mentorVoiceUrl) {
+
+          URL.revokeObjectURL(
+            mentorVoiceUrl
+          );
+
+        }
+
+
+        mentorVoiceUrl =
+          URL.createObjectURL(
+            file
+          );
+
+
+        voicePreview.src =
+          mentorVoiceUrl;
+
+
+        voicePreview.classList.add(
+          "show"
+        );
+
+
+        voiceSampleName.textContent =
+          file.name;
+
+
+        setVoiceStatus(
+          "Mentor Voice Sample ready."
+        );
+
+
+        voiceInput.value =
+          "";
+
+      }
+    );
+
+
+    /* =========================================================
+       RECORD VOICE SAMPLE
+       ========================================================= */
+
+    document
+      .getElementById(
+        "recordVoiceBtn"
+      )
+      .addEventListener(
+        "click",
+        startVoiceRecording
+      );
+
+
+    document
+      .getElementById(
+        "stopVoiceBtn"
+      )
+      .addEventListener(
+        "click",
+        stopVoiceRecording
+      );
+
+
+    async function startVoiceRecording() {
+
+      try {
+
+        mentorStream =
+          await navigator.mediaDevices
+            .getUserMedia({
+              audio: true
+            });
+
+
+        voiceChunks = [];
+
+
+        voiceRecorder =
+          new MediaRecorder(
+            mentorStream
+          );
+
+
+        voiceRecorder.ondataavailable =
+          event => {
+
+            if (
+              event.data.size
+            ) {
+
+              voiceChunks.push(
+                event.data
+              );
+
+            }
+
+          };
+
+
+        voiceRecorder.onstop =
+          () => {
+
+            mentorVoiceBlob =
+              new Blob(
+                voiceChunks,
+                {
+                  type:
+                    voiceRecorder.mimeType ||
+                    "audio/webm"
+                }
+              );
+
+
+            if (mentorVoiceUrl) {
+
+              URL.revokeObjectURL(
+                mentorVoiceUrl
+              );
+
+            }
+
+
+            mentorVoiceUrl =
+              URL.createObjectURL(
+                mentorVoiceBlob
+              );
+
+
+            voicePreview.src =
+              mentorVoiceUrl;
+
+
+            voicePreview.classList.add(
+              "show"
+            );
+
+
+            voiceSampleName.textContent =
+              "Recorded Mentor Voice";
+
+
+            setVoiceStatus(
+              "Voice sample recording complete."
+            );
+
+
+            stopVoiceOnlyStream();
+
+          };
+
+
+        voiceRecorder.start();
+
+
+        document.getElementById(
+          "recordVoiceBtn"
+        ).disabled =
+          true;
+
+
+        document.getElementById(
+          "stopVoiceBtn"
+        ).disabled =
+          false;
+
+
+        setVoiceStatus(
+          "Recording voice sample..."
+        );
+
+
+      } catch (error) {
+
+        showMessage(
+          "Microphone permission দিন।"
+        );
+
+      }
+
+    }
+
+
+    function stopVoiceRecording() {
+
+      if (
+        voiceRecorder &&
+        voiceRecorder.state !==
+          "inactive"
+      ) {
+
+        voiceRecorder.stop();
+
+      }
+
+
+      document.getElementById(
+        "recordVoiceBtn"
+      ).disabled =
+        false;
+
+
+      document.getElementById(
+        "stopVoiceBtn"
+      ).disabled =
+        true;
+
+    }
+
+
+    function stopVoiceOnlyStream() {
+
+      if (!mentorStream)
+        return;
+
+
+      mentorStream
+        .getTracks()
+        .forEach(
+          track =>
+            track.stop()
+        );
+
+
+      mentorStream =
+        null;
+
+    }
+
+
+    /* =========================================================
+       VOICE API
+       ========================================================= */
+
+    const voiceApiEndpoint =
+      document.getElementById(
+        "voiceApiEndpoint"
+      );
+
+
+    voiceApiEndpoint.value =
+      localStorage.getItem(
+        VOICE_API_KEY
+      ) || "";
+
+
+    voiceApiEndpoint.addEventListener(
+      "change",
+      () => {
+
+        localStorage.setItem(
+          VOICE_API_KEY,
+          voiceApiEndpoint.value.trim()
+        );
+
+      }
+    );
+
+
+    /* =========================================================
+       CLONE VOICE
+       ========================================================= */
+
+    document
+      .getElementById(
+        "cloneVoiceBtn"
+      )
+      .addEventListener(
+        "click",
+        cloneMentorVoice
+      );
+
+
+    async function cloneMentorVoice() {
+
+      if (!mainVideoFile) {
+
+        setVoiceStatus(
+          "প্রথমে Main Video upload করুন।"
+        );
+
+        return;
+
+      }
+
+
+      if (!mentorVoiceBlob) {
+
+        setVoiceStatus(
+          "প্রথমে Mentor Voice Sample upload বা record করুন।"
+        );
+
+        return;
+
+      }
+
+
+      const endpoint =
+        voiceApiEndpoint.value.trim();
+
+
+      localStorage.setItem(
+        VOICE_API_KEY,
+        endpoint
+      );
+
+
+      /*
+        GitHub Pages নিজে voice cloning করে না।
+
+        Backend/API endpoint না থাকলে
+        এখানে কোনো fake clone দেখানো হবে না।
+      */
+
+      if (!endpoint) {
+
+        setVoiceStatus(
+          "Voice clone API connected নেই। Backend endpoint যোগ করলে actual voice cloning হবে."
+        );
+
+        return;
+
+      }
+
+
+      const progress =
+        document.getElementById(
+          "voiceProgress"
+        );
+
+      const progressBar =
+        document.getElementById(
+          "voiceProgressBar"
+        );
+
+
+      progress.classList.add(
+        "show"
+      );
+
+
+      progressBar.style.width =
+        "10%";
+
+
+      setVoiceStatus(
+        "Voice clone request পাঠানো হচ্ছে..."
+      );
+
+
+      try {
+
+        const form =
+          new FormData();
+
+
+        form.append(
+          "sourceVideo",
+          mainVideoFile,
+          mainVideoFile.name
+        );
+
+
+        form.append(
+          "voiceSample",
+          mentorVoiceBlob,
+          "mentor-voice-sample.webm"
+        );
+
+
+        form.append(
+          "mode",
+          "voice-clone"
+        );
+
+
+        form.append(
+          "preserveTiming",
+          "true"
+        );
+
+
+        progressBar.style.width =
+          "35%";
+
+
+        const response =
+          await fetch(
+            endpoint,
+            {
+              method: "POST",
+              body: form
+            }
+          );
+
+
+        if (!response.ok) {
+
+          throw new Error(
+            "Server response: " +
+            response.status
+          );
+
+        }
+
+
+        progressBar.style.width =
+          "70%";
+
+
+        const contentType =
+          response.headers.get(
+            "content-type"
+          ) || "";
+
+
+        /*
+          JSON response
+        */
+
+        if (
+          contentType.includes(
+            "application/json"
+          )
+        ) {
+
+          const data =
+            await response.json();
+
+
+          if (
+            data.audioUrl
+          ) {
+
+            clonedAudioUrl =
+              data.audioUrl;
+
+
+            const audio =
+              document.getElementById(
+                "clonedVoiceAudio"
+              );
+
+
+            audio.src =
+              clonedAudioUrl;
+
+
+            audio.classList.add(
+              "show"
+            );
+
+
+            progressBar.style.width =
+              "100%";
+
+
+            setVoiceStatus(
+              "Cloned voice audio received. এখন Use Cloned Voice চাপুন.",
+              true
+            );
+
+
+            return;
+
+          }
+
+
+          if (
+            data.videoUrl
+          ) {
+
+            clonedVideoUrl =
+              data.videoUrl;
+
+
+            progressBar.style.width =
+              "100%";
+
+
+            setVoiceStatus(
+              "Final cloned video received.",
+              true
+            );
+
+
+            /*
+              Backend যদি final video দেয়,
+              সেটি main video preview-তে ব্যবহার করা যাবে।
+            */
+
+            mainVideo.src =
+              clonedVideoUrl;
+
+
+            mainVideo.classList.add(
+              "show"
+            );
+
+
+            return;
+
+          }
+
+
+          throw new Error(
+            "API response-এ audioUrl বা videoUrl নেই."
+          );
+
+        }
+
+
+        /*
+          Raw audio response
+        */
+
+        if (
+          contentType.startsWith(
+            "audio/"
+          )
+        ) {
+
+          const blob =
+            await response.blob();
+
+
+          clonedAudioUrl =
+            URL.createObjectURL(
+              blob
+            );
+
+
+          const audio =
+            document.getElementById(
+              "clonedVoiceAudio"
+            );
+
+
+          audio.src =
+            clonedAudioUrl;
+
+
+          audio.classList.add(
+            "show"
+          );
+
+
+          progressBar.style.width =
+            "100%";
+
+
+          setVoiceStatus(
+            "Cloned voice audio received. এখন Use Cloned Voice চাপুন.",
+            true
+          );
+
+
+          return;
+
+        }
+
+
+        /*
+          Raw video response
+        */
+
+        if (
+          contentType.startsWith(
+            "video/"
+          )
+        ) {
+
+          const blob =
+            await response.blob();
+
+
+          clonedVideoUrl =
+            URL.createObjectURL(
+              blob
+            );
+
+
+          mainVideo.src =
+            clonedVideoUrl;
+
+
+          mainVideo.classList.add(
+            "show"
+          );
+
+
+          progressBar.style.width =
+            "100%";
+
+
+          setVoiceStatus(
+            "Final cloned video received.",
+            true
+          );
+
+
+          return;
+
+        }
+
+
+        throw new Error(
+          "Unsupported API response."
+        );
+
+
+      } catch (error) {
+
+        console.error(
+          error
+        );
+
+
+        progressBar.style.width =
+          "0%";
+
+
+        setVoiceStatus(
+          "Voice clone request failed. API endpoint/CORS/backend check করুন."
+        );
+
+      }
+
+    }
+
+
+    /* =========================================================
+       USE CLONED VOICE
+       ========================================================= */
+
+    const clonedVoiceAudio =
+      document.getElementById(
+        "clonedVoiceAudio"
+      );
+
+
+    document
+      .getElementById(
+        "useClonedVoiceBtn"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          if (
+            !clonedAudioUrl
+          ) {
+
+            setVoiceStatus(
+              "আগে Clone Mentor Voice করুন।"
+            );
+
+            return;
+
+          }
+
+
+          voiceMode =
+            "cloned";
+
+
+          mainVideo.muted =
+            true;
+
+
+          clonedVoiceAudio.currentTime =
+            mainVideo.currentTime;
+
+
+          updateVoiceModeUI();
+
+
+          setVoiceStatus(
+            "Cloned Mentor Voice active. Main Video original audio muted.",
+            true
+          );
+
+        }
+      );
+
+
+    /* =========================================================
+       RESET VOICE
+       ========================================================= */
+
+    document
+      .getElementById(
+        "resetVoiceBtn"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          voiceMode =
+            "original";
+
+
+          mainVideo.muted =
+            false;
+
+
+          clonedVoiceAudio.pause();
+
+
+          updateVoiceModeUI();
+
+
+          setVoiceStatus(
+            "Original Main Video voice restored."
+          );
+
+        }
+      );
+
+
+    /* =========================================================
+       VOICE UI
+       ========================================================= */
+
+    function updateVoiceModeUI() {
+
+      const audioState =
+        document.getElementById(
+          "audioState"
+        );
+
+      const voiceModeStatus =
+        document.getElementById(
+          "voiceModeStatus"
+        );
+
+      const originalAudioStatus =
+        document.getElementById(
+          "originalAudioStatus"
+        );
+
+
+      if (
+        voiceMode === "cloned"
+      ) {
+
+        audioState.textContent =
+          "Cloned Voice";
+
+        audioState.className =
+          "green";
+
+
+        voiceModeStatus.textContent =
+          "Mentor Clone";
+
+        voiceModeStatus.className =
+          "green";
+
+
+        originalAudioStatus.textContent =
+          "MUTED";
+
+        originalAudioStatus.className =
+          "red";
+
+      } else {
+
+        audioState.textContent =
+          "Original";
+
+        audioState.className =
+          "";
+
+
+        voiceModeStatus.textContent =
+          "Original";
+
+        voiceModeStatus.className =
+          "";
+
+
+        originalAudioStatus.textContent =
+          "ON";
+
+        originalAudioStatus.className =
+          "green";
+
+      }
+
+    }
+
+
+    function setVoiceStatus(
+      message,
+      active = false
+    ) {
+
+      const element =
+        document.getElementById(
+          "voiceCloneStatus"
+        );
+
+
+      element.textContent =
+        message;
+
+
+      element.classList.toggle(
+        "active",
+        active
+      );
+
+    }
+
+
+    /* =========================================================
+       SETTINGS
+       ========================================================= */
+
+    const settingsModal =
+      document.getElementById(
+        "settingsModal"
+      );
+
+
+    document
+      .getElementById(
+        "settingsBtn"
+      )
+      .addEventListener(
+        "click",
+        openSettings
+      );
+
+
+    function openSettings() {
+
+      document.getElementById(
+        "settingStudioName"
+      ).value =
+        settings.studioName;
+
+
+      document.getElementById(
+        "settingStudioSubtitle"
+      ).value =
+        settings.studioSubtitle;
+
+
+      document.getElementById(
+        "settingBrand"
+      ).value =
+        settings.selectedBrand;
+
+
+      document.getElementById(
+        "settingWelcome"
+      ).value =
+        settings.welcomeText;
+
+
+      settingsModal.classList.add(
+        "show"
+      );
+
+    }
+
+
+    function closeSettings() {
+
+      settingsModal.classList.remove(
+        "show"
+      );
+
+    }
+
+
+    document
+      .getElementById(
+        "closeSettings"
+      )
+      .addEventListener(
+        "click",
+        closeSettings
+      );
+
+
+    document
+      .getElementById(
+        "cancelSettings"
+      )
+      .addEventListener(
+        "click",
+        closeSettings
+      );
+
+
+    document
+      .getElementById(
+        "saveSettings"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          settings.studioName =
+            document.getElementById(
+              "settingStudioName"
+            ).value.trim() ||
+            defaultSettings.studioName;
+
+
+          settings.studioSubtitle =
+            document.getElementById(
+              "settingStudioSubtitle"
+            ).value.trim() ||
+            defaultSettings.studioSubtitle;
+
+
+          settings.selectedBrand =
+            document.getElementById(
+              "settingBrand"
+            ).value.trim() ||
+            defaultSettings.selectedBrand;
+
+
+          settings.welcomeText =
+            document.getElementById(
+              "settingWelcome"
+            ).value.trim() ||
+            defaultSettings.welcomeText;
+
+
+          localStorage.setItem(
+            SETTINGS_KEY,
+            JSON.stringify(settings)
+          );
+
+
+          applySettings();
+
+          closeSettings();
+
+          showMessage(
+            "Studio settings saved."
+          );
+
+        }
+      );
+
+
+    settingsModal.addEventListener(
+      "click",
+      event => {
+
+        if (
+          event.target ===
+          settingsModal
+        ) {
+
+          closeSettings();
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       LOGOUT
+       ========================================================= */
+
+    document
+      .getElementById(
+        "logoutBtn"
+      )
+      .addEventListener(
+        "click",
+        () => {
+
+          stopCamera();
+
+
+          sessionStorage.removeItem(
+            "personalCourseStudioMentorLoggedIn"
+          );
+
+          sessionStorage.removeItem(
+            "personalCourseStudioRole"
+          );
+
+          sessionStorage.removeItem(
+            "personalCourseStudioUsername"
+          );
+
+
+          window.location.replace(
+            "../login/"
+          );
+
+        }
+      );
+
+
+    /* =========================================================
+       SIMPLE MESSAGE
+       ========================================================= */
+
+    function showMessage(
+      message
+    ) {
+
+      const box =
+        document.createElement(
+          "div"
+        );
+
+
+      box.textContent =
+        message;
+
+
+      box.style.position =
+        "fixed";
+
+      box.style.left =
+        "50%";
+
+      box.style.bottom =
+        "90px";
+
+      box.style.transform =
+        "translateX(-50%)";
+
+      box.style.zIndex =
+        "1000";
+
+      box.style.padding =
+        "10px 14px";
+
+      box.style.borderRadius =
+        "10px";
+
+      box.style.background =
+        "#171c24";
+
+      box.style.border =
+        "1px solid rgba(255,255,255,.1)";
+
+      box.style.color =
+        "#e7ebf1";
+
+      box.style.fontSize =
+        "11px";
+
+      box.style.boxShadow =
+        "0 20px 50px rgba(0,0,0,.4)";
+
+
+      document.body.appendChild(
+        box
+      );
+
+
+      setTimeout(
+        () => {
+
+          box.remove();
+
+        },
+        2800
+      );
+
+    }
+
+
+    /* =========================================================
+       LOGO AUTO SYNC
+       =========================================================
+
+       Admin page থেকে logo change করলে
+       Mentor page refresh/open করার সময়
+       এই function একই logo load করবে।
+
+       একই browser-এর একই domain হওয়ায়
+       localStorage shared থাকবে।
        ========================================================= */
 
     window.addEventListener(
-      "beforeunload",
+      "storage",
+      event => {
+
+        if (
+          event.key ===
+          PROFILE_KEY
+        ) {
+
+          loadAdminLogo();
+
+        }
+
+
+        if (
+          event.key ===
+          STUDENTS_KEY
+        ) {
+
+          loadStudents();
+
+          renderStudents();
+
+        }
+
+
+        if (
+          event.key ===
+          SETTINGS_KEY
+        ) {
+
+          loadSettings();
+
+          applySettings();
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       PAGE VISIBILITY REFRESH
+       ========================================================= */
+
+    document.addEventListener(
+      "visibilitychange",
       () => {
 
-        if (cameraStream) {
+        if (
+          document.visibilityState ===
+          "visible"
+        ) {
 
-          cameraStream
-            .getTracks()
-            .forEach(
-              track =>
-                track.stop()
-            );
+          loadAdminLogo();
 
-        }
+          loadStudents();
 
+          renderStudents();
 
-        if (voiceSampleUrl) {
+          loadSettings();
 
-          URL.revokeObjectURL(
-            voiceSampleUrl
-          );
-
-        }
-
-
-        if (clonedVoiceUrl) {
-
-          URL.revokeObjectURL(
-            clonedVoiceUrl
-          );
+          applySettings();
 
         }
 
@@ -4719,22 +4921,16 @@
 
     loadSettings();
 
-    loadVoiceApi();
-
     loadStudents();
 
-    updateMainMute();
+    applySettings();
 
-    updateBrandVisibility();
+    loadAdminLogo();
 
+    renderStudents();
 
-    console.log(
-      "Personal Course Studio — Mentor Studio loaded."
-    );
+    updateVoiceModeUI();
 
-    console.log(
-      "Step 3 — Mentor Voice Clone System ready."
-    );
 
   </script>
 
