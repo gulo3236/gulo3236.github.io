@@ -1,58 +1,84 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Admin Panel — Personal Course Studio</title>
+  <title>SNK AI Academy — Administrator Panel</title>
+
+  <meta name="theme-color" content="#070a12" />
 
   <style>
+    /* =========================================================
+       SNK AI ACADEMY
+       ADMINISTRATOR PANEL
+       ========================================================= */
+
     :root {
-      --bg: #07090f;
-      --bg2: #0d111b;
-      --card: rgba(17, 23, 35, 0.88);
-      --card2: rgba(22, 29, 44, 0.92);
-      --border: rgba(255,255,255,.09);
+      --bg: #070a12;
+      --bg-2: #0b1020;
+      --card: rgba(16, 22, 38, 0.88);
+      --card-2: rgba(20, 27, 46, 0.92);
 
-      --text: #f5f7fb;
-      --muted: #8e99ab;
+      --border: rgba(255, 255, 255, 0.09);
+      --border-light: rgba(255, 255, 255, 0.14);
 
-      --primary: #7c5cff;
-      --primary2: #5d3df0;
+      --text: #f7f9ff;
+      --muted: #98a2b8;
 
-      --green: #20d58a;
-      --yellow: #ffc857;
-      --red: #ff5d73;
-      --blue: #42a5ff;
+      --primary: #6c63ff;
+      --primary-2: #8b7cff;
 
-      --shadow: 0 25px 70px rgba(0,0,0,.35);
-      --radius: 22px;
+      --green: #21d07a;
+      --orange: #ffb020;
+      --red: #ff5c6c;
+      --blue: #43a5ff;
+
+      --shadow:
+        0 20px 60px rgba(0, 0, 0, 0.35);
+
+      --radius: 20px;
     }
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      min-height: 100vh;
       font-family:
         Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
         "Segoe UI",
-        Roboto,
-        Arial,
         sans-serif;
+
       background:
-        radial-gradient(circle at 15% 10%, rgba(124,92,255,.16), transparent 28%),
-        radial-gradient(circle at 85% 5%, rgba(66,165,255,.12), transparent 25%),
+        radial-gradient(
+          circle at 10% 0%,
+          rgba(108, 99, 255, 0.13),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 90% 10%,
+          rgba(67, 165, 255, 0.08),
+          transparent 25%
+        ),
         var(--bg);
+
       color: var(--text);
-      overflow-x: hidden;
+      min-height: 100vh;
     }
 
     button,
     input,
+    textarea,
     select {
       font: inherit;
     }
@@ -61,257 +87,263 @@
       cursor: pointer;
     }
 
-    /* =========================
-       APP
-    ========================= */
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* =========================================================
+       LAYOUT
+       ========================================================= */
 
     .app {
       min-height: 100vh;
       display: flex;
     }
 
-    /* =========================
-       SIDEBAR
-    ========================= */
-
     .sidebar {
-      width: 270px;
+      width: 275px;
       min-height: 100vh;
       position: fixed;
       left: 0;
       top: 0;
       bottom: 0;
-      z-index: 100;
-      padding: 22px 16px;
-      background: rgba(9,12,20,.94);
-      backdrop-filter: blur(22px);
+
+      background:
+        linear-gradient(
+          180deg,
+          rgba(11, 16, 31, 0.98),
+          rgba(6, 9, 18, 0.98)
+        );
+
       border-right: 1px solid var(--border);
+
+      padding: 24px 18px;
+
       display: flex;
       flex-direction: column;
+
+      z-index: 100;
     }
+
+    .main {
+      width: calc(100% - 275px);
+      margin-left: 275px;
+      min-height: 100vh;
+      padding: 30px;
+    }
+
+    /* =========================================================
+       BRAND
+       ========================================================= */
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
-      padding: 8px 10px 25px;
+      gap: 13px;
+      padding: 8px 8px 25px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 25px;
     }
 
     .brand-logo {
-      width: 46px;
-      height: 46px;
-      border-radius: 15px;
-      display: grid;
-      place-items: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+
       background:
-        linear-gradient(135deg, var(--primary), #a78bfa);
+        linear-gradient(
+          135deg,
+          var(--primary),
+          #3e8cff
+        );
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      overflow: hidden;
+
       font-weight: 900;
       font-size: 16px;
-      box-shadow: 0 12px 30px rgba(124,92,255,.28);
+
+      box-shadow:
+        0 10px 30px rgba(108, 99, 255, 0.25);
+    }
+
+    .brand-logo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .brand-text h2 {
-      font-size: 15px;
+      font-size: 16px;
       line-height: 1.2;
     }
 
     .brand-text p {
       color: var(--muted);
-      font-size: 11px;
+      font-size: 12px;
       margin-top: 4px;
     }
 
+    /* =========================================================
+       NAVIGATION
+       ========================================================= */
+
+    .nav-section {
+      margin-bottom: 25px;
+    }
+
     .nav-title {
-      color: #5e6879;
+      color: #68738c;
+      text-transform: uppercase;
+      letter-spacing: 1.4px;
       font-size: 10px;
       font-weight: 800;
-      letter-spacing: 1.5px;
-      padding: 14px 12px 9px;
-      text-transform: uppercase;
+      padding: 0 12px 9px;
     }
 
-    .nav {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .nav button {
+    .nav-item {
       width: 100%;
       border: 0;
-      color: #aab3c2;
       background: transparent;
-      padding: 13px 13px;
-      border-radius: 14px;
+      color: #aeb7ca;
+
       display: flex;
       align-items: center;
       gap: 12px;
+
+      padding: 12px 13px;
+      margin: 3px 0;
+
+      border-radius: 12px;
+
+      font-size: 14px;
       text-align: left;
-      transition: .2s ease;
+
+      transition: 0.2s ease;
     }
 
-    .nav button:hover {
-      background: rgba(255,255,255,.045);
+    .nav-item:hover {
+      background: rgba(255, 255, 255, 0.05);
       color: #fff;
     }
 
-    .nav button.active {
+    .nav-item.active {
       color: #fff;
+
       background:
         linear-gradient(
-          135deg,
-          rgba(124,92,255,.22),
-          rgba(124,92,255,.08)
+          90deg,
+          rgba(108, 99, 255, 0.22),
+          rgba(108, 99, 255, 0.08)
         );
+
       box-shadow:
-        inset 0 0 0 1px rgba(124,92,255,.18);
+        inset 3px 0 0 var(--primary);
     }
 
     .nav-icon {
-      width: 25px;
-      height: 25px;
-      border-radius: 8px;
-      display: grid;
-      place-items: center;
-      font-size: 14px;
-      background: rgba(255,255,255,.05);
+      width: 22px;
+      text-align: center;
+      font-size: 17px;
     }
 
     .sidebar-bottom {
       margin-top: auto;
     }
 
-    .admin-mini-card {
-      padding: 14px;
-      border: 1px solid var(--border);
-      border-radius: 18px;
-      background: rgba(255,255,255,.025);
-      margin-bottom: 10px;
-    }
-
-    .admin-mini-top {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .avatar {
-      width: 38px;
-      height: 38px;
-      border-radius: 12px;
-      display: grid;
-      place-items: center;
-      background:
-        linear-gradient(135deg, #243047, #141b2b);
-      border: 1px solid var(--border);
-      font-weight: 800;
-    }
-
-    .admin-mini-card strong {
-      display: block;
-      font-size: 13px;
-    }
-
-    .admin-mini-card small {
-      color: var(--green);
-      font-size: 10px;
-    }
-
     .logout-btn {
       width: 100%;
-      border: 1px solid rgba(255,93,115,.18);
-      color: #ff8293;
-      background: rgba(255,93,115,.05);
-      border-radius: 13px;
-      padding: 11px;
-      font-weight: 700;
+      border: 1px solid rgba(255, 92, 108, 0.2);
+      background: rgba(255, 92, 108, 0.06);
+      color: #ff8995;
+
+      padding: 12px;
+      border-radius: 12px;
+
+      transition: 0.2s;
     }
 
     .logout-btn:hover {
-      background: rgba(255,93,115,.1);
+      background: rgba(255, 92, 108, 0.12);
     }
 
-    /* =========================
-       MAIN
-    ========================= */
+    /* =========================================================
+       MOBILE TOPBAR
+       ========================================================= */
 
-    .main {
-      width: calc(100% - 270px);
-      margin-left: 270px;
-      min-height: 100vh;
+    .mobile-topbar {
+      display: none;
     }
+
+    /* =========================================================
+       TOP HEADER
+       ========================================================= */
 
     .topbar {
-      height: 78px;
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      padding: 0 28px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      background: rgba(7,9,15,.72);
-      backdrop-filter: blur(18px);
-      border-bottom: 1px solid var(--border);
+      align-items: center;
+
+      margin-bottom: 28px;
     }
 
-    .topbar-left h1 {
-      font-size: 20px;
+    .page-heading h1 {
+      font-size: 27px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
     }
 
-    .topbar-left p {
+    .page-heading p {
+      margin-top: 5px;
       color: var(--muted);
-      font-size: 12px;
-      margin-top: 4px;
+      font-size: 13px;
     }
 
-    .top-actions {
+    .admin-status {
       display: flex;
       align-items: center;
       gap: 10px;
-    }
 
-    .top-btn {
+      padding: 8px 13px;
+
       border: 1px solid var(--border);
-      color: #dce2ed;
-      background: rgba(255,255,255,.04);
-      padding: 10px 13px;
-      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.03);
+
+      border-radius: 100px;
+
       font-size: 12px;
-      font-weight: 700;
+      color: #cbd3e5;
     }
 
-    .top-btn:hover {
-      background: rgba(255,255,255,.08);
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--green);
+      border-radius: 50%;
+      box-shadow: 0 0 12px var(--green);
     }
 
-    .mobile-menu {
+    /* =========================================================
+       PAGE
+       ========================================================= */
+
+    .page {
       display: none;
+      animation: pageIn 0.25s ease;
     }
 
-    .content {
-      padding: 28px;
-      max-width: 1500px;
-      margin: auto;
-    }
-
-    /* =========================
-       SECTIONS
-    ========================= */
-
-    .section {
-      display: none;
-      animation: fadeUp .35s ease;
-    }
-
-    .section.active {
+    .page.active {
       display: block;
     }
 
-    @keyframes fadeUp {
+    @keyframes pageIn {
       from {
         opacity: 0;
-        transform: translateY(10px);
+        transform: translateY(7px);
       }
 
       to {
@@ -320,255 +352,153 @@
       }
     }
 
-    .page-head {
-      display: flex;
-      align-items: flex-end;
-      justify-content: space-between;
-      gap: 20px;
-      margin-bottom: 24px;
-    }
-
-    .page-head h2 {
-      font-size: 26px;
-    }
-
-    .page-head p {
-      color: var(--muted);
-      font-size: 13px;
-      margin-top: 7px;
-    }
-
-    /* =========================
-       BUTTONS
-    ========================= */
-
-    .btn {
-      border: 0;
-      border-radius: 12px;
-      padding: 11px 15px;
-      font-weight: 800;
-      font-size: 12px;
-      color: #fff;
-      background: var(--primary);
-      box-shadow: 0 10px 25px rgba(124,92,255,.18);
-    }
-
-    .btn:hover {
-      background: var(--primary2);
-    }
-
-    .btn.secondary {
-      background: rgba(255,255,255,.06);
-      border: 1px solid var(--border);
-      box-shadow: none;
-    }
-
-    .btn.danger {
-      background: rgba(255,93,115,.1);
-      color: #ff8293;
-      border: 1px solid rgba(255,93,115,.18);
-      box-shadow: none;
-    }
-
-    /* =========================
+    /* =========================================================
        STATS
-    ========================= */
+       ========================================================= */
 
     .stats-grid {
       display: grid;
       grid-template-columns:
         repeat(4, minmax(0, 1fr));
+
       gap: 16px;
       margin-bottom: 20px;
     }
 
     .stat-card {
-      padding: 20px;
+      background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      background: var(--card);
-      box-shadow: var(--shadow);
-      position: relative;
-      overflow: hidden;
-    }
 
-    .stat-card::after {
-      content: "";
-      position: absolute;
-      width: 110px;
-      height: 110px;
-      border-radius: 50%;
-      background: rgba(124,92,255,.08);
-      right: -40px;
-      top: -40px;
+      padding: 20px;
+
+      box-shadow: var(--shadow);
     }
 
     .stat-top {
       display: flex;
-      align-items: center;
       justify-content: space-between;
+      align-items: center;
     }
 
     .stat-icon {
       width: 40px;
       height: 40px;
-      border-radius: 13px;
-      display: grid;
-      place-items: center;
-      background: rgba(124,92,255,.12);
+      border-radius: 12px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(108, 99, 255, 0.12);
+      color: #9a92ff;
+
+      font-size: 18px;
     }
 
     .stat-label {
       color: var(--muted);
-      font-size: 11px;
-      font-weight: 700;
+      font-size: 12px;
+      margin-top: 16px;
     }
 
-    .stat-number {
-      font-size: 29px;
-      font-weight: 900;
-      margin-top: 12px;
+    .stat-value {
+      font-size: 26px;
+      font-weight: 800;
+      margin-top: 4px;
     }
 
-    .stat-note {
-      color: #667185;
-      font-size: 10px;
-      margin-top: 5px;
-    }
+    /* =========================================================
+       CARDS
+       ========================================================= */
 
-    /* =========================
-       DASHBOARD CARDS
-    ========================= */
-
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: 1.35fr .65fr;
-      gap: 18px;
-    }
-
-    .panel {
+    .card {
+      background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      background: var(--card);
+
       box-shadow: var(--shadow);
-      overflow: hidden;
+
+      padding: 22px;
+      margin-bottom: 20px;
     }
 
-    .panel-head {
-      padding: 18px 20px;
-      border-bottom: 1px solid var(--border);
+    .card-header {
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      gap: 10px;
-    }
-
-    .panel-head h3 {
-      font-size: 15px;
-    }
-
-    .panel-head span {
-      color: var(--muted);
-      font-size: 11px;
-    }
-
-    .panel-body {
-      padding: 20px;
-    }
-
-    .welcome-box {
-      min-height: 260px;
-      border-radius: 18px;
-      padding: 28px;
-      position: relative;
-      overflow: hidden;
-      background:
-        radial-gradient(
-          circle at 80% 20%,
-          rgba(124,92,255,.32),
-          transparent 35%
-        ),
-        linear-gradient(
-          135deg,
-          #171d31,
-          #0c111d
-        );
-      border: 1px solid rgba(255,255,255,.06);
-    }
-
-    .welcome-box h3 {
-      font-size: 25px;
-      max-width: 500px;
-    }
-
-    .welcome-box p {
-      color: #9da8ba;
-      font-size: 13px;
-      line-height: 1.8;
-      max-width: 560px;
-      margin-top: 12px;
-    }
-
-    .welcome-badge {
-      display: inline-flex;
-      margin-bottom: 18px;
-      padding: 7px 11px;
-      border-radius: 999px;
-      color: #cbbfff;
-      background: rgba(124,92,255,.12);
-      border: 1px solid rgba(124,92,255,.2);
-      font-size: 10px;
-      font-weight: 800;
-    }
-
-    .quick-actions {
-      display: grid;
-      gap: 10px;
-    }
-
-    .quick-btn {
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.025);
-      color: #e9edf5;
-      border-radius: 14px;
-      padding: 14px;
-      display: flex;
       align-items: center;
-      gap: 12px;
-      text-align: left;
+
+      gap: 15px;
+      margin-bottom: 18px;
     }
 
-    .quick-btn:hover {
-      background: rgba(255,255,255,.055);
+    .card-header h2 {
+      font-size: 17px;
     }
 
-    .quick-btn strong {
-      display: block;
-      font-size: 12px;
-    }
-
-    .quick-btn span {
-      display: block;
+    .card-header p {
       color: var(--muted);
-      font-size: 10px;
-      margin-top: 3px;
+      font-size: 12px;
+      margin-top: 4px;
     }
 
-    /* =========================
+    /* =========================================================
+       BUTTONS
+       ========================================================= */
+
+    .btn {
+      border: 0;
+      border-radius: 11px;
+
+      padding: 11px 16px;
+
+      color: #fff;
+      background: var(--primary);
+
+      font-weight: 700;
+      font-size: 13px;
+
+      transition: 0.2s;
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+
+      box-shadow:
+        0 10px 25px rgba(108, 99, 255, 0.2);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border);
+    }
+
+    .btn-danger {
+      background: rgba(255, 92, 108, 0.1);
+      color: #ff8490;
+      border: 1px solid rgba(255, 92, 108, 0.15);
+    }
+
+    .btn-success {
+      background: rgba(33, 208, 122, 0.12);
+      color: #5ff0a5;
+      border: 1px solid rgba(33, 208, 122, 0.15);
+    }
+
+    /* =========================================================
        FORMS
-    ========================= */
+       ========================================================= */
 
     .form-grid {
       display: grid;
       grid-template-columns:
         repeat(2, minmax(0, 1fr));
+
       gap: 16px;
     }
 
     .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 7px;
+      margin-bottom: 16px;
     }
 
     .form-group.full {
@@ -576,255 +506,343 @@
     }
 
     label {
-      color: #aeb8c8;
-      font-size: 11px;
+      display: block;
+
+      color: #cdd4e5;
+      font-size: 12px;
       font-weight: 700;
+
+      margin-bottom: 7px;
     }
 
     input,
+    textarea,
     select {
       width: 100%;
-      outline: none;
+
+      background: rgba(0, 0, 0, 0.2);
       border: 1px solid var(--border);
-      background: rgba(0,0,0,.2);
+
       color: #fff;
-      border-radius: 12px;
+
+      border-radius: 11px;
+
       padding: 12px 13px;
+
+      outline: none;
+
+      transition: 0.2s;
     }
 
     input:focus,
+    textarea:focus,
     select:focus {
-      border-color: rgba(124,92,255,.6);
-      box-shadow: 0 0 0 3px rgba(124,92,255,.08);
+      border-color: rgba(108, 99, 255, 0.65);
+
+      box-shadow:
+        0 0 0 3px rgba(108, 99, 255, 0.08);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 100px;
     }
 
     select option {
-      background: #101522;
+      background: #111625;
       color: #fff;
     }
 
-    .form-actions {
-      margin-top: 18px;
-      display: flex;
-      gap: 10px;
-    }
-
-    /* =========================
-       BRAND MANAGER
-    ========================= */
-
-    .brand-layout {
-      display: grid;
-      grid-template-columns: .75fr 1.25fr;
-      gap: 18px;
-    }
-
-    .brand-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    .brand-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      padding: 14px;
-      border-radius: 14px;
-      background: rgba(255,255,255,.025);
-      border: 1px solid var(--border);
-    }
-
-    .brand-item.active {
-      border-color: rgba(124,92,255,.38);
-      background: rgba(124,92,255,.07);
-    }
-
-    .brand-item strong {
-      font-size: 12px;
-    }
-
-    .brand-item small {
+    .form-note {
       color: var(--muted);
-      display: block;
-      margin-top: 4px;
-      font-size: 10px;
+      font-size: 11px;
+      margin-top: 6px;
+      line-height: 1.6;
     }
 
-    .brand-actions {
-      display: flex;
-      gap: 5px;
-    }
+    /* =========================================================
+       QUICK ACTIONS
+       ========================================================= */
 
-    .small-btn {
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.04);
-      color: #dce2ed;
-      padding: 7px 9px;
-      border-radius: 9px;
-      font-size: 10px;
-    }
-
-    /* =========================
-       STUDENTS
-    ========================= */
-
-    .student-layout {
+    .quick-grid {
       display: grid;
-      grid-template-columns: .75fr 1.25fr;
-      gap: 18px;
+
+      grid-template-columns:
+        repeat(3, minmax(0, 1fr));
+
+      gap: 14px;
     }
 
+    .quick-card {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.025);
+
+      padding: 18px;
+      border-radius: 16px;
+
+      transition: 0.2s;
+    }
+
+    .quick-card:hover {
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-2px);
+    }
+
+    .quick-card-icon {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .quick-card h3 {
+      font-size: 14px;
+      margin-bottom: 5px;
+    }
+
+    .quick-card p {
+      color: var(--muted);
+      font-size: 11px;
+      line-height: 1.5;
+      margin-bottom: 13px;
+    }
+
+    /* =========================================================
+       BRAND LIST
+       ========================================================= */
+
+    .brand-list,
     .student-list {
       display: grid;
       gap: 10px;
     }
 
-    .student-item {
-      padding: 13px;
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.025);
-      border-radius: 15px;
+    .brand-row,
+    .student-row {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 11px;
-    }
 
-    .student-photo {
-      width: 42px;
-      height: 42px;
+      gap: 12px;
+
+      padding: 13px 15px;
+
       border-radius: 13px;
-      object-fit: cover;
-      background: #161d2b;
-      display: grid;
-      place-items: center;
-      color: #8994a6;
-      flex-shrink: 0;
+
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid var(--border);
     }
 
-    .student-info {
-      min-width: 0;
-      flex: 1;
+    .brand-name {
+      font-weight: 700;
+      font-size: 13px;
     }
 
     .student-info strong {
       display: block;
-      font-size: 12px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      font-size: 13px;
     }
 
-    .student-info small {
+    .student-info span {
       display: block;
       color: var(--muted);
-      font-size: 10px;
-      margin-top: 4px;
+      font-size: 11px;
+      margin-top: 3px;
     }
 
-    .status {
-      font-size: 9px;
-      padding: 5px 8px;
-      border-radius: 999px;
-      font-weight: 800;
+    .row-actions {
+      display: flex;
+      gap: 7px;
+      flex-wrap: wrap;
     }
 
-    .status.online {
-      color: #55e6a7;
-      background: rgba(32,213,138,.08);
+    .small-btn {
+      border: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.04);
+
+      color: #dce3f3;
+
+      border-radius: 9px;
+      padding: 7px 10px;
+
+      font-size: 11px;
+      font-weight: 700;
     }
 
-    .status.offline {
-      color: #929bab;
-      background: rgba(255,255,255,.05);
+    .small-btn.delete {
+      color: #ff7e8b;
+      border-color: rgba(255, 92, 108, 0.15);
     }
 
-    .status.busy {
-      color: #ffd16a;
-      background: rgba(255,200,87,.08);
-    }
+    /* =========================================================
+       PROFILE
+       ========================================================= */
 
-    .photo-preview {
-      width: 80px;
-      height: 80px;
-      border-radius: 16px;
-      border: 1px dashed rgba(255,255,255,.15);
+    .profile-layout {
       display: grid;
-      place-items: center;
-      overflow: hidden;
-      color: var(--muted);
-      font-size: 10px;
-      margin-top: 8px;
+
+      grid-template-columns:
+        310px minmax(0, 1fr);
+
+      gap: 20px;
+
+      align-items: start;
     }
 
-    .photo-preview img {
+    .profile-card {
+      text-align: center;
+    }
+
+    .profile-avatar-wrap {
+      position: relative;
+
+      width: 150px;
+      height: 150px;
+
+      margin: 5px auto 18px;
+    }
+
+    .profile-avatar {
+      width: 150px;
+      height: 150px;
+
+      border-radius: 36px;
+
+      overflow: hidden;
+
+      border: 1px solid var(--border-light);
+
+      background:
+        linear-gradient(
+          135deg,
+          var(--primary),
+          #3f8cff
+        );
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 42px;
+      font-weight: 900;
+
+      box-shadow:
+        0 20px 50px rgba(0, 0, 0, 0.35);
+    }
+
+    .profile-avatar img {
       width: 100%;
       height: 100%;
       object-fit: cover;
     }
 
-    /* =========================
-       CURRENT CONFIG
-    ========================= */
+    .profile-upload {
+      position: absolute;
 
-    .config-list {
-      display: grid;
-      gap: 10px;
-    }
+      right: -5px;
+      bottom: -5px;
 
-    .config-row {
-      padding: 13px 14px;
-      border-radius: 13px;
-      background: rgba(255,255,255,.025);
-      border: 1px solid var(--border);
+      width: 44px;
+      height: 44px;
+
+      border-radius: 50%;
+
+      background: var(--primary);
+
+      border: 4px solid #101522;
+
+      color: #fff;
+
       display: flex;
-      justify-content: space-between;
-      gap: 15px;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 17px;
+
+      cursor: pointer;
     }
 
-    .config-row span {
-      color: var(--muted);
-      font-size: 11px;
+    .profile-upload input {
+      display: none;
     }
 
-    .config-row strong {
-      font-size: 11px;
-      text-align: right;
-      max-width: 55%;
-      overflow-wrap: anywhere;
+    .profile-card h2 {
+      font-size: 18px;
     }
 
-    /* =========================
-       EMPTY
-    ========================= */
-
-    .empty {
-      padding: 30px 15px;
-      text-align: center;
+    .profile-card p {
       color: var(--muted);
       font-size: 12px;
+      margin-top: 5px;
     }
 
-    /* =========================
+    .profile-role {
+      display: inline-flex;
+
+      margin-top: 13px;
+
+      padding: 6px 10px;
+
+      border-radius: 100px;
+
+      background: rgba(108, 99, 255, 0.1);
+      color: #aaa3ff;
+
+      font-size: 10px;
+      font-weight: 800;
+
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .profile-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    /* =========================================================
+       EMPTY
+       ========================================================= */
+
+    .empty {
+      text-align: center;
+      padding: 30px 15px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    /* =========================================================
        TOAST
-    ========================= */
+       ========================================================= */
 
     .toast {
       position: fixed;
+
       right: 25px;
       bottom: 25px;
-      z-index: 999;
-      min-width: 250px;
-      max-width: 350px;
-      padding: 14px 16px;
-      border-radius: 15px;
-      background: #161d2b;
-      border: 1px solid var(--border);
-      box-shadow: 0 20px 60px rgba(0,0,0,.4);
-      transform: translateY(30px);
+
+      z-index: 9999;
+
+      min-width: 260px;
+
+      padding: 14px 17px;
+
+      border-radius: 13px;
+
+      background: #111827;
+      border: 1px solid var(--border-light);
+
+      box-shadow: var(--shadow);
+
+      display: flex;
+      align-items: center;
+      gap: 10px;
+
+      transform: translateY(120px);
       opacity: 0;
+
       pointer-events: none;
-      transition: .3s ease;
+
+      transition: 0.3s;
     }
 
     .toast.show {
@@ -832,100 +850,152 @@
       opacity: 1;
     }
 
-    .toast strong {
-      display: block;
+    .toast-icon {
+      width: 28px;
+      height: 28px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 8px;
+
+      background: rgba(33, 208, 122, 0.12);
+      color: var(--green);
+    }
+
+    .toast-text {
       font-size: 12px;
+      font-weight: 600;
     }
 
-    .toast span {
-      display: block;
-      color: var(--muted);
-      font-size: 10px;
-      margin-top: 3px;
-    }
+    /* =========================================================
+       OVERLAY / MOBILE
+       ========================================================= */
 
-    /* =========================
-       MOBILE
-    ========================= */
+    .sidebar-overlay {
+      display: none;
+    }
 
     @media (max-width: 1100px) {
-
       .stats-grid {
         grid-template-columns:
           repeat(2, minmax(0, 1fr));
       }
 
-      .dashboard-grid,
-      .brand-layout,
-      .student-layout {
+      .profile-layout {
         grid-template-columns: 1fr;
       }
     }
 
-    @media (max-width: 800px) {
-
+    @media (max-width: 850px) {
       .sidebar {
-        width: 250px;
         transform: translateX(-100%);
-        transition: .25s ease;
+        transition: 0.3s ease;
       }
 
       .sidebar.open {
         transform: translateX(0);
       }
 
+      .sidebar-overlay {
+        position: fixed;
+        inset: 0;
+
+        background: rgba(0, 0, 0, 0.65);
+
+        z-index: 90;
+      }
+
+      .sidebar-overlay.show {
+        display: block;
+      }
+
       .main {
         width: 100%;
         margin-left: 0;
+
+        padding: 20px 15px 35px;
+      }
+
+      .mobile-topbar {
+        display: flex;
+
+        justify-content: space-between;
+        align-items: center;
+
+        margin-bottom: 22px;
       }
 
       .mobile-menu {
-        display: grid;
-        place-items: center;
-        width: 40px;
-        height: 40px;
+        width: 42px;
+        height: 42px;
+
         border: 1px solid var(--border);
-        background: rgba(255,255,255,.04);
+        background: rgba(255, 255, 255, 0.04);
+
         color: #fff;
+
         border-radius: 11px;
-        margin-right: 10px;
+
+        font-size: 20px;
+      }
+
+      .mobile-logo {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+
+        font-size: 14px;
+        font-weight: 800;
+      }
+
+      .mobile-logo span {
+        width: 34px;
+        height: 34px;
+
+        border-radius: 10px;
+
+        background: var(--primary);
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        font-size: 11px;
       }
 
       .topbar {
-        padding: 0 15px;
+        align-items: flex-start;
       }
 
-      .topbar-left {
-        display: flex;
-        align-items: center;
-      }
-
-      .topbar-left h1 {
-        font-size: 16px;
-      }
-
-      .topbar-left p {
+      .admin-status {
         display: none;
       }
 
-      .content {
-        padding: 18px 14px 30px;
-      }
-
-      .page-head {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
-      .page-head h2 {
-        font-size: 22px;
+      .quick-grid {
+        grid-template-columns: 1fr;
       }
     }
 
-    @media (max-width: 550px) {
-
+    @media (max-width: 600px) {
       .stats-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+      }
+
+      .stat-card {
+        padding: 15px;
+      }
+
+      .stat-value {
+        font-size: 21px;
+      }
+
+      .stat-icon {
+        width: 34px;
+        height: 34px;
+        font-size: 15px;
       }
 
       .form-grid {
@@ -936,30 +1006,42 @@
         grid-column: auto;
       }
 
-      .top-actions .top-btn:first-child {
-        display: none;
+      .card {
+        padding: 16px;
+        border-radius: 16px;
       }
 
-      .welcome-box {
-        padding: 21px;
+      .card-header {
+        align-items: flex-start;
+        flex-direction: column;
       }
 
-      .welcome-box h3 {
-        font-size: 21px;
+      .brand-row,
+      .student-row {
+        align-items: flex-start;
+        flex-direction: column;
       }
 
-      .panel-body {
-        padding: 15px;
+      .row-actions {
+        width: 100%;
       }
 
-      .stat-card {
-        padding: 17px;
+      .small-btn {
+        flex: 1;
+      }
+
+      .profile-actions {
+        flex-direction: column;
+      }
+
+      .profile-actions .btn {
+        width: 100%;
       }
 
       .toast {
-        left: 14px;
-        right: 14px;
-        bottom: 14px;
+        left: 15px;
+        right: 15px;
+        bottom: 15px;
         min-width: auto;
       }
     }
@@ -968,181 +1050,193 @@
 
 <body>
 
-<div class="app">
+  <!-- =========================================================
+       APP
+       ========================================================= -->
 
-  <!-- =========================
-       SIDEBAR
-  ========================== -->
+  <div class="app">
 
-  <aside class="sidebar" id="sidebar">
+    <!-- =======================================================
+         SIDEBAR
+         ======================================================= -->
 
-    <div class="brand">
-      <div class="brand-logo" id="brandLogo">CS</div>
+    <aside class="sidebar" id="sidebar">
 
-      <div class="brand-text">
-        <h2 id="brandName">Personal Course Studio</h2>
-        <p>Administrator Panel</p>
-      </div>
-    </div>
+      <div class="brand">
 
-    <div class="nav-title">Management</div>
+        <div class="brand-logo" id="sidebarLogo">
+          SNK
+        </div>
 
-    <nav class="nav">
-
-      <button
-        class="active"
-        data-section="dashboard"
-        onclick="showSection('dashboard', this)"
-      >
-        <span class="nav-icon">⌂</span>
-        Dashboard
-      </button>
-
-      <button
-        data-section="settings"
-        onclick="showSection('settings', this)"
-      >
-        <span class="nav-icon">⚙</span>
-        Studio Settings
-      </button>
-
-      <button
-        data-section="brands"
-        onclick="showSection('brands', this)"
-      >
-        <span class="nav-icon">◆</span>
-        Brand Manager
-      </button>
-
-      <button
-        data-section="students"
-        onclick="showSection('students', this)"
-      >
-        <span class="nav-icon">♙</span>
-        Student Manager
-      </button>
-
-    </nav>
-
-    <div class="nav-title">Studio</div>
-
-    <nav class="nav">
-
-      <button onclick="openMentorStudio()">
-        <span class="nav-icon">▶</span>
-        Open Mentor Studio
-      </button>
-
-      <button onclick="openHome()">
-        <span class="nav-icon">◉</span>
-        Public Home
-      </button>
-
-    </nav>
-
-    <div class="sidebar-bottom">
-
-      <div class="admin-mini-card">
-
-        <div class="admin-mini-top">
-
-          <div class="avatar">A</div>
-
-          <div>
-            <strong id="adminUsername">admin</strong>
-            <small>● Super Admin</small>
-          </div>
-
+        <div class="brand-text">
+          <h2>SNK</h2>
+          <p>SNK AI Academy</p>
         </div>
 
       </div>
 
-      <button
-        class="logout-btn"
-        onclick="logoutAdmin()"
-      >
-        ⇥ Logout
-      </button>
 
-    </div>
+      <!-- MANAGEMENT -->
 
-  </aside>
+      <div class="nav-section">
+
+        <div class="nav-title">
+          Management
+        </div>
+
+        <button
+          class="nav-item active"
+          data-page="dashboard"
+        >
+          <span class="nav-icon">⌂</span>
+          <span>Dashboard</span>
+        </button>
+
+        <button
+          class="nav-item"
+          data-page="settings"
+        >
+          <span class="nav-icon">⚙</span>
+          <span>Studio Settings</span>
+        </button>
+
+        <button
+          class="nav-item"
+          data-page="brands"
+        >
+          <span class="nav-icon">◆</span>
+          <span>Brand Manager</span>
+        </button>
+
+        <button
+          class="nav-item"
+          data-page="students"
+        >
+          <span class="nav-icon">♙</span>
+          <span>Student Manager</span>
+        </button>
+
+        <button
+          class="nav-item"
+          data-page="profile"
+        >
+          <span class="nav-icon">👤</span>
+          <span>Profile</span>
+        </button>
+
+      </div>
 
 
-  <!-- =========================
-       MAIN
-  ========================== -->
+      <!-- STUDIO -->
 
-  <main class="main">
+      <div class="nav-section">
 
-    <header class="topbar">
+        <div class="nav-title">
+          Studio
+        </div>
 
-      <div class="topbar-left">
+        <button
+          class="nav-item"
+          id="mentorBtn"
+        >
+          <span class="nav-icon">▶</span>
+          <span>Open Mentor Studio</span>
+        </button>
+
+        <button
+          class="nav-item"
+          id="homeBtn"
+        >
+          <span class="nav-icon">◉</span>
+          <span>Public Home</span>
+        </button>
+
+      </div>
+
+
+      <div class="sidebar-bottom">
+
+        <button
+          class="logout-btn"
+          id="logoutBtn"
+        >
+          ⇥ &nbsp; Logout
+        </button>
+
+      </div>
+
+    </aside>
+
+
+    <div
+      class="sidebar-overlay"
+      id="sidebarOverlay"
+    ></div>
+
+
+    <!-- =======================================================
+         MAIN
+         ======================================================= -->
+
+    <main class="main">
+
+      <!-- MOBILE TOPBAR -->
+
+      <div class="mobile-topbar">
 
         <button
           class="mobile-menu"
-          onclick="toggleSidebar()"
+          id="mobileMenu"
         >
           ☰
         </button>
 
-        <div>
+        <div class="mobile-logo">
+          <span id="mobileLogo">
+            SNK
+          </span>
+
+          SNK AI Academy
+        </div>
+
+      </div>
+
+
+      <!-- TOPBAR -->
+
+      <header class="topbar">
+
+        <div class="page-heading">
+
           <h1 id="pageTitle">
-            Admin Dashboard
+            Dashboard
           </h1>
 
-          <p>
-            Personal Course Studio control center
+          <p id="pageSubtitle">
+            Manage your personal course studio.
           </p>
+
         </div>
 
-      </div>
+        <div class="admin-status">
 
-      <div class="top-actions">
+          <span class="status-dot"></span>
 
-        <button
-          class="top-btn"
-          onclick="openHome()"
-        >
-          View Home
-        </button>
+          Administrator
 
-        <button
-          class="btn"
-          onclick="openMentorStudio()"
-        >
-          Open Studio
-        </button>
+        </div>
 
-      </div>
-
-    </header>
+      </header>
 
 
-    <div class="content">
-
-
-      <!-- =========================
+      <!-- =====================================================
            DASHBOARD
-      ========================== -->
+           ===================================================== -->
 
       <section
-        class="section active"
-        id="section-dashboard"
+        class="page active"
+        id="page-dashboard"
       >
-
-        <div class="page-head">
-
-          <div>
-            <h2>Dashboard</h2>
-
-            <p>
-              আপনার Personal Course Studio-এর সবকিছু এখান থেকে পরিচালনা করুন।
-            </p>
-          </div>
-
-        </div>
-
 
         <div class="stats-grid">
 
@@ -1150,25 +1244,21 @@
 
             <div class="stat-top">
 
-              <span class="stat-label">
-                Total Students
-              </span>
-
               <div class="stat-icon">
-                ♙
+                🎓
               </div>
 
             </div>
 
-            <div
-              class="stat-number"
-              id="totalStudents"
-            >
-              0
+            <div class="stat-label">
+              Students
             </div>
 
-            <div class="stat-note">
-              Registered students
+            <div
+              class="stat-value"
+              id="studentCount"
+            >
+              0
             </div>
 
           </div>
@@ -1177,38 +1267,6 @@
           <div class="stat-card">
 
             <div class="stat-top">
-
-              <span class="stat-label">
-                Online Students
-              </span>
-
-              <div class="stat-icon">
-                ●
-              </div>
-
-            </div>
-
-            <div
-              class="stat-number"
-              id="onlineStudents"
-            >
-              0
-            </div>
-
-            <div class="stat-note">
-              Current status
-            </div>
-
-          </div>
-
-
-          <div class="stat-card">
-
-            <div class="stat-top">
-
-              <span class="stat-label">
-                Total Brands
-              </span>
 
               <div class="stat-icon">
                 ◆
@@ -1216,15 +1274,15 @@
 
             </div>
 
-            <div
-              class="stat-number"
-              id="totalBrands"
-            >
-              0
+            <div class="stat-label">
+              Brands
             </div>
 
-            <div class="stat-note">
-              Available studio brands
+            <div
+              class="stat-value"
+              id="brandCount"
+            >
+              0
             </div>
 
           </div>
@@ -1234,26 +1292,39 @@
 
             <div class="stat-top">
 
-              <span class="stat-label">
-                Current Brand
-              </span>
+              <div class="stat-icon">
+                🎥
+              </div>
+
+            </div>
+
+            <div class="stat-label">
+              Studio
+            </div>
+
+            <div class="stat-value">
+              Ready
+            </div>
+
+          </div>
+
+
+          <div class="stat-card">
+
+            <div class="stat-top">
 
               <div class="stat-icon">
-                ★
+                👤
               </div>
 
             </div>
 
-            <div
-              class="stat-number"
-              id="currentBrandShort"
-              style="font-size:16px;line-height:1.5;"
-            >
-              —
+            <div class="stat-label">
+              Current Role
             </div>
 
-            <div class="stat-note">
-              Active studio branding
+            <div class="stat-value">
+              Admin
             </div>
 
           </div>
@@ -1261,391 +1332,325 @@
         </div>
 
 
-        <div class="dashboard-grid">
+        <!-- QUICK ACTIONS -->
 
-          <div class="panel">
+        <div class="card">
 
-            <div class="panel-head">
-
-              <div>
-                <h3>Welcome to Admin Control</h3>
-                <span>Studio overview</span>
-              </div>
-
-            </div>
-
-            <div class="panel-body">
-
-              <div class="welcome-box">
-
-                <div class="welcome-badge">
-                  ADMIN CONTROL CENTER
-                </div>
-
-                <h3 id="welcomeHeading">
-                  আপনার ক্লাস তৈরির পুরো Studio এখন আপনার নিয়ন্ত্রণে।
-                </h3>
-
-                <p>
-                  Studio name, branding, student list এবং
-                  Mentor Studio-এর প্রয়োজনীয় configuration এখান
-                  থেকে manage করতে পারবেন।
-                </p>
-
-                <br />
-
-                <button
-                  class="btn"
-                  onclick="openMentorStudio()"
-                >
-                  Go to Mentor Studio →
-                </button>
-
-              </div>
-
-            </div>
-
-          </div>
-
-
-          <div class="panel">
-
-            <div class="panel-head">
-
-              <div>
-                <h3>Quick Actions</h3>
-                <span>Frequently used</span>
-              </div>
-
-            </div>
-
-            <div class="panel-body">
-
-              <div class="quick-actions">
-
-                <button
-                  class="quick-btn"
-                  onclick="showSection('settings')"
-                >
-
-                  <div class="nav-icon">
-                    ⚙
-                  </div>
-
-                  <div>
-                    <strong>Studio Settings</strong>
-                    <span>Update studio information</span>
-                  </div>
-
-                </button>
-
-
-                <button
-                  class="quick-btn"
-                  onclick="showSection('brands')"
-                >
-
-                  <div class="nav-icon">
-                    ◆
-                  </div>
-
-                  <div>
-                    <strong>Manage Brands</strong>
-                    <span>Add or select your brand</span>
-                  </div>
-
-                </button>
-
-
-                <button
-                  class="quick-btn"
-                  onclick="showSection('students')"
-                >
-
-                  <div class="nav-icon">
-                    ♙
-                  </div>
-
-                  <div>
-                    <strong>Manage Students</strong>
-                    <span>Add student profile and status</span>
-                  </div>
-
-                </button>
-
-
-                <button
-                  class="quick-btn"
-                  onclick="openMentorStudio()"
-                >
-
-                  <div class="nav-icon">
-                    ▶
-                  </div>
-
-                  <div>
-                    <strong>Open Mentor Studio</strong>
-                    <span>Start creating your class</span>
-                  </div>
-
-                </button>
-
-              </div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- =========================
-           SETTINGS
-      ========================== -->
-
-      <section
-        class="section"
-        id="section-settings"
-      >
-
-        <div class="page-head">
-
-          <div>
-            <h2>Studio Settings</h2>
-
-            <p>
-              Mentor Studio-এর basic information configure করুন।
-            </p>
-          </div>
-
-        </div>
-
-
-        <div class="panel">
-
-          <div class="panel-head">
+          <div class="card-header">
 
             <div>
-              <h3>Studio Configuration</h3>
-              <span>Saved locally in your browser</span>
+              <h2>Quick Actions</h2>
+              <p>
+                Frequently used administrator tools.
+              </p>
             </div>
 
           </div>
 
-          <div class="panel-body">
 
-            <form
-              id="settingsForm"
-              onsubmit="saveSettings(event)"
-            >
+          <div class="quick-grid">
 
-              <div class="form-grid">
+            <div class="quick-card">
 
-                <div class="form-group">
-
-                  <label>
-                    Studio Name
-                  </label>
-
-                  <input
-                    id="studioName"
-                    type="text"
-                    placeholder="Personal Course Studio"
-                    required
-                  />
-
-                </div>
-
-
-                <div class="form-group">
-
-                  <label>
-                    Studio Logo / Initial
-                  </label>
-
-                  <input
-                    id="studioLogo"
-                    type="text"
-                    maxlength="5"
-                    placeholder="CS"
-                  />
-
-                </div>
-
-
-                <div class="form-group full">
-
-                  <label>
-                    Studio Subtitle
-                  </label>
-
-                  <input
-                    id="studioSubtitle"
-                    type="text"
-                    placeholder="নিজের ক্লাস ও কোর্স ভিডিও তৈরির জন্য"
-                  />
-
-                </div>
-
-
-                <div class="form-group">
-
-                  <label>
-                    Selected Brand
-                  </label>
-
-                  <select id="selectedBrand">
-                  </select>
-
-                </div>
-
-
-                <div class="form-group">
-
-                  <label>
-                    Zoom / Class Title
-                  </label>
-
-                  <input
-                    id="zoomTitle"
-                    type="text"
-                    placeholder="Zoom Demo"
-                  />
-
-                </div>
-
-
-                <div class="form-group full">
-
-                  <label>
-                    Welcome Text
-                  </label>
-
-                  <input
-                    id="welcomeText"
-                    type="text"
-                    placeholder="আপনার ক্লাস শুরু করার জন্য প্রস্তুত?"
-                  />
-
-                </div>
-
+              <div class="quick-card-icon">
+                ▶
               </div>
 
+              <h3>
+                Mentor Studio
+              </h3>
 
-              <div class="form-actions">
-
-                <button
-                  class="btn"
-                  type="submit"
-                >
-                  Save Settings
-                </button>
-
-                <button
-                  class="btn secondary"
-                  type="button"
-                  onclick="loadSettingsIntoForm()"
-                >
-                  Reset Form
-                </button>
-
-              </div>
-
-            </form>
-
-          </div>
-
-        </div>
-
-
-        <br />
-
-
-        <div class="panel">
-
-          <div class="panel-head">
-
-            <div>
-              <h3>Current Configuration</h3>
-              <span>Live saved values</span>
-            </div>
-
-          </div>
-
-          <div class="panel-body">
-
-            <div
-              class="config-list"
-              id="configList"
-            >
-            </div>
-
-          </div>
-
-        </div>
-
-      </section>
-
-
-      <!-- =========================
-           BRANDS
-      ========================== -->
-
-      <section
-        class="section"
-        id="section-brands"
-      >
-
-        <div class="page-head">
-
-          <div>
-            <h2>Brand Manager</h2>
-
-            <p>
-              Mentor Studio-এর জন্য একাধিক brand profile তৈরি করুন।
-            </p>
-          </div>
-
-        </div>
-
-
-        <div class="brand-layout">
-
-
-          <div class="panel">
-
-            <div class="panel-head">
-
-              <div>
-                <h3>Add New Brand</h3>
-                <span>Brand name</span>
-              </div>
-
-            </div>
-
-            <div class="panel-body">
-
-              <div class="form-group">
-
-                <label>
-                  Brand Name
-                </label>
-
-                <input
-                  id="newBrand"
-                  type="text"
-                  placeholder="My New Brand"
-                />
-
-              </div>
-
-              <br />
+              <p>
+                Open your class recording studio.
+              </p>
 
               <button
                 class="btn"
-                onclick="addBrand()"
+                onclick="openMentorStudio()"
+              >
+                Open Studio
+              </button>
+
+            </div>
+
+
+            <div class="quick-card">
+
+              <div class="quick-card-icon">
+                👤
+              </div>
+
+              <h3>
+                Profile
+              </h3>
+
+              <p>
+                Manage administrator information and logo.
+              </p>
+
+              <button
+                class="btn btn-secondary"
+                onclick="showPage('profile')"
+              >
+                Open Profile
+              </button>
+
+            </div>
+
+
+            <div class="quick-card">
+
+              <div class="quick-card-icon">
+                ◉
+              </div>
+
+              <h3>
+                Public Home
+              </h3>
+
+              <p>
+                Preview the public Personal Course Studio.
+              </p>
+
+              <button
+                class="btn btn-secondary"
+                onclick="openPublicHome()"
+              >
+                Open Home
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- CURRENT PROFILE -->
+
+        <div class="card">
+
+          <div class="card-header">
+
+            <div>
+              <h2>Administrator Profile</h2>
+
+              <p>
+                Current administrator information.
+              </p>
+            </div>
+
+            <button
+              class="btn btn-secondary"
+              onclick="showPage('profile')"
+            >
+              Edit Profile
+            </button>
+
+          </div>
+
+
+          <div class="student-row">
+
+            <div class="student-info">
+
+              <strong id="dashboardAdminName">
+                Administrator
+              </strong>
+
+              <span id="dashboardAdminEmail">
+                admin@snkacademy.local
+              </span>
+
+            </div>
+
+            <span class="profile-role">
+              Administrator
+            </span>
+
+          </div>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           STUDIO SETTINGS
+           ===================================================== -->
+
+      <section
+        class="page"
+        id="page-settings"
+      >
+
+        <div class="card">
+
+          <div class="card-header">
+
+            <div>
+              <h2>Studio Settings</h2>
+
+              <p>
+                Control the name and basic identity of your studio.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="form-grid">
+
+            <div class="form-group">
+
+              <label>
+                Studio Name
+              </label>
+
+              <input
+                type="text"
+                id="studioName"
+                placeholder="Personal Course Studio"
+              />
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                Studio Logo / Short Name
+              </label>
+
+              <input
+                type="text"
+                id="studioLogo"
+                placeholder="CS"
+              />
+
+            </div>
+
+
+            <div class="form-group full">
+
+              <label>
+                Studio Subtitle
+              </label>
+
+              <input
+                type="text"
+                id="studioSubtitle"
+                placeholder="নিজের ক্লাস ও কোর্স ভিডিও তৈরির জন্য"
+              />
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                Selected Brand
+              </label>
+
+              <select id="selectedBrand">
+              </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                Zoom Title
+              </label>
+
+              <input
+                type="text"
+                id="zoomTitle"
+                placeholder="Zoom Demo"
+              />
+
+            </div>
+
+
+            <div class="form-group full">
+
+              <label>
+                Welcome Text
+              </label>
+
+              <textarea
+                id="welcomeText"
+                placeholder="আপনার ক্লাস শুরু করার জন্য প্রস্তুত?"
+              ></textarea>
+
+            </div>
+
+          </div>
+
+
+          <button
+            class="btn"
+            id="saveSettingsBtn"
+          >
+            Save Studio Settings
+          </button>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           BRAND MANAGER
+           ===================================================== -->
+
+      <section
+        class="page"
+        id="page-brands"
+      >
+
+        <div class="card">
+
+          <div class="card-header">
+
+            <div>
+              <h2>Brand Manager</h2>
+
+              <p>
+                Manage the brands available inside Mentor Studio.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="form-grid">
+
+            <div class="form-group">
+
+              <label>
+                New Brand Name
+              </label>
+
+              <input
+                type="text"
+                id="brandInput"
+                placeholder="Example: SNK AI Academy"
+              />
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                &nbsp;
+              </label>
+
+              <button
+                class="btn"
+                id="addBrandBtn"
               >
                 + Add Brand
               </button>
@@ -1654,201 +1659,389 @@
 
           </div>
 
+        </div>
 
-          <div class="panel">
 
-            <div class="panel-head">
+        <div class="card">
 
-              <div>
-                <h3>Available Brands</h3>
-                <span id="brandCountText">
-                  0 brands
-                </span>
-              </div>
+          <div class="card-header">
 
-            </div>
+            <div>
+              <h2>Available Brands</h2>
 
-            <div class="panel-body">
-
-              <div
-                class="brand-list"
-                id="brandList"
-              >
-              </div>
-
+              <p>
+                These brands can be selected from Studio Settings.
+              </p>
             </div>
 
           </div>
+
+
+          <div
+            class="brand-list"
+            id="brandList"
+          ></div>
 
         </div>
 
       </section>
 
 
-      <!-- =========================
-           STUDENTS
-      ========================== -->
+      <!-- =====================================================
+           STUDENT MANAGER
+           ===================================================== -->
 
       <section
-        class="section"
-        id="section-students"
+        class="page"
+        id="page-students"
       >
 
-        <div class="page-head">
+        <div class="card">
 
-          <div>
-            <h2>Student Manager</h2>
+          <div class="card-header">
 
-            <p>
-              Student profile, photo এবং online status পরিচালনা করুন।
-            </p>
+            <div>
+              <h2>Student Manager</h2>
+
+              <p>
+                Add and manage students for your personal studio.
+              </p>
+            </div>
+
           </div>
+
+
+          <div class="form-grid">
+
+            <div class="form-group">
+
+              <label>
+                Student Name
+              </label>
+
+              <input
+                type="text"
+                id="studentName"
+                placeholder="Student Name"
+              />
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                Student ID
+              </label>
+
+              <input
+                type="text"
+                id="studentId"
+                placeholder="SNK001"
+              />
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                Email
+              </label>
+
+              <input
+                type="email"
+                id="studentEmail"
+                placeholder="student@example.com"
+              />
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label>
+                Phone
+              </label>
+
+              <input
+                type="text"
+                id="studentPhone"
+                placeholder="+880..."
+              />
+
+            </div>
+
+          </div>
+
+
+          <button
+            class="btn"
+            id="addStudentBtn"
+          >
+            + Add Student
+          </button>
 
         </div>
 
 
-        <div class="student-layout">
+        <div class="card">
+
+          <div class="card-header">
+
+            <div>
+              <h2>Students</h2>
+
+              <p>
+                Current students registered in this browser.
+              </p>
+            </div>
+
+          </div>
 
 
-          <div class="panel">
+          <div
+            class="student-list"
+            id="studentList"
+          ></div>
 
-            <div class="panel-head">
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           PROFILE
+           ===================================================== -->
+
+      <section
+        class="page"
+        id="page-profile"
+      >
+
+        <div class="profile-layout">
+
+          <!-- PROFILE PREVIEW -->
+
+          <div class="card profile-card">
+
+            <div class="profile-avatar-wrap">
+
+              <div
+                class="profile-avatar"
+                id="profileAvatar"
+              >
+                SNK
+              </div>
+
+
+              <label
+                class="profile-upload"
+                title="Change Logo"
+              >
+
+                📷
+
+                <input
+                  type="file"
+                  id="logoInput"
+                  accept="image/png,image/jpeg,image/webp,image/svg+xml"
+                />
+
+              </label>
+
+            </div>
+
+
+            <h2 id="profilePreviewName">
+              Administrator
+            </h2>
+
+            <p id="profilePreviewEmail">
+              admin@snkacademy.local
+            </p>
+
+            <div class="profile-role">
+              Administrator
+            </div>
+
+
+            <p style="margin-top:16px;">
+              Click the camera button to change your profile logo.
+            </p>
+
+          </div>
+
+
+          <!-- PROFILE FORM -->
+
+          <div class="card">
+
+            <div class="card-header">
 
               <div>
-                <h3 id="studentFormTitle">
-                  Add Student
-                </h3>
 
-                <span>
-                  Student profile
-                </span>
+                <h2>
+                  Profile Information
+                </h2>
+
+                <p>
+                  Update your administrator profile.
+                </p>
+
               </div>
 
             </div>
 
-            <div class="panel-body">
 
-              <input
-                type="hidden"
-                id="editingStudentId"
-              />
-
+            <div class="form-grid">
 
               <div class="form-group">
 
                 <label>
-                  Student Name
+                  Admin Name
                 </label>
 
                 <input
-                  id="studentName"
                   type="text"
-                  placeholder="Student name"
+                  id="profileName"
+                  placeholder="Administrator"
                 />
 
               </div>
 
 
-              <br />
-
-
               <div class="form-group">
 
                 <label>
-                  Status
-                </label>
-
-                <select id="studentStatus">
-
-                  <option value="Online">
-                    Online
-                  </option>
-
-                  <option value="Offline">
-                    Offline
-                  </option>
-
-                  <option value="Busy">
-                    Busy
-                  </option>
-
-                </select>
-
-              </div>
-
-
-              <br />
-
-
-              <div class="form-group">
-
-                <label>
-                  Student Photo
+                  Username
                 </label>
 
                 <input
-                  id="studentPhoto"
-                  type="file"
-                  accept="image/*"
-                  onchange="previewStudentPhoto(event)"
+                  type="text"
+                  id="profileUsername"
+                  placeholder="admin"
+                  readonly
                 />
 
-                <div
-                  class="photo-preview"
-                  id="photoPreview"
-                >
-                  No photo
+                <div class="form-note">
+                  Username is controlled by the login system.
                 </div>
 
               </div>
 
 
-              <div class="form-actions">
+              <div class="form-group">
 
-                <button
-                  class="btn"
-                  onclick="saveStudent()"
-                >
-                  Save Student
-                </button>
+                <label>
+                  Email
+                </label>
 
-                <button
-                  class="btn secondary"
-                  onclick="resetStudentForm()"
-                >
-                  Clear
-                </button>
+                <input
+                  type="email"
+                  id="profileEmail"
+                  placeholder="admin@snkacademy.local"
+                />
 
               </div>
+
+
+              <div class="form-group">
+
+                <label>
+                  Phone
+                </label>
+
+                <input
+                  type="text"
+                  id="profilePhone"
+                  placeholder="+880..."
+                />
+
+              </div>
+
+
+              <div class="form-group full">
+
+                <label>
+                  Profile Bio
+                </label>
+
+                <textarea
+                  id="profileBio"
+                  placeholder="Write a short profile description..."
+                ></textarea>
+
+              </div>
+
+            </div>
+
+
+            <div class="profile-actions">
+
+              <button
+                class="btn"
+                id="saveProfileBtn"
+              >
+                Save Profile
+              </button>
+
+              <button
+                class="btn btn-secondary"
+                id="resetProfileBtn"
+              >
+                Reset
+              </button>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- LOGO INFORMATION -->
+
+        <div class="card">
+
+          <div class="card-header">
+
+            <div>
+
+              <h2>
+                Profile Logo
+              </h2>
+
+              <p>
+                Your selected logo is saved locally in this browser.
+              </p>
 
             </div>
 
           </div>
 
 
-          <div class="panel">
+          <div class="student-row">
 
-            <div class="panel-head">
+            <div class="student-info">
 
-              <div>
-                <h3>Student List</h3>
+              <strong>
+                Logo Storage
+              </strong>
 
-                <span id="studentCountText">
-                  0 students
-                </span>
-              </div>
-
-            </div>
-
-            <div class="panel-body">
-
-              <div
-                class="student-list"
-                id="studentList"
-              >
-              </div>
+              <span>
+                personalCourseStudioProfile
+              </span>
 
             </div>
+
+
+            <button
+              class="small-btn delete"
+              id="removeLogoBtn"
+            >
+              Remove Logo
+            </button>
 
           </div>
 
@@ -1856,1681 +2049,1535 @@
 
       </section>
 
+    </main>
+
+  </div>
+
+
+  <!-- =========================================================
+       TOAST
+       ========================================================= -->
+
+  <div
+    class="toast"
+    id="toast"
+  >
+
+    <div class="toast-icon">
+      ✓
     </div>
 
-  </main>
+    <div
+      class="toast-text"
+      id="toastText"
+    >
+      Saved successfully.
+    </div>
 
-</div>
+  </div>
 
 
-<!-- =========================
-     TOAST
-========================== -->
+  <script>
+    /* =========================================================
+       SNK AI ACADEMY
+       ADMIN PANEL JAVASCRIPT
+       ========================================================= */
 
-<div
-  class="toast"
-  id="toast"
->
-  <strong id="toastTitle">
-    Saved
-  </strong>
 
-  <span id="toastMessage">
-    Changes saved successfully.
-  </span>
-</div>
+    /* =========================================================
+       STORAGE KEYS
+       ========================================================= */
 
+    const SETTINGS_KEY =
+      "personalCourseStudioSettings";
 
-<script>
-  /* =========================================================
-     PERSONAL COURSE STUDIO
-     ADMIN PANEL
-  ========================================================= */
+    const BRANDS_KEY =
+      "personalCourseStudioBrands";
 
+    const STUDENTS_KEY =
+      "personalCourseStudioStudents";
 
-  /* =========================
-     SECURITY
-  ========================== */
+    const PROFILE_KEY =
+      "personalCourseStudioProfile";
 
-  const ADMIN_SESSION_KEY =
-    "personalCourseStudioAdminLoggedIn";
 
-  const MENTOR_SESSION_KEY =
-    "personalCourseStudioMentorLoggedIn";
+    /* =========================================================
+       ADMIN SESSION PROTECTION
+       ========================================================= */
 
-  const ROLE_KEY =
-    "personalCourseStudioRole";
-
-  const USERNAME_KEY =
-    "personalCourseStudioUsername";
-
-
-  const adminLoggedIn =
-    sessionStorage.getItem(ADMIN_SESSION_KEY) === "true";
-
-  const currentRole =
-    sessionStorage.getItem(ROLE_KEY);
-
-
-  /*
-    Admin only.
-    If someone directly opens /admin/
-    without admin login, send to login.
-  */
-
-  if (
-    !adminLoggedIn ||
-    currentRole !== "admin"
-  ) {
-    window.location.replace("../login/");
-  }
-
-
-  /* =========================
-     STORAGE KEYS
-  ========================== */
-
-  const SETTINGS_KEY =
-    "personalCourseStudioSettings";
-
-  const BRANDS_KEY =
-    "personalCourseStudioBrands";
-
-  const STUDENTS_KEY =
-    "personalCourseStudioStudents";
-
-
-  /* =========================
-     DEFAULT SETTINGS
-  ========================== */
-
-  const defaultSettings = {
-
-    studioName:
-      "Personal Course Studio",
-
-    studioSubtitle:
-      "নিজের ক্লাস ও কোর্স ভিডিও তৈরির জন্য",
-
-    studioLogo:
-      "CS",
-
-    selectedBrand:
-      "Shah Neil Khan / USHA.AI",
-
-    zoomTitle:
-      "Zoom Demo",
-
-    welcomeText:
-      "আপনার ক্লাস শুরু করার জন্য প্রস্তুত?"
-
-  };
-
-
-  /* =========================
-     DEFAULT BRANDS
-  ========================== */
-
-  const defaultBrands = [
-
-    "Shah Neil Khan / USHA.AI",
-
-    "SNK AI Academy",
-
-    "SNK IT Institute",
-
-    "My Personal Studio",
-
-    "Custom Brand"
-
-  ];
-
-
-  /* =========================
-     STORAGE HELPERS
-  ========================== */
-
-  function getSettings() {
-
-    try {
-
-      const saved =
-        localStorage.getItem(SETTINGS_KEY);
-
-      if (!saved) {
-        return { ...defaultSettings };
-      }
-
-      return {
-        ...defaultSettings,
-        ...JSON.parse(saved)
-      };
-
-    } catch (error) {
-
-      console.error(error);
-
-      return { ...defaultSettings };
-    }
-
-  }
-
-
-  function saveSettingsStorage(settings) {
-
-    localStorage.setItem(
-      SETTINGS_KEY,
-      JSON.stringify(settings)
-    );
-
-  }
-
-
-  function getBrands() {
-
-    try {
-
-      const saved =
-        localStorage.getItem(BRANDS_KEY);
-
-      if (!saved) {
-
-        localStorage.setItem(
-          BRANDS_KEY,
-          JSON.stringify(defaultBrands)
-        );
-
-        return [...defaultBrands];
-      }
-
-      const brands =
-        JSON.parse(saved);
-
-      if (
-        !Array.isArray(brands) ||
-        brands.length === 0
-      ) {
-
-        localStorage.setItem(
-          BRANDS_KEY,
-          JSON.stringify(defaultBrands)
-        );
-
-        return [...defaultBrands];
-      }
-
-      return brands;
-
-    } catch (error) {
-
-      console.error(error);
-
-      return [...defaultBrands];
-    }
-
-  }
-
-
-  function saveBrands(brands) {
-
-    localStorage.setItem(
-      BRANDS_KEY,
-      JSON.stringify(brands)
-    );
-
-  }
-
-
-  function getStudents() {
-
-    try {
-
-      const saved =
-        localStorage.getItem(STUDENTS_KEY);
-
-      if (!saved) {
-        return [];
-      }
-
-      const students =
-        JSON.parse(saved);
-
-      return Array.isArray(students)
-        ? students
-        : [];
-
-    } catch (error) {
-
-      console.error(error);
-
-      return [];
-    }
-
-  }
-
-
-  function saveStudents(students) {
-
-    localStorage.setItem(
-      STUDENTS_KEY,
-      JSON.stringify(students)
-    );
-
-  }
-
-
-  /* =========================
-     TOAST
-  ========================== */
-
-  let toastTimer;
-
-  function showToast(
-    title,
-    message
-  ) {
-
-    const toast =
-      document.getElementById("toast");
-
-    document.getElementById(
-      "toastTitle"
-    ).textContent = title;
-
-    document.getElementById(
-      "toastMessage"
-    ).textContent = message;
-
-    toast.classList.add("show");
-
-    clearTimeout(toastTimer);
-
-    toastTimer = setTimeout(() => {
-
-      toast.classList.remove("show");
-
-    }, 2800);
-
-  }
-
-
-  /* =========================
-     NAVIGATION
-  ========================== */
-
-  const sectionTitles = {
-
-    dashboard:
-      "Admin Dashboard",
-
-    settings:
-      "Studio Settings",
-
-    brands:
-      "Brand Manager",
-
-    students:
-      "Student Manager"
-
-  };
-
-
-  function showSection(
-    sectionName,
-    clickedButton = null
-  ) {
-
-    document
-      .querySelectorAll(".section")
-      .forEach(section => {
-
-        section.classList.remove("active");
-
-      });
-
-
-    const target =
-      document.getElementById(
-        "section-" + sectionName
+    const adminLoggedIn =
+      sessionStorage.getItem(
+        "personalCourseStudioAdminLoggedIn"
       );
 
-    if (target) {
-      target.classList.add("active");
-    }
+    if (adminLoggedIn !== "true") {
 
-
-    document
-      .querySelectorAll(".nav button")
-      .forEach(button => {
-
-        button.classList.remove("active");
-
-      });
-
-
-    const navButton =
-      document.querySelector(
-        `.nav button[data-section="${sectionName}"]`
-      );
-
-    if (navButton) {
-      navButton.classList.add("active");
-    }
-
-
-    document.getElementById(
-      "pageTitle"
-    ).textContent =
-      sectionTitles[sectionName]
-      || "Admin Dashboard";
-
-
-    const sidebar =
-      document.getElementById("sidebar");
-
-    sidebar.classList.remove("open");
-
-
-    if (sectionName === "settings") {
-
-      loadSettingsIntoForm();
+      window.location.replace("../login/");
 
     }
 
 
-    if (sectionName === "brands") {
+    /* =========================================================
+       DEFAULT DATA
+       ========================================================= */
 
-      renderBrands();
-
-    }
-
-
-    if (sectionName === "students") {
-
-      renderStudents();
-
-    }
-
-
-    if (sectionName === "dashboard") {
-
-      updateDashboard();
-
-    }
-
-  }
-
-
-  /* =========================
-     MOBILE SIDEBAR
-  ========================== */
-
-  function toggleSidebar() {
-
-    document
-      .getElementById("sidebar")
-      .classList.toggle("open");
-
-  }
-
-
-  /* =========================
-     SETTINGS
-  ========================== */
-
-  function loadSettingsIntoForm() {
-
-    const settings =
-      getSettings();
-
-    document.getElementById(
-      "studioName"
-    ).value =
-      settings.studioName || "";
-
-
-    document.getElementById(
-      "studioSubtitle"
-    ).value =
-      settings.studioSubtitle || "";
-
-
-    document.getElementById(
-      "studioLogo"
-    ).value =
-      settings.studioLogo || "";
-
-
-    document.getElementById(
-      "zoomTitle"
-    ).value =
-      settings.zoomTitle || "";
-
-
-    document.getElementById(
-      "welcomeText"
-    ).value =
-      settings.welcomeText || "";
-
-
-    renderBrandSelect(
-      settings.selectedBrand
-    );
-
-  }
-
-
-  function renderBrandSelect(
-    selectedValue
-  ) {
-
-    const select =
-      document.getElementById(
-        "selectedBrand"
-      );
-
-    const brands =
-      getBrands();
-
-    select.innerHTML = "";
-
-    brands.forEach(brand => {
-
-      const option =
-        document.createElement("option");
-
-      option.value = brand;
-
-      option.textContent = brand;
-
-      if (
-        brand === selectedValue
-      ) {
-
-        option.selected = true;
-
-      }
-
-      select.appendChild(option);
-
-    });
-
-  }
-
-
-  function saveSettings(event) {
-
-    event.preventDefault();
-
-
-    const settings = {
+    const DEFAULT_SETTINGS = {
 
       studioName:
-        document.getElementById(
-          "studioName"
-        ).value.trim()
-        || defaultSettings.studioName,
+        "Personal Course Studio",
 
       studioSubtitle:
-        document.getElementById(
-          "studioSubtitle"
-        ).value.trim()
-        || defaultSettings.studioSubtitle,
+        "নিজের ক্লাস ও কোর্স ভিডিও তৈরির জন্য",
 
       studioLogo:
-        document.getElementById(
-          "studioLogo"
-        ).value.trim()
-        || defaultSettings.studioLogo,
+        "CS",
 
       selectedBrand:
-        document.getElementById(
-          "selectedBrand"
-        ).value
-        || defaultSettings.selectedBrand,
+        "Shah Neil Khan / USHA.AI",
 
       zoomTitle:
-        document.getElementById(
-          "zoomTitle"
-        ).value.trim()
-        || defaultSettings.zoomTitle,
+        "Zoom Demo",
 
       welcomeText:
-        document.getElementById(
-          "welcomeText"
-        ).value.trim()
-        || defaultSettings.welcomeText
+        "আপনার ক্লাস শুরু করার জন্য প্রস্তুত?"
 
     };
 
 
-    saveSettingsStorage(
-      settings
-    );
+    const DEFAULT_BRANDS = [
 
+      "Shah Neil Khan / USHA.AI",
 
-    applyStudioBranding();
+      "SNK AI Academy",
 
-    updateDashboard();
+      "SNK IT Institute",
 
-    renderConfig();
+      "My Personal Studio",
 
-    showToast(
-      "Settings Saved",
-      "Studio configuration successfully updated."
-    );
-
-  }
-
-
-  /* =========================
-     APPLY BRANDING
-  ========================== */
-
-  function applyStudioBranding() {
-
-    const settings =
-      getSettings();
-
-    document.getElementById(
-      "brandLogo"
-    ).textContent =
-      settings.studioLogo || "CS";
-
-
-    document.getElementById(
-      "brandName"
-    ).textContent =
-      settings.studioName
-      || "Personal Course Studio";
-
-
-    document.getElementById(
-      "welcomeHeading"
-    ).textContent =
-      settings.welcomeText
-      || defaultSettings.welcomeText;
-
-  }
-
-
-  /* =========================
-     CURRENT CONFIG
-  ========================== */
-
-  function renderConfig() {
-
-    const settings =
-      getSettings();
-
-    const list =
-      document.getElementById(
-        "configList"
-      );
-
-    const rows = [
-
-      [
-        "Studio Name",
-        settings.studioName
-      ],
-
-      [
-        "Subtitle",
-        settings.studioSubtitle
-      ],
-
-      [
-        "Logo",
-        settings.studioLogo
-      ],
-
-      [
-        "Selected Brand",
-        settings.selectedBrand
-      ],
-
-      [
-        "Class Title",
-        settings.zoomTitle
-      ],
-
-      [
-        "Welcome Text",
-        settings.welcomeText
-      ]
+      "Custom Brand"
 
     ];
 
 
-    list.innerHTML = "";
+    const DEFAULT_PROFILE = {
 
+      name:
+        "Administrator",
 
-    rows.forEach(row => {
+      username:
+        sessionStorage.getItem(
+          "personalCourseStudioUsername"
+        ) || "admin",
 
-      const item =
-        document.createElement("div");
+      email:
+        "admin@snkacademy.local",
 
-      item.className =
-        "config-row";
+      phone:
+        "",
 
-      item.innerHTML = `
-        <span>${escapeHTML(row[0])}</span>
-        <strong>${escapeHTML(row[1] || "—")}</strong>
-      `;
+      bio:
+        "SNK AI Academy Administrator.",
 
-      list.appendChild(item);
-
-    });
-
-  }
-
-
-  /* =========================
-     BRAND MANAGER
-  ========================== */
-
-  function renderBrands() {
-
-    const brands =
-      getBrands();
-
-    const settings =
-      getSettings();
-
-    const list =
-      document.getElementById(
-        "brandList"
-      );
-
-
-    document.getElementById(
-      "brandCountText"
-    ).textContent =
-      `${brands.length} brands`;
-
-
-    renderBrandSelect(
-      settings.selectedBrand
-    );
-
-
-    list.innerHTML = "";
-
-
-    brands.forEach((brand, index) => {
-
-      const item =
-        document.createElement("div");
-
-      item.className =
-        "brand-item";
-
-
-      if (
-        brand === settings.selectedBrand
-      ) {
-
-        item.classList.add("active");
-
-      }
-
-
-      item.innerHTML = `
-
-        <div>
-
-          <strong>
-            ${escapeHTML(brand)}
-          </strong>
-
-          <small>
-            ${
-              brand === settings.selectedBrand
-                ? "● Currently Selected"
-                : "Available Brand"
-            }
-          </small>
-
-        </div>
-
-
-        <div class="brand-actions">
-
-          <button
-            class="small-btn"
-            onclick="selectBrand(${index})"
-          >
-            Use
-          </button>
-
-          <button
-            class="small-btn"
-            onclick="deleteBrand(${index})"
-          >
-            Delete
-          </button>
-
-        </div>
-
-      `;
-
-
-      list.appendChild(item);
-
-    });
-
-  }
-
-
-  function addBrand() {
-
-    const input =
-      document.getElementById(
-        "newBrand"
-      );
-
-    const name =
-      input.value.trim();
-
-
-    if (!name) {
-
-      showToast(
-        "Brand Name Required",
-        "একটি brand name লিখুন।"
-      );
-
-      input.focus();
-
-      return;
-    }
-
-
-    const brands =
-      getBrands();
-
-
-    const exists =
-      brands.some(
-        brand =>
-          brand.toLowerCase() ===
-          name.toLowerCase()
-      );
-
-
-    if (exists) {
-
-      showToast(
-        "Already Exists",
-        "এই brand আগে থেকেই আছে।"
-      );
-
-      return;
-    }
-
-
-    brands.push(name);
-
-    saveBrands(brands);
-
-
-    input.value = "";
-
-
-    renderBrands();
-
-    updateDashboard();
-
-
-    showToast(
-      "Brand Added",
-      `"${name}" successfully added.`
-    );
-
-  }
-
-
-  function selectBrand(index) {
-
-    const brands =
-      getBrands();
-
-    const brand =
-      brands[index];
-
-    if (!brand) {
-      return;
-    }
-
-
-    const settings =
-      getSettings();
-
-    settings.selectedBrand =
-      brand;
-
-
-    saveSettingsStorage(
-      settings
-    );
-
-
-    renderBrands();
-
-    loadSettingsIntoForm();
-
-    applyStudioBranding();
-
-    updateDashboard();
-
-    renderConfig();
-
-
-    showToast(
-      "Brand Selected",
-      `"${brand}" is now active.`
-    );
-
-  }
-
-
-  function deleteBrand(index) {
-
-    const brands =
-      getBrands();
-
-    const brand =
-      brands[index];
-
-    if (!brand) {
-      return;
-    }
-
-
-    if (
-      brands.length <= 1
-    ) {
-
-      showToast(
-        "Cannot Delete",
-        "কমপক্ষে একটি brand রাখতে হবে।"
-      );
-
-      return;
-    }
-
-
-    const settings =
-      getSettings();
-
-
-    if (
-      brand === settings.selectedBrand
-    ) {
-
-      showToast(
-        "Active Brand",
-        "আগে অন্য brand select করুন।"
-      );
-
-      return;
-    }
-
-
-    if (
-      !confirm(
-        `Delete "${brand}"?`
-      )
-    ) {
-
-      return;
-    }
-
-
-    brands.splice(
-      index,
-      1
-    );
-
-
-    saveBrands(brands);
-
-    renderBrands();
-
-    updateDashboard();
-
-
-    showToast(
-      "Brand Deleted",
-      "Brand successfully removed."
-    );
-
-  }
-
-
-  /* =========================
-     STUDENT MANAGER
-  ========================== */
-
-  let selectedStudentPhoto =
-    "";
-
-
-  function previewStudentPhoto(event) {
-
-    const file =
-      event.target.files &&
-      event.target.files[0];
-
-
-    if (!file) {
-      return;
-    }
-
-
-    const reader =
-      new FileReader();
-
-
-    reader.onload = function(e) {
-
-      selectedStudentPhoto =
-        e.target.result;
-
-
-      const preview =
-        document.getElementById(
-          "photoPreview"
-        );
-
-
-      preview.innerHTML = `
-        <img
-          src="${selectedStudentPhoto}"
-          alt="Student"
-        />
-      `;
+      logo:
+        ""
 
     };
 
 
-    reader.readAsDataURL(file);
+    /* =========================================================
+       HELPERS
+       ========================================================= */
 
-  }
+    function getStorage(key, fallback) {
 
+      try {
 
-  function saveStudent() {
+        const data =
+          localStorage.getItem(key);
 
-    const name =
-      document.getElementById(
-        "studentName"
-      ).value.trim();
+        if (!data) {
 
-
-    const status =
-      document.getElementById(
-        "studentStatus"
-      ).value;
-
-
-    const editingId =
-      document.getElementById(
-        "editingStudentId"
-      ).value;
-
-
-    if (!name) {
-
-      showToast(
-        "Student Name Required",
-        "Student name লিখুন।"
-      );
-
-      return;
-    }
-
-
-    const students =
-      getStudents();
-
-
-    if (editingId) {
-
-      const index =
-        students.findIndex(
-          student =>
-            student.id ===
-            editingId
-        );
-
-
-      if (index !== -1) {
-
-        students[index].name =
-          name;
-
-        students[index].status =
-          status;
-
-
-        if (
-          selectedStudentPhoto
-        ) {
-
-          students[index].photo =
-            selectedStudentPhoto;
+          return fallback;
 
         }
 
+        return JSON.parse(data);
 
-        saveStudents(
-          students
-        );
+      } catch (error) {
 
-
-        showToast(
-          "Student Updated",
-          "Student profile updated successfully."
-        );
+        return fallback;
 
       }
 
-    } else {
+    }
 
-      const student = {
 
-        id:
-          "STU-" +
-          Date.now(),
+    function saveStorage(key, value) {
 
-        name:
-          name,
+      localStorage.setItem(
+        key,
+        JSON.stringify(value)
+      );
 
-        status:
-          status,
+    }
 
-        photo:
-          selectedStudentPhoto || "",
 
-        createdAt:
-          new Date().toISOString()
+    function escapeHTML(value) {
 
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+
+    }
+
+
+    /* =========================================================
+       TOAST
+       ========================================================= */
+
+    let toastTimer;
+
+
+    function showToast(message) {
+
+      const toast =
+        document.getElementById("toast");
+
+      const text =
+        document.getElementById("toastText");
+
+      text.textContent = message;
+
+      toast.classList.add("show");
+
+      clearTimeout(toastTimer);
+
+      toastTimer =
+        setTimeout(() => {
+
+          toast.classList.remove("show");
+
+        }, 2500);
+
+    }
+
+
+    /* =========================================================
+       PROFILE
+       ========================================================= */
+
+    function getProfile() {
+
+      const saved =
+        getStorage(
+          PROFILE_KEY,
+          null
+        );
+
+      if (!saved) {
+
+        saveStorage(
+          PROFILE_KEY,
+          DEFAULT_PROFILE
+        );
+
+        return {
+          ...DEFAULT_PROFILE
+        };
+
+      }
+
+      return {
+        ...DEFAULT_PROFILE,
+        ...saved
       };
 
+    }
 
-      students.push(
-        student
+
+    function loadProfile() {
+
+      const profile =
+        getProfile();
+
+
+      document.getElementById(
+        "profileName"
+      ).value =
+        profile.name || "";
+
+
+      document.getElementById(
+        "profileUsername"
+      ).value =
+        profile.username || "admin";
+
+
+      document.getElementById(
+        "profileEmail"
+      ).value =
+        profile.email || "";
+
+
+      document.getElementById(
+        "profilePhone"
+      ).value =
+        profile.phone || "";
+
+
+      document.getElementById(
+        "profileBio"
+      ).value =
+        profile.bio || "";
+
+
+      updateProfilePreview(profile);
+
+    }
+
+
+    function updateProfilePreview(profile) {
+
+      const avatar =
+        document.getElementById(
+          "profileAvatar"
+        );
+
+      const sidebarLogo =
+        document.getElementById(
+          "sidebarLogo"
+        );
+
+      const mobileLogo =
+        document.getElementById(
+          "mobileLogo"
+        );
+
+
+      if (profile.logo) {
+
+        avatar.innerHTML =
+          `<img src="${profile.logo}" alt="Profile Logo">`;
+
+        sidebarLogo.innerHTML =
+          `<img src="${profile.logo}" alt="Logo">`;
+
+        mobileLogo.innerHTML =
+          `<img src="${profile.logo}" alt="Logo"
+          style="width:100%;height:100%;object-fit:cover;border-radius:10px;">`;
+
+      } else {
+
+        const initials =
+          getInitials(
+            profile.name || "SNK"
+          );
+
+        avatar.textContent =
+          initials;
+
+        sidebarLogo.textContent =
+          "SNK";
+
+        mobileLogo.textContent =
+          "SNK";
+
+      }
+
+
+      document.getElementById(
+        "profilePreviewName"
+      ).textContent =
+        profile.name || "Administrator";
+
+
+      document.getElementById(
+        "profilePreviewEmail"
+      ).textContent =
+        profile.email ||
+        "admin@snkacademy.local";
+
+
+      document.getElementById(
+        "dashboardAdminName"
+      ).textContent =
+        profile.name ||
+        "Administrator";
+
+
+      document.getElementById(
+        "dashboardAdminEmail"
+      ).textContent =
+        profile.email ||
+        "admin@snkacademy.local";
+
+    }
+
+
+    function getInitials(name) {
+
+      const parts =
+        String(name)
+          .trim()
+          .split(/\s+/)
+          .filter(Boolean);
+
+      if (!parts.length) {
+
+        return "SNK";
+
+      }
+
+      if (parts.length === 1) {
+
+        return parts[0]
+          .substring(0, 3)
+          .toUpperCase();
+
+      }
+
+      return (
+        parts[0].charAt(0) +
+        parts[parts.length - 1].charAt(0)
+      ).toUpperCase();
+
+    }
+
+
+    /* =========================================================
+       SAVE PROFILE
+       ========================================================= */
+
+    document
+      .getElementById("saveProfileBtn")
+      .addEventListener(
+        "click",
+        function () {
+
+          const oldProfile =
+            getProfile();
+
+
+          const profile = {
+
+            name:
+              document.getElementById(
+                "profileName"
+              ).value.trim() ||
+              "Administrator",
+
+            username:
+              oldProfile.username ||
+              "admin",
+
+            email:
+              document.getElementById(
+                "profileEmail"
+              ).value.trim() ||
+              "admin@snkacademy.local",
+
+            phone:
+              document.getElementById(
+                "profilePhone"
+              ).value.trim(),
+
+            bio:
+              document.getElementById(
+                "profileBio"
+              ).value.trim(),
+
+            logo:
+              oldProfile.logo || ""
+
+          };
+
+
+          saveStorage(
+            PROFILE_KEY,
+            profile
+          );
+
+
+          updateProfilePreview(
+            profile
+          );
+
+
+          showToast(
+            "Profile saved successfully."
+          );
+
+        }
       );
 
 
-      saveStudents(
+    /* =========================================================
+       PROFILE RESET
+       ========================================================= */
+
+    document
+      .getElementById("resetProfileBtn")
+      .addEventListener(
+        "click",
+        function () {
+
+          loadProfile();
+
+          showToast(
+            "Profile form reset."
+          );
+
+        }
+      );
+
+
+    /* =========================================================
+       LOGO UPLOAD
+       ========================================================= */
+
+    document
+      .getElementById("logoInput")
+      .addEventListener(
+        "change",
+        function (event) {
+
+          const file =
+            event.target.files[0];
+
+          if (!file) {
+
+            return;
+
+          }
+
+
+          if (!file.type.startsWith("image/")) {
+
+            showToast(
+              "Please select an image file."
+            );
+
+            return;
+
+          }
+
+
+          const maxSize =
+            3 * 1024 * 1024;
+
+
+          if (file.size > maxSize) {
+
+            showToast(
+              "Logo must be smaller than 3MB."
+            );
+
+            return;
+
+          }
+
+
+          const reader =
+            new FileReader();
+
+
+          reader.onload =
+            function (e) {
+
+              const profile =
+                getProfile();
+
+              profile.logo =
+                e.target.result;
+
+
+              saveStorage(
+                PROFILE_KEY,
+                profile
+              );
+
+
+              updateProfilePreview(
+                profile
+              );
+
+
+              showToast(
+                "Profile logo updated."
+              );
+
+            };
+
+
+          reader.readAsDataURL(file);
+
+        }
+      );
+
+
+    /* =========================================================
+       REMOVE LOGO
+       ========================================================= */
+
+    document
+      .getElementById("removeLogoBtn")
+      .addEventListener(
+        "click",
+        function () {
+
+          const profile =
+            getProfile();
+
+          profile.logo = "";
+
+          saveStorage(
+            PROFILE_KEY,
+            profile
+          );
+
+          updateProfilePreview(
+            profile
+          );
+
+          document.getElementById(
+            "logoInput"
+          ).value = "";
+
+          showToast(
+            "Profile logo removed."
+          );
+
+        }
+      );
+
+
+    /* =========================================================
+       SETTINGS
+       ========================================================= */
+
+    function getSettings() {
+
+      return {
+        ...DEFAULT_SETTINGS,
+        ...getStorage(
+          SETTINGS_KEY,
+          {}
+        )
+      };
+
+    }
+
+
+    function loadSettings() {
+
+      const settings =
+        getSettings();
+
+
+      document.getElementById(
+        "studioName"
+      ).value =
+        settings.studioName || "";
+
+
+      document.getElementById(
+        "studioLogo"
+      ).value =
+        settings.studioLogo || "";
+
+
+      document.getElementById(
+        "studioSubtitle"
+      ).value =
+        settings.studioSubtitle || "";
+
+
+      document.getElementById(
+        "zoomTitle"
+      ).value =
+        settings.zoomTitle || "";
+
+
+      document.getElementById(
+        "welcomeText"
+      ).value =
+        settings.welcomeText || "";
+
+
+      renderBrandSelect(
+        settings.selectedBrand
+      );
+
+    }
+
+
+    document
+      .getElementById("saveSettingsBtn")
+      .addEventListener(
+        "click",
+        function () {
+
+          const settings = {
+
+            studioName:
+              document.getElementById(
+                "studioName"
+              ).value.trim(),
+
+            studioLogo:
+              document.getElementById(
+                "studioLogo"
+              ).value.trim(),
+
+            studioSubtitle:
+              document.getElementById(
+                "studioSubtitle"
+              ).value.trim(),
+
+            selectedBrand:
+              document.getElementById(
+                "selectedBrand"
+              ).value,
+
+            zoomTitle:
+              document.getElementById(
+                "zoomTitle"
+              ).value.trim(),
+
+            welcomeText:
+              document.getElementById(
+                "welcomeText"
+              ).value.trim()
+
+          };
+
+
+          saveStorage(
+            SETTINGS_KEY,
+            settings
+          );
+
+
+          showToast(
+            "Studio settings saved."
+          );
+
+        }
+      );
+
+
+    /* =========================================================
+       BRANDS
+       ========================================================= */
+
+    function getBrands() {
+
+      const saved =
+        getStorage(
+          BRANDS_KEY,
+          null
+        );
+
+
+      if (!Array.isArray(saved)) {
+
+        saveStorage(
+          BRANDS_KEY,
+          DEFAULT_BRANDS
+        );
+
+        return [
+          ...DEFAULT_BRANDS
+        ];
+
+      }
+
+
+      return saved;
+
+    }
+
+
+    function renderBrands() {
+
+      const brands =
+        getBrands();
+
+      const list =
+        document.getElementById(
+          "brandList"
+        );
+
+
+      document.getElementById(
+        "brandCount"
+      ).textContent =
+        brands.length;
+
+
+      if (!brands.length) {
+
+        list.innerHTML =
+          `<div class="empty">
+            No brands added yet.
+          </div>`;
+
+        renderBrandSelect();
+
+        return;
+
+      }
+
+
+      list.innerHTML =
+        brands.map(
+          (brand, index) => {
+
+            return `
+              <div class="brand-row">
+
+                <div class="brand-name">
+                  ${escapeHTML(brand)}
+                </div>
+
+                <div class="row-actions">
+
+                  <button
+                    class="small-btn delete"
+                    onclick="deleteBrand(${index})"
+                  >
+                    Delete
+                  </button>
+
+                </div>
+
+              </div>
+            `;
+
+          }
+        ).join("");
+
+
+      renderBrandSelect();
+
+    }
+
+
+    function renderBrandSelect(selected) {
+
+      const select =
+        document.getElementById(
+          "selectedBrand"
+        );
+
+
+      if (!select) {
+
+        return;
+
+      }
+
+
+      const brands =
+        getBrands();
+
+
+      const current =
+        selected ||
+        getSettings().selectedBrand;
+
+
+      select.innerHTML =
+        brands.map(
+          brand => {
+
+            return `
+              <option
+                value="${escapeHTML(brand)}"
+                ${brand === current ? "selected" : ""}
+              >
+                ${escapeHTML(brand)}
+              </option>
+            `;
+
+          }
+        ).join("");
+
+    }
+
+
+    document
+      .getElementById("addBrandBtn")
+      .addEventListener(
+        "click",
+        function () {
+
+          const input =
+            document.getElementById(
+              "brandInput"
+            );
+
+          const name =
+            input.value.trim();
+
+
+          if (!name) {
+
+            showToast(
+              "Please enter a brand name."
+            );
+
+            return;
+
+          }
+
+
+          const brands =
+            getBrands();
+
+
+          const exists =
+            brands.some(
+              brand =>
+                brand.toLowerCase() ===
+                name.toLowerCase()
+            );
+
+
+          if (exists) {
+
+            showToast(
+              "This brand already exists."
+            );
+
+            return;
+
+          }
+
+
+          brands.push(name);
+
+
+          saveStorage(
+            BRANDS_KEY,
+            brands
+          );
+
+
+          input.value = "";
+
+
+          renderBrands();
+
+          loadSettings();
+
+
+          showToast(
+            "Brand added successfully."
+          );
+
+        }
+      );
+
+
+    function deleteBrand(index) {
+
+      const brands =
+        getBrands();
+
+
+      if (brands.length <= 1) {
+
+        showToast(
+          "At least one brand should remain."
+        );
+
+        return;
+
+      }
+
+
+      const brand =
+        brands[index];
+
+
+      if (
+        !confirm(
+          `Delete "${brand}"?`
+        )
+      ) {
+
+        return;
+
+      }
+
+
+      brands.splice(
+        index,
+        1
+      );
+
+
+      saveStorage(
+        BRANDS_KEY,
+        brands
+      );
+
+
+      renderBrands();
+
+      loadSettings();
+
+
+      showToast(
+        "Brand deleted."
+      );
+
+    }
+
+
+    /* =========================================================
+       STUDENTS
+       ========================================================= */
+
+    function getStudents() {
+
+      const saved =
+        getStorage(
+          STUDENTS_KEY,
+          []
+        );
+
+
+      return Array.isArray(saved)
+        ? saved
+        : [];
+
+    }
+
+
+    function renderStudents() {
+
+      const students =
+        getStudents();
+
+
+      const list =
+        document.getElementById(
+          "studentList"
+        );
+
+
+      document.getElementById(
+        "studentCount"
+      ).textContent =
+        students.length;
+
+
+      if (!students.length) {
+
+        list.innerHTML =
+          `<div class="empty">
+            No students added yet.
+          </div>`;
+
+        return;
+
+      }
+
+
+      list.innerHTML =
+        students.map(
+          (student, index) => {
+
+            return `
+              <div class="student-row">
+
+                <div class="student-info">
+
+                  <strong>
+                    ${escapeHTML(
+                      student.name ||
+                      "Unnamed Student"
+                    )}
+                  </strong>
+
+                  <span>
+                    ID:
+                    ${escapeHTML(
+                      student.id ||
+                      "-"
+                    )}
+                    ${
+                      student.email
+                        ? " • " +
+                          escapeHTML(
+                            student.email
+                          )
+                        : ""
+                    }
+                  </span>
+
+                </div>
+
+
+                <div class="row-actions">
+
+                  <button
+                    class="small-btn delete"
+                    onclick="deleteStudent(${index})"
+                  >
+                    Delete
+                  </button>
+
+                </div>
+
+              </div>
+            `;
+
+          }
+        ).join("");
+
+    }
+
+
+    document
+      .getElementById("addStudentBtn")
+      .addEventListener(
+        "click",
+        function () {
+
+          const name =
+            document.getElementById(
+              "studentName"
+            ).value.trim();
+
+          const id =
+            document.getElementById(
+              "studentId"
+            ).value.trim();
+
+          const email =
+            document.getElementById(
+              "studentEmail"
+            ).value.trim();
+
+          const phone =
+            document.getElementById(
+              "studentPhone"
+            ).value.trim();
+
+
+          if (!name) {
+
+            showToast(
+              "Please enter student name."
+            );
+
+            return;
+
+          }
+
+
+          const students =
+            getStudents();
+
+
+          students.push({
+
+            name,
+            id:
+              id ||
+              "STU-" +
+              Date.now(),
+
+            email,
+
+            phone,
+
+            createdAt:
+              new Date().toISOString()
+
+          });
+
+
+          saveStorage(
+            STUDENTS_KEY,
+            students
+          );
+
+
+          document.getElementById(
+            "studentName"
+          ).value = "";
+
+          document.getElementById(
+            "studentId"
+          ).value = "";
+
+          document.getElementById(
+            "studentEmail"
+          ).value = "";
+
+          document.getElementById(
+            "studentPhone"
+          ).value = "";
+
+
+          renderStudents();
+
+
+          showToast(
+            "Student added successfully."
+          );
+
+        }
+      );
+
+
+    function deleteStudent(index) {
+
+      const students =
+        getStudents();
+
+
+      const student =
+        students[index];
+
+
+      if (
+        !confirm(
+          `Delete ${
+            student?.name ||
+            "this student"
+          }?`
+        )
+      ) {
+
+        return;
+
+      }
+
+
+      students.splice(
+        index,
+        1
+      );
+
+
+      saveStorage(
+        STUDENTS_KEY,
         students
       );
 
 
+      renderStudents();
+
+
       showToast(
-        "Student Added",
-        `"${name}" added successfully.`
+        "Student deleted."
       );
 
     }
 
 
-    resetStudentForm();
+    /* =========================================================
+       PAGE NAVIGATION
+       ========================================================= */
 
-    renderStudents();
+    const pageTitles = {
 
-    updateDashboard();
+      dashboard: {
 
-  }
+        title:
+          "Dashboard",
+
+        subtitle:
+          "Manage your personal course studio."
+
+      },
+
+      settings: {
+
+        title:
+          "Studio Settings",
+
+        subtitle:
+          "Configure your studio identity and preferences."
+
+      },
+
+      brands: {
+
+        title:
+          "Brand Manager",
+
+        subtitle:
+          "Manage brands used inside your studio."
+
+      },
+
+      students: {
+
+        title:
+          "Student Manager",
+
+        subtitle:
+          "Manage students for your personal studio."
+
+      },
+
+      profile: {
+
+        title:
+          "Profile",
+
+        subtitle:
+          "Manage administrator information and logo."
+
+      }
+
+    };
 
 
-  function renderStudents() {
+    function showPage(pageName) {
 
-    const students =
-      getStudents();
+      document
+        .querySelectorAll(".page")
+        .forEach(
+          page => {
 
-    const list =
-      document.getElementById(
-        "studentList"
-      );
+            page.classList.remove(
+              "active"
+            );
 
-
-    document.getElementById(
-      "studentCountText"
-    ).textContent =
-      `${students.length} students`;
+          }
+        );
 
 
-    list.innerHTML = "";
+      const target =
+        document.getElementById(
+          "page-" + pageName
+        );
 
 
-    if (
-      students.length === 0
-    ) {
+      if (target) {
 
-      list.innerHTML = `
-        <div class="empty">
-          এখনো কোনো student যোগ করা হয়নি।
-        </div>
-      `;
-
-      return;
-    }
-
-
-    students.forEach(student => {
-
-      const item =
-        document.createElement("div");
-
-      item.className =
-        "student-item";
-
-
-      let statusClass =
-        "offline";
-
-
-      if (
-        student.status ===
-        "Online"
-      ) {
-
-        statusClass =
-          "online";
-
-      } else if (
-        student.status ===
-        "Busy"
-      ) {
-
-        statusClass =
-          "busy";
+        target.classList.add(
+          "active"
+        );
 
       }
 
 
-      const photo =
-        student.photo
-          ? `
-            <img
-              class="student-photo"
-              src="${student.photo}"
-              alt="${escapeHTML(student.name)}"
-            />
-          `
-          : `
-            <div class="student-photo">
-              ♙
-            </div>
-          `;
+      document
+        .querySelectorAll(".nav-item[data-page]")
+        .forEach(
+          item => {
+
+            item.classList.toggle(
+              "active",
+              item.dataset.page ===
+                pageName
+            );
+
+          }
+        );
 
 
-      item.innerHTML = `
-
-        ${photo}
-
-
-        <div class="student-info">
-
-          <strong>
-            ${escapeHTML(student.name)}
-          </strong>
-
-          <small>
-            ${escapeHTML(student.id)}
-          </small>
-
-        </div>
+      const info =
+        pageTitles[pageName];
 
 
-        <span
-          class="status ${statusClass}"
-        >
-          ${escapeHTML(student.status)}
-        </span>
+      if (info) {
+
+        document.getElementById(
+          "pageTitle"
+        ).textContent =
+          info.title;
 
 
-        <button
-          class="small-btn"
-          onclick="editStudent('${student.id}')"
-        >
-          Edit
-        </button>
+        document.getElementById(
+          "pageSubtitle"
+        ).textContent =
+          info.subtitle;
+
+      }
 
 
-        <button
-          class="small-btn"
-          onclick="deleteStudent('${student.id}')"
-        >
-          Delete
-        </button>
-
-      `;
+      closeMobileSidebar();
 
 
-      list.appendChild(item);
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
 
-    });
-
-  }
-
-
-  function editStudent(id) {
-
-    const students =
-      getStudents();
-
-
-    const student =
-      students.find(
-        item =>
-          item.id === id
-      );
-
-
-    if (!student) {
-      return;
     }
 
 
-    document.getElementById(
-      "editingStudentId"
-    ).value =
-      student.id;
+    document
+      .querySelectorAll(".nav-item[data-page]")
+      .forEach(
+        item => {
+
+          item.addEventListener(
+            "click",
+            function () {
+
+              showPage(
+                this.dataset.page
+              );
+
+            }
+          );
+
+        }
+      );
 
 
-    document.getElementById(
-      "studentName"
-    ).value =
-      student.name;
+    /* =========================================================
+       OPEN MENTOR STUDIO
+       ========================================================= */
+
+    function openMentorStudio() {
+
+      window.location.href =
+        "../mentor/";
+
+    }
 
 
-    document.getElementById(
-      "studentStatus"
-    ).value =
-      student.status;
+    document
+      .getElementById("mentorBtn")
+      .addEventListener(
+        "click",
+        openMentorStudio
+      );
 
 
-    selectedStudentPhoto =
-      student.photo || "";
+    /* =========================================================
+       OPEN PUBLIC HOME
+       ========================================================= */
+
+    function openPublicHome() {
+
+      window.location.href =
+        "../";
+
+    }
 
 
-    const preview =
+    document
+      .getElementById("homeBtn")
+      .addEventListener(
+        "click",
+        openPublicHome
+      );
+
+
+    /* =========================================================
+       LOGOUT
+       ========================================================= */
+
+    document
+      .getElementById("logoutBtn")
+      .addEventListener(
+        "click",
+        function () {
+
+          sessionStorage.removeItem(
+            "personalCourseStudioAdminLoggedIn"
+          );
+
+          sessionStorage.removeItem(
+            "personalCourseStudioRole"
+          );
+
+          sessionStorage.removeItem(
+            "personalCourseStudioUsername"
+          );
+
+
+          window.location.replace(
+            "../login/"
+          );
+
+        }
+      );
+
+
+    /* =========================================================
+       MOBILE SIDEBAR
+       ========================================================= */
+
+    const sidebar =
       document.getElementById(
-        "photoPreview"
+        "sidebar"
+      );
+
+    const overlay =
+      document.getElementById(
+        "sidebarOverlay"
       );
 
 
-    if (student.photo) {
+    function openMobileSidebar() {
 
-      preview.innerHTML = `
-        <img
-          src="${student.photo}"
-          alt="Student"
-        />
-      `;
+      sidebar.classList.add(
+        "open"
+      );
 
-    } else {
-
-      preview.textContent =
-        "No photo";
+      overlay.classList.add(
+        "show"
+      );
 
     }
 
 
-    document.getElementById(
-      "studentFormTitle"
-    ).textContent =
-      "Edit Student";
+    function closeMobileSidebar() {
 
-
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth"
-    });
-
-  }
-
-
-  function deleteStudent(id) {
-
-    const students =
-      getStudents();
-
-
-    const student =
-      students.find(
-        item =>
-          item.id === id
+      sidebar.classList.remove(
+        "open"
       );
 
+      overlay.classList.remove(
+        "show"
+      );
 
-    if (!student) {
-      return;
     }
 
 
-    if (
-      !confirm(
-        `Delete "${student.name}"?`
-      )
-    ) {
-
-      return;
-    }
-
-
-    const updated =
-      students.filter(
-        item =>
-          item.id !== id
+    document
+      .getElementById("mobileMenu")
+      .addEventListener(
+        "click",
+        openMobileSidebar
       );
 
 
-    saveStudents(
-      updated
+    overlay.addEventListener(
+      "click",
+      closeMobileSidebar
     );
 
 
-    renderStudents();
+    /* =========================================================
+       INITIALIZE
+       ========================================================= */
 
-    updateDashboard();
+    loadProfile();
 
-
-    showToast(
-      "Student Deleted",
-      "Student profile removed."
-    );
-
-  }
-
-
-  function resetStudentForm() {
-
-    document.getElementById(
-      "editingStudentId"
-    ).value = "";
-
-
-    document.getElementById(
-      "studentName"
-    ).value = "";
-
-
-    document.getElementById(
-      "studentStatus"
-    ).value = "Online";
-
-
-    document.getElementById(
-      "studentPhoto"
-    ).value = "";
-
-
-    selectedStudentPhoto =
-      "";
-
-
-    document.getElementById(
-      "photoPreview"
-    ).textContent =
-      "No photo";
-
-
-    document.getElementById(
-      "studentFormTitle"
-    ).textContent =
-      "Add Student";
-
-  }
-
-
-  /* =========================
-     DASHBOARD
-  ========================== */
-
-  function updateDashboard() {
-
-    const students =
-      getStudents();
-
-    const brands =
-      getBrands();
-
-    const settings =
-      getSettings();
-
-
-    document.getElementById(
-      "totalStudents"
-    ).textContent =
-      students.length;
-
-
-    document.getElementById(
-      "onlineStudents"
-    ).textContent =
-      students.filter(
-        student =>
-          student.status ===
-          "Online"
-      ).length;
-
-
-    document.getElementById(
-      "totalBrands"
-    ).textContent =
-      brands.length;
-
-
-    document.getElementById(
-      "currentBrandShort"
-    ).textContent =
-      settings.selectedBrand
-      || "—";
-
-  }
-
-
-  /* =========================
-     OPEN MENTOR STUDIO
-  ========================== */
-
-  function openMentorStudio() {
-
-    window.location.href =
-      "../mentor/";
-
-  }
-
-
-  /* =========================
-     OPEN HOME
-  ========================== */
-
-  function openHome() {
-
-    window.location.href =
-      "../";
-
-  }
-
-
-  /* =========================
-     LOGOUT
-  ========================== */
-
-  function logoutAdmin() {
-
-    sessionStorage.removeItem(
-      ADMIN_SESSION_KEY
-    );
-
-    sessionStorage.removeItem(
-      MENTOR_SESSION_KEY
-    );
-
-    sessionStorage.removeItem(
-      ROLE_KEY
-    );
-
-    sessionStorage.removeItem(
-      USERNAME_KEY
-    );
-
-
-    window.location.replace(
-      "../login/"
-    );
-
-  }
-
-
-  /* =========================
-     HTML ESCAPE
-  ========================== */
-
-  function escapeHTML(value) {
-
-    return String(value)
-      .replace(
-        /&/g,
-        "&amp;"
-      )
-      .replace(
-        /</g,
-        "&lt;"
-      )
-      .replace(
-        />/g,
-        "&gt;"
-      )
-      .replace(
-        /"/g,
-        "&quot;"
-      )
-      .replace(
-        /'/g,
-        "&#039;"
-      );
-
-  }
-
-
-  /* =========================
-     INITIALIZE
-  ========================== */
-
-  function initializeAdmin() {
-
-    const username =
-      sessionStorage.getItem(
-        USERNAME_KEY
-      )
-      || "admin";
-
-
-    document.getElementById(
-      "adminUsername"
-    ).textContent =
-      username;
-
-
-    /*
-      Make sure default brands exist.
-    */
-
-    getBrands();
-
-
-    /*
-      Make sure default settings exist.
-    */
-
-    const settings =
-      getSettings();
-
-    saveSettingsStorage(
-      settings
-    );
-
-
-    applyStudioBranding();
-
-    loadSettingsIntoForm();
+    loadSettings();
 
     renderBrands();
 
     renderStudents();
 
-    renderConfig();
-
-    updateDashboard();
-
-  }
-
-
-  /* =========================
-     STORAGE SYNC
-  ========================== */
-
-  window.addEventListener(
-    "storage",
-    function(event) {
-
-      if (
-        event.key ===
-        SETTINGS_KEY
-      ) {
-
-        applyStudioBranding();
-
-        loadSettingsIntoForm();
-
-        renderConfig();
-
-        updateDashboard();
-
-      }
-
-
-      if (
-        event.key ===
-        BRANDS_KEY
-      ) {
-
-        renderBrands();
-
-        updateDashboard();
-
-      }
-
-
-      if (
-        event.key ===
-        STUDENTS_KEY
-      ) {
-
-        renderStudents();
-
-        updateDashboard();
-
-      }
-
-    }
-  );
-
-
-  /* =========================
-     START
-  ========================== */
-
-  initializeAdmin();
-
-</script>
+  </script>
 
 </body>
 </html>
