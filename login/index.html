@@ -1,0 +1,2266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Login | Personal Course Studio</title>
+
+  <meta
+    name="description"
+    content="Secure Mentor and Admin login for Personal Course Studio."
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+
+    /* =========================================================
+       PERSONAL COURSE STUDIO
+       LOGIN PAGE
+       ========================================================= */
+
+    :root {
+
+      --white: #ffffff;
+
+      --text: #f7f8fb;
+
+      --muted:
+        rgba(255,255,255,.58);
+
+      --border:
+        rgba(255,255,255,.13);
+
+      --glass:
+        rgba(7,11,19,.57);
+
+      --gold:
+        #e8c875;
+
+      --gold-light:
+        #ffe8a5;
+
+      --danger:
+        #ff8585;
+
+    }
+
+
+    * {
+
+      margin: 0;
+      padding: 0;
+
+      box-sizing: border-box;
+
+    }
+
+
+    html,
+    body {
+
+      width: 100%;
+      min-height: 100%;
+
+    }
+
+
+    body {
+
+      min-height: 100vh;
+
+      overflow-x: hidden;
+
+      font-family:
+        "Inter",
+        Arial,
+        sans-serif;
+
+      color:
+        var(--text);
+
+      background:
+        #070a10;
+
+    }
+
+
+    a {
+
+      color: inherit;
+
+      text-decoration: none;
+
+    }
+
+
+    button,
+    input {
+
+      font: inherit;
+
+    }
+
+
+    /* =========================================================
+       BACKGROUND
+       ========================================================= */
+
+    .login-page {
+
+      position: relative;
+
+      width: 100%;
+      min-height: 100vh;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      padding: 35px 20px;
+
+      overflow: hidden;
+
+      background:
+
+        linear-gradient(
+          110deg,
+          rgba(4,8,15,.91),
+          rgba(4,8,15,.64),
+          rgba(4,8,15,.82)
+        ),
+
+        url(
+          "https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=2200&q=90"
+        );
+
+      background-size: cover;
+
+      background-position: center;
+
+    }
+
+
+    .background-glow {
+
+      position: absolute;
+
+      width: 650px;
+      height: 650px;
+
+      left: -260px;
+      top: -260px;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(232,200,117,.16),
+          transparent 70%
+        );
+
+      animation:
+        glowMove 12s
+        ease-in-out
+        infinite
+        alternate;
+
+      pointer-events: none;
+
+    }
+
+
+    @keyframes glowMove {
+
+      from {
+
+        transform:
+          translate3d(
+            0,
+            0,
+            0
+          );
+
+      }
+
+      to {
+
+        transform:
+          translate3d(
+            260px,
+            160px,
+            0
+          );
+
+      }
+
+    }
+
+
+    /* =========================================================
+       FLOATING LIGHTS
+       ========================================================= */
+
+    .lights {
+
+      position: absolute;
+
+      inset: 0;
+
+      pointer-events: none;
+
+    }
+
+
+    .light {
+
+      position: absolute;
+
+      width: 4px;
+      height: 4px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,.75);
+
+      box-shadow:
+        0 0 16px
+        rgba(255,255,255,.65);
+
+      animation:
+        floatLight
+        linear
+        infinite;
+
+    }
+
+
+    .light:nth-child(1) {
+
+      left: 10%;
+
+      animation-duration: 12s;
+
+    }
+
+
+    .light:nth-child(2) {
+
+      left: 24%;
+
+      animation-duration: 16s;
+
+      animation-delay: -6s;
+
+    }
+
+
+    .light:nth-child(3) {
+
+      left: 48%;
+
+      animation-duration: 14s;
+
+      animation-delay: -4s;
+
+    }
+
+
+    .light:nth-child(4) {
+
+      left: 68%;
+
+      animation-duration: 18s;
+
+      animation-delay: -10s;
+
+    }
+
+
+    .light:nth-child(5) {
+
+      left: 88%;
+
+      animation-duration: 13s;
+
+      animation-delay: -7s;
+
+    }
+
+
+    @keyframes floatLight {
+
+      from {
+
+        top: 110%;
+
+        opacity: 0;
+
+      }
+
+      20% {
+
+        opacity: .7;
+
+      }
+
+      80% {
+
+        opacity: .35;
+
+      }
+
+      to {
+
+        top: -10%;
+
+        opacity: 0;
+
+      }
+
+    }
+
+
+    /* =========================================================
+       BACK BUTTON
+       ========================================================= */
+
+    .back-home {
+
+      position: absolute;
+
+      top: 30px;
+      left: 35px;
+
+      z-index: 10;
+
+      display: inline-flex;
+
+      align-items: center;
+
+      gap: 8px;
+
+      padding:
+        11px 16px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.13);
+
+      border-radius:
+        999px;
+
+      background:
+        rgba(0,0,0,.25);
+
+      backdrop-filter:
+        blur(15px);
+
+      color:
+        rgba(255,255,255,.75);
+
+      font-size:
+        11px;
+
+      font-weight:
+        600;
+
+      transition:
+        .3s ease;
+
+    }
+
+
+    .back-home:hover {
+
+      background:
+        rgba(255,255,255,.10);
+
+      color:
+        white;
+
+      transform:
+        translateX(-3px);
+
+    }
+
+
+    /* =========================================================
+       LOGIN WRAPPER
+       ========================================================= */
+
+    .login-wrapper {
+
+      position: relative;
+
+      z-index: 5;
+
+      width: 100%;
+
+      max-width: 980px;
+
+      display: grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      border:
+        1px solid
+        rgba(255,255,255,.13);
+
+      border-radius:
+        30px;
+
+      overflow: hidden;
+
+      background:
+        rgba(6,10,18,.55);
+
+      box-shadow:
+        0 35px 100px
+        rgba(0,0,0,.48);
+
+      backdrop-filter:
+        blur(25px);
+
+      -webkit-backdrop-filter:
+        blur(25px);
+
+      animation:
+        wrapperEnter
+        .9s
+        cubic-bezier(
+          .22,
+          .61,
+          .36,
+          1
+        );
+
+    }
+
+
+    @keyframes wrapperEnter {
+
+      from {
+
+        opacity: 0;
+
+        transform:
+          translateY(30px)
+          scale(.97);
+
+      }
+
+      to {
+
+        opacity: 1;
+
+        transform:
+          translateY(0)
+          scale(1);
+
+      }
+
+    }
+
+
+    /* =========================================================
+       LEFT PANEL
+       ========================================================= */
+
+    .visual-panel {
+
+      position: relative;
+
+      min-height: 600px;
+
+      padding:
+        48px;
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      justify-content:
+        space-between;
+
+      background:
+
+        linear-gradient(
+          145deg,
+          rgba(232,200,117,.14),
+          rgba(255,255,255,.025)
+        );
+
+      border-right:
+        1px solid
+        rgba(255,255,255,.09);
+
+    }
+
+
+    .visual-panel::before {
+
+      content: "";
+
+      position: absolute;
+
+      inset: 0;
+
+      background:
+
+        linear-gradient(
+          180deg,
+          transparent,
+          rgba(0,0,0,.25)
+        );
+
+      pointer-events: none;
+
+    }
+
+
+    /* =========================================================
+       BRAND
+       ========================================================= */
+
+    .brand {
+
+      position: relative;
+
+      z-index: 2;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        13px;
+
+    }
+
+
+    .brand-logo {
+
+      width:
+        50px;
+
+      height:
+        50px;
+
+      display:
+        grid;
+
+      place-items:
+        center;
+
+      border:
+        1px solid
+        rgba(255,255,255,.17);
+
+      border-radius:
+        15px;
+
+      background:
+        rgba(255,255,255,.08);
+
+      color:
+        var(--gold-light);
+
+      font-size:
+        17px;
+
+      font-weight:
+        800;
+
+      backdrop-filter:
+        blur(15px);
+
+    }
+
+
+    .brand-name {
+
+      font-size:
+        14px;
+
+      font-weight:
+        800;
+
+    }
+
+
+    .brand-subtitle {
+
+      margin-top:
+        3px;
+
+      font-size:
+        10px;
+
+      color:
+        rgba(255,255,255,.47);
+
+    }
+
+
+    /* =========================================================
+       VISUAL CENTER
+       ========================================================= */
+
+    .visual-content {
+
+      position: relative;
+
+      z-index: 2;
+
+      max-width:
+        430px;
+
+    }
+
+
+    .visual-tag {
+
+      display:
+        inline-flex;
+
+      padding:
+        8px 12px;
+
+      margin-bottom:
+        18px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.13);
+
+      border-radius:
+        999px;
+
+      background:
+        rgba(0,0,0,.18);
+
+      color:
+        rgba(255,255,255,.68);
+
+      font-size:
+        9px;
+
+      font-weight:
+        700;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        1.5px;
+
+    }
+
+
+    .visual-title {
+
+      font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+      font-size:
+        clamp(
+          40px,
+          5vw,
+          68px
+        );
+
+      line-height:
+        1;
+
+      letter-spacing:
+        -2px;
+
+      font-weight:
+        600;
+
+      margin-bottom:
+        20px;
+
+    }
+
+
+    .visual-title span {
+
+      display:
+        block;
+
+      color:
+        var(--gold-light);
+
+      font-style:
+        italic;
+
+    }
+
+
+    .visual-description {
+
+      color:
+        rgba(255,255,255,.60);
+
+      font-size:
+        13px;
+
+      line-height:
+        1.8;
+
+      max-width:
+        390px;
+
+    }
+
+
+    /* =========================================================
+       VISUAL FOOTER
+       ========================================================= */
+
+    .visual-footer {
+
+      position: relative;
+
+      z-index: 2;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        10px;
+
+      color:
+        rgba(255,255,255,.42);
+
+      font-size:
+        10px;
+
+    }
+
+
+    .status-dot {
+
+      width:
+        7px;
+
+      height:
+        7px;
+
+      border-radius:
+        50%;
+
+      background:
+        #7de2a6;
+
+      box-shadow:
+        0 0 12px
+        rgba(125,226,166,.7);
+
+    }
+
+
+    /* =========================================================
+       FORM PANEL
+       ========================================================= */
+
+    .form-panel {
+
+      padding:
+        48px;
+
+      background:
+        rgba(2,5,11,.32);
+
+    }
+
+
+    .form-header {
+
+      margin-bottom:
+        28px;
+
+    }
+
+
+    .form-header h2 {
+
+      font-size:
+        28px;
+
+      letter-spacing:
+        -.7px;
+
+      margin-bottom:
+        8px;
+
+    }
+
+
+    .form-header p {
+
+      color:
+        var(--muted);
+
+      font-size:
+        12px;
+
+      line-height:
+        1.7;
+
+    }
+
+
+    /* =========================================================
+       ROLE SWITCHER
+       ========================================================= */
+
+    .role-switcher {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap:
+        8px;
+
+      padding:
+        5px;
+
+      margin-bottom:
+        25px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.09);
+
+      border-radius:
+        14px;
+
+      background:
+        rgba(255,255,255,.035);
+
+    }
+
+
+    .role-button {
+
+      min-height:
+        46px;
+
+      border:
+        0;
+
+      border-radius:
+        10px;
+
+      background:
+        transparent;
+
+      color:
+        rgba(255,255,255,.45);
+
+      cursor:
+        pointer;
+
+      font-size:
+        11px;
+
+      font-weight:
+        700;
+
+      transition:
+        .3s ease;
+
+    }
+
+
+    .role-button.active {
+
+      color:
+        #17191e;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fff,
+          #e9dfc4
+        );
+
+      box-shadow:
+        0 8px 25px
+        rgba(0,0,0,.25);
+
+    }
+
+
+    /* =========================================================
+       FORM
+       ========================================================= */
+
+    .form-group {
+
+      margin-bottom:
+        17px;
+
+    }
+
+
+    .form-label {
+
+      display:
+        block;
+
+      margin-bottom:
+        8px;
+
+      color:
+        rgba(255,255,255,.67);
+
+      font-size:
+        10px;
+
+      font-weight:
+        700;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        1px;
+
+    }
+
+
+    .input-wrap {
+
+      position:
+        relative;
+
+    }
+
+
+    .input-icon {
+
+      position:
+        absolute;
+
+      left:
+        15px;
+
+      top:
+        50%;
+
+      transform:
+        translateY(-50%);
+
+      color:
+        rgba(255,255,255,.38);
+
+      font-size:
+        15px;
+
+      pointer-events:
+        none;
+
+    }
+
+
+    .form-input {
+
+      width:
+        100%;
+
+      height:
+        53px;
+
+      padding:
+        0 46px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.10);
+
+      border-radius:
+        14px;
+
+      outline:
+        none;
+
+      background:
+        rgba(255,255,255,.045);
+
+      color:
+        white;
+
+      font-size:
+        13px;
+
+      transition:
+        .3s ease;
+
+    }
+
+
+    .form-input::placeholder {
+
+      color:
+        rgba(255,255,255,.27);
+
+    }
+
+
+    .form-input:focus {
+
+      border-color:
+        rgba(232,200,117,.52);
+
+      background:
+        rgba(255,255,255,.065);
+
+      box-shadow:
+        0 0 0 4px
+        rgba(232,200,117,.06);
+
+    }
+
+
+    .password-toggle {
+
+      position:
+        absolute;
+
+      right:
+        13px;
+
+      top:
+        50%;
+
+      transform:
+        translateY(-50%);
+
+      width:
+        32px;
+
+      height:
+        32px;
+
+      display:
+        grid;
+
+      place-items:
+        center;
+
+      border:
+        0;
+
+      background:
+        transparent;
+
+      color:
+        rgba(255,255,255,.40);
+
+      cursor:
+        pointer;
+
+      border-radius:
+        8px;
+
+    }
+
+
+    .password-toggle:hover {
+
+      background:
+        rgba(255,255,255,.08);
+
+      color:
+        white;
+
+    }
+
+
+    /* =========================================================
+       LOGIN BUTTON
+       ========================================================= */
+
+    .login-button {
+
+      width:
+        100%;
+
+      height:
+        55px;
+
+      margin-top:
+        5px;
+
+      border-radius:
+        14px;
+
+      border:
+        0;
+
+      cursor:
+        pointer;
+
+      background:
+        linear-gradient(
+          135deg,
+          #fff,
+          #e7ddc4
+        );
+
+      color:
+        #11141a;
+
+      font-size:
+        12px;
+
+      font-weight:
+        800;
+
+      box-shadow:
+        0 15px 35px
+        rgba(0,0,0,.28);
+
+      transition:
+        .3s ease;
+
+    }
+
+
+    .login-button:hover {
+
+      transform:
+        translateY(-3px);
+
+      box-shadow:
+        0 20px 45px
+        rgba(0,0,0,.40);
+
+    }
+
+
+    .login-button:active {
+
+      transform:
+        translateY(0);
+
+    }
+
+
+    .login-button.loading {
+
+      opacity:
+        .65;
+
+      pointer-events:
+        none;
+
+    }
+
+
+    /* =========================================================
+       ERROR / MESSAGE
+       ========================================================= */
+
+    .message {
+
+      min-height:
+        18px;
+
+      margin-top:
+        14px;
+
+      text-align:
+        center;
+
+      font-size:
+        10px;
+
+      line-height:
+        1.5;
+
+    }
+
+
+    .message.error {
+
+      color:
+        var(--danger);
+
+    }
+
+
+    .message.success {
+
+      color:
+        #82e4a9;
+
+    }
+
+
+    /* =========================================================
+       DEMO ACCOUNT
+       ========================================================= */
+
+    .demo-box {
+
+      margin-top:
+        22px;
+
+      padding:
+        15px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.08);
+
+      border-radius:
+        14px;
+
+      background:
+        rgba(255,255,255,.025);
+
+    }
+
+
+    .demo-title {
+
+      margin-bottom:
+        8px;
+
+      color:
+        rgba(255,255,255,.43);
+
+      font-size:
+        9px;
+
+      font-weight:
+        700;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        1.2px;
+
+    }
+
+
+    .demo-credentials {
+
+      color:
+        rgba(255,255,255,.64);
+
+      font-size:
+        10px;
+
+      line-height:
+        1.7;
+
+    }
+
+
+    .demo-credentials strong {
+
+      color:
+        rgba(255,255,255,.88);
+
+    }
+
+
+    /* =========================================================
+       MOBILE
+       ========================================================= */
+
+    @media (max-width: 850px) {
+
+      .login-wrapper {
+
+        max-width:
+          560px;
+
+        grid-template-columns:
+          1fr;
+
+      }
+
+
+      .visual-panel {
+
+        min-height:
+          310px;
+
+        padding:
+          30px;
+
+      }
+
+
+      .visual-content {
+
+        margin-top:
+          25px;
+
+      }
+
+
+      .visual-title {
+
+        font-size:
+          46px;
+
+      }
+
+
+      .visual-footer {
+
+        display:
+          none;
+
+      }
+
+
+      .form-panel {
+
+        padding:
+          32px;
+
+      }
+
+    }
+
+
+    @media (max-width: 500px) {
+
+      .login-page {
+
+        padding:
+          75px 14px 25px;
+
+      }
+
+
+      .back-home {
+
+        top:
+          18px;
+
+        left:
+          18px;
+
+        padding:
+          9px 13px;
+
+        font-size:
+          10px;
+
+      }
+
+
+      .login-wrapper {
+
+        border-radius:
+          23px;
+
+      }
+
+
+      .visual-panel {
+
+        min-height:
+          250px;
+
+        padding:
+          24px;
+
+      }
+
+
+      .brand-logo {
+
+        width:
+          42px;
+
+        height:
+          42px;
+
+        border-radius:
+          12px;
+
+      }
+
+
+      .brand-name {
+
+        font-size:
+          12px;
+
+      }
+
+
+      .visual-title {
+
+        font-size:
+          38px;
+
+        letter-spacing:
+          -1.5px;
+
+      }
+
+
+      .visual-description {
+
+        display:
+          none;
+
+      }
+
+
+      .form-panel {
+
+        padding:
+          25px 20px 28px;
+
+      }
+
+
+      .form-header h2 {
+
+        font-size:
+          24px;
+
+      }
+
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <main class="login-page">
+
+
+    <!-- =====================================================
+         BACKGROUND EFFECTS
+         ===================================================== -->
+
+    <div class="background-glow"></div>
+
+
+    <div class="lights">
+
+      <span class="light"></span>
+      <span class="light"></span>
+      <span class="light"></span>
+      <span class="light"></span>
+      <span class="light"></span>
+
+    </div>
+
+
+    <!-- =====================================================
+         BACK HOME
+         ===================================================== -->
+
+    <a
+      href="/"
+      class="back-home"
+    >
+      ← Back Home
+    </a>
+
+
+    <!-- =====================================================
+         LOGIN CARD
+         ===================================================== -->
+
+    <section class="login-wrapper">
+
+
+      <!-- ===================================================
+           VISUAL PANEL
+           =================================================== -->
+
+      <div class="visual-panel">
+
+
+        <div class="brand">
+
+          <div class="brand-logo">
+            CS
+          </div>
+
+          <div>
+
+            <div class="brand-name">
+              Personal Course Studio
+            </div>
+
+            <div class="brand-subtitle">
+              Learn • Create • Teach
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <div class="visual-content">
+
+          <div class="visual-tag">
+            Private Workspace
+          </div>
+
+          <h1 class="visual-title">
+
+            Your
+
+            <span>
+              Studio.
+            </span>
+
+          </h1>
+
+          <p class="visual-description">
+
+            Create classes, record courses,
+            manage students and build your
+            own teaching environment from
+            one private workspace.
+
+          </p>
+
+        </div>
+
+
+        <div class="visual-footer">
+
+          <span class="status-dot"></span>
+
+          Private Studio Environment
+
+        </div>
+
+
+      </div>
+
+
+      <!-- ===================================================
+           FORM PANEL
+           =================================================== -->
+
+      <div class="form-panel">
+
+
+        <div class="form-header">
+
+          <h2>
+            Welcome back
+          </h2>
+
+          <p>
+            Choose your access type and
+            enter your studio credentials.
+          </p>
+
+        </div>
+
+
+        <!-- =================================================
+             ROLE SWITCHER
+             ================================================= -->
+
+        <div class="role-switcher">
+
+          <button
+            type="button"
+            class="role-button active"
+            id="mentorRole"
+          >
+            🎓 Mentor
+          </button>
+
+          <button
+            type="button"
+            class="role-button"
+            id="adminRole"
+          >
+            ⚙️ Admin
+          </button>
+
+        </div>
+
+
+        <!-- =================================================
+             LOGIN FORM
+             ================================================= -->
+
+        <form
+          id="loginForm"
+          autocomplete="off"
+        >
+
+
+          <div class="form-group">
+
+            <label
+              class="form-label"
+              for="username"
+            >
+              Username
+            </label>
+
+            <div class="input-wrap">
+
+              <span class="input-icon">
+                👤
+              </span>
+
+              <input
+                id="username"
+                class="form-input"
+                type="text"
+                placeholder="Enter username"
+                autocomplete="username"
+                required
+              >
+
+            </div>
+
+          </div>
+
+
+          <div class="form-group">
+
+            <label
+              class="form-label"
+              for="password"
+            >
+              Password
+            </label>
+
+            <div class="input-wrap">
+
+              <span class="input-icon">
+                🔒
+              </span>
+
+              <input
+                id="password"
+                class="form-input"
+                type="password"
+                placeholder="Enter password"
+                autocomplete="current-password"
+                required
+              >
+
+              <button
+                type="button"
+                class="password-toggle"
+                id="passwordToggle"
+                aria-label="Show password"
+              >
+                👁
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <button
+            type="submit"
+            class="login-button"
+            id="loginButton"
+          >
+            Enter Mentor Studio →
+          </button>
+
+
+          <div
+            class="message"
+            id="message"
+          ></div>
+
+
+        </form>
+
+
+        <!-- =================================================
+             DEMO CREDENTIALS
+             ================================================= -->
+
+        <div class="demo-box">
+
+          <div class="demo-title">
+            Demo Access
+          </div>
+
+          <div
+            class="demo-credentials"
+            id="demoCredentials"
+          >
+
+            Username:
+            <strong>mentor</strong>
+            <br>
+
+            Password:
+            <strong>Mentor@123</strong>
+
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </section>
+
+
+  </main>
+
+
+  <script>
+
+    /* =========================================================
+       PERSONAL COURSE STUDIO
+       LOGIN SYSTEM
+       ========================================================= */
+
+
+    /* =========================================================
+       STORAGE KEYS
+       ========================================================= */
+
+    const MENTOR_SESSION_KEY =
+      "personalCourseStudioMentorLoggedIn";
+
+    const ADMIN_SESSION_KEY =
+      "personalCourseStudioAdminLoggedIn";
+
+    const ROLE_KEY =
+      "personalCourseStudioRole";
+
+    const USERNAME_KEY =
+      "personalCourseStudioUsername";
+
+
+    /* =========================================================
+       ACCOUNTS
+       ========================================================= */
+
+    const ACCOUNTS = {
+
+      mentor: {
+
+        username:
+          "mentor",
+
+        password:
+          "Mentor@123",
+
+        role:
+          "mentor",
+
+        redirect:
+          "/mentor/"
+
+      },
+
+      admin: {
+
+        username:
+          "admin",
+
+        password:
+          "Admin@123",
+
+        role:
+          "admin",
+
+        redirect:
+          "/admin/"
+
+      }
+
+    };
+
+
+    /* =========================================================
+       ELEMENTS
+       ========================================================= */
+
+    const mentorRole =
+      document.getElementById(
+        "mentorRole"
+      );
+
+    const adminRole =
+      document.getElementById(
+        "adminRole"
+      );
+
+    const usernameInput =
+      document.getElementById(
+        "username"
+      );
+
+    const passwordInput =
+      document.getElementById(
+        "password"
+      );
+
+    const passwordToggle =
+      document.getElementById(
+        "passwordToggle"
+      );
+
+    const loginForm =
+      document.getElementById(
+        "loginForm"
+      );
+
+    const loginButton =
+      document.getElementById(
+        "loginButton"
+      );
+
+    const message =
+      document.getElementById(
+        "message"
+      );
+
+    const demoCredentials =
+      document.getElementById(
+        "demoCredentials"
+      );
+
+
+    /* =========================================================
+       CURRENT ROLE
+       ========================================================= */
+
+    let selectedRole =
+      "mentor";
+
+
+    /* =========================================================
+       SELECT ROLE
+       ========================================================= */
+
+    function selectRole(role) {
+
+      selectedRole =
+        role;
+
+
+      mentorRole.classList.toggle(
+        "active",
+        role === "mentor"
+      );
+
+
+      adminRole.classList.toggle(
+        "active",
+        role === "admin"
+      );
+
+
+      if (role === "mentor") {
+
+        loginButton.textContent =
+          "Enter Mentor Studio →";
+
+
+        demoCredentials.innerHTML = `
+          Username:
+          <strong>mentor</strong>
+          <br>
+          Password:
+          <strong>Mentor@123</strong>
+        `;
+
+      }
+
+
+      if (role === "admin") {
+
+        loginButton.textContent =
+          "Enter Admin Panel →";
+
+
+        demoCredentials.innerHTML = `
+          Username:
+          <strong>admin</strong>
+          <br>
+          Password:
+          <strong>Admin@123</strong>
+        `;
+
+      }
+
+
+      clearMessage();
+
+    }
+
+
+    mentorRole.addEventListener(
+      "click",
+      () => {
+
+        selectRole(
+          "mentor"
+        );
+
+      }
+    );
+
+
+    adminRole.addEventListener(
+      "click",
+      () => {
+
+        selectRole(
+          "admin"
+        );
+
+      }
+    );
+
+
+    /* =========================================================
+       PASSWORD SHOW / HIDE
+       ========================================================= */
+
+    passwordToggle.addEventListener(
+      "click",
+      () => {
+
+        if (
+          passwordInput.type ===
+          "password"
+        ) {
+
+          passwordInput.type =
+            "text";
+
+          passwordToggle.textContent =
+            "🙈";
+
+          passwordToggle.setAttribute(
+            "aria-label",
+            "Hide password"
+          );
+
+        } else {
+
+          passwordInput.type =
+            "password";
+
+          passwordToggle.textContent =
+            "👁";
+
+          passwordToggle.setAttribute(
+            "aria-label",
+            "Show password"
+          );
+
+        }
+
+      }
+    );
+
+
+    /* =========================================================
+       MESSAGE
+       ========================================================= */
+
+    function showMessage(
+      text,
+      type = "error"
+    ) {
+
+      message.textContent =
+        text;
+
+      message.className =
+        "message " + type;
+
+    }
+
+
+    function clearMessage() {
+
+      message.textContent =
+        "";
+
+      message.className =
+        "message";
+
+    }
+
+
+    /* =========================================================
+       CLEAR OTHER SESSIONS
+       ========================================================= */
+
+    function clearSessions() {
+
+      sessionStorage.removeItem(
+        MENTOR_SESSION_KEY
+      );
+
+      sessionStorage.removeItem(
+        ADMIN_SESSION_KEY
+      );
+
+      sessionStorage.removeItem(
+        ROLE_KEY
+      );
+
+      sessionStorage.removeItem(
+        USERNAME_KEY
+      );
+
+    }
+
+
+    /* =========================================================
+       LOGIN
+       ========================================================= */
+
+    loginForm.addEventListener(
+      "submit",
+      (event) => {
+
+        event.preventDefault();
+
+
+        const username =
+          usernameInput.value.trim();
+
+        const password =
+          passwordInput.value;
+
+
+        clearMessage();
+
+
+        const account =
+          ACCOUNTS[
+            selectedRole
+          ];
+
+
+        if (
+          username !==
+          account.username ||
+          password !==
+          account.password
+        ) {
+
+          showMessage(
+            "Username অথবা password সঠিক নয়।"
+          );
+
+          passwordInput.focus();
+
+          return;
+
+        }
+
+
+        /* Loading */
+
+        loginButton.classList.add(
+          "loading"
+        );
+
+        loginButton.textContent =
+          "Entering Studio...";
+
+
+        /* Clear previous sessions */
+
+        clearSessions();
+
+
+        /* Set role */
+
+        sessionStorage.setItem(
+          ROLE_KEY,
+          account.role
+        );
+
+
+        sessionStorage.setItem(
+          USERNAME_KEY,
+          account.username
+        );
+
+
+        /* Mentor session */
+
+        if (
+          account.role ===
+          "mentor"
+        ) {
+
+          sessionStorage.setItem(
+            MENTOR_SESSION_KEY,
+            "true"
+          );
+
+        }
+
+
+        /* Admin session */
+
+        if (
+          account.role ===
+          "admin"
+        ) {
+
+          sessionStorage.setItem(
+            ADMIN_SESSION_KEY,
+            "true"
+          );
+
+        }
+
+
+        showMessage(
+          "Login successful. Redirecting...",
+          "success"
+        );
+
+
+        setTimeout(
+          () => {
+
+            window.location.href =
+              account.redirect;
+
+          },
+          500
+        );
+
+      }
+    );
+
+
+    /* =========================================================
+       EXISTING SESSION CHECK
+       ========================================================= */
+
+    function checkExistingSession() {
+
+      const role =
+        sessionStorage.getItem(
+          ROLE_KEY
+        );
+
+
+      const mentorLoggedIn =
+        sessionStorage.getItem(
+          MENTOR_SESSION_KEY
+        ) === "true";
+
+
+      const adminLoggedIn =
+        sessionStorage.getItem(
+          ADMIN_SESSION_KEY
+        ) === "true";
+
+
+      if (
+        role === "mentor" &&
+        mentorLoggedIn
+      ) {
+
+        window.location.replace(
+          "/mentor/"
+        );
+
+        return;
+
+      }
+
+
+      if (
+        role === "admin" &&
+        adminLoggedIn
+      ) {
+
+        window.location.replace(
+          "/admin/"
+        );
+
+        return;
+
+      }
+
+    }
+
+
+    /* =========================================================
+       INITIALIZE
+       ========================================================= */
+
+    selectRole(
+      "mentor"
+    );
+
+    checkExistingSession();
+
+
+  </script>
+
+</body>
+</html>
