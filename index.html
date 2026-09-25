@@ -2,22 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Learn • Create • Teach</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="theme-color"
+    content="#02060c"
+  >
 
   <meta
     name="description"
     content="Personal learning, teaching and course recording studio."
   >
 
+  <title>Learn • Create • Teach</title>
+
   <link
     rel="icon"
-    type="image/png"
     href="https://github.com/yourdocuments/masha.github.io/blob/main/logo.png?raw=true"
   >
 
   <style>
+
+    /* =========================================
+       RESET
+    ========================================= */
+
     * {
       margin: 0;
       padding: 0;
@@ -29,7 +42,6 @@
       --white: #ffffff;
       --muted: rgba(255,255,255,.66);
       --line: rgba(255,255,255,.12);
-      --glass: rgba(255,255,255,.07);
       --blue: #55b9ff;
       --purple: #8370ff;
     }
@@ -59,8 +71,9 @@
       text-decoration: none;
     }
 
+
     /* =========================================
-       BACKGROUND
+       PAGE BACKGROUND
     ========================================= */
 
     .page {
@@ -70,8 +83,8 @@
 
       background:
         linear-gradient(
-          rgba(2, 7, 15, .54),
-          rgba(2, 7, 15, .91)
+          rgba(2, 7, 15, .58),
+          rgba(2, 7, 15, .94)
         ),
         url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2200&q=85")
         center / cover fixed;
@@ -79,9 +92,12 @@
 
     .page::before {
       content: "";
+
       position: fixed;
       inset: 0;
+
       z-index: -1;
+
       pointer-events: none;
 
       background:
@@ -102,52 +118,73 @@
         );
     }
 
+
     /* =========================================
        NAVBAR
     ========================================= */
 
     .navbar {
       position: fixed;
+
       top: 0;
       left: 0;
       right: 0;
+
       z-index: 1000;
 
-      padding: 14px 5vw;
+      min-height: 120px;
+
+      padding:
+        10px
+        5vw;
 
       display: flex;
+
       align-items: center;
+
       justify-content: space-between;
 
-      background: rgba(2,6,12,.46);
+      background:
+        rgba(2,6,12,.48);
 
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      backdrop-filter:
+        blur(20px);
 
-      border-bottom: 1px solid rgba(255,255,255,.08);
+      -webkit-backdrop-filter:
+        blur(20px);
+
+      border-bottom:
+        1px solid rgba(255,255,255,.08);
     }
+
+
+    /* =========================================
+       BRAND / LOGO
+    ========================================= */
 
     .brand {
       display: flex;
+
       align-items: center;
+
+      flex-shrink: 0;
     }
 
-    /*
-      LOGO ONLY
-      No MashaLive / Personal Course Studio text
-    */
-
     .brand-logo {
-      width: 72px;
-      height: 72px;
-
-      object-fit: contain;
+      width: 100px;
+      height: 100px;
 
       display: block;
 
+      object-fit: contain;
+
       filter:
-        drop-shadow(0 10px 25px rgba(0,0,0,.35))
-        drop-shadow(0 0 18px rgba(85,185,255,.08));
+        drop-shadow(
+          0 10px 25px rgba(0,0,0,.35)
+        )
+        drop-shadow(
+          0 0 18px rgba(85,185,255,.08)
+        );
 
       transition:
         transform .25s ease,
@@ -158,32 +195,51 @@
       transform: scale(1.04);
 
       filter:
-        drop-shadow(0 12px 28px rgba(0,0,0,.4))
-        drop-shadow(0 0 25px rgba(85,185,255,.18));
+        drop-shadow(
+          0 12px 28px rgba(0,0,0,.4)
+        )
+        drop-shadow(
+          0 0 25px rgba(85,185,255,.18)
+        );
     }
+
+
+    /* =========================================
+       NAVIGATION BUTTONS
+    ========================================= */
 
     .nav-actions {
       display: flex;
+
       align-items: center;
+
       gap: 10px;
     }
 
     .nav-btn {
-      min-height: 42px;
-      padding: 0 17px;
+      min-height: 43px;
+
+      padding:
+        0 17px;
 
       display: inline-flex;
+
       align-items: center;
+
       justify-content: center;
 
-      border: 1px solid rgba(255,255,255,.13);
+      border:
+        1px solid rgba(255,255,255,.13);
+
       border-radius: 13px;
 
-      background: rgba(255,255,255,.06);
+      background:
+        rgba(255,255,255,.06);
 
       color: #fff;
 
       font-size: 13px;
+
       font-weight: 700;
 
       transition:
@@ -194,10 +250,14 @@
     }
 
     .nav-btn:hover {
-      transform: translateY(-2px);
+      transform:
+        translateY(-2px);
 
-      background: rgba(255,255,255,.11);
-      border-color: rgba(255,255,255,.22);
+      background:
+        rgba(255,255,255,.11);
+
+      border-color:
+        rgba(255,255,255,.22);
 
       box-shadow:
         0 10px 30px rgba(0,0,0,.25);
@@ -211,7 +271,8 @@
           rgba(122,92,255,.96)
         );
 
-      border-color: transparent;
+      border-color:
+        transparent;
 
       box-shadow:
         0 10px 30px rgba(70,125,255,.25);
@@ -222,6 +283,7 @@
         0 14px 38px rgba(70,125,255,.36);
     }
 
+
     /* =========================================
        HERO
     ========================================= */
@@ -230,17 +292,21 @@
       min-height: 100vh;
 
       padding:
-        155px
+        175px
         5vw
         90px;
 
       display: flex;
+
       align-items: center;
     }
 
     .hero-grid {
-      width: min(1250px, 100%);
-      margin: 0 auto;
+      width:
+        min(1250px, 100%);
+
+      margin:
+        0 auto;
 
       display: grid;
 
@@ -257,28 +323,46 @@
       max-width: 700px;
     }
 
+
+    /* =========================================
+       EYEBROW
+    ========================================= */
+
     .eyebrow {
       display: inline-flex;
+
       align-items: center;
+
       gap: 9px;
 
-      padding: 8px 13px;
+      padding:
+        8px 13px;
+
       margin-bottom: 25px;
 
-      border: 1px solid rgba(255,255,255,.12);
+      border:
+        1px solid rgba(255,255,255,.12);
+
       border-radius: 999px;
 
-      background: rgba(255,255,255,.06);
+      background:
+        rgba(255,255,255,.06);
 
-      backdrop-filter: blur(10px);
+      backdrop-filter:
+        blur(10px);
 
-      color: rgba(255,255,255,.76);
+      color:
+        rgba(255,255,255,.76);
 
       font-size: 11px;
+
       font-weight: 700;
 
-      letter-spacing: 1.2px;
-      text-transform: uppercase;
+      letter-spacing:
+        1.2px;
+
+      text-transform:
+        uppercase;
     }
 
     .eyebrow-dot {
@@ -287,22 +371,33 @@
 
       border-radius: 50%;
 
-      background: #65c6ff;
+      background:
+        #65c6ff;
 
       box-shadow:
         0 0 14px #65c6ff;
     }
 
+
+    /* =========================================
+       HERO TITLE
+    ========================================= */
+
     .hero h1 {
-      font-size: clamp(58px, 8vw, 110px);
+      font-size:
+        clamp(58px, 8vw, 110px);
 
-      line-height: .93;
+      line-height:
+        .93;
 
-      letter-spacing: -5px;
+      letter-spacing:
+        -5px;
 
-      font-weight: 900;
+      font-weight:
+        900;
 
-      margin-bottom: 28px;
+      margin-bottom:
+        28px;
 
       background:
         linear-gradient(
@@ -312,50 +407,76 @@
           #9b8cff 90%
         );
 
-      -webkit-background-clip: text;
-      background-clip: text;
+      -webkit-background-clip:
+        text;
 
-      color: transparent;
+      background-clip:
+        text;
+
+      color:
+        transparent;
     }
 
     .hero-subtitle {
-      font-size: 18px;
+      font-size:
+        18px;
 
-      color: rgba(255,255,255,.72);
+      color:
+        rgba(255,255,255,.72);
 
-      letter-spacing: .4px;
+      letter-spacing:
+        .4px;
 
-      margin-bottom: 34px;
+      margin-bottom:
+        34px;
     }
+
+
+    /* =========================================
+       HERO BUTTONS
+    ========================================= */
 
     .hero-actions {
       display: flex;
+
       flex-wrap: wrap;
+
       gap: 12px;
     }
 
     .hero-btn {
       min-height: 53px;
 
-      padding: 0 23px;
+      padding:
+        0 23px;
 
       display: inline-flex;
+
       align-items: center;
+
       justify-content: center;
+
       gap: 9px;
 
-      border-radius: 15px;
+      border-radius:
+        15px;
 
-      border: 1px solid rgba(255,255,255,.13);
+      border:
+        1px solid rgba(255,255,255,.13);
 
-      font-size: 14px;
-      font-weight: 800;
+      font-size:
+        14px;
 
-      transition: .25s ease;
+      font-weight:
+        800;
+
+      transition:
+        .25s ease;
     }
 
     .hero-btn:hover {
-      transform: translateY(-3px);
+      transform:
+        translateY(-3px);
     }
 
     .hero-btn.primary {
@@ -366,40 +487,49 @@
           #735eff
         );
 
-      border-color: transparent;
+      border-color:
+        transparent;
 
       box-shadow:
         0 16px 40px rgba(69,125,255,.28);
     }
 
     .hero-btn.secondary {
-      background: rgba(255,255,255,.06);
+      background:
+        rgba(255,255,255,.06);
 
-      backdrop-filter: blur(12px);
+      backdrop-filter:
+        blur(12px);
     }
 
     .hero-btn.secondary:hover {
-      background: rgba(255,255,255,.11);
+      background:
+        rgba(255,255,255,.11);
     }
 
+
     /* =========================================
-       SALAT CARD
+       SALAT SIDE
     ========================================= */
 
     .hero-side {
       display: flex;
+
       justify-content: center;
     }
 
     .salat-card {
-      width: min(100%, 430px);
+      width:
+        min(100%, 430px);
 
-      padding: 30px;
+      padding:
+        30px;
 
       border:
         1px solid rgba(255,255,255,.13);
 
-      border-radius: 30px;
+      border-radius:
+        30px;
 
       background:
         linear-gradient(
@@ -408,14 +538,18 @@
           rgba(255,255,255,.045)
         );
 
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
+      backdrop-filter:
+        blur(24px);
+
+      -webkit-backdrop-filter:
+        blur(24px);
 
       box-shadow:
         0 35px 90px rgba(0,0,0,.35),
         inset 0 1px 0 rgba(255,255,255,.09);
 
       position: relative;
+
       overflow: hidden;
     }
 
@@ -432,75 +566,118 @@
 
       border-radius: 50%;
 
-      background: rgba(91,177,255,.15);
+      background:
+        rgba(91,177,255,.15);
 
-      filter: blur(10px);
+      filter:
+        blur(10px);
     }
+
+
+    /* =========================================
+       CARD TOP
+    ========================================= */
 
     .card-top {
       display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
+
+      justify-content:
+        space-between;
+
+      align-items:
+        flex-start;
 
       gap: 15px;
 
-      margin-bottom: 30px;
+      margin-bottom:
+        30px;
 
       position: relative;
     }
 
     .card-title {
-      font-size: 20px;
-      font-weight: 800;
+      font-size:
+        20px;
+
+      font-weight:
+        800;
     }
 
     .card-small {
-      margin-top: 7px;
+      margin-top:
+        7px;
 
-      color: rgba(255,255,255,.52);
+      color:
+        rgba(255,255,255,.52);
 
-      font-size: 12px;
+      font-size:
+        12px;
     }
+
+
+    /* =========================================
+       LIVE
+    ========================================= */
 
     .live-pill {
       display: inline-flex;
+
       align-items: center;
+
       gap: 7px;
 
-      padding: 7px 10px;
+      padding:
+        7px 10px;
 
-      border-radius: 999px;
+      border-radius:
+        999px;
 
-      background: rgba(60,205,145,.1);
+      background:
+        rgba(60,205,145,.1);
 
       border:
         1px solid rgba(60,205,145,.2);
 
-      color: #82e6ba;
+      color:
+        #82e6ba;
 
-      font-size: 10px;
-      font-weight: 800;
+      font-size:
+        10px;
 
-      text-transform: uppercase;
-      letter-spacing: .7px;
+      font-weight:
+        800;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        .7px;
     }
 
     .live-dot {
       width: 6px;
       height: 6px;
 
-      border-radius: 50%;
+      border-radius:
+        50%;
 
-      background: #59e0a3;
+      background:
+        #59e0a3;
 
       box-shadow:
         0 0 10px #59e0a3;
     }
 
+
+    /* =========================================
+       PRAYER
+    ========================================= */
+
     .prayer-time {
       position: relative;
 
-      padding: 23px 0;
+      padding:
+        23px 0;
 
       border-top:
         1px solid rgba(255,255,255,.08);
@@ -508,69 +685,107 @@
 
     .prayer-row {
       display: flex;
-      justify-content: space-between;
-      align-items: center;
 
-      padding: 13px 0;
+      justify-content:
+        space-between;
 
-      color: rgba(255,255,255,.75);
+      align-items:
+        center;
+
+      padding:
+        13px 0;
+
+      color:
+        rgba(255,255,255,.75);
     }
 
     .prayer-row strong {
-      color: #fff;
-      font-size: 14px;
+      color:
+        #fff;
+
+      font-size:
+        14px;
     }
 
     .prayer-row span {
-      font-size: 14px;
-      font-weight: 700;
+      font-size:
+        14px;
+
+      font-weight:
+        700;
     }
+
+
+    /* =========================================
+       CARD NOTE
+    ========================================= */
 
     .card-note {
       position: relative;
 
-      margin-top: 18px;
+      margin-top:
+        18px;
 
-      padding: 13px 15px;
+      padding:
+        13px 15px;
 
-      border-radius: 15px;
+      border-radius:
+        15px;
 
-      background: rgba(0,0,0,.16);
+      background:
+        rgba(0,0,0,.16);
 
       border:
         1px solid rgba(255,255,255,.07);
 
-      color: rgba(255,255,255,.58);
+      color:
+        rgba(255,255,255,.58);
 
-      font-size: 11px;
+      font-size:
+        11px;
 
-      line-height: 1.6;
+      line-height:
+        1.6;
     }
+
 
     /* =========================================
        FEATURES
     ========================================= */
 
     .features {
-      padding: 30px 5vw 100px;
+      padding:
+        30px
+        5vw
+        100px;
     }
 
     .features-inner {
-      width: min(1250px, 100%);
-      margin: 0 auto;
+      width:
+        min(1250px, 100%);
+
+      margin:
+        0 auto;
     }
 
     .section-label {
-      margin-bottom: 20px;
+      margin-bottom:
+        20px;
 
-      color: rgba(255,255,255,.46);
+      color:
+        rgba(255,255,255,.46);
 
-      font-size: 11px;
-      font-weight: 800;
+      font-size:
+        11px;
 
-      letter-spacing: 1.4px;
+      font-weight:
+        800;
 
-      text-transform: uppercase;
+      letter-spacing:
+        1.4px;
+
+      text-transform:
+        uppercase;
     }
 
     .feature-grid {
@@ -579,22 +794,33 @@
       grid-template-columns:
         repeat(3, 1fr);
 
-      gap: 16px;
+      gap:
+        16px;
     }
 
+
+    /* =========================================
+       FEATURE CARD
+    ========================================= */
+
     .feature-card {
-      min-height: 190px;
+      min-height:
+        190px;
 
-      padding: 26px;
+      padding:
+        26px;
 
-      border-radius: 24px;
+      border-radius:
+        24px;
 
       border:
         1px solid rgba(255,255,255,.1);
 
-      background: rgba(255,255,255,.055);
+      background:
+        rgba(255,255,255,.055);
 
-      backdrop-filter: blur(15px);
+      backdrop-filter:
+        blur(15px);
 
       transition:
         transform .3s ease,
@@ -603,25 +829,37 @@
     }
 
     .feature-card:hover {
-      transform: translateY(-6px);
+      transform:
+        translateY(-6px);
 
-      background: rgba(255,255,255,.085);
+      background:
+        rgba(255,255,255,.085);
 
       border-color:
         rgba(255,255,255,.18);
     }
 
     .feature-icon {
-      width: 46px;
-      height: 46px;
+      width:
+        46px;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      height:
+        46px;
 
-      margin-bottom: 24px;
+      display:
+        flex;
 
-      border-radius: 14px;
+      align-items:
+        center;
+
+      justify-content:
+        center;
+
+      margin-bottom:
+        24px;
+
+      border-radius:
+        14px;
 
       background:
         linear-gradient(
@@ -633,28 +871,39 @@
       border:
         1px solid rgba(255,255,255,.1);
 
-      font-size: 20px;
+      font-size:
+        20px;
     }
 
     .feature-card h3 {
-      font-size: 17px;
-      margin-bottom: 8px;
+      font-size:
+        17px;
+
+      margin-bottom:
+        8px;
     }
 
     .feature-card p {
-      color: rgba(255,255,255,.54);
+      color:
+        rgba(255,255,255,.54);
 
-      font-size: 12px;
+      font-size:
+        12px;
 
-      line-height: 1.65;
+      line-height:
+        1.65;
     }
+
 
     /* =========================================
        FOOTER
     ========================================= */
 
     footer {
-      padding: 30px 5vw 40px;
+      padding:
+        30px
+        5vw
+        40px;
 
       border-top:
         1px solid rgba(255,255,255,.08);
@@ -664,86 +913,144 @@
     }
 
     .footer-inner {
-      width: min(1250px, 100%);
-      margin: 0 auto;
+      width:
+        min(1250px, 100%);
 
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      margin:
+        0 auto;
 
-      gap: 20px;
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      justify-content:
+        space-between;
+
+      gap:
+        20px;
     }
 
     .footer-brand {
-      display: flex;
-      align-items: center;
+      display:
+        flex;
+
+      align-items:
+        center;
     }
 
     .footer-logo {
-      width: 58px;
-      height: 58px;
+      width:
+        70px;
 
-      object-fit: contain;
+      height:
+        70px;
 
-      display: block;
+      object-fit:
+        contain;
+
+      display:
+        block;
+
+      filter:
+        drop-shadow(
+          0 8px 18px rgba(0,0,0,.28)
+        );
     }
 
     .footer-copy {
-      color: rgba(255,255,255,.4);
+      color:
+        rgba(255,255,255,.4);
 
-      font-size: 11px;
+      font-size:
+        11px;
     }
+
+
+    /* =========================================
+       TABLET
+    ========================================= */
+
+    @media (max-width: 900px) {
+
+      .navbar {
+        min-height:
+          108px;
+      }
+
+      .hero {
+        padding-top:
+          150px;
+      }
+
+      .hero-grid {
+        grid-template-columns:
+          1fr;
+
+        gap:
+          50px;
+      }
+
+      .hero-side {
+        justify-content:
+          flex-start;
+      }
+
+      .feature-grid {
+        grid-template-columns:
+          1fr;
+      }
+
+      .salat-card {
+        max-width:
+          520px;
+      }
+    }
+
 
     /* =========================================
        MOBILE
     ========================================= */
 
-    @media (max-width: 900px) {
-
-      .hero-grid {
-        grid-template-columns: 1fr;
-        gap: 50px;
-      }
-
-      .hero-side {
-        justify-content: flex-start;
-      }
-
-      .feature-grid {
-        grid-template-columns: 1fr;
-      }
-
-      .salat-card {
-        max-width: 520px;
-      }
-    }
-
     @media (max-width: 650px) {
 
       .navbar {
-        padding: 10px 16px;
+        min-height:
+          90px;
+
+        padding:
+          5px 16px;
       }
 
       .brand-logo {
-        width: 58px;
-        height: 58px;
+        width:
+          78px;
+
+        height:
+          78px;
       }
 
       .nav-actions {
-        gap: 6px;
+        gap:
+          6px;
       }
 
       .nav-btn {
-        min-height: 38px;
+        min-height:
+          38px;
 
-        padding: 0 11px;
+        padding:
+          0 11px;
 
-        font-size: 11px;
+        font-size:
+          11px;
       }
 
-      .nav-btn.mentor {
-        display: none;
-      }
+      /*
+        Mentor button remains available.
+        It is NOT hidden.
+      */
 
       .hero {
         padding:
@@ -756,24 +1063,31 @@
         font-size:
           clamp(52px, 17vw, 82px);
 
-        letter-spacing: -4px;
+        letter-spacing:
+          -4px;
       }
 
       .hero-subtitle {
-        font-size: 15px;
+        font-size:
+          15px;
       }
 
       .hero-actions {
-        flex-direction: column;
+        flex-direction:
+          column;
       }
 
       .hero-btn {
-        width: 100%;
+        width:
+          100%;
       }
 
       .salat-card {
-        padding: 23px;
-        border-radius: 24px;
+        padding:
+          23px;
+
+        border-radius:
+          24px;
       }
 
       .features {
@@ -784,19 +1098,72 @@
       }
 
       .feature-card {
-        min-height: auto;
+        min-height:
+          auto;
       }
 
       .footer-inner {
-        flex-direction: column;
-        align-items: flex-start;
+        flex-direction:
+          column;
+
+        align-items:
+          flex-start;
       }
 
       .footer-logo {
-        width: 52px;
-        height: 52px;
+        width:
+          70px;
+
+        height:
+          70px;
       }
     }
+
+
+    /* =========================================
+       SMALL MOBILE
+    ========================================= */
+
+    @media (max-width: 400px) {
+
+      .navbar {
+        padding-left:
+          10px;
+
+        padding-right:
+          10px;
+      }
+
+      .brand-logo {
+        width:
+          70px;
+
+        height:
+          70px;
+      }
+
+      .nav-btn {
+        padding:
+          0 8px;
+
+        font-size:
+          10px;
+      }
+
+      .hero {
+        padding-top:
+          110px;
+      }
+
+      .hero h1 {
+        font-size:
+          50px;
+
+        letter-spacing:
+          -3px;
+      }
+    }
+
 
     /* =========================================
        ANIMATION
@@ -820,47 +1187,65 @@
       }
 
       @keyframes heroIn {
+
         from {
           opacity: 0;
-          transform: translateY(25px);
+
+          transform:
+            translateY(25px);
         }
 
         to {
           opacity: 1;
-          transform: translateY(0);
+
+          transform:
+            translateY(0);
         }
       }
 
       @keyframes sideIn {
+
         from {
           opacity: 0;
-          transform: translateX(25px);
+
+          transform:
+            translateX(25px);
         }
 
         to {
           opacity: 1;
-          transform: translateX(0);
+
+          transform:
+            translateX(0);
         }
       }
 
       @keyframes fadeUp {
+
         from {
           opacity: 0;
-          transform: translateY(15px);
+
+          transform:
+            translateY(15px);
         }
 
         to {
           opacity: 1;
-          transform: translateY(0);
+
+          transform:
+            translateY(0);
         }
       }
     }
+
   </style>
 </head>
+
 
 <body>
 
   <div class="page">
+
 
     <!-- =====================================
          NAVBAR
@@ -868,20 +1253,22 @@
 
     <header class="navbar">
 
-      <!-- LOGO ONLY -->
-
-      <a href="./" class="brand">
+      <a
+        href="./"
+        class="brand"
+        aria-label="Home"
+      >
 
         <img
           class="brand-logo"
           src="https://github.com/yourdocuments/masha.github.io/blob/main/logo.png?raw=true"
-          alt="SNK Business Logo"
+          alt="SNK Business"
         >
 
       </a>
 
 
-      <div class="nav-actions">
+      <nav class="nav-actions">
 
         <a
           href="./login/"
@@ -892,14 +1279,15 @@
 
         <a
           href="./mentor/"
-          class="nav-btn primary mentor"
+          class="nav-btn primary"
         >
           Mentor Studio
         </a>
 
-      </div>
+      </nav>
 
     </header>
+
 
 
     <!-- =====================================
@@ -911,6 +1299,9 @@
       <section class="hero">
 
         <div class="hero-grid">
+
+
+          <!-- HERO LEFT -->
 
           <div class="hero-content">
 
@@ -924,16 +1315,14 @@
 
 
             <h1>
-              Create.
-              <br>
-              Teach.
-              <br>
+              Create.<br>
+              Teach.<br>
               Inspire.
             </h1>
 
 
             <p class="hero-subtitle">
-              Learn • Create • Teach
+              Learn • Create • Teach.
             </p>
 
 
@@ -960,8 +1349,9 @@
           </div>
 
 
+
           <!-- =================================
-               SALAT
+               SALAT CARD
           ================================== -->
 
           <div class="hero-side">
@@ -973,7 +1363,7 @@
                 <div>
 
                   <div class="card-title">
-                    Daily Salat
+                    Today's Salat
                   </div>
 
                   <div class="card-small">
@@ -987,7 +1377,7 @@
 
                   <span class="live-dot"></span>
 
-                  Live
+                  Today
 
                 </div>
 
@@ -998,22 +1388,22 @@
 
                 <div class="prayer-row">
                   <strong>Fajr</strong>
-                  <span>04:28 AM</span>
+                  <span>04:25 AM</span>
                 </div>
 
                 <div class="prayer-row">
                   <strong>Dhuhr</strong>
-                  <span>12:04 PM</span>
+                  <span>12:05 PM</span>
                 </div>
 
                 <div class="prayer-row">
                   <strong>Asr</strong>
-                  <span>04:29 PM</span>
+                  <span>04:25 PM</span>
                 </div>
 
                 <div class="prayer-row">
                   <strong>Maghrib</strong>
-                  <span>06:08 PM</span>
+                  <span>06:10 PM</span>
                 </div>
 
                 <div class="prayer-row">
@@ -1025,8 +1415,10 @@
 
 
               <div class="card-note">
-                Prayer times are shown as a simple studio
-                companion feature.
+
+                Prayer times are shown as a simple
+                daily reference for the studio home page.
+
               </div>
 
             </div>
@@ -1036,6 +1428,7 @@
         </div>
 
       </section>
+
 
 
       <!-- =====================================
@@ -1053,10 +1446,13 @@
 
           <div class="feature-grid">
 
-            <div class="feature-card">
+
+            <!-- CARD 1 -->
+
+            <article class="feature-card">
 
               <div class="feature-icon">
-                🎬
+                🎥
               </div>
 
               <h3>
@@ -1065,13 +1461,16 @@
 
               <p>
                 Create your own class and course
-                recordings in a focused studio environment.
+                recordings with a simple personal
+                studio workflow.
               </p>
 
-            </div>
+            </article>
 
 
-            <div class="feature-card">
+            <!-- CARD 2 -->
+
+            <article class="feature-card">
 
               <div class="feature-icon">
                 🎙️
@@ -1082,14 +1481,17 @@
               </h3>
 
               <p>
-                Manage your teaching screen, mentor camera,
-                slides and recorded class workflow.
+                Use the private Mentor Studio for
+                teaching, recording and creating
+                course content.
               </p>
 
-            </div>
+            </article>
 
 
-            <div class="feature-card">
+            <!-- CARD 3 -->
+
+            <article class="feature-card">
 
               <div class="feature-icon">
                 🕌
@@ -1100,11 +1502,13 @@
               </h3>
 
               <p>
-                Keep daily prayer information alongside
-                your personal learning and teaching studio.
+                Keep a simple daily prayer-time
+                reference available beside your
+                personal learning workspace.
               </p>
 
-            </div>
+            </article>
+
 
           </div>
 
@@ -1113,6 +1517,7 @@
       </section>
 
     </main>
+
 
 
     <!-- =====================================
@@ -1135,14 +1540,55 @@
 
 
         <div class="footer-copy">
-          Learn • Create • Teach
+          Learn • Create • Teach.
         </div>
 
       </div>
 
     </footer>
 
+
   </div>
+
+
+  <!-- =====================================
+       SIMPLE HOME SCRIPT
+  ====================================== -->
+
+  <script>
+
+    /*
+      Keep root page simple.
+      Login and Mentor are normal links.
+    */
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      function () {
+
+        const mentorLinks =
+          document.querySelectorAll(
+            'a[href="./mentor/"]'
+          );
+
+        mentorLinks.forEach(function (link) {
+
+          link.addEventListener(
+            "click",
+            function () {
+
+              window.location.href =
+                "./mentor/";
+
+            }
+          );
+
+        });
+
+      }
+    );
+
+  </script>
 
 </body>
 </html>
