@@ -9,6 +9,16 @@
   content="width=device-width, initial-scale=1.0"
 >
 
+<meta
+  name="theme-color"
+  content="#070a10"
+>
+
+<link
+  rel="manifest"
+  href="../manifest.json"
+>
+
 <title>Mentor Studio | Personal Course Studio</title>
 
 <link
@@ -661,6 +671,9 @@ a {
   user-select:
     none;
 
+  touch-action:
+    none;
+
 }
 
 
@@ -799,6 +812,9 @@ a {
 
   cursor:
     grab;
+
+  touch-action:
+    none;
 
 }
 
@@ -1628,7 +1644,10 @@ a {
 
     <div class="brand">
 
-      <div class="logo">
+      <div
+        class="logo"
+        id="studioLogo"
+      >
         CS
       </div>
 
@@ -1710,7 +1729,10 @@ a {
           id="welcomeScreen"
         >
 
-          <div class="welcome-logo">
+          <div
+            class="welcome-logo"
+            id="welcomeLogo"
+          >
             CS
           </div>
 
@@ -1975,7 +1997,7 @@ if (
 ) {
 
   window.location.replace(
-    "/login/"
+    "../login/"
   );
 
 }
@@ -1990,7 +2012,6 @@ const SETTINGS_KEY =
 
 const STUDENTS_KEY =
   "personalCourseStudioStudents";
-
 
 
 /* =========================================================
@@ -2020,7 +2041,6 @@ const defaultSettings = {
 };
 
 
-
 /* =========================================================
    ELEMENTS
    ========================================================= */
@@ -2033,6 +2053,16 @@ const studioName =
 const studioSubtitle =
   document.getElementById(
     "studioSubtitle"
+  );
+
+const studioLogo =
+  document.getElementById(
+    "studioLogo"
+  );
+
+const welcomeLogo =
+  document.getElementById(
+    "welcomeLogo"
   );
 
 const welcomeText =
@@ -2105,6 +2135,15 @@ const toast =
     "toast"
   );
 
+const playButton =
+  document.getElementById(
+    "playButton"
+  );
+
+const recordButton =
+  document.getElementById(
+    "recordButton"
+  );
 
 
 /* =========================================================
@@ -2140,7 +2179,6 @@ function showToast(text) {
     );
 
 }
-
 
 
 /* =========================================================
@@ -2196,25 +2234,13 @@ function loadSettings() {
     settings.selectedBrand;
 
 
-  const logo =
-    document.querySelector(
-      ".logo"
-    );
-
-  const welcomeLogo =
-    document.querySelector(
-      ".welcome-logo"
-    );
-
-
-  logo.textContent =
+  studioLogo.textContent =
     settings.studioLogo || "CS";
 
   welcomeLogo.textContent =
     settings.studioLogo || "CS";
 
 }
-
 
 
 /* =========================================================
@@ -2257,7 +2283,7 @@ function loadStudents() {
 
         No students added yet.
 
-        <br>
+        <br><br>
 
         Students added from
         Admin Panel will appear here.
@@ -2425,7 +2451,6 @@ function loadStudents() {
 }
 
 
-
 /* =========================================================
    INITIALS
    ========================================================= */
@@ -2433,7 +2458,9 @@ function loadStudents() {
 function getInitials(name) {
 
   if (!name) {
+
     return "?";
+
   }
 
 
@@ -2449,7 +2476,6 @@ function getInitials(name) {
     .join("");
 
 }
-
 
 
 /* =========================================================
@@ -2484,7 +2510,9 @@ document
 
 
           if (!file) {
+
             return;
+
           }
 
 
@@ -2523,7 +2551,6 @@ document
   );
 
 
-
 /* =========================================================
    MAIN VIDEO
    ========================================================= */
@@ -2556,7 +2583,9 @@ document
 
 
           if (!file) {
+
             return;
+
           }
 
 
@@ -2578,6 +2607,10 @@ document
             "none";
 
 
+          playButton.textContent =
+            "▶ Play";
+
+
           showToast(
             "Main video loaded"
           );
@@ -2589,7 +2622,6 @@ document
 
     }
   );
-
 
 
 /* =========================================================
@@ -2610,14 +2642,28 @@ document
 
       try {
 
-        if (!navigator.mediaDevices ||
-            !navigator.mediaDevices.getUserMedia) {
+        if (
+          !navigator.mediaDevices ||
+          !navigator.mediaDevices.getUserMedia
+        ) {
 
           showToast(
             "Camera is not supported in this browser."
           );
 
           return;
+
+        }
+
+
+        if (mentorStream) {
+
+          mentorStream
+            .getTracks()
+            .forEach(
+              track =>
+                track.stop()
+            );
 
         }
 
@@ -2660,7 +2706,6 @@ document
   );
 
 
-
 /* =========================================================
    CLEAR STAGE
    ========================================================= */
@@ -2678,8 +2723,12 @@ document
 
       mainVideo.pause();
 
-      mainVideo.src =
-        "";
+      mainVideo.removeAttribute(
+        "src"
+      );
+
+      mainVideo.load();
+
 
       mainImage.style.display =
         "none";
@@ -2691,6 +2740,10 @@ document
         "flex";
 
 
+      playButton.textContent =
+        "▶ Play";
+
+
       showToast(
         "Stage cleared"
       );
@@ -2699,59 +2752,60 @@ document
   );
 
 
-
 /* =========================================================
    PLAY / PAUSE
    ========================================================= */
 
-document
-  .getElementById(
-    "playButton"
-  )
-  .addEventListener(
-    "click",
-    () => {
+playButton.addEventListener(
+  "click",
+  () => {
+
+    if (
+      mainVideo.style.display !==
+      "none" &&
+      mainVideo.src
+    ) {
 
       if (
-        mainVideo.style.display !==
-        "none" &&
-        mainVideo.src
+        mainVideo.paused
       ) {
 
-        if (
-          mainVideo.paused
-        ) {
+        mainVideo.play();
 
-          mainVideo.play();
+        playButton.textContent =
+          "⏸ Pause";
 
-          document.getElementById(
-            "playButton"
-          ).textContent =
-            "⏸ Pause";
+      } else {
 
-        } else {
+        mainVideo.pause();
 
-          mainVideo.pause();
-
-          document.getElementById(
-            "playButton"
-          ).textContent =
-            "▶ Play";
-
-        }
-
-        return;
+        playButton.textContent =
+          "▶ Play";
 
       }
 
-
-      showToast(
-        "Load a main video first"
-      );
+      return;
 
     }
-  );
 
+
+    showToast(
+      "Load a main video first"
+    );
+
+  }
+);
+
+
+mainVideo.addEventListener(
+  "ended",
+  () => {
+
+    playButton.textContent =
+      "▶ Play";
+
+  }
+);
 
 
 /* =========================================================
@@ -2792,7 +2846,6 @@ document
   );
 
 
-
 /* =========================================================
    SCREEN RECORDING
    ========================================================= */
@@ -2804,160 +2857,219 @@ let recordedChunks =
   [];
 
 
-document
-  .getElementById(
-    "recordButton"
-  )
-  .addEventListener(
-    "click",
-    async () => {
+recordButton.addEventListener(
+  "click",
+  async () => {
 
-      if (recorder &&
-          recorder.state === "recording") {
+    if (
+      recorder &&
+      recorder.state === "recording"
+    ) {
 
-        recorder.stop();
+      recorder.stop();
+
+      return;
+
+    }
+
+
+    try {
+
+      if (
+        !navigator.mediaDevices ||
+        !navigator.mediaDevices.getDisplayMedia
+      ) {
+
+        showToast(
+          "Screen recording is not supported."
+        );
 
         return;
 
       }
 
 
-      try {
+      const stream =
+        await navigator.mediaDevices.getDisplayMedia({
 
-        const stream =
-          await navigator.mediaDevices.getDisplayMedia({
+          video: true,
 
-            video: true,
+          audio: true
 
-            audio: true
-
-          });
+        });
 
 
-        recordedChunks =
-          [];
+      recordedChunks =
+        [];
 
 
-        recorder =
-          new MediaRecorder(
-            stream,
-            {
-              mimeType:
-                "video/webm"
-            }
-          );
+      let mimeType =
+        "video/webm";
 
 
-        recorder.ondataavailable =
-          event => {
+      if (
+        MediaRecorder.isTypeSupported(
+          "video/webm;codecs=vp9"
+        )
+      ) {
 
-            if (
-              event.data.size > 0
-            ) {
+        mimeType =
+          "video/webm;codecs=vp9";
 
-              recordedChunks.push(
-                event.data
-              );
+      } else if (
+        MediaRecorder.isTypeSupported(
+          "video/webm"
+        )
+      ) {
 
-            }
-
-          };
-
-
-        recorder.onstop =
-          () => {
-
-            const blob =
-              new Blob(
-                recordedChunks,
-                {
-                  type:
-                    "video/webm"
-                }
-              );
-
-
-            const url =
-              URL.createObjectURL(
-                blob
-              );
-
-
-            const link =
-              document.createElement(
-                "a"
-              );
-
-
-            link.href =
-              url;
-
-            link.download =
-              "personal-course-recording-" +
-              Date.now() +
-              ".webm";
-
-
-            link.click();
-
-
-            URL.revokeObjectURL(
-              url
-            );
-
-
-            showToast(
-              "Recording saved"
-            );
-
-          };
-
-
-        stream
-          .getVideoTracks()[0]
-          .addEventListener(
-            "ended",
-            () => {
-
-              if (
-                recorder &&
-                recorder.state ===
-                "recording"
-              ) {
-
-                recorder.stop();
-
-              }
-
-            }
-          );
-
-
-        recorder.start();
-
-
-        document.getElementById(
-          "recordButton"
-        ).textContent =
-          "■ Stop Recording";
-
-
-        showToast(
-          "Screen recording started"
-        );
-
-
-      } catch {
-
-        showToast(
-          "Screen recording permission was cancelled."
-        );
+        mimeType =
+          "video/webm";
 
       }
 
-    }
-  );
 
+      recorder =
+        new MediaRecorder(
+          stream,
+          {
+            mimeType
+          }
+        );
+
+
+      recorder.ondataavailable =
+        event => {
+
+          if (
+            event.data &&
+            event.data.size > 0
+          ) {
+
+            recordedChunks.push(
+              event.data
+            );
+
+          }
+
+        };
+
+
+      recorder.onstop =
+        () => {
+
+          const blob =
+            new Blob(
+              recordedChunks,
+              {
+                type:
+                  "video/webm"
+              }
+            );
+
+
+          const url =
+            URL.createObjectURL(
+              blob
+            );
+
+
+          const link =
+            document.createElement(
+              "a"
+            );
+
+
+          link.href =
+            url;
+
+          link.download =
+            "personal-course-recording-" +
+            Date.now() +
+            ".webm";
+
+
+          document.body.appendChild(
+            link
+          );
+
+          link.click();
+
+          link.remove();
+
+
+          setTimeout(
+            () => {
+
+              URL.revokeObjectURL(
+                url
+              );
+
+            },
+            1000
+          );
+
+
+          stream
+            .getTracks()
+            .forEach(
+              track =>
+                track.stop()
+            );
+
+
+          recordButton.textContent =
+            "● Record";
+
+
+          showToast(
+            "Recording saved"
+          );
+
+        };
+
+
+      stream
+        .getVideoTracks()[0]
+        .addEventListener(
+          "ended",
+          () => {
+
+            if (
+              recorder &&
+              recorder.state ===
+              "recording"
+            ) {
+
+              recorder.stop();
+
+            }
+
+          }
+        );
+
+
+      recorder.start();
+
+
+      recordButton.textContent =
+        "■ Stop Recording";
+
+
+      showToast(
+        "Screen recording started"
+      );
+
+
+    } catch (error) {
+
+      showToast(
+        "Screen recording permission was cancelled."
+      );
+
+    }
+
+  }
+);
 
 
 /* =========================================================
@@ -2980,7 +3092,6 @@ document
   );
 
 
-
 /* =========================================================
    LOGOUT
    ========================================================= */
@@ -2992,6 +3103,19 @@ document
   .addEventListener(
     "click",
     () => {
+
+
+      if (mentorStream) {
+
+        mentorStream
+          .getTracks()
+          .forEach(
+            track =>
+              track.stop()
+          );
+
+      }
+
 
       sessionStorage.removeItem(
         "personalCourseStudioMentorLoggedIn"
@@ -3011,12 +3135,11 @@ document
 
 
       window.location.replace(
-        "/login/"
+        "../login/"
       );
 
     }
   );
-
 
 
 /* =========================================================
@@ -3104,7 +3227,9 @@ function makeDraggable(
   ) {
 
     if (!dragging) {
+
       return;
+
     }
 
 
@@ -3239,7 +3364,6 @@ makeDraggable(
 );
 
 
-
 /* =========================================================
    STORAGE SYNC
    ========================================================= */
@@ -3271,6 +3395,56 @@ window.addEventListener(
 );
 
 
+/* =========================================================
+   PAGE VISIBILITY
+   ========================================================= */
+
+document.addEventListener(
+  "visibilitychange",
+  () => {
+
+    if (
+      document.hidden &&
+      mentorStream
+    ) {
+
+      /*
+        Camera stays active so the mentor
+        can return to the studio without
+        restarting it unnecessarily.
+      */
+
+    }
+
+  }
+);
+
+
+/* =========================================================
+   PWA SERVICE WORKER
+   ========================================================= */
+
+if (
+  "serviceWorker" in navigator
+) {
+
+  window.addEventListener(
+    "load",
+    () => {
+
+      navigator.serviceWorker
+        .register(
+          "../sw.js"
+        )
+        .catch(
+          () => {}
+        );
+
+    }
+  );
+
+}
+
 
 /* =========================================================
    INITIAL LOAD
@@ -3279,7 +3453,6 @@ window.addEventListener(
 loadSettings();
 
 loadStudents();
-
 
 </script>
 
