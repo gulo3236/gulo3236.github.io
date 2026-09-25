@@ -1,1466 +1,1497 @@
 <!DOCTYPE html>
-<html lang="bn">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Mentor Studio | Personal Course Studio</title>
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Personal Course Studio</title>
+
+  <meta
+    name="description"
+    content="Personal Course Studio — Learn, Create, Teach."
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.googleapis.com"
+  >
+
+  <link
+    rel="preconnect"
+    href="https://fonts.gstatic.com"
+    crossorigin
+  >
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600;700&display=swap"
+    rel="stylesheet"
+  >
 
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+
+    /* =========================================================
+       PERSONAL COURSE STUDIO
+       CINEMATIC HOME PAGE
+       ========================================================= */
 
     :root {
-      --bg: #071018;
-      --bg-soft: #0c1621;
-      --panel: #0e1a26;
-      --panel-soft: rgba(255,255,255,.06);
-      --border: rgba(255,255,255,.10);
-      --text: #f7f9fb;
-      --muted: rgba(255,255,255,.58);
-      --gold: #f4bd55;
-      --green: #5ee39a;
-      --blue: #67b9ff;
-      --red: #ff6b6b;
+      --white: #ffffff;
+      --soft-white: rgba(255,255,255,.82);
+      --muted: rgba(255,255,255,.62);
+
+      --glass: rgba(10,14,24,.35);
+      --glass-strong: rgba(8,12,20,.58);
+
+      --border: rgba(255,255,255,.16);
+
+      --gold: #e8c875;
+      --gold-light: #ffe7a3;
+
+      --shadow:
+        0 25px 80px rgba(0,0,0,.45);
+
+      --transition:
+        cubic-bezier(.22,.61,.36,1);
     }
 
-    html,
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       width: 100%;
-      height: 100%;
-    }
-
-    body {
+      min-height: 100vh;
       overflow: hidden;
 
       font-family:
-        Inter,
-        "Segoe UI",
+        "Inter",
         Arial,
         sans-serif;
 
-      color: var(--text);
-      background:
-        radial-gradient(
-          circle at 20% 10%,
-          rgba(67,137,195,.10),
-          transparent 30%
-        ),
-        var(--bg);
+      background: #070a10;
+      color: var(--white);
     }
 
     button,
-    input {
+    a {
       font: inherit;
     }
 
     button {
-      cursor: pointer;
+      border: 0;
     }
 
-    /* =====================================================
-       TOPBAR
-    ===================================================== */
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+
+    /* =========================================================
+       CINEMATIC STAGE
+       ========================================================= */
+
+    .cinematic-page {
+      position: relative;
+
+      width: 100%;
+      height: 100vh;
+      min-height: 620px;
+
+      overflow: hidden;
+
+      background:
+        #080b12;
+    }
+
+
+    /* =========================================================
+       BACKGROUND SCENES
+       ========================================================= */
+
+    .scene-layer {
+      position: absolute;
+      inset: 0;
+
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+
+      opacity: 0;
+
+      transform:
+        scale(1.08);
+
+      transition:
+        opacity 1.8s var(--transition),
+        transform 9s ease;
+
+      z-index: 1;
+    }
+
+    .scene-layer.active {
+      opacity: 1;
+
+      transform:
+        scale(1);
+    }
+
+
+    /* =========================================================
+       SCENE IMAGES
+       ========================================================= */
+
+    .scene-sky {
+      background-image:
+        url("https://images.unsplash.com/photo-1499346030926-9a72daac6c63?auto=format&fit=crop&w=2200&q=90");
+    }
+
+    .scene-turkey {
+      background-image:
+        url("https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=2200&q=90");
+    }
+
+    .scene-saudi {
+      background-image:
+        url("https://images.unsplash.com/photo-1518684079-3c830dcef090?auto=format&fit=crop&w=2200&q=90");
+    }
+
+    .scene-makkah {
+      background-image:
+        url("https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=2200&q=90");
+    }
+
+    .scene-kaaba {
+      background-image:
+        url("https://images.unsplash.com/photo-1565552645632-d725f8bfc19a?auto=format&fit=crop&w=2200&q=90");
+    }
+
+
+    /* =========================================================
+       DARK CINEMATIC OVERLAY
+       ========================================================= */
+
+    .cinematic-overlay {
+      position: absolute;
+      inset: 0;
+
+      z-index: 2;
+
+      pointer-events: none;
+
+      background:
+        linear-gradient(
+          90deg,
+          rgba(2,5,12,.84) 0%,
+          rgba(2,5,12,.62) 34%,
+          rgba(2,5,12,.25) 68%,
+          rgba(2,5,12,.58) 100%
+        ),
+
+        linear-gradient(
+          180deg,
+          rgba(0,0,0,.48) 0%,
+          transparent 28%,
+          transparent 65%,
+          rgba(0,0,0,.76) 100%
+        );
+    }
+
+
+    /* =========================================================
+       CINEMATIC LIGHT
+       ========================================================= */
+
+    .light-glow {
+      position: absolute;
+
+      width: 650px;
+      height: 650px;
+
+      left: -250px;
+      top: -250px;
+
+      z-index: 3;
+
+      border-radius: 50%;
+
+      background:
+        radial-gradient(
+          circle,
+          rgba(255,224,145,.14),
+          transparent 68%
+        );
+
+      pointer-events: none;
+
+      animation:
+        glowMove 12s ease-in-out infinite alternate;
+    }
+
+    @keyframes glowMove {
+
+      0% {
+        transform:
+          translate3d(0,0,0);
+      }
+
+      100% {
+        transform:
+          translate3d(220px,130px,0);
+      }
+    }
+
+
+    /* =========================================================
+       PARTICLE / DUST EFFECT
+       ========================================================= */
+
+    .particles {
+      position: absolute;
+      inset: 0;
+
+      z-index: 4;
+
+      pointer-events: none;
+
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+
+      width: 3px;
+      height: 3px;
+
+      border-radius: 50%;
+
+      background:
+        rgba(255,255,255,.7);
+
+      box-shadow:
+        0 0 12px
+        rgba(255,255,255,.5);
+
+      animation:
+        floatParticle
+        linear infinite;
+    }
+
+    .particle:nth-child(1) {
+      left: 12%;
+      animation-duration: 13s;
+      animation-delay: -3s;
+    }
+
+    .particle:nth-child(2) {
+      left: 25%;
+      animation-duration: 17s;
+      animation-delay: -9s;
+    }
+
+    .particle:nth-child(3) {
+      left: 42%;
+      animation-duration: 12s;
+      animation-delay: -5s;
+    }
+
+    .particle:nth-child(4) {
+      left: 58%;
+      animation-duration: 19s;
+      animation-delay: -13s;
+    }
+
+    .particle:nth-child(5) {
+      left: 73%;
+      animation-duration: 15s;
+      animation-delay: -7s;
+    }
+
+    .particle:nth-child(6) {
+      left: 88%;
+      animation-duration: 18s;
+      animation-delay: -11s;
+    }
+
+    @keyframes floatParticle {
+
+      0% {
+        top: 110%;
+        opacity: 0;
+        transform: translateX(0);
+      }
+
+      15% {
+        opacity: .65;
+      }
+
+      80% {
+        opacity: .45;
+      }
+
+      100% {
+        top: -10%;
+        opacity: 0;
+        transform: translateX(80px);
+      }
+    }
+
+
+    /* =========================================================
+       NAVBAR
+       ========================================================= */
 
     .topbar {
-      height: 68px;
+      position: absolute;
+
+      top: 0;
+      left: 0;
+      right: 0;
+
+      z-index: 20;
+
+      height: 90px;
 
       display: flex;
       align-items: center;
       justify-content: space-between;
 
-      padding: 0 18px;
-
-      border-bottom: 1px solid var(--border);
-
-      background:
-        rgba(7,16,24,.94);
-
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-
-      position: relative;
-      z-index: 50;
+      padding:
+        0 5vw;
     }
 
-    .brand-left {
+    .brand {
       display: flex;
       align-items: center;
-      gap: 11px;
-
-      min-width: 0;
+      gap: 13px;
     }
 
-    .studio-logo {
-      width: 42px;
-      height: 42px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      flex-shrink: 0;
-
-      border-radius: 12px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #fff,
-          #dfe7ef
-        );
-
-      color: #15202a;
-
-      font-size: 14px;
-      font-weight: 900;
-    }
-
-    .studio-info {
-      min-width: 0;
-    }
-
-    .studio-info h1 {
-      font-size: 14px;
-      font-weight: 800;
-
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .studio-info p {
-      margin-top: 2px;
-
-      color: var(--muted);
-
-      font-size: 10px;
-
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .top-actions {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-
-    .top-btn {
-      height: 36px;
-
-      padding: 0 12px;
-
-      border: 1px solid var(--border);
-      border-radius: 10px;
-
-      background:
-        rgba(255,255,255,.05);
-
-      color:
-        rgba(255,255,255,.76);
-
-      font-size: 10px;
-
-      transition: .2s ease;
-    }
-
-    .top-btn:hover {
-      background:
-        rgba(255,255,255,.10);
-
-      color: #fff;
-    }
-
-    .mentor-pill {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-
-      height: 36px;
-
-      padding: 0 11px;
-
-      border-radius: 10px;
-
-      background:
-        rgba(94,227,154,.08);
-
-      border:
-        1px solid
-        rgba(94,227,154,.15);
-
-      color: #b7f3d0;
-
-      font-size: 10px;
-    }
-
-    .mentor-pill i {
-      width: 6px;
-      height: 6px;
-
-      border-radius: 50%;
-
-      background: var(--green);
-
-      box-shadow:
-        0 0 10px
-        rgba(94,227,154,.7);
-    }
-
-    /* =====================================================
-       WORKSPACE
-    ===================================================== */
-
-    .workspace {
-      height: calc(100vh - 68px);
+    .brand-logo {
+      width: 48px;
+      height: 48px;
 
       display: grid;
+      place-items: center;
 
-      grid-template-columns:
-        minmax(0, 1fr)
-        285px;
-
-      min-height: 0;
-    }
-
-    /* =====================================================
-       STAGE AREA
-    ===================================================== */
-
-    .stage-area {
-      min-width: 0;
-      min-height: 0;
-
-      display: flex;
-      flex-direction: column;
-
-      background:
-        #060e16;
-    }
-
-    .stage-wrap {
-      flex: 1;
-
-      min-height: 0;
-
-      padding: 16px;
-    }
-
-    .stage {
-      position: relative;
-
-      width: 100%;
-      height: 100%;
-
-      min-height: 300px;
-
-      overflow: hidden;
-
-      border:
-        1px solid
-        rgba(255,255,255,.10);
-
-      border-radius: 18px;
+      border-radius: 15px;
 
       background:
         linear-gradient(
-          135deg,
-          #10202d,
-          #07111b
+          145deg,
+          rgba(255,255,255,.20),
+          rgba(255,255,255,.05)
         );
-
-      box-shadow:
-        inset 0 0 0 1px
-        rgba(255,255,255,.02),
-        0 20px 60px
-        rgba(0,0,0,.28);
-    }
-
-    /* =====================================================
-       STAGE WELCOME
-    ===================================================== */
-
-    .welcome-screen {
-      position: absolute;
-      inset: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      padding: 30px;
-
-      text-align: center;
-
-      pointer-events: none;
-
-      transition: .2s ease;
-    }
-
-    .welcome-content {
-      max-width: 580px;
-    }
-
-    .welcome-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-
-      padding: 8px 12px;
-
-      border-radius: 999px;
-
-      background:
-        rgba(255,255,255,.07);
 
       border:
         1px solid
-        rgba(255,255,255,.10);
+        rgba(255,255,255,.20);
+
+      box-shadow:
+        0 10px 35px rgba(0,0,0,.25);
+
+      font-size: 17px;
+      font-weight: 800;
+
+      color: var(--gold-light);
+
+      backdrop-filter:
+        blur(14px);
+    }
+
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .brand-name {
+      font-size: 15px;
+      font-weight: 800;
+      letter-spacing: .3px;
+    }
+
+    .brand-subtitle {
+      font-size: 11px;
+      color: rgba(255,255,255,.58);
+      letter-spacing: .5px;
+    }
+
+
+    /* =========================================================
+       NAV RIGHT
+       ========================================================= */
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .nav-link {
+      padding:
+        11px 17px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.13);
+
+      background:
+        rgba(0,0,0,.18);
+
+      border-radius: 999px;
 
       color:
-        rgba(255,255,255,.65);
-
-      font-size: 10px;
-    }
-
-    .welcome-badge i {
-      width: 6px;
-      height: 6px;
-
-      border-radius: 50%;
-
-      background: var(--green);
-    }
-
-    .welcome-content h2 {
-      margin-top: 18px;
-
-      font-size:
-        clamp(28px, 4vw, 48px);
-
-      line-height: 1.08;
-
-      letter-spacing: -1.5px;
-    }
-
-    .welcome-content p {
-      margin-top: 12px;
-
-      color: var(--muted);
+        rgba(255,255,255,.78);
 
       font-size: 12px;
+      font-weight: 600;
 
-      line-height: 1.7;
+      backdrop-filter:
+        blur(14px);
+
+      transition:
+        .3s ease;
     }
 
-    /* =====================================================
-       MAIN MEDIA
-    ===================================================== */
+    .nav-link:hover {
+      background:
+        rgba(255,255,255,.12);
 
-    #mainImage,
-    #mainVideo {
-      position: absolute;
+      color: white;
 
-      inset: 0;
+      transform:
+        translateY(-2px);
+    }
+
+    .login-nav {
+      background:
+        rgba(255,255,255,.13);
+
+      color:
+        white;
+    }
+
+
+    /* =========================================================
+       MAIN CONTENT
+       ========================================================= */
+
+    .content {
+      position: relative;
+
+      z-index: 10;
 
       width: 100%;
       height: 100%;
 
-      object-fit: contain;
+      display: flex;
+      align-items: center;
 
-      display: none;
-
-      background: #050b11;
+      padding:
+        110px 8vw 90px;
     }
 
-    #mainImage {
-      object-fit: contain;
+    .hero {
+      max-width: 760px;
+
+      animation:
+        heroEnter 1.2s
+        var(--transition);
     }
 
-    /* =====================================================
-       DRAGGABLE BRAND BADGE
-    ===================================================== */
+    @keyframes heroEnter {
 
-    .brand-badge {
-      position: absolute;
+      from {
+        opacity: 0;
+        transform:
+          translateY(30px);
+      }
 
-      left: 22px;
-      bottom: 22px;
-
-      z-index: 20;
-
-      max-width: calc(100% - 44px);
-
-      padding: 9px 13px;
-
-      border-radius: 10px;
-
-      background:
-        rgba(0,0,0,.66);
-
-      border:
-        1px solid
-        rgba(255,255,255,.13);
-
-      color: #fff;
-
-      font-size: 11px;
-      font-weight: 800;
-
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-
-      cursor: grab;
-
-      user-select: none;
-
-      box-shadow:
-        0 8px 25px
-        rgba(0,0,0,.25);
+      to {
+        opacity: 1;
+        transform:
+          translateY(0);
+      }
     }
 
-    .brand-badge:active {
-      cursor: grabbing;
-    }
 
-    /* =====================================================
-       DRAGGABLE STAGE LABEL
-    ===================================================== */
+    /* =========================================================
+       LOCATION BADGE
+       ========================================================= */
 
-    .stage-label {
-      position: absolute;
+    .location-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
 
-      left: 50%;
-      top: 22px;
+      padding:
+        9px 14px;
 
-      transform:
-        translateX(-50%);
-
-      z-index: 20;
-
-      padding: 9px 15px;
-
-      border-radius: 999px;
-
-      background:
-        rgba(0,0,0,.52);
-
-      border:
-        1px solid
-        rgba(255,255,255,.13);
-
-      color: rgba(255,255,255,.90);
-
-      font-size: 10px;
-      font-weight: 700;
-
-      white-space: nowrap;
-
-      cursor: grab;
-      user-select: none;
-
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-
-    .stage-label:active {
-      cursor: grabbing;
-    }
-
-    /* =====================================================
-       MENTOR VIDEO
-    ===================================================== */
-
-    .mentor-card {
-      position: absolute;
-
-      right: 22px;
-      top: 22px;
-
-      z-index: 30;
-
-      width: 220px;
-      height: 145px;
-
-      overflow: hidden;
+      margin-bottom: 24px;
 
       border:
         1px solid
         rgba(255,255,255,.16);
 
-      border-radius: 15px;
+      border-radius: 999px;
 
       background:
-        #172534;
+        rgba(0,0,0,.24);
 
-      box-shadow:
-        0 16px 45px
-        rgba(0,0,0,.35);
-
-      cursor: grab;
-
-      user-select: none;
-    }
-
-    .mentor-card:active {
-      cursor: grabbing;
-    }
-
-    .mentor-video {
-      width: 100%;
-      height: 100%;
-
-      display: block;
-
-      object-fit: cover;
-
-      background:
-        linear-gradient(
-          135deg,
-          #203446,
-          #0d1721
-        );
-    }
-
-    .mentor-placeholder {
-      position: absolute;
-      inset: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      flex-direction: column;
-
-      gap: 8px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(28,48,65,.94),
-          rgba(8,17,26,.95)
-        );
+      backdrop-filter:
+        blur(15px);
 
       color:
-        rgba(255,255,255,.55);
+        rgba(255,255,255,.82);
 
-      font-size: 10px;
+      font-size: 11px;
+      font-weight: 600;
 
-      pointer-events: none;
+      letter-spacing:
+        1.4px;
+
+      text-transform:
+        uppercase;
     }
 
-    .mentor-placeholder-icon {
-      width: 42px;
-      height: 42px;
+    .location-dot {
+      width: 7px;
+      height: 7px;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 13px;
+      border-radius: 50%;
 
       background:
-        rgba(255,255,255,.08);
+        var(--gold);
 
-      color: rgba(255,255,255,.70);
-
-      font-size: 17px;
+      box-shadow:
+        0 0 15px
+        rgba(232,200,117,.8);
     }
 
-    /* =====================================================
-       BOTTOM TOOLBAR
-    ===================================================== */
 
-    .toolbar {
-      min-height: 72px;
+    /* =========================================================
+       TITLE
+       ========================================================= */
 
+    .hero-title {
+      font-family:
+        "Playfair Display",
+        Georgia,
+        serif;
+
+      font-size:
+        clamp(52px, 7vw, 100px);
+
+      line-height:
+        .96;
+
+      letter-spacing:
+        -3px;
+
+      font-weight:
+        600;
+
+      text-shadow:
+        0 15px 45px
+        rgba(0,0,0,.45);
+
+      margin-bottom:
+        25px;
+    }
+
+    .hero-title span {
+      display: block;
+
+      color:
+        var(--gold-light);
+
+      font-style:
+        italic;
+    }
+
+
+    /* =========================================================
+       DESCRIPTION
+       ========================================================= */
+
+    .hero-description {
+      max-width: 590px;
+
+      color:
+        rgba(255,255,255,.72);
+
+      font-size:
+        clamp(14px, 1.4vw, 17px);
+
+      line-height:
+        1.8;
+
+      margin-bottom:
+        34px;
+    }
+
+
+    /* =========================================================
+       BUTTONS
+       ========================================================= */
+
+    .hero-actions {
       display: flex;
       align-items: center;
-      gap: 7px;
+      flex-wrap: wrap;
 
-      padding:
-        10px 16px;
-
-      border-top:
-        1px solid
-        var(--border);
-
-      background:
-        #09131e;
+      gap: 13px;
     }
 
-    .tool-group {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
+    .primary-btn,
+    .secondary-btn {
 
-    .tool-btn {
-      height: 42px;
-
-      padding: 0 12px;
+      min-height: 54px;
 
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 7px;
 
-      border:
-        1px solid
-        rgba(255,255,255,.10);
+      padding:
+        0 23px;
 
-      border-radius: 10px;
+      border-radius:
+        15px;
 
-      background:
-        rgba(255,255,255,.055);
+      cursor:
+        pointer;
 
-      color:
-        rgba(255,255,255,.76);
+      transition:
+        .3s var(--transition);
 
-      font-size: 10px;
+      font-size:
+        13px;
 
-      white-space: nowrap;
-
-      transition: .2s ease;
+      font-weight:
+        700;
     }
 
-    .tool-btn:hover {
-      background:
-        rgba(255,255,255,.10);
-
-      color: #fff;
-    }
-
-    .tool-btn.primary {
-      background:
-        rgba(103,185,255,.10);
-
-      border-color:
-        rgba(103,185,255,.20);
-
-      color: #b9dcff;
-    }
-
-    .tool-btn.record {
-      background:
-        rgba(255,70,70,.08);
-
-      border-color:
-        rgba(255,90,90,.18);
-
-      color:
-        #ffaaaa;
-    }
-
-    .tool-btn.record.recording {
-      background:
-        rgba(255,70,70,.18);
-
-      color:
-        #fff;
-    }
-
-    .toolbar-spacer {
-      flex: 1;
-    }
-
-    .status {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-
-      color:
-        rgba(255,255,255,.45);
-
-      font-size: 9px;
-    }
-
-    .status-dot {
-      width: 6px;
-      height: 6px;
-
-      border-radius: 50%;
-
-      background:
-        rgba(255,255,255,.30);
-    }
-
-    .status-dot.active {
-      background:
-        var(--green);
-
-      box-shadow:
-        0 0 10px
-        rgba(94,227,154,.7);
-    }
-
-    /* =====================================================
-       RIGHT STUDENT PANEL
-    ===================================================== */
-
-    .student-panel {
-      min-height: 0;
-
-      display: flex;
-      flex-direction: column;
-
-      border-left:
-        1px solid
-        var(--border);
-
-      background:
-        #0a141f;
-    }
-
-    .student-head {
-      padding: 20px 18px 16px;
-
-      border-bottom:
-        1px solid
-        var(--border);
-    }
-
-    .student-title-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 10px;
-    }
-
-    .student-title-row h2 {
-      font-size: 15px;
-    }
-
-    .student-count {
-      min-width: 28px;
-      height: 25px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      padding: 0 8px;
-
-      border-radius: 8px;
-
-      background:
-        rgba(103,185,255,.10);
-
-      color:
-        #a9d6ff;
-
-      font-size: 10px;
-      font-weight: 800;
-    }
-
-    .student-subtitle {
-      margin-top: 6px;
-
-      color: var(--muted);
-
-      font-size: 9px;
-    }
-
-    .student-list {
-      flex: 1;
-
-      min-height: 0;
-
-      overflow-y: auto;
-
-      padding: 10px;
-    }
-
-    .student-list::-webkit-scrollbar {
-      width: 5px;
-    }
-
-    .student-list::-webkit-scrollbar-thumb {
-      background:
-        rgba(255,255,255,.10);
-
-      border-radius: 10px;
-    }
-
-    .student-item {
-      display: flex;
-      align-items: center;
-
-      gap: 10px;
-
-      padding: 10px;
-
-      margin-bottom: 6px;
-
-      border:
-        1px solid
-        rgba(255,255,255,.07);
-
-      border-radius: 12px;
-
-      background:
-        rgba(255,255,255,.035);
-
-      transition: .2s ease;
-    }
-
-    .student-item:hover {
-      background:
-        rgba(255,255,255,.065);
-    }
-
-    .student-avatar {
-      width: 39px;
-      height: 39px;
-
-      flex-shrink: 0;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      overflow: hidden;
-
-      border-radius: 11px;
+    .primary-btn {
 
       background:
         linear-gradient(
           135deg,
-          #38516a,
-          #172735
+          #fff,
+          #e9e4d5
         );
 
       color:
-        rgba(255,255,255,.84);
-
-      font-size: 10px;
-      font-weight: 800;
-    }
-
-    .student-avatar img {
-      width: 100%;
-      height: 100%;
-
-      object-fit: cover;
-    }
-
-    .student-info {
-      min-width: 0;
-
-      flex: 1;
-    }
-
-    .student-name {
-      display: block;
-
-      color:
-        rgba(255,255,255,.88);
-
-      font-size: 11px;
-      font-weight: 700;
-
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .student-status {
-      display: flex;
-      align-items: center;
-      gap: 5px;
-
-      margin-top: 4px;
-
-      color:
-        rgba(255,255,255,.42);
-
-      font-size: 9px;
-    }
-
-    .student-status-dot {
-      width: 6px;
-      height: 6px;
-
-      border-radius: 50%;
-
-      background:
-        rgba(255,255,255,.30);
-    }
-
-    .student-status-dot.online {
-      background: var(--green);
-
-      box-shadow:
-        0 0 8px
-        rgba(94,227,154,.55);
-    }
-
-    .student-status-dot.busy {
-      background: var(--gold);
-
-      box-shadow:
-        0 0 8px
-        rgba(244,189,85,.45);
-    }
-
-    .student-status-dot.offline {
-      background:
-        rgba(255,255,255,.28);
-    }
-
-    .empty-students {
-      padding: 35px 15px;
-
-      text-align: center;
-
-      color:
-        rgba(255,255,255,.36);
-
-      font-size: 10px;
-      line-height: 1.7;
-    }
-
-    .student-footer {
-      padding: 13px;
-
-      border-top:
-        1px solid
-        var(--border);
-    }
-
-    .student-footer-note {
-      padding: 10px;
-
-      border-radius: 10px;
-
-      background:
-        rgba(255,255,255,.035);
-
-      color:
-        rgba(255,255,255,.38);
-
-      font-size: 9px;
-
-      line-height: 1.5;
-
-      text-align: center;
-    }
-
-    /* =====================================================
-       TOAST
-    ===================================================== */
-
-    .toast {
-      position: fixed;
-
-      right: 20px;
-      bottom: 90px;
-
-      z-index: 200;
-
-      max-width: 330px;
-
-      padding: 12px 15px;
-
-      border:
-        1px solid
-        rgba(255,255,255,.12);
-
-      border-radius: 11px;
-
-      background:
-        rgba(7,16,24,.94);
-
-      color: #fff;
-
-      font-size: 10px;
+        #11141a;
 
       box-shadow:
         0 15px 40px
-        rgba(0,0,0,.35);
+        rgba(0,0,0,.30);
+    }
 
-      opacity: 0;
+    .primary-btn:hover {
+      transform:
+        translateY(-4px);
+
+      box-shadow:
+        0 20px 50px
+        rgba(0,0,0,.42);
+    }
+
+    .secondary-btn {
+
+      border:
+        1px solid
+        rgba(255,255,255,.18);
+
+      background:
+        rgba(255,255,255,.08);
+
+      color:
+        white;
+
+      backdrop-filter:
+        blur(14px);
+    }
+
+    .secondary-btn:hover {
+
+      background:
+        rgba(255,255,255,.14);
 
       transform:
-        translateY(10px);
-
-      pointer-events: none;
-
-      transition: .25s ease;
+        translateY(-4px);
     }
 
-    .toast.show {
-      opacity: 1;
+
+    /* =========================================================
+       ENTRANCE PANEL
+       ========================================================= */
+
+    .entrance-panel {
+
+      position: absolute;
+
+      right: 5vw;
+      bottom: 8vh;
+
+      z-index: 15;
+
+      width:
+        270px;
+
+      padding:
+        20px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.13);
+
+      border-radius:
+        22px;
+
+      background:
+        rgba(5,8,15,.38);
+
+      backdrop-filter:
+        blur(20px);
+
+      box-shadow:
+        var(--shadow);
+    }
+
+    .entrance-title {
+
+      font-size:
+        11px;
+
+      font-weight:
+        700;
+
+      text-transform:
+        uppercase;
+
+      letter-spacing:
+        1.5px;
+
+      color:
+        rgba(255,255,255,.50);
+
+      margin-bottom:
+        13px;
+    }
+
+    .entrance-grid {
+
+      display:
+        grid;
+
+      grid-template-columns:
+        1fr 1fr;
+
+      gap:
+        9px;
+    }
+
+    .entrance-item {
+
+      min-height:
+        76px;
+
+      display:
+        flex;
+
+      flex-direction:
+        column;
+
+      justify-content:
+        center;
+
+      gap:
+        5px;
+
+      padding:
+        12px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.10);
+
+      border-radius:
+        15px;
+
+      background:
+        rgba(255,255,255,.055);
+
+      transition:
+        .3s ease;
+    }
+
+    .entrance-item:hover {
 
       transform:
-        translateY(0);
+        translateY(-3px);
+
+      background:
+        rgba(255,255,255,.11);
     }
 
-    /* =====================================================
-       HIDDEN FILE INPUTS
-    ===================================================== */
+    .entrance-icon {
 
-    .hidden-file {
-      display: none;
+      font-size:
+        18px;
     }
 
-    /* =====================================================
+    .entrance-name {
+
+      font-size:
+        11px;
+
+      font-weight:
+        700;
+    }
+
+    .entrance-desc {
+
+      font-size:
+        9px;
+
+      color:
+        rgba(255,255,255,.45);
+    }
+
+
+    /* =========================================================
+       SCENE CONTROLS
+       ========================================================= */
+
+    .scene-controls {
+
+      position:
+        absolute;
+
+      left:
+        8vw;
+
+      bottom:
+        45px;
+
+      z-index:
+        20;
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        12px;
+    }
+
+    .scene-dots {
+
+      display:
+        flex;
+
+      align-items:
+        center;
+
+      gap:
+        7px;
+    }
+
+    .scene-dot {
+
+      width:
+        7px;
+
+      height:
+        7px;
+
+      border-radius:
+        50%;
+
+      border:
+        0;
+
+      background:
+        rgba(255,255,255,.30);
+
+      cursor:
+        pointer;
+
+      transition:
+        .35s ease;
+    }
+
+    .scene-dot.active {
+
+      width:
+        26px;
+
+      border-radius:
+        999px;
+
+      background:
+        var(--gold-light);
+
+      box-shadow:
+        0 0 15px
+        rgba(255,231,163,.45);
+    }
+
+    .scene-counter {
+
+      color:
+        rgba(255,255,255,.55);
+
+      font-size:
+        10px;
+
+      letter-spacing:
+        1px;
+
+      margin-left:
+        5px;
+    }
+
+
+    /* =========================================================
+       BOTTOM LINE
+       ========================================================= */
+
+    .bottom-line {
+
+      position:
+        absolute;
+
+      left:
+        0;
+
+      bottom:
+        0;
+
+      z-index:
+        16;
+
+      width:
+        100%;
+
+      height:
+        3px;
+
+      background:
+        rgba(255,255,255,.10);
+    }
+
+    .progress-line {
+
+      height:
+        100%;
+
+      width:
+        0%;
+
+      background:
+        var(--gold);
+
+      box-shadow:
+        0 0 14px
+        rgba(232,200,117,.65);
+
+      transition:
+        width .1s linear;
+    }
+
+
+    /* =========================================================
+       SOUND BUTTON
+       ========================================================= */
+
+    .sound-button {
+
+      position:
+        absolute;
+
+      right:
+        5vw;
+
+      bottom:
+        45px;
+
+      z-index:
+        20;
+
+      width:
+        40px;
+
+      height:
+        40px;
+
+      border:
+        1px solid
+        rgba(255,255,255,.15);
+
+      border-radius:
+        50%;
+
+      background:
+        rgba(0,0,0,.25);
+
+      color:
+        white;
+
+      cursor:
+        pointer;
+
+      backdrop-filter:
+        blur(12px);
+
+      transition:
+        .3s ease;
+    }
+
+    .sound-button:hover {
+
+      background:
+        rgba(255,255,255,.12);
+
+      transform:
+        scale(1.08);
+    }
+
+
+    /* =========================================================
        RESPONSIVE
-    ===================================================== */
+       ========================================================= */
 
     @media (max-width: 900px) {
 
-      .workspace {
-        grid-template-columns:
-          minmax(0, 1fr);
+      .topbar {
+        padding:
+          0 5vw;
       }
 
-      .student-panel {
-        display: none;
+      .nav-link:not(.login-nav) {
+        display:
+          none;
       }
 
-      .mentor-card {
-        width: 190px;
-        height: 125px;
+      .content {
+        padding:
+          110px 7vw 180px;
+      }
+
+      .hero {
+        max-width:
+          650px;
+      }
+
+      .entrance-panel {
+
+        right:
+          5vw;
+
+        bottom:
+          18px;
+
+        width:
+          245px;
+      }
+
+      .scene-controls {
+        left:
+          7vw;
+
+        bottom:
+          35px;
+      }
+
+      .sound-button {
+        bottom:
+          35px;
       }
     }
+
 
     @media (max-width: 650px) {
 
+      .cinematic-page {
+        min-height:
+          700px;
+      }
+
       .topbar {
-        height: 60px;
-
-        padding:
-          0 10px;
-      }
-
-      .workspace {
         height:
-          calc(100vh - 60px);
+          75px;
       }
 
-      .studio-info p {
-        display: none;
+      .brand-logo {
+        width:
+          42px;
+
+        height:
+          42px;
+
+        border-radius:
+          13px;
       }
 
-      .top-btn {
-        width: 36px;
-
-        padding: 0;
-
-        font-size: 0;
+      .brand-name {
+        font-size:
+          13px;
       }
 
-      .top-btn::before {
-        font-size: 14px;
+      .brand-subtitle {
+        font-size:
+          9px;
       }
 
-      #settingsBtn::before {
-        content: "⚙";
+      .login-nav {
+        padding:
+          9px 13px;
+
+        font-size:
+          10px;
       }
 
-      #logoutBtn::before {
-        content: "↪";
-      }
+      .content {
 
-      .mentor-pill {
-        display: none;
-      }
-
-      .stage-wrap {
-        padding: 8px;
-      }
-
-      .toolbar {
-        min-height: 62px;
+        align-items:
+          flex-start;
 
         padding:
-          7px 8px;
-
-        overflow-x: auto;
-
-        scrollbar-width: none;
+          145px 6vw 240px;
       }
 
-      .toolbar::-webkit-scrollbar {
-        display: none;
+      .hero-title {
+
+        font-size:
+          clamp(47px, 14vw, 72px);
+
+        letter-spacing:
+          -2px;
       }
 
-      .tool-btn {
-        height: 38px;
+      .hero-description {
 
-        padding:
-          0 10px;
-      }
+        font-size:
+          13px;
 
-      .toolbar-spacer {
-        display: none;
-      }
-
-      .status {
-        display: none;
-      }
-
-      .mentor-card {
-        right: 12px;
-        top: 12px;
-
-        width: 145px;
-        height: 98px;
-      }
-
-      .brand-badge {
-        left: 12px;
-        bottom: 12px;
-      }
-
-      .stage-label {
-        top: 12px;
+        line-height:
+          1.7;
 
         max-width:
-          calc(100% - 170px);
+          450px;
+      }
 
-        overflow: hidden;
-        text-overflow: ellipsis;
+      .hero-actions {
+
+        width:
+          100%;
+      }
+
+      .primary-btn,
+      .secondary-btn {
+
+        min-height:
+          49px;
+
+        padding:
+          0 17px;
+
+        font-size:
+          11px;
+      }
+
+      .entrance-panel {
+
+        left:
+          6vw;
+
+        right:
+          6vw;
+
+        bottom:
+          62px;
+
+        width:
+          auto;
+
+        padding:
+          13px;
+      }
+
+      .entrance-grid {
+
+        grid-template-columns:
+          1fr 1fr;
+      }
+
+      .entrance-item {
+
+        min-height:
+          61px;
+      }
+
+      .scene-controls {
+
+        left:
+          6vw;
+
+        bottom:
+          22px;
+      }
+
+      .sound-button {
+
+        right:
+          6vw;
+
+        bottom:
+          17px;
+
+        width:
+          36px;
+
+        height:
+          36px;
       }
     }
 
+
     @media (max-width: 420px) {
 
-      .studio-logo {
-        width: 36px;
-        height: 36px;
+      .brand-subtitle {
+        display:
+          none;
       }
 
-      .studio-info h1 {
-        max-width: 150px;
+      .location-badge {
+        font-size:
+          9px;
       }
 
-      .welcome-content h2 {
-        font-size: 26px;
+      .hero-title {
+        font-size:
+          45px;
       }
 
-      .mentor-card {
-        width: 120px;
-        height: 82px;
+      .hero-actions {
+        gap:
+          8px;
       }
 
-      .stage-label {
-        max-width:
-          calc(100% - 145px);
-
-        font-size: 8px;
+      .primary-btn,
+      .secondary-btn {
+        flex:
+          1;
       }
     }
 
   </style>
 </head>
 
+
 <body>
 
-  <!-- =====================================================
-       TOPBAR
-  ====================================================== -->
 
-  <header class="topbar">
+  <!-- =======================================================
+       CINEMATIC HOME
+       ======================================================= -->
 
-    <div class="brand-left">
+  <main class="cinematic-page">
 
-      <div
-        class="studio-logo"
-        id="studioLogo">
-        CS
-      </div>
 
-      <div class="studio-info">
+    <!-- =====================================================
+         BACKGROUND SCENES
+         ===================================================== -->
 
-        <h1 id="studioName">
-          Personal Course Studio
+    <div
+      class="scene-layer scene-sky active"
+      data-scene="sky"
+    ></div>
+
+    <div
+      class="scene-layer scene-turkey"
+      data-scene="turkey"
+    ></div>
+
+    <div
+      class="scene-layer scene-saudi"
+      data-scene="saudi"
+    ></div>
+
+    <div
+      class="scene-layer scene-makkah"
+      data-scene="makkah"
+    ></div>
+
+    <div
+      class="scene-layer scene-kaaba"
+      data-scene="kaaba"
+    ></div>
+
+
+    <!-- =====================================================
+         CINEMATIC OVERLAY
+         ===================================================== -->
+
+    <div class="cinematic-overlay"></div>
+
+    <div class="light-glow"></div>
+
+
+    <!-- =====================================================
+         PARTICLES
+         ===================================================== -->
+
+    <div class="particles">
+
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+      <span class="particle"></span>
+
+    </div>
+
+
+    <!-- =====================================================
+         TOP NAV
+         ===================================================== -->
+
+    <header class="topbar">
+
+      <a
+        href="/"
+        class="brand"
+      >
+
+        <div class="brand-logo">
+          CS
+        </div>
+
+        <div class="brand-text">
+
+          <div class="brand-name">
+            Personal Course Studio
+          </div>
+
+          <div class="brand-subtitle">
+            Learn • Create • Teach
+          </div>
+
+        </div>
+
+      </a>
+
+
+      <nav class="nav-actions">
+
+        <a
+          href="/mentor/"
+          class="nav-link"
+        >
+          Mentor
+        </a>
+
+        <a
+          href="/admin/"
+          class="nav-link"
+        >
+          Admin
+        </a>
+
+        <a
+          href="/login/"
+          class="nav-link login-nav"
+        >
+          Login
+        </a>
+
+      </nav>
+
+    </header>
+
+
+    <!-- =====================================================
+         MAIN HERO
+         ===================================================== -->
+
+    <section class="content">
+
+      <div class="hero">
+
+
+        <div class="location-badge">
+
+          <span class="location-dot"></span>
+
+          <span id="sceneLocation">
+            Endless Sky
+          </span>
+
+        </div>
+
+
+        <h1
+          class="hero-title"
+          id="heroTitle"
+        >
+
+          Learn.
+
+          <span>
+            Create.
+          </span>
+
+          Teach.
+
         </h1>
 
-        <p id="studioSubtitle">
-          নিজের ক্লাস ও কোর্স ভিডিও তৈরির জন্য
+
+        <p
+          class="hero-description"
+          id="heroDescription"
+        >
+
+          A private cinematic workspace designed
+          for creating beautiful classes, course
+          recordings and learning experiences.
+
         </p>
 
-      </div>
 
-    </div>
-
-
-    <div class="top-actions">
-
-      <div class="mentor-pill">
-
-        <i></i>
-
-        Mentor Mode
-
-      </div>
-
-
-      <button
-        class="top-btn"
-        id="settingsBtn"
-        type="button">
-
-        Settings
-
-      </button>
-
-
-      <button
-        class="top-btn"
-        id="logoutBtn"
-        type="button">
-
-        Logout
-
-      </button>
-
-    </div>
-
-  </header>
-
-
-  <!-- =====================================================
-       WORKSPACE
-  ====================================================== -->
-
-  <main class="workspace">
-
-
-    <!-- ===================================================
-         STAGE
-    ==================================================== -->
-
-    <section class="stage-area">
-
-
-      <div class="stage-wrap">
-
-        <div
-          class="stage"
-          id="stage">
-
-
-          <!-- WELCOME -->
-
-          <div
-            class="welcome-screen"
-            id="welcomeScreen">
-
-            <div class="welcome-content">
-
-              <div class="welcome-badge">
-
-                <i></i>
-
-                Mentor Studio Ready
-
-              </div>
-
-
-              <h2 id="welcomeText">
-                আপনার ক্লাস শুরু করার জন্য প্রস্তুত?
-              </h2>
-
-
-              <p>
-                Slide, image অথবা main video
-                যোগ করে আপনার class recording শুরু করুন।
-              </p>
-
-            </div>
-
-          </div>
-
-
-          <!-- MAIN IMAGE -->
-
-          <img
-            id="mainImage"
-            alt="Main course content">
-
-
-          <!-- MAIN VIDEO -->
-
-          <video
-            id="mainVideo"
-            controls
-            playsinline>
-          </video>
-
-
-          <!-- STAGE LABEL -->
-
-          <div
-            class="stage-label"
-            id="stageLabel">
-
-            Shah Neil Khan / USHA.AI
-
-          </div>
-
-
-          <!-- BRAND BADGE -->
-
-          <div
-            class="brand-badge"
-            id="brandBadge">
-
-            Shah Neil Khan / USHA.AI
-
-          </div>
-
-
-          <!-- MENTOR VIDEO -->
-
-          <div
-            class="mentor-card"
-            id="mentorCard">
-
-            <video
-              class="mentor-video"
-              id="mentorVideo"
-              autoplay
-              muted
-              playsinline>
-            </video>
-
-
-            <div
-              class="mentor-placeholder"
-              id="mentorPlaceholder">
-
-              <div class="mentor-placeholder-icon">
-                ◉
-              </div>
-
-              <span>
-                Mentor Video
-              </span>
-
-            </div>
-
-          </div>
-
-
-        </div>
-
-      </div>
-
-
-      <!-- =================================================
-           TOOLBAR
-      ================================================== -->
-
-      <div class="toolbar">
-
-
-        <div class="tool-group">
-
-          <button
-            class="tool-btn primary"
-            id="imageBtn"
-            type="button">
-
-            🖼
-            Slide / Image
-
-          </button>
-
-
-          <button
-            class="tool-btn"
-            id="mainVideoBtn"
-            type="button">
-
-            ▶
-            Main Video
-
-          </button>
-
-
-          <button
-            class="tool-btn"
-            id="mentorVideoBtn"
-            type="button">
-
-            ◉
-            Mentor Video
-
-          </button>
-
-        </div>
-
-
-        <div class="tool-group">
-
-          <button
-            class="tool-btn"
-            id="clearBtn"
-            type="button">
-
-            ✕
-            Clear
-
-          </button>
-
-
-          <button
-            class="tool-btn"
-            id="playBtn"
-            type="button">
-
-            ▶
-            Play
-
-          </button>
-
-
-          <button
-            class="tool-btn"
-            id="fullscreenBtn"
-            type="button">
-
-            ⛶
-            Fullscreen
-
-          </button>
-
-
-          <button
-            class="tool-btn record"
-            id="recordBtn"
-            type="button">
-
-            ●
-            Record
-
-          </button>
-
-        </div>
-
-
-        <div class="toolbar-spacer"></div>
-
-
-        <div class="status">
-
-          <span
-            class="status-dot"
-            id="statusDot">
-          </span>
-
-          <span id="statusText">
-            Studio Ready
-          </span>
+        <div class="hero-actions">
+
+          <a
+            href="/login/"
+            class="primary-btn"
+          >
+            Enter Studio
+            <span style="margin-left:8px;">
+              →
+            </span>
+          </a>
+
+          <a
+            href="/mentor/"
+            class="secondary-btn"
+          >
+            Mentor Studio
+          </a>
 
         </div>
 
@@ -1469,1803 +1500,644 @@
     </section>
 
 
-    <!-- ===================================================
-         STUDENT PANEL
-    ==================================================== -->
+    <!-- =====================================================
+         MENTOR / ADMIN ENTRANCE
+         ===================================================== -->
 
-    <aside class="student-panel">
+    <aside class="entrance-panel">
+
+      <div class="entrance-title">
+        Studio Entrance
+      </div>
+
+      <div class="entrance-grid">
 
 
-      <div class="student-head">
+        <a
+          href="/mentor/"
+          class="entrance-item"
+        >
 
-        <div class="student-title-row">
-
-          <h2 id="zoomTitle">
-            Zoom Demo
-          </h2>
-
-          <div
-            class="student-count"
-            id="studentCount">
-
-            0
-
+          <div class="entrance-icon">
+            🎓
           </div>
 
-        </div>
+          <div class="entrance-name">
+            Mentor
+          </div>
+
+          <div class="entrance-desc">
+            Course Studio
+          </div>
+
+        </a>
 
 
-        <p class="student-subtitle">
-          Students managed from Admin Panel
-        </p>
+        <a
+          href="/admin/"
+          class="entrance-item"
+        >
 
-      </div>
+          <div class="entrance-icon">
+            ⚙️
+          </div>
 
+          <div class="entrance-name">
+            Admin
+          </div>
 
-      <div
-        class="student-list"
-        id="studentList">
+          <div class="entrance-desc">
+            Control Panel
+          </div>
 
-      </div>
+        </a>
 
-
-      <div class="student-footer">
-
-        <div class="student-footer-note">
-
-          Student information is synced from
-          your Admin Panel.
-
-        </div>
 
       </div>
 
     </aside>
 
+
+    <!-- =====================================================
+         SCENE CONTROLS
+         ===================================================== -->
+
+    <div class="scene-controls">
+
+      <div class="scene-dots">
+
+        <button
+          class="scene-dot active"
+          data-index="0"
+          aria-label="Sky"
+        ></button>
+
+        <button
+          class="scene-dot"
+          data-index="1"
+          aria-label="Turkey"
+        ></button>
+
+        <button
+          class="scene-dot"
+          data-index="2"
+          aria-label="Saudi Arabia"
+        ></button>
+
+        <button
+          class="scene-dot"
+          data-index="3"
+          aria-label="Makkah"
+        ></button>
+
+        <button
+          class="scene-dot"
+          data-index="4"
+          aria-label="Kaaba"
+        ></button>
+
+      </div>
+
+      <div
+        class="scene-counter"
+        id="sceneCounter"
+      >
+        01 / 05
+      </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         SOUND / AMBIENCE BUTTON
+         ===================================================== -->
+
+    <button
+      class="sound-button"
+      id="soundButton"
+      aria-label="Toggle ambience"
+      title="Ambient sound"
+    >
+      🔇
+    </button>
+
+
+    <!-- =====================================================
+         PROGRESS
+         ===================================================== -->
+
+    <div class="bottom-line">
+
+      <div
+        class="progress-line"
+        id="progressLine"
+      ></div>
+
+    </div>
+
+
   </main>
 
-
-  <!-- =====================================================
-       FILE INPUTS
-  ====================================================== -->
-
-  <input
-    type="file"
-    class="hidden-file"
-    id="imageInput"
-    accept="image/*">
-
-
-  <input
-    type="file"
-    class="hidden-file"
-    id="mainVideoInput"
-    accept="video/*">
-
-
-  <input
-    type="file"
-    class="hidden-file"
-    id="mentorVideoInput"
-    accept="video/*">
-
-
-  <!-- =====================================================
-       TOAST
-  ====================================================== -->
-
-  <div
-    class="toast"
-    id="toast">
-  </div>
 
 
   <script>
 
-    /* =====================================================
-       MENTOR SESSION PROTECTION
-    ===================================================== */
-
-    const MENTOR_SESSION_KEY =
-      "personalCourseStudioMentorLoggedIn";
-
-    const ROLE_KEY =
-      "personalCourseStudioRole";
+    /* =========================================================
+       PERSONAL COURSE STUDIO
+       CINEMATIC SCENE ENGINE
+       ========================================================= */
 
 
-    const mentorLoggedIn =
-      sessionStorage.getItem(
-        MENTOR_SESSION_KEY
-      ) === "true";
+    const scenes = [
+
+      {
+        location: "Endless Sky",
+
+        title: "Learn.",
+
+        highlight: "Create.",
+
+        description:
+          "A quiet beginning beneath an endless sky. Your private studio for creating beautiful learning experiences."
+      },
+
+      {
+        location: "Cappadocia, Türkiye",
+
+        title: "Dream.",
+
+        highlight: "Explore.",
+
+        description:
+          "Inspired by the timeless landscapes of Türkiye, where every horizon feels like the beginning of a new journey."
+      },
+
+      {
+        location: "Saudi Arabia",
+
+        title: "Focus.",
+
+        highlight: "Build.",
+
+        description:
+          "A calm cinematic atmosphere inspired by the landscapes and architecture of Saudi Arabia."
+      },
+
+      {
+        location: "Makkah",
+
+        title: "Learn.",
+
+        highlight: "Reflect.",
+
+        description:
+          "A peaceful visual journey inspired by Makkah and its timeless atmosphere."
+      },
+
+      {
+        location: "The Kaaba",
+
+        title: "Teach.",
+
+        highlight: "Inspire.",
+
+        description:
+          "Create meaningful classes and share knowledge from a workspace designed around your teaching journey."
+      }
+
+    ];
 
 
-    const currentRole =
-      sessionStorage.getItem(
-        ROLE_KEY
+    const sceneLayers =
+      document.querySelectorAll(
+        ".scene-layer"
+      );
+
+    const sceneDots =
+      document.querySelectorAll(
+        ".scene-dot"
+      );
+
+    const sceneLocation =
+      document.getElementById(
+        "sceneLocation"
+      );
+
+    const heroTitle =
+      document.getElementById(
+        "heroTitle"
+      );
+
+    const heroDescription =
+      document.getElementById(
+        "heroDescription"
+      );
+
+    const sceneCounter =
+      document.getElementById(
+        "sceneCounter"
+      );
+
+    const progressLine =
+      document.getElementById(
+        "progressLine"
       );
 
 
-    /*
-      IMPORTANT:
-      Only Mentor can enter index.html.
-    */
+    let currentScene = 0;
 
-    if (
-      !mentorLoggedIn ||
-      currentRole !== "mentor"
+    let sceneTimer = null;
+
+    let progressTimer = null;
+
+    const SCENE_DURATION =
+      8000;
+
+
+    /* =========================================================
+       UPDATE SCENE
+       ========================================================= */
+
+    function updateScene(
+      index,
+      restartTimer = true
     ) {
 
-      window.location.replace(
-        "login.html"
-      );
-
-    }
-
-
-    /* =====================================================
-       STORAGE KEYS
-    ===================================================== */
-
-    const SETTINGS_KEY =
-      "personalCourseStudioSettings";
-
-    const BRANDS_KEY =
-      "personalCourseStudioBrands";
-
-    const STUDENTS_KEY =
-      "personalCourseStudioStudents";
-
-
-    /* =====================================================
-       DEFAULT SETTINGS
-    ===================================================== */
-
-    const defaultSettings = {
-
-      studioName:
-        "Personal Course Studio",
-
-      studioSubtitle:
-        "নিজের ক্লাস ও কোর্স ভিডিও তৈরির জন্য",
-
-      studioLogo:
-        "CS",
-
-      selectedBrand:
-        "Shah Neil Khan / USHA.AI",
-
-      zoomTitle:
-        "Zoom Demo",
-
-      welcomeText:
-        "আপনার ক্লাস শুরু করার জন্য প্রস্তুত?"
-
-    };
-
-
-    /* =====================================================
-       ELEMENTS
-    ===================================================== */
-
-    const studio =
-      document.getElementById(
-        "stage"
-      );
-
-    const welcomeScreen =
-      document.getElementById(
-        "welcomeScreen"
-      );
-
-    const mainImage =
-      document.getElementById(
-        "mainImage"
-      );
-
-    const mainVideo =
-      document.getElementById(
-        "mainVideo"
-      );
-
-    const mentorVideo =
-      document.getElementById(
-        "mentorVideo"
-      );
-
-    const mentorPlaceholder =
-      document.getElementById(
-        "mentorPlaceholder"
-      );
-
-    const imageInput =
-      document.getElementById(
-        "imageInput"
-      );
-
-    const mainVideoInput =
-      document.getElementById(
-        "mainVideoInput"
-      );
-
-    const mentorVideoInput =
-      document.getElementById(
-        "mentorVideoInput"
-      );
-
-    const stageLabel =
-      document.getElementById(
-        "stageLabel"
-      );
-
-    const brandBadge =
-      document.getElementById(
-        "brandBadge"
-      );
-
-    const mentorCard =
-      document.getElementById(
-        "mentorCard"
-      );
-
-
-    /* =====================================================
-       LOAD SETTINGS
-    ===================================================== */
-
-    function loadSettings() {
-
-      let settings = {};
-
-      try {
-
-        settings =
-          JSON.parse(
-            localStorage.getItem(
-              SETTINGS_KEY
-            )
-          ) || {};
-
-      } catch (error) {
-
-        settings = {};
-
-      }
-
-
-      settings = {
-        ...defaultSettings,
-        ...settings
-      };
-
-
-      document.getElementById(
-        "studioName"
-      ).textContent =
-        settings.studioName;
-
-
-      document.getElementById(
-        "studioSubtitle"
-      ).textContent =
-        settings.studioSubtitle;
-
-
-      document.getElementById(
-        "studioLogo"
-      ).textContent =
-        settings.studioLogo;
-
-
-      document.getElementById(
-        "zoomTitle"
-      ).textContent =
-        settings.zoomTitle;
-
-
-      document.getElementById(
-        "welcomeText"
-      ).textContent =
-        settings.welcomeText;
-
-
-      /*
-        Admin-selected brand is used
-        in both draggable labels.
-      */
-
-      stageLabel.textContent =
-        settings.selectedBrand;
-
-
-      brandBadge.textContent =
-        settings.selectedBrand;
-
-    }
-
-
-    /* =====================================================
-       LOAD STUDENTS
-    ===================================================== */
-
-    function loadStudents() {
-
-      let students = [];
-
-
-      try {
-
-        students =
-          JSON.parse(
-            localStorage.getItem(
-              STUDENTS_KEY
-            )
-          ) || [];
-
-      } catch (error) {
-
-        students = [];
-
-      }
-
-
-      if (!Array.isArray(students)) {
-
-        students = [];
-
-      }
-
-
-      renderStudents(students);
-
-    }
-
-
-    /* =====================================================
-       STUDENT RENDER
-    ===================================================== */
-
-    function renderStudents(students) {
-
-      const list =
-        document.getElementById(
-          "studentList"
-        );
-
-      const count =
-        document.getElementById(
-          "studentCount"
-        );
-
-
-      count.textContent =
-        students.length;
-
-
-      if (!students.length) {
-
-        list.innerHTML = `
-
-          <div class="empty-students">
-
-            No students added yet.<br><br>
-
-            Add students from the
-            Admin Panel.
-
-          </div>
-
-        `;
-
+      if (
+        index < 0 ||
+        index >= scenes.length
+      ) {
         return;
-
       }
 
 
-      list.innerHTML =
-        students
-          .map(
-            student =>
-              createStudentHTML(student)
-          )
-          .join("");
+      currentScene = index;
 
-    }
 
+      const scene =
+        scenes[index];
 
-    /* =====================================================
-       STUDENT HTML
-    ===================================================== */
 
-    function createStudentHTML(student) {
+      /* Background */
 
-      const name =
-        escapeHtml(
-          student.name ||
-          "Student"
-        );
+      sceneLayers.forEach(
+        (layer, layerIndex) => {
 
-
-      const status =
-        normalizeStatus(
-          student.status
-        );
-
-
-      const statusLabel =
-        getStatusLabel(status);
-
-
-      const avatar =
-        student.photo
-          ? `
-            <div class="student-avatar">
-              <img
-                src="${student.photo}"
-                alt="${name}">
-            </div>
-          `
-          : `
-            <div class="student-avatar">
-              ${getInitials(
-                student.name ||
-                "Student"
-              )}
-            </div>
-          `;
-
-
-      return `
-
-        <div class="student-item">
-
-          ${avatar}
-
-          <div class="student-info">
-
-            <span class="student-name">
-              ${name}
-            </span>
-
-            <div class="student-status">
-
-              <span
-                class="student-status-dot ${status}">
-              </span>
-
-              <span>
-                ${statusLabel}
-              </span>
-
-            </div>
-
-          </div>
-
-        </div>
-
-      `;
-
-    }
-
-
-    /* =====================================================
-       STATUS
-    ===================================================== */
-
-    function normalizeStatus(status) {
-
-      const value =
-        String(
-          status || ""
-        ).toLowerCase();
-
-
-      if (
-        value === "online"
-      ) {
-
-        return "online";
-
-      }
-
-
-      if (
-        value === "busy"
-      ) {
-
-        return "busy";
-
-      }
-
-
-      return "offline";
-
-    }
-
-
-    function getStatusLabel(status) {
-
-      if (
-        status === "online"
-      ) {
-
-        return "Online";
-
-      }
-
-
-      if (
-        status === "busy"
-      ) {
-
-        return "Busy";
-
-      }
-
-
-      return "Offline";
-
-    }
-
-
-    /* =====================================================
-       INITIALS
-    ===================================================== */
-
-    function getInitials(name) {
-
-      const parts =
-        String(name)
-          .trim()
-          .split(/\s+/)
-          .filter(Boolean);
-
-
-      if (!parts.length) {
-
-        return "ST";
-
-      }
-
-
-      if (
-        parts.length === 1
-      ) {
-
-        return parts[0]
-          .substring(0, 2)
-          .toUpperCase();
-
-      }
-
-
-      return (
-        parts[0][0] +
-        parts[parts.length - 1][0]
-      ).toUpperCase();
-
-    }
-
-
-    /* =====================================================
-       ESCAPE HTML
-    ===================================================== */
-
-    function escapeHtml(value) {
-
-      return String(value)
-        .replace(
-          /&/g,
-          "&amp;"
-        )
-        .replace(
-          /</g,
-          "&lt;"
-        )
-        .replace(
-          />/g,
-          "&gt;"
-        )
-        .replace(
-          /"/g,
-          "&quot;"
-        )
-        .replace(
-          /'/g,
-          "&#039;"
-        );
-
-    }
-
-
-    /* =====================================================
-       IMAGE UPLOAD
-    ===================================================== */
-
-    document.getElementById(
-      "imageBtn"
-    ).addEventListener(
-      "click",
-      () => {
-
-        imageInput.click();
-
-      }
-    );
-
-
-    imageInput.addEventListener(
-      "change",
-      event => {
-
-        const file =
-          event.target.files[0];
-
-
-        if (!file) {
-          return;
-        }
-
-
-        const url =
-          URL.createObjectURL(file);
-
-
-        mainImage.src =
-          url;
-
-
-        mainImage.style.display =
-          "block";
-
-
-        mainVideo.style.display =
-          "none";
-
-
-        welcomeScreen.style.display =
-          "none";
-
-
-        updateStatus(
-          "Slide / Image loaded",
-          true
-        );
-
-      }
-    );
-
-
-    /* =====================================================
-       MAIN VIDEO UPLOAD
-    ===================================================== */
-
-    document.getElementById(
-      "mainVideoBtn"
-    ).addEventListener(
-      "click",
-      () => {
-
-        mainVideoInput.click();
-
-      }
-    );
-
-
-    mainVideoInput.addEventListener(
-      "change",
-      event => {
-
-        const file =
-          event.target.files[0];
-
-
-        if (!file) {
-          return;
-        }
-
-
-        const url =
-          URL.createObjectURL(file);
-
-
-        mainVideo.src =
-          url;
-
-
-        mainVideo.style.display =
-          "block";
-
-
-        mainImage.style.display =
-          "none";
-
-
-        welcomeScreen.style.display =
-          "none";
-
-
-        updateStatus(
-          "Main video loaded",
-          true
-        );
-
-      }
-    );
-
-
-    /* =====================================================
-       MENTOR VIDEO
-    ===================================================== */
-
-    document.getElementById(
-      "mentorVideoBtn"
-    ).addEventListener(
-      "click",
-      () => {
-
-        mentorVideoInput.click();
-
-      }
-    );
-
-
-    mentorVideoInput.addEventListener(
-      "change",
-      event => {
-
-        const file =
-          event.target.files[0];
-
-
-        if (!file) {
-          return;
-        }
-
-
-        const url =
-          URL.createObjectURL(file);
-
-
-        mentorVideo.src =
-          url;
-
-
-        mentorVideo.style.display =
-          "block";
-
-
-        mentorPlaceholder.style.display =
-          "none";
-
-
-        mentorVideo
-          .play()
-          .catch(
-            () => {}
-          );
-
-
-        updateStatus(
-          "Mentor video loaded",
-          true
-        );
-
-      }
-    );
-
-
-    /* =====================================================
-       CLEAR
-    ===================================================== */
-
-    document.getElementById(
-      "clearBtn"
-    ).addEventListener(
-      "click",
-      () => {
-
-        mainImage.removeAttribute(
-          "src"
-        );
-
-        mainVideo.pause();
-
-        mainVideo.removeAttribute(
-          "src"
-        );
-
-        mainImage.style.display =
-          "none";
-
-        mainVideo.style.display =
-          "none";
-
-        welcomeScreen.style.display =
-          "flex";
-
-
-        updateStatus(
-          "Studio Ready",
-          false
-        );
-
-      }
-    );
-
-
-    /* =====================================================
-       PLAY / PAUSE
-    ===================================================== */
-
-    document.getElementById(
-      "playBtn"
-    ).addEventListener(
-      "click",
-      () => {
-
-        if (
-          mainVideo.style.display !==
-          "none" &&
-          mainVideo.src
-        ) {
-
-          if (
-            mainVideo.paused
-          ) {
-
-            mainVideo
-              .play()
-              .then(
-                () => {
-                  document.getElementById(
-                    "playBtn"
-                  ).innerHTML =
-                    "⏸ Pause";
-                }
-              )
-              .catch(
-                () => {}
-              );
-
-          } else {
-
-            mainVideo.pause();
-
-            document.getElementById(
-              "playBtn"
-            ).innerHTML =
-              "▶ Play";
-
-          }
-
-          return;
-
-        }
-
-
-        if (
-          mentorVideo.src
-        ) {
-
-          if (
-            mentorVideo.paused
-          ) {
-
-            mentorVideo
-              .play()
-              .catch(
-                () => {}
-              );
-
-          } else {
-
-            mentorVideo.pause();
-
-          }
-
-          return;
-
-        }
-
-
-        showToast(
-          "First add a Main Video."
-        );
-
-      }
-    );
-
-
-    mainVideo.addEventListener(
-      "play",
-      () => {
-
-        document.getElementById(
-          "playBtn"
-        ).innerHTML =
-          "⏸ Pause";
-
-      }
-    );
-
-
-    mainVideo.addEventListener(
-      "pause",
-      () => {
-
-        document.getElementById(
-          "playBtn"
-        ).innerHTML =
-          "▶ Play";
-
-      }
-    );
-
-
-    /* =====================================================
-       FULLSCREEN
-    ===================================================== */
-
-    document.getElementById(
-      "fullscreenBtn"
-    ).addEventListener(
-      "click",
-      async () => {
-
-        try {
-
-          if (
-            !document.fullscreenElement
-          ) {
-
-            await studio.requestFullscreen();
-
-          } else {
-
-            await document.exitFullscreen();
-
-          }
-
-        } catch (error) {
-
-          showToast(
-            "Fullscreen is not available."
+          layer.classList.toggle(
+            "active",
+            layerIndex === index
           );
 
         }
+      );
+
+
+      /* Dots */
+
+      sceneDots.forEach(
+        (dot, dotIndex) => {
+
+          dot.classList.toggle(
+            "active",
+            dotIndex === index
+          );
+
+        }
+      );
+
+
+      /* Text */
+
+      sceneLocation.textContent =
+        scene.location;
+
+
+      heroTitle.innerHTML =
+        scene.title +
+        "<span>" +
+        scene.highlight +
+        "</span>" +
+        "Teach.";
+
+
+      heroDescription.textContent =
+        scene.description;
+
+
+      /* Counter */
+
+      sceneCounter.textContent =
+        String(index + 1).padStart(2, "0") +
+        " / " +
+        String(scenes.length).padStart(2, "0");
+
+
+      /* Restart progress */
+
+      if (restartTimer) {
+
+        startSceneTimer();
 
       }
-    );
-
-
-    /* =====================================================
-       STATUS
-    ===================================================== */
-
-    function updateStatus(
-      text,
-      active
-    ) {
-
-      document.getElementById(
-        "statusText"
-      ).textContent =
-        text;
-
-
-      document.getElementById(
-        "statusDot"
-      ).classList.toggle(
-        "active",
-        Boolean(active)
-      );
 
     }
 
 
-    /* =====================================================
-       TOAST
-    ===================================================== */
+    /* =========================================================
+       SCENE TIMER
+       ========================================================= */
 
-    const toast =
-      document.getElementById(
-        "toast"
-      );
+    function startSceneTimer() {
 
+      clearTimeout(sceneTimer);
 
-    let toastTimer;
+      clearInterval(progressTimer);
 
 
-    function showToast(text) {
-
-      clearTimeout(
-        toastTimer
-      );
+      progressLine.style.width =
+        "0%";
 
 
-      toast.textContent =
-        text;
+      let startedAt =
+        Date.now();
 
 
-      toast.classList.add(
-        "show"
-      );
+      progressTimer =
+        setInterval(() => {
+
+          const elapsed =
+            Date.now() -
+            startedAt;
 
 
-      toastTimer =
-        setTimeout(
+          let percentage =
+            (elapsed /
+              SCENE_DURATION) *
+            100;
+
+
+          if (percentage > 100) {
+            percentage = 100;
+          }
+
+
+          progressLine.style.width =
+            percentage + "%";
+
+        }, 50);
+
+
+      sceneTimer =
+        setTimeout(() => {
+
+          clearInterval(
+            progressTimer
+          );
+
+
+          const nextScene =
+            (currentScene + 1) %
+            scenes.length;
+
+
+          updateScene(
+            nextScene,
+            true
+          );
+
+        }, SCENE_DURATION);
+
+    }
+
+
+    /* =========================================================
+       DOT NAVIGATION
+       ========================================================= */
+
+    sceneDots.forEach(
+      (dot) => {
+
+        dot.addEventListener(
+          "click",
           () => {
 
-            toast.classList.remove(
-              "show"
-            );
-
-          },
-          2600
-        );
-
-    }
-
-
-    /* =====================================================
-       DRAGGABLE ELEMENT
-    ===================================================== */
-
-    function makeDraggable(
-      element,
-      boundary
-    ) {
-
-      let dragging = false;
-
-      let startX = 0;
-      let startY = 0;
-
-      let startLeft = 0;
-      let startTop = 0;
-
-
-      function pointerDown(
-        event
-      ) {
-
-        /*
-          Do not interfere with
-          video controls.
-        */
-
-        if (
-          event.target.closest(
-            "video"
-          )
-        ) {
-
-          /*
-            Mentor card itself is draggable,
-            but clicking directly on the
-            video should still work normally
-            when possible.
-          */
-
-        }
-
-
-        dragging = true;
-
-
-        const point =
-          getPoint(event);
-
-
-        const elementRect =
-          element.getBoundingClientRect();
-
-        const boundaryRect =
-          boundary.getBoundingClientRect();
-
-
-        startX =
-          point.x;
-
-        startY =
-          point.y;
-
-
-        startLeft =
-          elementRect.left -
-          boundaryRect.left;
-
-        startTop =
-          elementRect.top -
-          boundaryRect.top;
-
-
-        element.style.left =
-          startLeft + "px";
-
-        element.style.top =
-          startTop + "px";
-
-
-        element.style.right =
-          "auto";
-
-        element.style.bottom =
-          "auto";
-
-
-        if (
-          element === stageLabel
-        ) {
-
-          element.style.transform =
-            "none";
-
-        }
-
-
-        document.addEventListener(
-          "mousemove",
-          pointerMove
-        );
-
-        document.addEventListener(
-          "mouseup",
-          pointerUp
-        );
-
-
-        document.addEventListener(
-          "touchmove",
-          pointerMove,
-          {
-            passive: false
-          }
-        );
-
-        document.addEventListener(
-          "touchend",
-          pointerUp
-        );
-
-
-        event.preventDefault();
-
-      }
-
-
-      function pointerMove(
-        event
-      ) {
-
-        if (!dragging) {
-          return;
-        }
-
-
-        if (
-          event.cancelable
-        ) {
-
-          event.preventDefault();
-
-        }
-
-
-        const point =
-          getPoint(event);
-
-
-        const boundaryRect =
-          boundary.getBoundingClientRect();
-
-
-        const elementRect =
-          element.getBoundingClientRect();
-
-
-        let left =
-          startLeft +
-          (
-            point.x -
-            startX
-          );
-
-
-        let top =
-          startTop +
-          (
-            point.y -
-            startY
-          );
-
-
-        const maxLeft =
-          boundaryRect.width -
-          elementRect.width;
-
-        const maxTop =
-          boundaryRect.height -
-          elementRect.height;
-
-
-        left =
-          Math.max(
-            0,
-            Math.min(
-              left,
-              maxLeft
-            )
-          );
-
-
-        top =
-          Math.max(
-            0,
-            Math.min(
-              top,
-              maxTop
-            )
-          );
-
-
-        element.style.left =
-          left + "px";
-
-        element.style.top =
-          top + "px";
-
-      }
-
-
-      function pointerUp() {
-
-        dragging = false;
-
-
-        document.removeEventListener(
-          "mousemove",
-          pointerMove
-        );
-
-        document.removeEventListener(
-          "mouseup",
-          pointerUp
-        );
-
-
-        document.removeEventListener(
-          "touchmove",
-          pointerMove
-        );
-
-        document.removeEventListener(
-          "touchend",
-          pointerUp
-        );
-
-      }
-
-
-      function getPoint(
-        event
-      ) {
-
-        if (
-          event.touches &&
-          event.touches.length
-        ) {
-
-          return {
-            x:
-              event.touches[0].clientX,
-
-            y:
-              event.touches[0].clientY
-          };
-
-        }
-
-
-        if (
-          event.changedTouches &&
-          event.changedTouches.length
-        ) {
-
-          return {
-            x:
-              event.changedTouches[0].clientX,
-
-            y:
-              event.changedTouches[0].clientY
-          };
-
-        }
-
-
-        return {
-          x:
-            event.clientX,
-
-          y:
-            event.clientY
-        };
-
-      }
-
-
-      element.addEventListener(
-        "mousedown",
-        pointerDown
-      );
-
-      element.addEventListener(
-        "touchstart",
-        pointerDown,
-        {
-          passive: false
-        }
-      );
-
-    }
-
-
-    /* =====================================================
-       ENABLE DRAG
-    ===================================================== */
-
-    makeDraggable(
-      brandBadge,
-      studio
-    );
-
-
-    makeDraggable(
-      stageLabel,
-      studio
-    );
-
-
-    makeDraggable(
-      mentorCard,
-      studio
-    );
-
-
-    /* =====================================================
-       RECORDING
-    ===================================================== */
-
-    let mediaRecorder =
-      null;
-
-    let recordedChunks =
-      [];
-
-    let recordingStream =
-      null;
-
-
-    const recordBtn =
-      document.getElementById(
-        "recordBtn"
-      );
-
-
-    recordBtn.addEventListener(
-      "click",
-      async () => {
-
-        if (
-          mediaRecorder &&
-          mediaRecorder.state ===
-          "recording"
-        ) {
-
-          stopRecording();
-
-          return;
-
-        }
-
-
-        await startRecording();
-
-      }
-    );
-
-
-    async function startRecording() {
-
-      if (
-        !navigator.mediaDevices ||
-        !navigator.mediaDevices.getDisplayMedia
-      ) {
-
-        showToast(
-          "Screen recording is not supported in this browser."
-        );
-
-        return;
-
-      }
-
-
-      try {
-
-        recordingStream =
-          await navigator
-            .mediaDevices
-            .getDisplayMedia({
-
-              video: {
-                frameRate: 30
-              },
-
-              audio: true
-
-            });
-
-
-        recordedChunks = [];
-
-
-        mediaRecorder =
-          new MediaRecorder(
-            recordingStream,
-            {
-              mimeType:
-                getSupportedMimeType()
-            }
-          );
-
-
-        mediaRecorder.ondataavailable =
-          event => {
-
-            if (
-              event.data &&
-              event.data.size > 0
-            ) {
-
-              recordedChunks.push(
-                event.data
+            const index =
+              Number(
+                dot.dataset.index
               );
 
-            }
+            updateScene(
+              index,
+              true
+            );
 
-          };
-
-
-        mediaRecorder.onstop =
-          saveRecording;
-
-
-        recordingStream
-          .getVideoTracks()[0]
-          .addEventListener(
-            "ended",
-            () => {
-
-              if (
-                mediaRecorder &&
-                mediaRecorder.state ===
-                "recording"
-              ) {
-
-                stopRecording();
-
-              }
-
-            }
-          );
-
-
-        mediaRecorder.start();
-
-
-        recordBtn.classList.add(
-          "recording"
-        );
-
-
-        recordBtn.innerHTML =
-          "■ Stop Recording";
-
-
-        updateStatus(
-          "Recording...",
-          true
-        );
-
-
-        showToast(
-          "Screen recording started."
-        );
-
-      } catch (error) {
-
-        showToast(
-          "Screen recording was cancelled."
-        );
-
-      }
-
-    }
-
-
-    function getSupportedMimeType() {
-
-      const types = [
-
-        "video/webm;codecs=vp9,opus",
-
-        "video/webm;codecs=vp8,opus",
-
-        "video/webm"
-
-      ];
-
-
-      for (
-        const type of types
-      ) {
-
-        if (
-          MediaRecorder.isTypeSupported(
-            type
-          )
-        ) {
-
-          return type;
-
-        }
-
-      }
-
-
-      return "";
-
-    }
-
-
-    function stopRecording() {
-
-      if (
-        mediaRecorder &&
-        mediaRecorder.state ===
-        "recording"
-      ) {
-
-        mediaRecorder.stop();
-
-      }
-
-
-      if (
-        recordingStream
-      ) {
-
-        recordingStream
-          .getTracks()
-          .forEach(
-            track => {
-              track.stop();
-            }
-          );
-
-      }
-
-
-      recordBtn.classList.remove(
-        "recording"
-      );
-
-
-      recordBtn.innerHTML =
-        "● Record";
-
-    }
-
-
-    function saveRecording() {
-
-      if (
-        !recordedChunks.length
-      ) {
-
-        updateStatus(
-          "Studio Ready",
-          false
-        );
-
-        return;
-
-      }
-
-
-      const blob =
-        new Blob(
-          recordedChunks,
-          {
-            type:
-              "video/webm"
           }
         );
 
-
-      const url =
-        URL.createObjectURL(
-          blob
-        );
+      }
+    );
 
 
-      const link =
-        document.createElement(
-          "a"
-        );
+    /* =========================================================
+       KEYBOARD NAVIGATION
+       ========================================================= */
+
+    document.addEventListener(
+      "keydown",
+      (event) => {
+
+        if (
+          event.key === "ArrowRight"
+        ) {
+
+          const next =
+            (currentScene + 1) %
+            scenes.length;
+
+          updateScene(next);
+
+        }
 
 
-      const timestamp =
-        new Date()
-          .toISOString()
-          .replace(
-            /[:.]/g,
-            "-"
-          );
+        if (
+          event.key === "ArrowLeft"
+        ) {
+
+          const previous =
+            (currentScene - 1 +
+              scenes.length) %
+            scenes.length;
+
+          updateScene(previous);
+
+        }
+
+      }
+    );
 
 
-      link.href =
-        url;
+    /* =========================================================
+       TOUCH SWIPE
+       ========================================================= */
+
+    let touchStartX = 0;
+
+    let touchEndX = 0;
 
 
-      link.download =
-        `course-recording-${timestamp}.webm`;
+    document.addEventListener(
+      "touchstart",
+      (event) => {
+
+        touchStartX =
+          event.changedTouches[0].screenX;
+
+      },
+      {
+        passive: true
+      }
+    );
 
 
-      document.body.appendChild(
-        link
+    document.addEventListener(
+      "touchend",
+      (event) => {
+
+        touchEndX =
+          event.changedTouches[0].screenX;
+
+
+        const distance =
+          touchEndX -
+          touchStartX;
+
+
+        if (
+          Math.abs(distance) < 60
+        ) {
+          return;
+        }
+
+
+        if (distance < 0) {
+
+          const next =
+            (currentScene + 1) %
+            scenes.length;
+
+          updateScene(next);
+
+        } else {
+
+          const previous =
+            (currentScene - 1 +
+              scenes.length) %
+            scenes.length;
+
+          updateScene(previous);
+
+        }
+
+      },
+      {
+        passive: true
+      }
+    );
+
+
+    /* =========================================================
+       AMBIENT SOUND
+       ========================================================= */
+
+    const soundButton =
+      document.getElementById(
+        "soundButton"
       );
 
 
-      link.click();
+    let soundEnabled = false;
 
 
-      link.remove();
+    soundButton.addEventListener(
+      "click",
+      () => {
+
+        soundEnabled =
+          !soundEnabled;
 
 
-      setTimeout(
-        () => {
+        if (soundEnabled) {
 
-          URL.revokeObjectURL(
-            url
-          );
+          soundButton.textContent =
+            "🔊";
 
-        },
-        1000
-      );
+          soundButton.title =
+            "Ambient sound enabled";
+
+        } else {
+
+          soundButton.textContent =
+            "🔇";
+
+          soundButton.title =
+            "Ambient sound";
+
+        }
+
+      }
+    );
 
 
-      updateStatus(
-        "Recording saved",
-        false
-      );
+    /* =========================================================
+       PRELOAD BACKGROUND IMAGES
+       ========================================================= */
+
+    function preloadImages() {
+
+      sceneLayers.forEach(
+        (layer) => {
+
+          const background =
+            getComputedStyle(layer)
+              .backgroundImage;
 
 
-      showToast(
-        "Recording finished and downloaded."
+          const match =
+            background.match(
+              /url\(["']?(.*?)["']?\)/
+            );
+
+
+          if (!match) {
+            return;
+          }
+
+
+          const image =
+            new Image();
+
+          image.src =
+            match[1];
+
+        }
       );
 
     }
 
 
-    /* =====================================================
-       SETTINGS BUTTON
-    ===================================================== */
-
-    document.getElementById(
-      "settingsBtn"
-    ).addEventListener(
-      "click",
-      () => {
-
-        showToast(
-          "Studio appearance and settings are managed from the Admin Panel."
-        );
-
-      }
-    );
-
-
-    /* =====================================================
-       LOGOUT
-    ===================================================== */
-
-    document.getElementById(
-      "logoutBtn"
-    ).addEventListener(
-      "click",
-      () => {
-
-        if (
-          mediaRecorder &&
-          mediaRecorder.state ===
-          "recording"
-        ) {
-
-          stopRecording();
-
-        }
-
-
-        sessionStorage.removeItem(
-          MENTOR_SESSION_KEY
-        );
-
-
-        sessionStorage.removeItem(
-          ROLE_KEY
-        );
-
-
-        sessionStorage.removeItem(
-          "personalCourseStudioUsername"
-        );
-
-
-        window.location.replace(
-          "login.html"
-        );
-
-      }
-    );
-
-
-    /* =====================================================
-       STORAGE EVENT
-       If Admin changes settings/student list
-       in another tab, Mentor Studio updates.
-    ===================================================== */
-
-    window.addEventListener(
-      "storage",
-      event => {
-
-        if (
-          event.key ===
-          SETTINGS_KEY
-        ) {
-
-          loadSettings();
-
-        }
-
-
-        if (
-          event.key ===
-          STUDENTS_KEY
-        ) {
-
-          loadStudents();
-
-        }
-
-      }
-    );
-
-
-    /* =====================================================
+    /* =========================================================
        INITIALIZE
-    ===================================================== */
+       ========================================================= */
 
-    loadSettings();
-
-    loadStudents();
-
-    updateStatus(
-      "Studio Ready",
+    updateScene(
+      0,
       false
     );
+
+    startSceneTimer();
+
+    preloadImages();
+
 
   </script>
 
