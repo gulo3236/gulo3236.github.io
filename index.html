@@ -1,53 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>Personal Course Studio</title>
+  <title>Learn • Create • Teach</title>
 
   <meta
     name="description"
-    content="Personal Course Studio — Create beautiful course and class videos."
-  />
+    content="Personal learning, teaching and course recording studio."
+  >
 
-  <meta name="theme-color" content="#07111f" />
-
-  <link rel="manifest" href="./manifest.json" />
+  <link
+    rel="icon"
+    type="image/png"
+    href="https://github.com/yourdocuments/masha.github.io/blob/main/logo.png?raw=true"
+  >
 
   <style>
-    /* =========================================================
-       PERSONAL COURSE STUDIO
-       HOME + SALAT SYSTEM — STEP 2
-       ========================================================= */
-
-    :root {
-      --bg: #050812;
-      --bg2: #07111f;
-      --card: rgba(10, 20, 35, 0.76);
-      --card2: rgba(15, 29, 48, 0.82);
-      --border: rgba(255, 255, 255, 0.10);
-
-      --text: #ffffff;
-      --muted: #a9b6c8;
-
-      --gold: #f4c95d;
-      --gold2: #ffdf82;
-
-      --green: #49e39b;
-      --blue: #55aaff;
-      --red: #ff7777;
-
-      --shadow:
-        0 30px 80px rgba(0, 0, 0, 0.45);
-
-      --radius: 24px;
-    }
-
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
+    }
+
+    :root {
+      --bg: #02060c;
+      --white: #ffffff;
+      --muted: rgba(255,255,255,.66);
+      --line: rgba(255,255,255,.12);
+      --glass: rgba(255,255,255,.07);
+      --blue: #55b9ff;
+      --purple: #8370ff;
     }
 
     html {
@@ -56,6 +40,7 @@
 
     body {
       min-height: 100vh;
+      overflow-x: hidden;
 
       font-family:
         Inter,
@@ -65,277 +50,235 @@
         "Segoe UI",
         sans-serif;
 
-      color: var(--text);
-
-      background:
-        radial-gradient(
-          circle at 20% 20%,
-          rgba(70, 120, 255, 0.15),
-          transparent 35%
-        ),
-        radial-gradient(
-          circle at 80% 30%,
-          rgba(244, 201, 93, 0.10),
-          transparent 30%
-        ),
-        linear-gradient(
-          135deg,
-          #03060d,
-          #07111f 45%,
-          #03060d
-        );
-
-      overflow-x: hidden;
+      color: var(--white);
+      background: var(--bg);
     }
 
-    button,
-    input,
-    select {
-      font: inherit;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    /* =========================================================
+    /* =========================================
        BACKGROUND
-       ========================================================= */
+    ========================================= */
 
-    .background {
-      position: fixed;
-      inset: 0;
-      z-index: -10;
-
-      overflow: hidden;
+    .page {
+      position: relative;
+      min-height: 100vh;
+      isolation: isolate;
 
       background:
         linear-gradient(
-          rgba(2, 7, 15, 0.62),
-          rgba(2, 7, 15, 0.90)
+          rgba(2, 7, 15, .54),
+          rgba(2, 7, 15, .91)
         ),
         url("https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=2200&q=85")
-        center / cover;
+        center / cover fixed;
     }
 
-    .background::before {
+    .page::before {
       content: "";
-
-      position: absolute;
+      position: fixed;
       inset: 0;
+      z-index: -1;
+      pointer-events: none;
 
       background:
         radial-gradient(
-          circle at 50% 30%,
-          rgba(85, 170, 255, 0.16),
-          transparent 40%
+          circle at 15% 20%,
+          rgba(65,160,255,.18),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 85% 25%,
+          rgba(130,100,255,.15),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 50% 90%,
+          rgba(0,180,255,.08),
+          transparent 35%
         );
     }
 
-    .background::after {
-      content: "";
-
-      position: absolute;
-
-      width: 600px;
-      height: 600px;
-
-      border-radius: 50%;
-
-      background:
-        rgba(244, 201, 93, 0.08);
-
-      filter: blur(100px);
-
-      top: -200px;
-      right: -150px;
-    }
-
-    /* =========================================================
+    /* =========================================
        NAVBAR
-       ========================================================= */
+    ========================================= */
 
     .navbar {
       position: fixed;
-
       top: 0;
       left: 0;
       right: 0;
+      z-index: 1000;
 
-      z-index: 100;
-
-      height: 76px;
+      padding: 14px 5vw;
 
       display: flex;
       align-items: center;
       justify-content: space-between;
 
-      padding: 0 6%;
-
-      background:
-        rgba(3, 8, 16, 0.58);
+      background: rgba(2,6,12,.46);
 
       backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
 
-      border-bottom:
-        1px solid rgba(255, 255, 255, 0.07);
+      border-bottom: 1px solid rgba(255,255,255,.08);
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
     }
+
+    /*
+      LOGO ONLY
+      No MashaLive / Personal Course Studio text
+    */
 
     .brand-logo {
-      width: 44px;
-      height: 44px;
+      width: 72px;
+      height: 72px;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      object-fit: contain;
 
-      border-radius: 14px;
-
-      color: #07111f;
-
-      background:
-        linear-gradient(
-          135deg,
-          var(--gold2),
-          var(--gold)
-        );
-
-      font-size: 18px;
-      font-weight: 900;
-
-      box-shadow:
-        0 8px 30px rgba(244, 201, 93, 0.22);
-    }
-
-    .brand-text strong {
       display: block;
 
-      font-size: 15px;
+      filter:
+        drop-shadow(0 10px 25px rgba(0,0,0,.35))
+        drop-shadow(0 0 18px rgba(85,185,255,.08));
+
+      transition:
+        transform .25s ease,
+        filter .25s ease;
     }
 
-    .brand-text span {
-      display: block;
+    .brand-logo:hover {
+      transform: scale(1.04);
 
-      margin-top: 2px;
-
-      font-size: 11px;
-
-      color: var(--muted);
+      filter:
+        drop-shadow(0 12px 28px rgba(0,0,0,.4))
+        drop-shadow(0 0 25px rgba(85,185,255,.18));
     }
 
     .nav-actions {
       display: flex;
       align-items: center;
-
       gap: 10px;
     }
 
     .nav-btn {
-      text-decoration: none;
+      min-height: 42px;
+      padding: 0 17px;
 
       display: inline-flex;
       align-items: center;
       justify-content: center;
 
-      min-height: 42px;
+      border: 1px solid rgba(255,255,255,.13);
+      border-radius: 13px;
 
-      padding: 0 18px;
-
-      border-radius: 12px;
+      background: rgba(255,255,255,.06);
 
       color: #fff;
-
-      border:
-        1px solid rgba(255,255,255,0.10);
-
-      background:
-        rgba(255,255,255,0.05);
 
       font-size: 13px;
       font-weight: 700;
 
-      transition: 0.25s ease;
+      transition:
+        transform .25s ease,
+        background .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
     }
 
     .nav-btn:hover {
       transform: translateY(-2px);
 
-      background:
-        rgba(255,255,255,0.10);
+      background: rgba(255,255,255,.11);
+      border-color: rgba(255,255,255,.22);
+
+      box-shadow:
+        0 10px 30px rgba(0,0,0,.25);
     }
 
     .nav-btn.primary {
-      color: #08111c;
-
-      border-color: transparent;
-
       background:
         linear-gradient(
           135deg,
-          var(--gold2),
-          var(--gold)
+          rgba(85,185,255,.96),
+          rgba(122,92,255,.96)
         );
+
+      border-color: transparent;
+
+      box-shadow:
+        0 10px 30px rgba(70,125,255,.25);
     }
 
-    /* =========================================================
+    .nav-btn.primary:hover {
+      box-shadow:
+        0 14px 38px rgba(70,125,255,.36);
+    }
+
+    /* =========================================
        HERO
-       ========================================================= */
+    ========================================= */
 
     .hero {
       min-height: 100vh;
 
+      padding:
+        155px
+        5vw
+        90px;
+
       display: flex;
       align-items: center;
-      justify-content: center;
-
-      padding:
-        130px 6%
-        70px;
     }
 
-    .hero-inner {
-      width: 100%;
-      max-width: 1200px;
+    .hero-grid {
+      width: min(1250px, 100%);
+      margin: 0 auto;
 
       display: grid;
 
       grid-template-columns:
         minmax(0, 1.15fr)
-        minmax(350px, 0.85fr);
+        minmax(340px, .85fr);
 
-      gap: 55px;
+      gap: 70px;
 
       align-items: center;
     }
 
-    .hero-copy {
-      max-width: 720px;
+    .hero-content {
+      max-width: 700px;
     }
 
     .eyebrow {
       display: inline-flex;
       align-items: center;
-
       gap: 9px;
 
       padding: 8px 13px;
+      margin-bottom: 25px;
 
+      border: 1px solid rgba(255,255,255,.12);
       border-radius: 999px;
 
-      background:
-        rgba(255,255,255,0.06);
+      background: rgba(255,255,255,.06);
 
-      border:
-        1px solid rgba(255,255,255,0.09);
+      backdrop-filter: blur(10px);
 
-      color: #d9e4f2;
+      color: rgba(255,255,255,.76);
 
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 700;
 
-      margin-bottom: 22px;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
     }
 
     .eyebrow-dot {
@@ -344,36 +287,29 @@
 
       border-radius: 50%;
 
-      background: var(--green);
+      background: #65c6ff;
 
       box-shadow:
-        0 0 15px rgba(73,227,155,0.7);
+        0 0 14px #65c6ff;
     }
 
-    h1 {
-      font-size:
-        clamp(
-          48px,
-          7vw,
-          92px
-        );
+    .hero h1 {
+      font-size: clamp(58px, 8vw, 110px);
 
-      line-height: 0.98;
+      line-height: .93;
 
-      letter-spacing: -4px;
+      letter-spacing: -5px;
 
-      margin-bottom: 25px;
-    }
+      font-weight: 900;
 
-    h1 span {
-      display: block;
+      margin-bottom: 28px;
 
       background:
         linear-gradient(
           135deg,
-          #ffffff,
-          #d9e6f6 42%,
-          var(--gold2)
+          #ffffff 15%,
+          #d7eaff 48%,
+          #9b8cff 90%
         );
 
       -webkit-background-clip: text;
@@ -382,90 +318,105 @@
       color: transparent;
     }
 
-    /* =========================================================
-       HERO ACTIONS
-       ========================================================= */
+    .hero-subtitle {
+      font-size: 18px;
+
+      color: rgba(255,255,255,.72);
+
+      letter-spacing: .4px;
+
+      margin-bottom: 34px;
+    }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-
       gap: 12px;
     }
 
     .hero-btn {
-      min-height: 52px;
+      min-height: 53px;
 
-      padding: 0 22px;
+      padding: 0 23px;
 
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      gap: 9px;
 
-      text-decoration: none;
+      border-radius: 15px;
 
-      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,.13);
 
       font-size: 14px;
       font-weight: 800;
 
-      transition: 0.25s ease;
-    }
-
-    .hero-btn.primary {
-      color: #07111f;
-
-      background:
-        linear-gradient(
-          135deg,
-          var(--gold2),
-          var(--gold)
-        );
-
-      box-shadow:
-        0 15px 40px rgba(244,201,93,0.18);
-    }
-
-    .hero-btn.secondary {
-      color: #fff;
-
-      background:
-        rgba(255,255,255,0.06);
-
-      border:
-        1px solid rgba(255,255,255,0.10);
+      transition: .25s ease;
     }
 
     .hero-btn:hover {
       transform: translateY(-3px);
     }
 
-    /* =========================================================
+    .hero-btn.primary {
+      background:
+        linear-gradient(
+          135deg,
+          #3da9ff,
+          #735eff
+        );
+
+      border-color: transparent;
+
+      box-shadow:
+        0 16px 40px rgba(69,125,255,.28);
+    }
+
+    .hero-btn.secondary {
+      background: rgba(255,255,255,.06);
+
+      backdrop-filter: blur(12px);
+    }
+
+    .hero-btn.secondary:hover {
+      background: rgba(255,255,255,.11);
+    }
+
+    /* =========================================
        SALAT CARD
-       ========================================================= */
+    ========================================= */
+
+    .hero-side {
+      display: flex;
+      justify-content: center;
+    }
 
     .salat-card {
-      position: relative;
+      width: min(100%, 430px);
 
-      padding: 26px;
+      padding: 30px;
 
-      border-radius: 28px;
+      border:
+        1px solid rgba(255,255,255,.13);
+
+      border-radius: 30px;
 
       background:
         linear-gradient(
           145deg,
-          rgba(15, 31, 51, 0.92),
-          rgba(5, 12, 22, 0.90)
+          rgba(255,255,255,.11),
+          rgba(255,255,255,.045)
         );
 
-      border:
-        1px solid rgba(255,255,255,0.10);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
 
-      box-shadow: var(--shadow);
+      box-shadow:
+        0 35px 90px rgba(0,0,0,.35),
+        inset 0 1px 0 rgba(255,255,255,.09);
 
+      position: relative;
       overflow: hidden;
-
-      backdrop-filter: blur(20px);
     }
 
     .salat-card::before {
@@ -473,668 +424,156 @@
 
       position: absolute;
 
-      width: 260px;
-      height: 260px;
+      width: 180px;
+      height: 180px;
+
+      top: -80px;
+      right: -70px;
 
       border-radius: 50%;
 
-      background:
-        rgba(244,201,93,0.10);
+      background: rgba(91,177,255,.15);
 
-      filter: blur(60px);
-
-      top: -120px;
-      right: -90px;
+      filter: blur(10px);
     }
 
-    .salat-header {
-      position: relative;
-      z-index: 1;
-
+    .card-top {
       display: flex;
-
       justify-content: space-between;
       align-items: flex-start;
 
-      gap: 12px;
-
-      margin-bottom: 20px;
-    }
-
-    .salat-title {
-      display: flex;
-
-      gap: 12px;
-
-      align-items: center;
-    }
-
-    .mosque-icon {
-      width: 46px;
-      height: 46px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 14px;
-
-      background:
-        rgba(244,201,93,0.12);
-
-      border:
-        1px solid rgba(244,201,93,0.20);
-
-      font-size: 23px;
-    }
-
-    .salat-title h2 {
-      font-size: 20px;
-
-      margin-bottom: 4px;
-    }
-
-    .salat-title p {
-      color: var(--muted);
-
-      font-size: 12px;
-    }
-
-    .location {
-      padding: 7px 10px;
-
-      border-radius: 9px;
-
-      color: #cfe0f3;
-
-      background:
-        rgba(255,255,255,0.05);
-
-      border:
-        1px solid rgba(255,255,255,0.08);
-
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    /* =========================================================
-       DATE BAR
-       ========================================================= */
-
-    .date-bar {
-      position: relative;
-      z-index: 1;
-
-      display: grid;
-
-      grid-template-columns: 1fr 1fr;
-
-      gap: 9px;
-
-      margin-bottom: 12px;
-    }
-
-    .date-box {
-      padding: 12px;
-
-      border-radius: 14px;
-
-      background:
-        rgba(255,255,255,0.035);
-
-      border:
-        1px solid rgba(255,255,255,0.06);
-    }
-
-    .date-label {
-      color: #71849a;
-
-      font-size: 10px;
-
-      margin-bottom: 4px;
-    }
-
-    .date-value {
-      color: #edf5ff;
-
-      font-size: 12px;
-
-      font-weight: 800;
-
-      line-height: 1.4;
-    }
-
-    /* =========================================================
-       SUNRISE
-       ========================================================= */
-
-    .sunrise-box {
-      position: relative;
-      z-index: 1;
-
-      display: flex;
-
-      align-items: center;
-      justify-content: space-between;
-
       gap: 15px;
 
-      padding: 14px 16px;
+      margin-bottom: 30px;
 
-      margin-bottom: 16px;
-
-      border-radius: 15px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(255, 193, 7, 0.09),
-          rgba(255, 255, 255, 0.035)
-        );
-
-      border:
-        1px solid rgba(255, 201, 75, 0.12);
+      position: relative;
     }
 
-    .sunrise-left {
-      display: flex;
-      align-items: center;
-
-      gap: 10px;
-    }
-
-    .sunrise-icon {
-      font-size: 21px;
-    }
-
-    .sunrise-title {
-      font-size: 12px;
+    .card-title {
+      font-size: 20px;
       font-weight: 800;
     }
 
-    .sunrise-subtitle {
-      color: #71849a;
+    .card-small {
+      margin-top: 7px;
+
+      color: rgba(255,255,255,.52);
+
+      font-size: 12px;
+    }
+
+    .live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+
+      padding: 7px 10px;
+
+      border-radius: 999px;
+
+      background: rgba(60,205,145,.1);
+
+      border:
+        1px solid rgba(60,205,145,.2);
+
+      color: #82e6ba;
 
       font-size: 10px;
-
-      margin-top: 2px;
-    }
-
-    .sunrise-time {
-      color: var(--gold2);
-
-      font-size: 14px;
-      font-weight: 900;
-    }
-
-    /* =========================================================
-       JUMMAH
-       ========================================================= */
-
-    .jummah-box {
-      position: relative;
-      z-index: 1;
-
-      display: none;
-
-      padding: 15px;
-
-      margin-bottom: 16px;
-
-      border-radius: 16px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(73,227,155,0.12),
-          rgba(85,170,255,0.08)
-        );
-
-      border:
-        1px solid rgba(73,227,155,0.20);
-    }
-
-    .jummah-box.show {
-      display: block;
-    }
-
-    .jummah-title {
-      display: flex;
-      align-items: center;
-
-      gap: 9px;
-
-      font-size: 13px;
-      font-weight: 850;
-
-      margin-bottom: 5px;
-    }
-
-    .jummah-text {
-      color: #a8b9cb;
-
-      font-size: 11px;
-
-      line-height: 1.6;
-    }
-
-    /* =========================================================
-       NEXT PRAYER
-       ========================================================= */
-
-    .next-prayer {
-      position: relative;
-      z-index: 1;
-
-      padding: 20px;
-
-      margin-bottom: 18px;
-
-      border-radius: 19px;
-
-      background:
-        linear-gradient(
-          135deg,
-          rgba(73,227,155,0.10),
-          rgba(85,170,255,0.08)
-        );
-
-      border:
-        1px solid rgba(73,227,155,0.16);
-    }
-
-    .next-label {
-      color: #9bb0c7;
-
-      font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
 
       text-transform: uppercase;
-
-      letter-spacing: 1px;
+      letter-spacing: .7px;
     }
 
-    .next-name {
-      margin-top: 5px;
+    .live-dot {
+      width: 6px;
+      height: 6px;
 
-      font-size: 24px;
-      font-weight: 850;
-    }
+      border-radius: 50%;
 
-    .next-time {
-      margin-top: 4px;
+      background: #59e0a3;
 
-      color: var(--gold2);
-
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .countdown {
-      margin-top: 13px;
-
-      font-size: 32px;
-      font-weight: 900;
-
-      letter-spacing: 1px;
-
-      font-variant-numeric: tabular-nums;
-    }
-
-    .countdown-label {
-      margin-top: 2px;
-
-      color: var(--muted);
-
-      font-size: 11px;
-    }
-
-    /* =========================================================
-       PRAYER LIST
-       ========================================================= */
-
-    .prayer-list {
-      position: relative;
-      z-index: 1;
-
-      display: grid;
-
-      gap: 8px;
-    }
-
-    .prayer-row {
-      display: grid;
-
-      grid-template-columns:
-        42px
-        1fr
-        auto;
-
-      align-items: center;
-
-      gap: 10px;
-
-      padding: 11px 12px;
-
-      border-radius: 14px;
-
-      background:
-        rgba(255,255,255,0.035);
-
-      border:
-        1px solid rgba(255,255,255,0.045);
-
-      transition: 0.2s ease;
-    }
-
-    .prayer-row:hover {
-      background:
-        rgba(255,255,255,0.07);
-    }
-
-    .prayer-row.active {
-      border-color:
-        rgba(244,201,93,0.30);
-
-      background:
-        rgba(244,201,93,0.075);
-    }
-
-    .prayer-icon {
-      width: 34px;
-      height: 34px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      border-radius: 10px;
-
-      background:
-        rgba(255,255,255,0.06);
-
-      font-size: 15px;
-    }
-
-    .prayer-name {
-      font-size: 13px;
-      font-weight: 750;
-    }
-
-    .prayer-arabic {
-      color: #71849a;
-
-      font-size: 10px;
-
-      margin-top: 2px;
+      box-shadow:
+        0 0 10px #59e0a3;
     }
 
     .prayer-time {
-      color: #dce7f4;
-
-      font-size: 13px;
-      font-weight: 800;
-
-      font-variant-numeric: tabular-nums;
-    }
-
-    /* =========================================================
-       SETTINGS
-       ========================================================= */
-
-    .settings-toggle {
       position: relative;
-      z-index: 1;
 
-      width: 100%;
-
-      display: flex;
-
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 12px;
-
-      margin-top: 17px;
-
-      padding: 13px 14px;
-
-      border: 1px solid rgba(255,255,255,0.07);
-
-      border-radius: 13px;
-
-      color: #dfe9f5;
-
-      background:
-        rgba(255,255,255,0.035);
-
-      cursor: pointer;
-
-      font-size: 12px;
-      font-weight: 800;
-
-      text-align: left;
-
-      transition: 0.2s ease;
-    }
-
-    .settings-toggle:hover {
-      background:
-        rgba(255,255,255,0.07);
-    }
-
-    .settings-panel {
-      position: relative;
-      z-index: 1;
-
-      display: none;
-
-      margin-top: 10px;
-
-      padding: 16px;
-
-      border-radius: 17px;
-
-      background:
-        rgba(3,9,17,0.80);
-
-      border:
-        1px solid rgba(255,255,255,0.08);
-    }
-
-    .settings-panel.open {
-      display: block;
-    }
-
-    .setting-group {
-      margin-bottom: 13px;
-    }
-
-    .setting-group:last-child {
-      margin-bottom: 0;
-    }
-
-    .setting-group label {
-      display: block;
-
-      color: #9aaabd;
-
-      font-size: 10px;
-      font-weight: 700;
-
-      margin-bottom: 6px;
-    }
-
-    .setting-group input,
-    .setting-group select {
-      width: 100%;
-
-      height: 42px;
-
-      padding: 0 12px;
-
-      border-radius: 11px;
-
-      color: #fff;
-
-      background:
-        rgba(255,255,255,0.06);
-
-      border:
-        1px solid rgba(255,255,255,0.09);
-
-      outline: none;
-
-      font-size: 12px;
-    }
-
-    .setting-group input:focus,
-    .setting-group select:focus {
-      border-color:
-        rgba(244,201,93,0.45);
-    }
-
-    .setting-group select option {
-      color: #111;
-
-      background: #fff;
-    }
-
-    .setting-help {
-      color: #66788e;
-
-      font-size: 9px;
-
-      line-height: 1.5;
-
-      margin-top: 5px;
-    }
-
-    .settings-actions {
-      display: flex;
-
-      gap: 8px;
-
-      margin-top: 15px;
-    }
-
-    .settings-btn {
-      flex: 1;
-
-      height: 42px;
-
-      border: 0;
-
-      border-radius: 11px;
-
-      cursor: pointer;
-
-      font-size: 11px;
-      font-weight: 800;
-
-      transition: 0.2s ease;
-    }
-
-    .settings-btn.save {
-      color: #07111f;
-
-      background:
-        linear-gradient(
-          135deg,
-          var(--gold2),
-          var(--gold)
-        );
-    }
-
-    .settings-btn.reset {
-      color: #dce7f4;
-
-      background:
-        rgba(255,255,255,0.06);
-
-      border:
-        1px solid rgba(255,255,255,0.08);
-    }
-
-    .settings-btn:hover {
-      transform: translateY(-1px);
-    }
-
-    /* =========================================================
-       SALAT FOOTER
-       ========================================================= */
-
-    .salat-footer {
-      position: relative;
-      z-index: 1;
-
-      display: flex;
-
-      align-items: center;
-      justify-content: space-between;
-
-      gap: 12px;
-
-      margin-top: 16px;
-
-      padding-top: 15px;
+      padding: 23px 0;
 
       border-top:
-        1px solid rgba(255,255,255,0.07);
+        1px solid rgba(255,255,255,.08);
     }
 
-    .date-info {
-      color: #8091a6;
+    .prayer-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
 
-      font-size: 10px;
+      padding: 13px 0;
+
+      color: rgba(255,255,255,.75);
+    }
+
+    .prayer-row strong {
+      color: #fff;
+      font-size: 14px;
+    }
+
+    .prayer-row span {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .card-note {
+      position: relative;
+
+      margin-top: 18px;
+
+      padding: 13px 15px;
+
+      border-radius: 15px;
+
+      background: rgba(0,0,0,.16);
+
+      border:
+        1px solid rgba(255,255,255,.07);
+
+      color: rgba(255,255,255,.58);
+
+      font-size: 11px;
 
       line-height: 1.6;
     }
 
-    .refresh-btn {
-      border: 0;
+    /* =========================================
+       FEATURES
+    ========================================= */
 
-      cursor: pointer;
+    .features {
+      padding: 30px 5vw 100px;
+    }
 
-      padding: 9px 13px;
+    .features-inner {
+      width: min(1250px, 100%);
+      margin: 0 auto;
+    }
 
-      border-radius: 10px;
+    .section-label {
+      margin-bottom: 20px;
 
-      color: #dfeaf7;
-
-      background:
-        rgba(255,255,255,0.06);
-
-      border:
-        1px solid rgba(255,255,255,0.08);
+      color: rgba(255,255,255,.46);
 
       font-size: 11px;
-      font-weight: 700;
+      font-weight: 800;
 
-      transition: 0.2s ease;
+      letter-spacing: 1.4px;
+
+      text-transform: uppercase;
     }
 
-    .refresh-btn:hover {
-      background:
-        rgba(255,255,255,0.11);
-    }
-
-    /* =========================================================
-       INFO SECTION
-       ========================================================= */
-
-    .info-section {
-      padding:
-        50px 6%
-        90px;
-    }
-
-    .info-grid {
-      width: 100%;
-      max-width: 1200px;
-
-      margin: auto;
-
+    .feature-grid {
       display: grid;
 
       grid-template-columns:
@@ -1143,159 +582,189 @@
       gap: 16px;
     }
 
-    .info-card {
-      padding: 25px;
+    .feature-card {
+      min-height: 190px;
 
-      border-radius: 22px;
+      padding: 26px;
 
-      background:
-        rgba(7,16,28,0.70);
+      border-radius: 24px;
 
       border:
-        1px solid rgba(255,255,255,0.07);
+        1px solid rgba(255,255,255,.1);
+
+      background: rgba(255,255,255,.055);
 
       backdrop-filter: blur(15px);
+
+      transition:
+        transform .3s ease,
+        background .3s ease,
+        border-color .3s ease;
     }
 
-    .info-icon {
-      width: 45px;
-      height: 45px;
+    .feature-card:hover {
+      transform: translateY(-6px);
+
+      background: rgba(255,255,255,.085);
+
+      border-color:
+        rgba(255,255,255,.18);
+    }
+
+    .feature-icon {
+      width: 46px;
+      height: 46px;
 
       display: flex;
       align-items: center;
       justify-content: center;
 
-      border-radius: 13px;
+      margin-bottom: 24px;
+
+      border-radius: 14px;
 
       background:
-        rgba(85,170,255,0.10);
+        linear-gradient(
+          135deg,
+          rgba(88,183,255,.2),
+          rgba(143,124,255,.18)
+        );
 
-      margin-bottom: 17px;
+      border:
+        1px solid rgba(255,255,255,.1);
 
       font-size: 20px;
     }
 
-    .info-card h3 {
-      font-size: 16px;
-
+    .feature-card h3 {
+      font-size: 17px;
       margin-bottom: 8px;
     }
 
-    .info-card p {
-      color: var(--muted);
+    .feature-card p {
+      color: rgba(255,255,255,.54);
 
-      font-size: 13px;
+      font-size: 12px;
 
-      line-height: 1.7;
+      line-height: 1.65;
     }
 
-    /* =========================================================
+    /* =========================================
        FOOTER
-       ========================================================= */
+    ========================================= */
 
     footer {
-      padding:
-        25px 6%
-        35px;
+      padding: 30px 5vw 40px;
 
-      text-align: center;
+      border-top:
+        1px solid rgba(255,255,255,.08);
 
-      color: #64758a;
+      background:
+        rgba(0,0,0,.2);
+    }
+
+    .footer-inner {
+      width: min(1250px, 100%);
+      margin: 0 auto;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      gap: 20px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-logo {
+      width: 58px;
+      height: 58px;
+
+      object-fit: contain;
+
+      display: block;
+    }
+
+    .footer-copy {
+      color: rgba(255,255,255,.4);
 
       font-size: 11px;
     }
 
-    /* =========================================================
-       LOADING / ERROR
-       ========================================================= */
+    /* =========================================
+       MOBILE
+    ========================================= */
 
-    .loading {
-      color: #91a5ba;
+    @media (max-width: 900px) {
 
-      font-size: 12px;
-    }
-
-    .error {
-      color: #ff9c9c;
-
-      font-size: 12px;
-
-      line-height: 1.6;
-    }
-
-    /* =========================================================
-       RESPONSIVE
-       ========================================================= */
-
-    @media (max-width: 950px) {
-
-      .hero-inner {
+      .hero-grid {
         grid-template-columns: 1fr;
-
-        max-width: 760px;
+        gap: 50px;
       }
 
-      .hero-copy {
-        text-align: center;
-
-        margin: auto;
+      .hero-side {
+        justify-content: flex-start;
       }
 
-      .hero-actions {
-        justify-content: center;
-      }
-
-      .eyebrow {
-        margin-left: auto;
-        margin-right: auto;
+      .feature-grid {
+        grid-template-columns: 1fr;
       }
 
       .salat-card {
-        max-width: 560px;
-
-        width: 100%;
-
-        margin: auto;
+        max-width: 520px;
       }
-
-      .info-grid {
-        grid-template-columns: 1fr;
-
-        max-width: 760px;
-      }
-
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 650px) {
 
       .navbar {
-        height: 68px;
-
-        padding: 0 18px;
+        padding: 10px 16px;
       }
 
-      .brand-text {
-        display: none;
+      .brand-logo {
+        width: 58px;
+        height: 58px;
+      }
+
+      .nav-actions {
+        gap: 6px;
       }
 
       .nav-btn {
         min-height: 38px;
 
-        padding: 0 12px;
+        padding: 0 11px;
 
         font-size: 11px;
       }
 
-      .hero {
-        padding:
-          105px 18px
-          50px;
+      .nav-btn.mentor {
+        display: none;
       }
 
-      h1 {
-        font-size: 48px;
+      .hero {
+        padding:
+          125px
+          18px
+          65px;
+      }
 
-        letter-spacing: -2.5px;
+      .hero h1 {
+        font-size:
+          clamp(52px, 17vw, 82px);
+
+        letter-spacing: -4px;
+      }
+
+      .hero-subtitle {
+        font-size: 15px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
       }
 
       .hero-btn {
@@ -1303,1795 +772,377 @@
       }
 
       .salat-card {
-        padding: 18px;
-
-        border-radius: 22px;
+        padding: 23px;
+        border-radius: 24px;
       }
 
-      .salat-header {
-        gap: 10px;
-      }
-
-      .location {
-        display: none;
-      }
-
-      .date-bar {
-        grid-template-columns: 1fr;
-      }
-
-      .countdown {
-        font-size: 28px;
-      }
-
-      .prayer-row {
-        grid-template-columns:
-          38px
-          1fr
-          auto;
-      }
-
-      .info-section {
+      .features {
         padding:
-          25px 18px
-          60px;
+          15px
+          18px
+          70px;
       }
 
+      .feature-card {
+        min-height: auto;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .footer-logo {
+        width: 52px;
+        height: 52px;
+      }
+    }
+
+    /* =========================================
+       ANIMATION
+    ========================================= */
+
+    @media (prefers-reduced-motion: no-preference) {
+
+      .hero-content {
+        animation:
+          heroIn .9s ease both;
+      }
+
+      .hero-side {
+        animation:
+          sideIn 1s .15s ease both;
+      }
+
+      .feature-card {
+        animation:
+          fadeUp .7s ease both;
+      }
+
+      @keyframes heroIn {
+        from {
+          opacity: 0;
+          transform: translateY(25px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes sideIn {
+        from {
+          opacity: 0;
+          transform: translateX(25px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateX(0);
+        }
+      }
+
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(15px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- =======================================================
-       BACKGROUND
-       ======================================================= -->
+  <div class="page">
 
-  <div class="background"></div>
+    <!-- =====================================
+         NAVBAR
+    ====================================== -->
 
+    <header class="navbar">
 
-  <!-- =======================================================
-       NAVBAR
-       ======================================================= -->
+      <!-- LOGO ONLY -->
 
-  <header class="navbar">
+      <a href="./" class="brand">
 
-    <div class="brand">
+        <img
+          class="brand-logo"
+          src="https://github.com/yourdocuments/masha.github.io/blob/main/logo.png?raw=true"
+          alt="SNK Business Logo"
+        >
 
-      <div class="brand-logo">
-        CS
-      </div>
-
-      <div class="brand-text">
-
-        <strong>
-          Personal Course Studio
-        </strong>
-
-        <span>
-          Learn • Create • Teach
-        </span>
-
-      </div>
-
-    </div>
-
-
-    <nav class="nav-actions">
-
-      <a
-        href="./login/"
-        class="nav-btn"
-      >
-        Login
       </a>
 
-      <a
-        href="./mentor/"
-        class="nav-btn primary"
-      >
-        Mentor Studio
-      </a>
 
-    </nav>
+      <div class="nav-actions">
 
-  </header>
+        <a
+          href="./login/"
+          class="nav-btn"
+        >
+          Login
+        </a>
+
+        <a
+          href="./mentor/"
+          class="nav-btn primary mentor"
+        >
+          Mentor Studio
+        </a>
+
+      </div>
+
+    </header>
 
 
-  <!-- =======================================================
-       HERO
-       ======================================================= -->
+    <!-- =====================================
+         HERO
+    ====================================== -->
 
-  <main>
+    <main>
 
-    <section class="hero">
+      <section class="hero">
 
-      <div class="hero-inner">
+        <div class="hero-grid">
+
+          <div class="hero-content">
+
+            <div class="eyebrow">
+
+              <span class="eyebrow-dot"></span>
+
+              Personal Learning & Recording Studio
+
+            </div>
 
 
-        <!-- =================================================
-             HERO COPY
-             ================================================= -->
+            <h1>
+              Create.
+              <br>
+              Teach.
+              <br>
+              Inspire.
+            </h1>
 
-        <div class="hero-copy">
 
-          <div class="eyebrow">
+            <p class="hero-subtitle">
+              Learn • Create • Teach
+            </p>
 
-            <span class="eyebrow-dot"></span>
 
-            Personal Learning & Recording Studio
+            <div class="hero-actions">
+
+              <a
+                href="./login/"
+                class="hero-btn primary"
+              >
+                Enter Studio
+                <span>→</span>
+              </a>
+
+
+              <a
+                href="./mentor/"
+                class="hero-btn secondary"
+              >
+                Mentor Studio
+              </a>
+
+            </div>
 
           </div>
 
 
-          <h1>
+          <!-- =================================
+               SALAT
+          ================================== -->
 
-            Create.
+          <div class="hero-side">
 
-            <span>
-              Teach.
-            </span>
+            <div class="salat-card">
 
-            Inspire.
+              <div class="card-top">
 
-          </h1>
+                <div>
+
+                  <div class="card-title">
+                    Daily Salat
+                  </div>
+
+                  <div class="card-small">
+                    Dhaka, Bangladesh
+                  </div>
+
+                </div>
 
 
-          <div class="hero-actions">
+                <div class="live-pill">
 
-            <a
-              href="./login/"
-              class="hero-btn primary"
-            >
-              Enter Studio →
-            </a>
+                  <span class="live-dot"></span>
 
-            <a
-              href="./mentor/"
-              class="hero-btn secondary"
-            >
-              Mentor Studio
-            </a>
+                  Live
+
+                </div>
+
+              </div>
+
+
+              <div class="prayer-time">
+
+                <div class="prayer-row">
+                  <strong>Fajr</strong>
+                  <span>04:28 AM</span>
+                </div>
+
+                <div class="prayer-row">
+                  <strong>Dhuhr</strong>
+                  <span>12:04 PM</span>
+                </div>
+
+                <div class="prayer-row">
+                  <strong>Asr</strong>
+                  <span>04:29 PM</span>
+                </div>
+
+                <div class="prayer-row">
+                  <strong>Maghrib</strong>
+                  <span>06:08 PM</span>
+                </div>
+
+                <div class="prayer-row">
+                  <strong>Isha</strong>
+                  <span>07:25 PM</span>
+                </div>
+
+              </div>
+
+
+              <div class="card-note">
+                Prayer times are shown as a simple studio
+                companion feature.
+              </div>
+
+            </div>
 
           </div>
 
         </div>
 
-
-        <!-- =================================================
-             SALAT CARD
-             ================================================= -->
-
-        <div class="salat-card">
+      </section>
 
 
-          <!-- HEADER -->
+      <!-- =====================================
+           FEATURES
+      ====================================== -->
 
-          <div class="salat-header">
+      <section class="features">
 
-            <div class="salat-title">
+        <div class="features-inner">
 
-              <div class="mosque-icon">
+          <div class="section-label">
+            Studio
+          </div>
+
+
+          <div class="feature-grid">
+
+            <div class="feature-card">
+
+              <div class="feature-icon">
+                🎬
+              </div>
+
+              <h3>
+                Course Recording
+              </h3>
+
+              <p>
+                Create your own class and course
+                recordings in a focused studio environment.
+              </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+              <div class="feature-icon">
+                🎙️
+              </div>
+
+              <h3>
+                Mentor Studio
+              </h3>
+
+              <p>
+                Manage your teaching screen, mentor camera,
+                slides and recorded class workflow.
+              </p>
+
+            </div>
+
+
+            <div class="feature-card">
+
+              <div class="feature-icon">
                 🕌
               </div>
 
-              <div>
+              <h3>
+                Daily Salat
+              </h3>
 
-                <h2>
-                  Salat Times
-                </h2>
-
-                <p>
-                  আজকের নামাজের সময়
-                </p>
-
-              </div>
-
-            </div>
-
-
-            <div
-              class="location"
-              id="locationBadge"
-            >
-              📍 Dhaka, Bangladesh
-            </div>
-
-          </div>
-
-
-          <!-- =================================================
-               GREGORIAN + HIJRI
-               ================================================= -->
-
-          <div class="date-bar">
-
-            <div class="date-box">
-
-              <div class="date-label">
-                Gregorian
-              </div>
-
-              <div
-                class="date-value"
-                id="gregorianDate"
-              >
-                Loading...
-              </div>
-
-            </div>
-
-
-            <div class="date-box">
-
-              <div class="date-label">
-                Hijri
-              </div>
-
-              <div
-                class="date-value"
-                id="hijriDate"
-              >
-                Loading...
-              </div>
+              <p>
+                Keep daily prayer information alongside
+                your personal learning and teaching studio.
+              </p>
 
             </div>
 
           </div>
 
+        </div>
 
-          <!-- =================================================
-               SUNRISE
-               ================================================= -->
+      </section>
 
-          <div class="sunrise-box">
-
-            <div class="sunrise-left">
-
-              <div class="sunrise-icon">
-                🌅
-              </div>
-
-              <div>
-
-                <div class="sunrise-title">
-                  Sunrise
-                </div>
-
-                <div class="sunrise-subtitle">
-                  সূর্যোদয়
-                </div>
-
-              </div>
-
-            </div>
+    </main>
 
 
-            <div
-              class="sunrise-time"
-              id="sunriseTime"
-            >
-              --
-            </div>
+    <!-- =====================================
+         FOOTER
+    ====================================== -->
 
-          </div>
+    <footer>
 
+      <div class="footer-inner">
 
-          <!-- =================================================
-               JUMMAH
-               ================================================= -->
+        <div class="footer-brand">
 
-          <div
-            class="jummah-box"
-            id="jummahBox"
+          <img
+            class="footer-logo"
+            src="https://github.com/yourdocuments/masha.github.io/blob/main/logo.png?raw=true"
+            alt="SNK Business"
           >
 
-            <div class="jummah-title">
-              🕌 Jummah Mubarak
-            </div>
+        </div>
 
-            <div
-              class="jummah-text"
-              id="jummahText"
-            >
-              আজ শুক্রবার। যোহরের পরিবর্তে
-              স্থানীয় মসজিদের জুমার জামাতের সময় অনুসরণ করুন।
-            </div>
 
-          </div>
-
-
-          <!-- =================================================
-               NEXT PRAYER
-               ================================================= -->
-
-          <div
-            class="next-prayer"
-            id="nextPrayerBox"
-          >
-
-            <div class="next-label">
-              Next Prayer
-            </div>
-
-            <div
-              class="next-name"
-              id="nextPrayerName"
-            >
-              Loading...
-            </div>
-
-            <div
-              class="next-time"
-              id="nextPrayerTime"
-            >
-              --
-            </div>
-
-            <div
-              class="countdown"
-              id="countdown"
-            >
-              --:--:--
-            </div>
-
-            <div class="countdown-label">
-              remaining
-            </div>
-
-          </div>
-
-
-          <!-- =================================================
-               PRAYER LIST
-               ================================================= -->
-
-          <div
-            class="prayer-list"
-            id="prayerList"
-          >
-
-            <div class="loading">
-              নামাজের সময় লোড হচ্ছে...
-            </div>
-
-          </div>
-
-
-          <!-- =================================================
-               SETTINGS TOGGLE
-               ================================================= -->
-
-          <button
-            class="settings-toggle"
-            id="settingsToggle"
-            type="button"
-          >
-
-            <span>
-              ⚙️ Salat Settings
-            </span>
-
-            <span id="settingsArrow">
-              ＋
-            </span>
-
-          </button>
-
-
-          <!-- =================================================
-               SETTINGS PANEL
-               ================================================= -->
-
-          <div
-            class="settings-panel"
-            id="settingsPanel"
-          >
-
-            <div class="setting-group">
-
-              <label for="cityInput">
-                City
-              </label>
-
-              <input
-                id="cityInput"
-                type="text"
-                placeholder="Dhaka"
-                autocomplete="off"
-              />
-
-              <div class="setting-help">
-                Example: Dhaka, Makkah, London, Istanbul
-              </div>
-
-            </div>
-
-
-            <div class="setting-group">
-
-              <label for="countryInput">
-                Country
-              </label>
-
-              <input
-                id="countryInput"
-                type="text"
-                placeholder="Bangladesh"
-                autocomplete="off"
-              />
-
-            </div>
-
-
-            <div class="setting-group">
-
-              <label for="methodSelect">
-                Calculation Method
-              </label>
-
-              <select id="methodSelect">
-
-                <option value="1">
-                  Karachi
-                </option>
-
-                <option value="2">
-                  ISNA
-                </option>
-
-                <option value="3">
-                  Muslim World League
-                </option>
-
-                <option value="4">
-                  Umm Al-Qura, Makkah
-                </option>
-
-                <option value="5">
-                  Egyptian General Authority
-                </option>
-
-                <option value="7">
-                  Institute of Geophysics, Tehran
-                </option>
-
-                <option value="8">
-                  Gulf Region
-                </option>
-
-                <option value="9">
-                  Kuwait
-                </option>
-
-                <option value="10">
-                  Qatar
-                </option>
-
-                <option value="11">
-                  Majlis Ugama Islam Singapura
-                </option>
-
-                <option value="12">
-                  Union Organization Islamic de France
-                </option>
-
-                <option value="13">
-                  Diyanet, Turkey
-                </option>
-
-                <option value="14">
-                  Spiritual Administration of Muslims of Russia
-                </option>
-
-                <option value="15">
-                  Moonsighting Committee
-                </option>
-
-                <option value="16">
-                  Dubai, UAE
-                </option>
-
-                <option value="17">
-                  JAKIM, Malaysia
-                </option>
-
-                <option value="18">
-                  Tunisia
-                </option>
-
-                <option value="19">
-                  Algeria
-                </option>
-
-                <option value="20">
-                  Kementerian Agama Indonesia
-                </option>
-
-                <option value="21">
-                  Morocco
-                </option>
-
-                <option value="22">
-                  Comunidate Islamica de Lisboa
-                </option>
-
-              </select>
-
-              <div class="setting-help">
-                Different calculation methods can produce
-                different prayer times.
-              </div>
-
-            </div>
-
-
-            <div class="setting-group">
-
-              <label for="schoolSelect">
-                Asr Juristic School
-              </label>
-
-              <select id="schoolSelect">
-
-                <option value="0">
-                  Shafi / Maliki / Hanbali
-                </option>
-
-                <option value="1">
-                  Hanafi
-                </option>
-
-              </select>
-
-              <div class="setting-help">
-                This setting mainly affects Asr.
-              </div>
-
-            </div>
-
-
-            <div class="settings-actions">
-
-              <button
-                type="button"
-                class="settings-btn save"
-                id="saveSettingsBtn"
-              >
-                Save & Refresh
-              </button>
-
-              <button
-                type="button"
-                class="settings-btn reset"
-                id="resetSettingsBtn"
-              >
-                Reset
-              </button>
-
-            </div>
-
-          </div>
-
-
-          <!-- =================================================
-               FOOTER
-               ================================================= -->
-
-          <div class="salat-footer">
-
-            <div
-              class="date-info"
-              id="dateInfo"
-            >
-              Today's prayer times
-            </div>
-
-
-            <button
-              class="refresh-btn"
-              id="refreshBtn"
-              type="button"
-            >
-              ↻ Refresh
-            </button>
-
-          </div>
-
+        <div class="footer-copy">
+          Learn • Create • Teach
         </div>
 
       </div>
 
-    </section>
+    </footer>
 
-
-    <!-- =====================================================
-         INFO CARDS
-         ===================================================== -->
-
-    <section class="info-section">
-
-      <div class="info-grid">
-
-
-        <div class="info-card">
-
-          <div class="info-icon">
-            🎥
-          </div>
-
-          <h3>
-            Course Recording
-          </h3>
-
-          <p>
-            নিজের course এবং live class recording
-            তৈরি করুন সহজভাবে।
-          </p>
-
-        </div>
-
-
-        <div class="info-card">
-
-          <div class="info-icon">
-            🖥️
-          </div>
-
-          <h3>
-            Mentor Studio
-          </h3>
-
-          <p>
-            Slide, video এবং camera একসাথে ব্যবহার
-            করে teaching setup তৈরি করুন।
-          </p>
-
-        </div>
-
-
-        <div class="info-card">
-
-          <div class="info-icon">
-            🕌
-          </div>
-
-          <h3>
-            Daily Salat
-          </h3>
-
-          <p>
-            Prayer time, Hijri date, Sunrise এবং
-            Jummah information এক জায়গায়।
-          </p>
-
-        </div>
-
-
-      </div>
-
-    </section>
-
-  </main>
-
-
-  <!-- =======================================================
-       FOOTER
-       ======================================================= -->
-
-  <footer>
-    Personal Course Studio © 2026
-  </footer>
-
-
-  <!-- =======================================================
-       SALAT JAVASCRIPT
-       ======================================================= -->
-
-  <script>
-
-    /* =======================================================
-       STORAGE
-       ======================================================= */
-
-    const SALAT_SETTINGS_KEY =
-      "personalCourseStudioSalatSettings";
-
-
-    /* =======================================================
-       DEFAULT SETTINGS
-       ======================================================= */
-
-    const DEFAULT_SETTINGS = {
-
-      city: "Dhaka",
-
-      country: "Bangladesh",
-
-      method: "1",
-
-      school: "0"
-
-    };
-
-
-    /* =======================================================
-       LOAD SAVED SETTINGS
-       ======================================================= */
-
-    function loadSavedSettings() {
-
-      try {
-
-        const saved =
-          localStorage.getItem(
-            SALAT_SETTINGS_KEY
-          );
-
-        if (!saved) {
-
-          return {
-            ...DEFAULT_SETTINGS
-          };
-
-        }
-
-        const parsed =
-          JSON.parse(saved);
-
-        return {
-          ...DEFAULT_SETTINGS,
-          ...parsed
-        };
-
-      } catch (error) {
-
-        console.error(
-          "Settings error:",
-          error
-        );
-
-        return {
-          ...DEFAULT_SETTINGS
-        };
-
-      }
-
-    }
-
-
-    let salatSettings =
-      loadSavedSettings();
-
-
-    /* =======================================================
-       PRAYER DEFINITIONS
-       ======================================================= */
-
-    const prayerDefinitions = [
-
-      {
-        key: "Fajr",
-        name: "Fajr",
-        arabic: "ফজর",
-        icon: "🌙"
-      },
-
-      {
-        key: "Dhuhr",
-        name: "Dhuhr",
-        arabic: "যোহর",
-        icon: "☀️"
-      },
-
-      {
-        key: "Asr",
-        name: "Asr",
-        arabic: "আসর",
-        icon: "🌤️"
-      },
-
-      {
-        key: "Maghrib",
-        name: "Maghrib",
-        arabic: "মাগরিব",
-        icon: "🌇"
-      },
-
-      {
-        key: "Isha",
-        name: "Isha",
-        arabic: "এশা",
-        icon: "🌙"
-      }
-
-    ];
-
-
-    let prayerTimes = {};
-
-    let countdownTimer = null;
-
-
-    /* =======================================================
-       ELEMENTS
-       ======================================================= */
-
-    const prayerList =
-      document.getElementById(
-        "prayerList"
-      );
-
-    const nextPrayerName =
-      document.getElementById(
-        "nextPrayerName"
-      );
-
-    const nextPrayerTime =
-      document.getElementById(
-        "nextPrayerTime"
-      );
-
-    const countdown =
-      document.getElementById(
-        "countdown"
-      );
-
-    const dateInfo =
-      document.getElementById(
-        "dateInfo"
-      );
-
-    const refreshBtn =
-      document.getElementById(
-        "refreshBtn"
-      );
-
-    const settingsToggle =
-      document.getElementById(
-        "settingsToggle"
-      );
-
-    const settingsPanel =
-      document.getElementById(
-        "settingsPanel"
-      );
-
-    const settingsArrow =
-      document.getElementById(
-        "settingsArrow"
-      );
-
-    const cityInput =
-      document.getElementById(
-        "cityInput"
-      );
-
-    const countryInput =
-      document.getElementById(
-        "countryInput"
-      );
-
-    const methodSelect =
-      document.getElementById(
-        "methodSelect"
-      );
-
-    const schoolSelect =
-      document.getElementById(
-        "schoolSelect"
-      );
-
-    const saveSettingsBtn =
-      document.getElementById(
-        "saveSettingsBtn"
-      );
-
-    const resetSettingsBtn =
-      document.getElementById(
-        "resetSettingsBtn"
-      );
-
-    const locationBadge =
-      document.getElementById(
-        "locationBadge"
-      );
-
-    const gregorianDate =
-      document.getElementById(
-        "gregorianDate"
-      );
-
-    const hijriDate =
-      document.getElementById(
-        "hijriDate"
-      );
-
-    const sunriseTime =
-      document.getElementById(
-        "sunriseTime"
-      );
-
-    const jummahBox =
-      document.getElementById(
-        "jummahBox"
-      );
-
-    const jummahText =
-      document.getElementById(
-        "jummahText"
-      );
-
-
-    /* =======================================================
-       APPLY SETTINGS TO FORM
-       ======================================================= */
-
-    function applySettingsToForm() {
-
-      cityInput.value =
-        salatSettings.city;
-
-      countryInput.value =
-        salatSettings.country;
-
-      methodSelect.value =
-        salatSettings.method;
-
-      schoolSelect.value =
-        salatSettings.school;
-
-    }
-
-
-    /* =======================================================
-       UPDATE API URL
-       ======================================================= */
-
-    function getApiUrl() {
-
-      const city =
-        encodeURIComponent(
-          salatSettings.city
-        );
-
-      const country =
-        encodeURIComponent(
-          salatSettings.country
-        );
-
-      return (
-        `https://api.aladhan.com/v1/timingsByCity` +
-        `?city=${city}` +
-        `&country=${country}` +
-        `&method=${salatSettings.method}` +
-        `&school=${salatSettings.school}`
-      );
-
-    }
-
-
-    /* =======================================================
-       12 HOUR TIME
-       ======================================================= */
-
-    function convertTo12Hour(time) {
-
-      if (!time) {
-        return "--";
-      }
-
-      const cleanTime =
-        time
-          .split(" ")[0]
-          .trim();
-
-      const parts =
-        cleanTime.split(":");
-
-      let hour =
-        parseInt(
-          parts[0],
-          10
-        );
-
-      const minute =
-        parts[1];
-
-      const ampm =
-        hour >= 12
-          ? "PM"
-          : "AM";
-
-      hour =
-        hour % 12 || 12;
-
-      return (
-        `${hour}:${minute} ${ampm}`
-      );
-
-    }
-
-
-    /* =======================================================
-       CREATE PRAYER DATE
-       ======================================================= */
-
-    function createPrayerDate(time) {
-
-      const cleanTime =
-        time
-          .split(" ")[0];
-
-      const parts =
-        cleanTime
-          .split(":")
-          .map(Number);
-
-      const date =
-        new Date();
-
-      date.setHours(
-        parts[0],
-        parts[1],
-        0,
-        0
-      );
-
-      return date;
-
-    }
-
-
-    /* =======================================================
-       LOAD PRAYER TIMES
-       ======================================================= */
-
-    async function loadPrayerTimes() {
-
-      prayerList.innerHTML = `
-        <div class="loading">
-          নামাজের সময় লোড হচ্ছে...
-        </div>
-      `;
-
-
-      if (countdownTimer) {
-
-        clearInterval(
-          countdownTimer
-        );
-
-        countdownTimer = null;
-
-      }
-
-
-      locationBadge.textContent =
-        `📍 ${salatSettings.city}, ${salatSettings.country}`;
-
-
-      try {
-
-        const response =
-          await fetch(
-            getApiUrl(),
-            {
-              cache: "no-store"
-            }
-          );
-
-
-        if (!response.ok) {
-
-          throw new Error(
-            "Prayer API request failed"
-          );
-
-        }
-
-
-        const data =
-          await response.json();
-
-
-        if (
-          !data ||
-          data.code !== 200 ||
-          !data.data
-        ) {
-
-          throw new Error(
-            "Invalid prayer time data"
-          );
-
-        }
-
-
-        prayerTimes =
-          data.data.timings || {};
-
-
-        renderDates(
-          data.data
-        );
-
-
-        renderSunrise();
-
-
-        renderJummah();
-
-
-        renderPrayerList();
-
-
-        updateNextPrayer();
-
-
-      } catch (error) {
-
-        console.error(
-          "Salat API Error:",
-          error
-        );
-
-
-        prayerList.innerHTML = `
-          <div class="error">
-            নামাজের সময় লোড করা যাচ্ছে না।<br><br>
-            City / Country সঠিক আছে কিনা দেখুন।
-            তারপর Refresh করুন।
-          </div>
-        `;
-
-
-        nextPrayerName.textContent =
-          "Unavailable";
-
-
-        nextPrayerTime.textContent =
-          "--";
-
-
-        countdown.textContent =
-          "--:--:--";
-
-
-        sunriseTime.textContent =
-          "--";
-
-      }
-
-    }
-
-
-    /* =======================================================
-       RENDER DATES
-       ======================================================= */
-
-    function renderDates(data) {
-
-      if (
-        data.date &&
-        data.date.gregorian
-      ) {
-
-        const g =
-          data.date.gregorian;
-
-        gregorianDate.textContent =
-          `${g.day} ${g.month.en} ${g.year}`;
-
-      }
-
-
-      if (
-        data.date &&
-        data.date.hijri
-      ) {
-
-        const h =
-          data.date.hijri;
-
-        hijriDate.textContent =
-          `${h.day} ${h.month.en} ${h.year} AH`;
-
-      }
-
-
-      if (
-        data.date &&
-        data.date.readable
-      ) {
-
-        dateInfo.textContent =
-          `${data.date.readable} • ` +
-          `${salatSettings.city}`;
-
-      } else {
-
-        dateInfo.textContent =
-          `Today • ${salatSettings.city}`;
-
-      }
-
-    }
-
-
-    /* =======================================================
-       SUNRISE
-       ======================================================= */
-
-    function renderSunrise() {
-
-      if (
-        prayerTimes.Sunrise
-      ) {
-
-        sunriseTime.textContent =
-          convertTo12Hour(
-            prayerTimes.Sunrise
-          );
-
-      } else {
-
-        sunriseTime.textContent =
-          "--";
-
-      }
-
-    }
-
-
-    /* =======================================================
-       JUMMAH
-       ======================================================= */
-
-    function renderJummah() {
-
-      const today =
-        new Date();
-
-      const day =
-        today.getDay();
-
-      if (day === 5) {
-
-        jummahBox.classList.add(
-          "show"
-        );
-
-        jummahText.textContent =
-          "আজ শুক্রবার। স্থানীয় মসজিদের " +
-          "জুমার জামাতের সময় অনুসরণ করুন। " +
-          "এই system আপনার configured prayer calculation-এর " +
-          "Dhuhr time দেখাবে, কিন্তু Jummah congregation time " +
-          "স্থানীয় মসজিদ অনুযায়ী ভিন্ন হতে পারে।";
-
-      } else {
-
-        jummahBox.classList.remove(
-          "show"
-        );
-
-      }
-
-    }
-
-
-    /* =======================================================
-       RENDER PRAYER LIST
-       ======================================================= */
-
-    function renderPrayerList() {
-
-      prayerList.innerHTML = "";
-
-
-      prayerDefinitions.forEach(
-        prayer => {
-
-          const time =
-            prayerTimes[
-              prayer.key
-            ];
-
-
-          if (!time) {
-            return;
-          }
-
-
-          const row =
-            document.createElement(
-              "div"
-            );
-
-
-          row.className =
-            "prayer-row";
-
-
-          row.dataset.prayer =
-            prayer.key;
-
-
-          row.innerHTML = `
-
-            <div class="prayer-icon">
-              ${prayer.icon}
-            </div>
-
-            <div>
-
-              <div class="prayer-name">
-                ${prayer.name}
-              </div>
-
-              <div class="prayer-arabic">
-                ${prayer.arabic}
-              </div>
-
-            </div>
-
-            <div class="prayer-time">
-              ${convertTo12Hour(time)}
-            </div>
-
-          `;
-
-
-          prayerList.appendChild(
-            row
-          );
-
-        }
-      );
-
-    }
-
-
-    /* =======================================================
-       GET NEXT PRAYER
-       ======================================================= */
-
-    function getNextPrayer() {
-
-      const now =
-        new Date();
-
-      const prayersToday = [];
-
-
-      prayerDefinitions.forEach(
-        prayer => {
-
-          const raw =
-            prayerTimes[
-              prayer.key
-            ];
-
-
-          if (!raw) {
-            return;
-          }
-
-
-          const date =
-            createPrayerDate(
-              raw
-            );
-
-
-          prayersToday.push({
-
-            ...prayer,
-
-            rawTime:
-              raw.split(" ")[0],
-
-            date
-
-          });
-
-        }
-      );
-
-
-      for (
-        const prayer of
-        prayersToday
-      ) {
-
-        if (
-          prayer.date > now
-        ) {
-
-          return prayer;
-
-        }
-
-      }
-
-
-      if (
-        prayersToday.length > 0
-      ) {
-
-        const first =
-          prayersToday[0];
-
-
-        const tomorrow =
-          new Date(
-            first.date
-          );
-
-
-        tomorrow.setDate(
-          tomorrow.getDate() + 1
-        );
-
-
-        return {
-
-          ...first,
-
-          date:
-            tomorrow,
-
-          tomorrow:
-            true
-
-        };
-
-      }
-
-
-      return null;
-
-    }
-
-
-    /* =======================================================
-       UPDATE NEXT PRAYER
-       ======================================================= */
-
-    function updateNextPrayer() {
-
-      const next =
-        getNextPrayer();
-
-
-      if (!next) {
-
-        nextPrayerName.textContent =
-          "No prayer data";
-
-        nextPrayerTime.textContent =
-          "--";
-
-        countdown.textContent =
-          "--:--:--";
-
-        return;
-
-      }
-
-
-      nextPrayerName.textContent =
-        `${next.name}` +
-        `${next.tomorrow ? " • Tomorrow" : ""}`;
-
-
-      nextPrayerTime.textContent =
-        convertTo12Hour(
-          next.rawTime
-        );
-
-
-      document
-        .querySelectorAll(
-          ".prayer-row"
-        )
-        .forEach(
-          row => {
-
-            row.classList.remove(
-              "active"
-            );
-
-
-            if (
-              row.dataset.prayer ===
-              next.key
-            ) {
-
-              row.classList.add(
-                "active"
-              );
-
-            }
-
-          }
-        );
-
-
-      if (countdownTimer) {
-
-        clearInterval(
-          countdownTimer
-        );
-
-      }
-
-
-      updateCountdown(
-        next.date
-      );
-
-
-      countdownTimer =
-        setInterval(
-          () => {
-
-            updateCountdown(
-              next.date
-            );
-
-          },
-          1000
-        );
-
-    }
-
-
-    /* =======================================================
-       COUNTDOWN
-       ======================================================= */
-
-    function updateCountdown(
-      targetDate
-    ) {
-
-      const now =
-        new Date();
-
-
-      const difference =
-        targetDate.getTime() -
-        now.getTime();
-
-
-      if (
-        difference <= 0
-      ) {
-
-        updateNextPrayer();
-
-        return;
-
-      }
-
-
-      const totalSeconds =
-        Math.floor(
-          difference / 1000
-        );
-
-
-      const hours =
-        Math.floor(
-          totalSeconds / 3600
-        );
-
-
-      const minutes =
-        Math.floor(
-          (totalSeconds % 3600) /
-          60
-        );
-
-
-      const seconds =
-        totalSeconds % 60;
-
-
-      countdown.textContent =
-        `${String(hours).padStart(2, "0")}:` +
-        `${String(minutes).padStart(2, "0")}:` +
-        `${String(seconds).padStart(2, "0")}`;
-
-    }
-
-
-    /* =======================================================
-       SETTINGS OPEN / CLOSE
-       ======================================================= */
-
-    settingsToggle.addEventListener(
-      "click",
-      () => {
-
-        const isOpen =
-          settingsPanel.classList.toggle(
-            "open"
-          );
-
-
-        settingsArrow.textContent =
-          isOpen
-            ? "−"
-            : "＋";
-
-      }
-    );
-
-
-    /* =======================================================
-       SAVE SETTINGS
-       ======================================================= */
-
-    saveSettingsBtn.addEventListener(
-      "click",
-      () => {
-
-        const city =
-          cityInput.value.trim();
-
-
-        const country =
-          countryInput.value.trim();
-
-
-        if (
-          !city ||
-          !country
-        ) {
-
-          alert(
-            "City এবং Country দুটোই দিতে হবে।"
-          );
-
-          return;
-
-        }
-
-
-        salatSettings = {
-
-          city,
-
-          country,
-
-          method:
-            methodSelect.value,
-
-          school:
-            schoolSelect.value
-
-        };
-
-
-        localStorage.setItem(
-          SALAT_SETTINGS_KEY,
-          JSON.stringify(
-            salatSettings
-          )
-        );
-
-
-        settingsPanel.classList.remove(
-          "open"
-        );
-
-
-        settingsArrow.textContent =
-          "＋";
-
-
-        loadPrayerTimes();
-
-      }
-    );
-
-
-    /* =======================================================
-       RESET SETTINGS
-       ======================================================= */
-
-    resetSettingsBtn.addEventListener(
-      "click",
-      () => {
-
-        salatSettings = {
-          ...DEFAULT_SETTINGS
-        };
-
-
-        localStorage.removeItem(
-          SALAT_SETTINGS_KEY
-        );
-
-
-        applySettingsToForm();
-
-
-        loadPrayerTimes();
-
-      }
-    );
-
-
-    /* =======================================================
-       REFRESH
-       ======================================================= */
-
-    refreshBtn.addEventListener(
-      "click",
-      () => {
-
-        loadPrayerTimes();
-
-      }
-    );
-
-
-    /* =======================================================
-       AUTO REFRESH
-       ======================================================= */
-
-    setInterval(
-      () => {
-
-        loadPrayerTimes();
-
-      },
-      30 * 60 * 1000
-    );
-
-
-    /* =======================================================
-       SERVICE WORKER
-       ======================================================= */
-
-    if (
-      "serviceWorker" in navigator
-    ) {
-
-      window.addEventListener(
-        "load",
-        () => {
-
-          navigator.serviceWorker
-            .register("./sw.js")
-            .catch(
-              error => {
-
-                console.log(
-                  "Service Worker:",
-                  error
-                );
-
-              }
-            );
-
-        }
-      );
-
-    }
-
-
-    /* =======================================================
-       INITIALIZE
-       ======================================================= */
-
-    applySettingsToForm();
-
-    loadPrayerTimes();
-
-  </script>
+  </div>
 
 </body>
 </html>
