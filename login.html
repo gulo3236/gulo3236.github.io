@@ -1,1106 +1,855 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  />
 
-  <title>Personal Course Studio</title>
+  <title>Personal Course Studio — Login</title>
 
   <style>
     * {
+      box-sizing: border-box;
       margin: 0;
       padding: 0;
-      box-sizing: border-box;
     }
 
     :root {
-      --white: #ffffff;
-      --muted: rgba(255,255,255,.68);
-      --gold: #f4bd55;
-      --border: rgba(255,255,255,.16);
-      --glass: rgba(5,14,24,.56);
-    }
-
-    html,
-    body {
-      width: 100%;
-      min-height: 100%;
+      --bg: #070b12;
+      --card: rgba(15, 22, 34, 0.92);
+      --card-border: rgba(255, 255, 255, 0.09);
+      --text: #f7f9fc;
+      --muted: #91a0b5;
+      --blue: #3b82f6;
+      --blue-dark: #2563eb;
+      --green: #22c55e;
+      --red: #ef4444;
     }
 
     body {
       min-height: 100vh;
-      overflow: hidden;
-
       font-family:
         Inter,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
         "Segoe UI",
-        Arial,
         sans-serif;
 
-      color: var(--white);
-      background: #07111d;
-    }
-
-    /* =====================================================
-       TURKISH SCENERY
-    ===================================================== */
-
-    .scene {
-      position: fixed;
-      inset: 0;
-      z-index: -10;
-
-      background:
-        linear-gradient(
-          180deg,
-          rgba(4,12,21,.12),
-          rgba(4,12,21,.38),
-          rgba(4,12,21,.82)
-        ),
-        url("https://images.unsplash.com/photo-1524231757912-21f4fe3a7200?auto=format&fit=crop&w=2400&q=92")
-        center center / cover no-repeat;
-
-      transform: scale(1.04);
-
-      animation:
-        sceneryZoom 22s
-        ease-in-out
-        infinite alternate;
-    }
-
-    @keyframes sceneryZoom {
-
-      from {
-        transform: scale(1.04);
-      }
-
-      to {
-        transform: scale(1.10);
-      }
-
-    }
-
-
-    .scene-overlay {
-      position: fixed;
-      inset: 0;
-      z-index: -9;
-
-      background:
-        radial-gradient(
-          circle at 50% 35%,
-          rgba(255,255,255,.10),
-          transparent 35%
-        ),
-        linear-gradient(
-          90deg,
-          rgba(3,10,18,.60),
-          rgba(3,10,18,.12),
-          rgba(3,10,18,.60)
-        );
-    }
-
-
-    /* =====================================================
-       TOP BRAND
-    ===================================================== */
-
-    .top-brand {
-      position: fixed;
-
-      top: 28px;
-      left: 30px;
-
-      z-index: 20;
-
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-
-    .logo {
-      width: 46px;
-      height: 46px;
+      color: var(--text);
 
       display: flex;
       align-items: center;
       justify-content: center;
+
+      padding: 24px;
+
+      background:
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(59, 130, 246, 0.18),
+          transparent 32%
+        ),
+        radial-gradient(
+          circle at 80% 80%,
+          rgba(34, 197, 94, 0.10),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          #05080e,
+          #0a101b 50%,
+          #05080e
+        );
+    }
+
+    .login-wrapper {
+      width: 100%;
+      max-width: 980px;
+
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+
+      background: rgba(255, 255, 255, 0.025);
+      border: 1px solid var(--card-border);
+
+      border-radius: 28px;
+      overflow: hidden;
+
+      box-shadow:
+        0 30px 80px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    }
+
+    /* =========================
+       LEFT SIDE
+    ========================= */
+
+    .visual-side {
+      position: relative;
+      min-height: 650px;
+
+      padding: 48px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      overflow: hidden;
+
+      background:
+        linear-gradient(
+          145deg,
+          rgba(20, 35, 60, 0.95),
+          rgba(8, 14, 24, 0.98)
+        );
+    }
+
+    .visual-side::before {
+      content: "";
+      position: absolute;
+
+      width: 420px;
+      height: 420px;
+
+      border-radius: 50%;
+
+      background: rgba(59, 130, 246, 0.13);
+
+      filter: blur(70px);
+
+      top: -160px;
+      left: -150px;
+    }
+
+    .visual-side::after {
+      content: "";
+      position: absolute;
+
+      width: 300px;
+      height: 300px;
+
+      border-radius: 50%;
+
+      background: rgba(34, 197, 94, 0.08);
+
+      filter: blur(70px);
+
+      right: -100px;
+      bottom: -100px;
+    }
+
+    .visual-content {
+      position: relative;
+      z-index: 2;
+    }
+
+    .logo-box {
+      width: 64px;
+      height: 64px;
+
+      border-radius: 18px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      font-size: 20px;
+      font-weight: 900;
+
+      color: white;
+
+      background:
+        linear-gradient(
+          135deg,
+          #3b82f6,
+          #2563eb
+        );
+
+      box-shadow:
+        0 15px 35px rgba(37, 99, 235, 0.35);
+    }
+
+    .visual-title {
+      margin-top: 34px;
+
+      font-size: clamp(32px, 4vw, 52px);
+
+      line-height: 1.05;
+
+      letter-spacing: -1.8px;
+    }
+
+    .visual-title span {
+      color: #60a5fa;
+    }
+
+    .visual-description {
+      max-width: 480px;
+
+      margin-top: 20px;
+
+      color: #aab6c7;
+
+      line-height: 1.8;
+
+      font-size: 15px;
+    }
+
+    .feature-list {
+      position: relative;
+      z-index: 2;
+
+      display: grid;
+      gap: 12px;
+    }
+
+    .feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+
+      color: #c9d3e1;
+
+      font-size: 14px;
+    }
+
+    .feature-icon {
+      width: 34px;
+      height: 34px;
+
+      border-radius: 10px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(59, 130, 246, 0.12);
+
+      border: 1px solid rgba(59, 130, 246, 0.16);
+
+      color: #60a5fa;
+
+      font-size: 16px;
+    }
+
+    /* =========================
+       RIGHT SIDE
+    ========================= */
+
+    .login-side {
+      padding: 48px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      background: rgba(9, 14, 23, 0.94);
+    }
+
+    .login-card {
+      width: 100%;
+      max-width: 390px;
+    }
+
+    .login-heading h2 {
+      font-size: 30px;
+
+      letter-spacing: -0.8px;
+    }
+
+    .login-heading p {
+      margin-top: 9px;
+
+      color: var(--muted);
+
+      font-size: 14px;
+
+      line-height: 1.6;
+    }
+
+    /* =========================
+       ROLE SELECT
+    ========================= */
+
+    .role-selector {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+
+      gap: 10px;
+
+      margin-top: 30px;
+    }
+
+    .role-btn {
+      border: 1px solid rgba(255, 255, 255, 0.08);
+
+      background: rgba(255, 255, 255, 0.035);
+
+      color: #9ba8bb;
+
+      border-radius: 14px;
+
+      padding: 14px 10px;
+
+      cursor: pointer;
+
+      transition: 0.2s ease;
+
+      font: inherit;
+    }
+
+    .role-btn:hover {
+      border-color: rgba(59, 130, 246, 0.35);
+
+      color: white;
+    }
+
+    .role-btn.active {
+      color: white;
+
+      border-color: rgba(59, 130, 246, 0.55);
+
+      background:
+        linear-gradient(
+          135deg,
+          rgba(59, 130, 246, 0.16),
+          rgba(37, 99, 235, 0.08)
+        );
+
+      box-shadow:
+        inset 0 0 0 1px rgba(59, 130, 246, 0.08);
+    }
+
+    .role-icon {
+      display: block;
+
+      font-size: 22px;
+
+      margin-bottom: 6px;
+    }
+
+    .role-name {
+      display: block;
+
+      font-weight: 700;
+
+      font-size: 13px;
+    }
+
+    /* =========================
+       FORM
+    ========================= */
+
+    .form {
+      margin-top: 25px;
+    }
+
+    .field {
+      margin-bottom: 18px;
+    }
+
+    .field label {
+      display: block;
+
+      margin-bottom: 8px;
+
+      color: #cbd5e1;
+
+      font-size: 13px;
+
+      font-weight: 600;
+    }
+
+    .input-wrap {
+      position: relative;
+    }
+
+    .input-wrap input {
+      width: 100%;
+
+      height: 52px;
+
+      padding: 0 46px 0 15px;
+
+      border-radius: 13px;
+
+      border: 1px solid rgba(255, 255, 255, 0.09);
+
+      background: rgba(255, 255, 255, 0.035);
+
+      color: white;
+
+      outline: none;
+
+      font: inherit;
+
+      transition: 0.2s ease;
+    }
+
+    .input-wrap input::placeholder {
+      color: #66758a;
+    }
+
+    .input-wrap input:focus {
+      border-color: rgba(59, 130, 246, 0.65);
+
+      background: rgba(59, 130, 246, 0.045);
+
+      box-shadow:
+        0 0 0 4px rgba(59, 130, 246, 0.08);
+    }
+
+    .toggle-password {
+      position: absolute;
+
+      right: 12px;
+      top: 50%;
+
+      transform: translateY(-50%);
+
+      border: 0;
+
+      background: transparent;
+
+      color: #8492a6;
+
+      cursor: pointer;
+
+      font-size: 17px;
+    }
+
+    .toggle-password:hover {
+      color: white;
+    }
+
+    /* =========================
+       LOGIN BUTTON
+    ========================= */
+
+    .login-btn {
+      width: 100%;
+
+      height: 54px;
+
+      border: 0;
 
       border-radius: 14px;
 
       background:
         linear-gradient(
           135deg,
-          #ffffff,
-          #e5ebf1
+          #3b82f6,
+          #2563eb
         );
 
-      color: #17202a;
+      color: white;
 
       font-size: 15px;
-      font-weight: 900;
 
-      box-shadow:
-        0 10px 35px rgba(0,0,0,.25);
-    }
-
-
-    .brand-text strong {
-      display: block;
-
-      font-size: 14px;
-      letter-spacing: .2px;
-    }
-
-
-    .brand-text span {
-      display: block;
-
-      margin-top: 3px;
-
-      color: rgba(255,255,255,.62);
-
-      font-size: 10px;
-    }
-
-
-    /* =====================================================
-       CENTER CONTENT
-    ===================================================== */
-
-    .page {
-      min-height: 100vh;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      padding: 25px;
-    }
-
-
-    .content {
-      width: min(900px, 100%);
-
-      text-align: center;
-    }
-
-
-    .location {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-
-      padding: 8px 14px;
-
-      border: 1px solid rgba(255,255,255,.18);
-      border-radius: 999px;
-
-      background: rgba(255,255,255,.09);
-
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-
-      color: rgba(255,255,255,.82);
-
-      font-size: 11px;
-    }
-
-
-    .location-dot {
-      width: 7px;
-      height: 7px;
-
-      border-radius: 50%;
-
-      background: #6ee7a0;
-
-      box-shadow:
-        0 0 13px rgba(110,231,160,.8);
-    }
-
-
-    .content h1 {
-      margin-top: 22px;
-
-      font-size:
-        clamp(45px, 8vw, 86px);
-
-      line-height: .98;
-
-      letter-spacing: -3px;
-
-      text-shadow:
-        0 12px 45px rgba(0,0,0,.42);
-    }
-
-
-    .content h1 span {
-      color: var(--gold);
-    }
-
-
-    .description {
-      width: min(570px, 100%);
-
-      margin: 20px auto 0;
-
-      color: rgba(255,255,255,.76);
-
-      font-size: 14px;
-      line-height: 1.75;
-
-      text-shadow:
-        0 3px 20px rgba(0,0,0,.5);
-    }
-
-
-    /* =====================================================
-       LOGIN BUTTON
-    ===================================================== */
-
-    .login-open-btn {
-
-      margin-top: 30px;
-
-      min-width: 190px;
-      height: 53px;
-
-      padding: 0 25px;
-
-      border: 0;
-      border-radius: 15px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #ffffff,
-          #e9edf2
-        );
-
-      color: #111820;
-
-      font-size: 13px;
       font-weight: 800;
 
       cursor: pointer;
 
       box-shadow:
-        0 18px 45px rgba(0,0,0,.28);
+        0 15px 30px rgba(37, 99, 235, 0.24);
 
       transition:
-        transform .2s ease,
-        box-shadow .2s ease;
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
     }
 
-
-    .login-open-btn:hover {
-
-      transform: translateY(-3px);
+    .login-btn:hover {
+      transform: translateY(-1px);
 
       box-shadow:
-        0 22px 55px rgba(0,0,0,.36);
+        0 18px 35px rgba(37, 99, 235, 0.32);
     }
 
-
-    .login-open-btn:active {
-
-      transform:
-        translateY(0);
+    .login-btn:active {
+      transform: translateY(0);
     }
 
+    .login-btn.loading {
+      opacity: 0.7;
 
-    /* =====================================================
-       SMALL FOOTER
-    ===================================================== */
-
-    .footer {
-
-      position: fixed;
-
-      left: 50%;
-      bottom: 25px;
-
-      transform: translateX(-50%);
-
-      color: rgba(255,255,255,.48);
-
-      font-size: 10px;
-
-      white-space: nowrap;
+      pointer-events: none;
     }
 
+    /* =========================
+       ERROR
+    ========================= */
 
-    /* =====================================================
-       LOGIN MODAL
-    ===================================================== */
-
-    .modal {
-
-      position: fixed;
-      inset: 0;
-
-      z-index: 100;
-
+    .message {
       display: none;
 
-      align-items: center;
-      justify-content: center;
+      margin-top: 15px;
 
-      padding: 20px;
-
-      background:
-        rgba(2,8,14,.62);
-
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-    }
-
-
-    .modal.show {
-      display: flex;
-    }
-
-
-    .login-card {
-
-      width: min(410px, 100%);
-
-      padding: 30px;
-
-      border: 1px solid var(--border);
-
-      border-radius: 25px;
-
-      background:
-        rgba(8,18,29,.84);
-
-      backdrop-filter: blur(25px);
-      -webkit-backdrop-filter: blur(25px);
-
-      box-shadow:
-        0 35px 100px rgba(0,0,0,.48);
-
-      animation:
-        modalIn .25s ease;
-    }
-
-
-    @keyframes modalIn {
-
-      from {
-        opacity: 0;
-        transform: translateY(15px) scale(.98);
-      }
-
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
-
-    }
-
-
-    .modal-header {
-
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-
-      margin-bottom: 25px;
-    }
-
-
-    .modal-title h2 {
-
-      font-size: 25px;
-
-      letter-spacing: -.6px;
-    }
-
-
-    .modal-title p {
-
-      margin-top: 6px;
-
-      color: var(--muted);
-
-      font-size: 11px;
-      line-height: 1.5;
-    }
-
-
-    .close-btn {
-
-      width: 34px;
-      height: 34px;
-
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 10px;
-
-      background: rgba(255,255,255,.06);
-
-      color: rgba(255,255,255,.70);
-
-      cursor: pointer;
-
-      font-size: 16px;
-
-      transition: .2s ease;
-    }
-
-
-    .close-btn:hover {
-
-      background: rgba(255,255,255,.12);
-
-      color: #fff;
-    }
-
-
-    /* =====================================================
-       ROLE SELECTOR
-    ===================================================== */
-
-    .roles {
-
-      display: grid;
-
-      grid-template-columns: 1fr 1fr;
-
-      gap: 8px;
-
-      margin-bottom: 21px;
-
-      padding: 5px;
-
-      border-radius: 13px;
-
-      background: rgba(255,255,255,.06);
-
-      border: 1px solid rgba(255,255,255,.08);
-    }
-
-
-    .role-btn {
-
-      height: 42px;
-
-      border: 0;
-      border-radius: 9px;
-
-      background: transparent;
-
-      color: rgba(255,255,255,.52);
-
-      font-size: 11px;
-      font-weight: 800;
-
-      cursor: pointer;
-
-      transition: .2s ease;
-    }
-
-
-    .role-btn:hover {
-
-      background: rgba(255,255,255,.06);
-
-      color: #fff;
-    }
-
-
-    .role-btn.active {
-
-      background: #ffffff;
-
-      color: #151d25;
-
-      box-shadow:
-        0 5px 15px rgba(0,0,0,.16);
-    }
-
-
-    /* =====================================================
-       FORM
-    ===================================================== */
-
-    .field {
-
-      margin-bottom: 16px;
-    }
-
-
-    .field label {
-
-      display: block;
-
-      margin-bottom: 7px;
-
-      color: rgba(255,255,255,.72);
-
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-
-    .input-wrap {
-
-      position: relative;
-    }
-
-
-    .input-icon {
-
-      position: absolute;
-
-      left: 14px;
-      top: 50%;
-
-      transform:
-        translateY(-50%);
-
-      color: rgba(255,255,255,.43);
-
-      font-size: 13px;
-    }
-
-
-    input {
-
-      width: 100%;
-      height: 49px;
-
-      padding:
-        0 44px;
-
-      border:
-        1px solid
-        rgba(255,255,255,.13);
+      padding: 12px 14px;
 
       border-radius: 12px;
 
-      outline: none;
-
-      background:
-        rgba(255,255,255,.065);
-
-      color: #fff;
-
       font-size: 13px;
-
-      transition: .2s ease;
-    }
-
-
-    input::placeholder {
-
-      color:
-        rgba(255,255,255,.32);
-    }
-
-
-    input:focus {
-
-      border-color:
-        rgba(244,189,85,.68);
-
-      background:
-        rgba(255,255,255,.09);
-
-      box-shadow:
-        0 0 0 4px
-        rgba(244,189,85,.07);
-    }
-
-
-    .password-toggle {
-
-      position: absolute;
-
-      right: 12px;
-      top: 50%;
-
-      transform:
-        translateY(-50%);
-
-      border: 0;
-
-      background: transparent;
-
-      color: rgba(255,255,255,.50);
-
-      cursor: pointer;
-
-      font-size: 10px;
-    }
-
-
-    .password-toggle:hover {
-
-      color: #fff;
-    }
-
-
-    /* =====================================================
-       SUBMIT
-    ===================================================== */
-
-    .submit-btn {
-
-      width: 100%;
-      height: 51px;
-
-      margin-top: 4px;
-
-      border: 0;
-      border-radius: 13px;
-
-      background:
-        linear-gradient(
-          135deg,
-          #ffffff,
-          #e8edf2
-        );
-
-      color: #131b23;
-
-      font-size: 13px;
-      font-weight: 800;
-
-      cursor: pointer;
-
-      box-shadow:
-        0 12px 30px rgba(0,0,0,.22);
-
-      transition: .2s ease;
-    }
-
-
-    .submit-btn:hover {
-
-      transform:
-        translateY(-2px);
-
-      box-shadow:
-        0 17px 38px rgba(0,0,0,.28);
-    }
-
-
-    /* =====================================================
-       MESSAGE
-    ===================================================== */
-
-    .message {
-
-      display: none;
-
-      margin-top: 13px;
-
-      padding: 10px 12px;
-
-      border-radius: 10px;
-
-      font-size: 11px;
 
       line-height: 1.5;
     }
 
+    .message.show {
+      display: block;
+    }
 
     .message.error {
+      color: #fecaca;
 
-      display: block;
+      background: rgba(239, 68, 68, 0.09);
 
-      color: #ffd0d0;
-
-      background:
-        rgba(255,65,65,.10);
-
-      border:
-        1px solid
-        rgba(255,90,90,.20);
+      border: 1px solid rgba(239, 68, 68, 0.16);
     }
-
 
     .message.success {
+      color: #bbf7d0;
 
-      display: block;
+      background: rgba(34, 197, 94, 0.09);
 
-      color: #caffdc;
-
-      background:
-        rgba(65,220,130,.09);
-
-      border:
-        1px solid
-        rgba(80,230,150,.18);
+      border: 1px solid rgba(34, 197, 94, 0.16);
     }
 
+    /* =========================
+       DEMO INFO
+    ========================= */
 
-    .private-note {
+    .demo-info {
+      margin-top: 22px;
 
-      margin-top: 17px;
+      padding: 14px;
+
+      border-radius: 13px;
+
+      border: 1px solid rgba(255, 255, 255, 0.06);
+
+      background: rgba(255, 255, 255, 0.025);
+
+      color: #77869a;
+
+      font-size: 12px;
+
+      line-height: 1.7;
+    }
+
+    .demo-info strong {
+      color: #aebbd0;
+    }
+
+    .bottom-note {
+      margin-top: 24px;
 
       text-align: center;
 
-      color: rgba(255,255,255,.34);
+      color: #536175;
 
-      font-size: 9px;
+      font-size: 11px;
+
+      line-height: 1.6;
     }
 
-
-    /* =====================================================
+    /* =========================
        MOBILE
-    ===================================================== */
+    ========================= */
 
-    @media (max-width: 600px) {
+    @media (max-width: 820px) {
+      .login-wrapper {
+        grid-template-columns: 1fr;
 
-      body {
-        overflow: auto;
+        max-width: 520px;
       }
 
+      .visual-side {
+        min-height: auto;
 
-      .top-brand {
-
-        top: 18px;
-        left: 18px;
+        padding: 34px;
       }
 
+      .visual-title {
+        margin-top: 25px;
 
-      .logo {
-
-        width: 42px;
-        height: 42px;
-
-        border-radius: 12px;
+        font-size: 36px;
       }
 
-
-      .brand-text strong {
-
-        font-size: 12px;
+      .feature-list {
+        margin-top: 35px;
       }
 
-
-      .brand-text span {
-
-        font-size: 9px;
+      .login-side {
+        padding: 34px;
       }
-
-
-      .page {
-
-        min-height: 100vh;
-
-        padding:
-          90px
-          18px
-          70px;
-      }
-
-
-      .content h1 {
-
-        font-size: 52px;
-
-        letter-spacing:
-          -2px;
-      }
-
-
-      .description {
-
-        font-size: 12px;
-      }
-
-
-      .login-card {
-
-        padding: 24px;
-
-        border-radius: 20px;
-      }
-
-
-      .footer {
-
-        bottom: 15px;
-
-        font-size: 9px;
-      }
-
     }
 
+    @media (max-width: 480px) {
+      body {
+        padding: 12px;
+      }
+
+      .login-wrapper {
+        border-radius: 22px;
+      }
+
+      .visual-side,
+      .login-side {
+        padding: 25px;
+      }
+
+      .visual-title {
+        font-size: 31px;
+      }
+
+      .role-selector {
+        gap: 8px;
+      }
+
+      .role-btn {
+        padding: 12px 7px;
+      }
+    }
   </style>
 </head>
 
 <body>
 
+  <div class="login-wrapper">
 
-  <!-- =====================================================
-       TURKISH SCENERY
-  ====================================================== -->
+    <!-- =================================
+         LEFT VISUAL
+    ================================== -->
 
-  <div class="scene"></div>
+    <section class="visual-side">
 
-  <div class="scene-overlay"></div>
+      <div class="visual-content">
 
+        <div class="logo-box">
+          CS
+        </div>
 
-  <!-- =====================================================
-       BRAND
-  ====================================================== -->
+        <h1 class="visual-title">
+          Personal
+          <br />
+          Course <span>Studio</span>
+        </h1>
 
-  <div class="top-brand">
-
-    <div class="logo">
-      CS
-    </div>
-
-    <div class="brand-text">
-
-      <strong>
-        Personal Course Studio
-      </strong>
-
-      <span>
-        Private Learning Workspace
-      </span>
-
-    </div>
-
-  </div>
-
-
-  <!-- =====================================================
-       PUBLIC SCREEN
-  ====================================================== -->
-
-  <main class="page">
-
-    <div class="content">
-
-      <div class="location">
-
-        <span class="location-dot"></span>
-
-        Turkish Scenery • Private Workspace
+        <p class="visual-description">
+          নিজের ক্লাস, কোর্স এবং ভিডিও তৈরি করার
+          জন্য আপনার ব্যক্তিগত Studio।
+        </p>
 
       </div>
 
+      <div class="feature-list">
 
-      <h1>
+        <div class="feature">
+          <div class="feature-icon">🎥</div>
+          <span>Class Recording Studio</span>
+        </div>
 
-        Learn.<br>
+        <div class="feature">
+          <div class="feature-icon">🖥️</div>
+          <span>Screen & Video Presentation</span>
+        </div>
 
-        Create.<br>
+        <div class="feature">
+          <div class="feature-icon">👥</div>
+          <span>Student Management</span>
+        </div>
 
-        <span>Grow.</span>
+      </div>
 
-      </h1>
-
-
-      <p class="description">
-
-        A quiet private space for classes,
-        course recording and learning.
-        Continue when you're ready.
-
-      </p>
-
-
-      <button
-        class="login-open-btn"
-        id="openLogin">
-
-        🔐 Mentor / Admin Login
-
-      </button>
-
-    </div>
-
-  </main>
+    </section>
 
 
-  <!-- =====================================================
-       FOOTER
-  ====================================================== -->
+    <!-- =================================
+         LOGIN
+    ================================== -->
 
-  <div class="footer">
+    <section class="login-side">
 
-    Personal Course Studio • Private Access
+      <div class="login-card">
 
-  </div>
-
-
-  <!-- =====================================================
-       LOGIN MODAL
-  ====================================================== -->
-
-  <div
-    class="modal"
-    id="loginModal">
-
-    <div class="login-card">
-
-
-      <div class="modal-header">
-
-        <div class="modal-title">
+        <div class="login-heading">
 
           <h2>
-            Welcome back
+            Welcome Back
           </h2>
 
           <p>
-            Choose your workspace and continue.
+            আপনার access role নির্বাচন করে
+            login করুন।
           </p>
 
         </div>
 
 
-        <button
-          class="close-btn"
-          id="closeLogin">
+        <!-- ROLE -->
 
-          ×
+        <div class="role-selector">
 
-        </button>
-
-      </div>
-
-
-      <!-- =================================================
-           ROLE
-      ================================================== -->
-
-      <div class="roles">
-
-        <button
-          type="button"
-          class="role-btn active"
-          data-role="mentor">
-
-          Mentor
-
-        </button>
-
-
-        <button
-          type="button"
-          class="role-btn"
-          data-role="admin">
-
-          Admin
-
-        </button>
-
-      </div>
-
-
-      <!-- =================================================
-           FORM
-      ================================================== -->
-
-      <form id="loginForm">
-
-        <div class="field">
-
-          <label for="username">
-            Username
-          </label>
-
-          <div class="input-wrap">
-
-            <span class="input-icon">
-              ◉
+          <button
+            type="button"
+            class="role-btn active"
+            id="mentorRoleBtn"
+          >
+            <span class="role-icon">👨‍🏫</span>
+            <span class="role-name">
+              Mentor
             </span>
+          </button>
 
-            <input
-              id="username"
-              type="text"
-              autocomplete="username"
-              placeholder="Enter username"
-              required>
 
-          </div>
+          <button
+            type="button"
+            class="role-btn"
+            id="adminRoleBtn"
+          >
+            <span class="role-icon">👑</span>
+            <span class="role-name">
+              Admin
+            </span>
+          </button>
 
         </div>
 
 
-        <div class="field">
+        <!-- FORM -->
 
-          <label for="password">
-            Password
-          </label>
+        <form
+          class="form"
+          id="loginForm"
+        >
 
-          <div class="input-wrap">
+          <div class="field">
 
-            <span class="input-icon">
-              ◆
-            </span>
+            <label for="username">
+              Username
+            </label>
 
-            <input
-              id="password"
-              type="password"
-              autocomplete="current-password"
-              placeholder="Enter password"
-              required>
+            <div class="input-wrap">
 
-            <button
-              type="button"
-              class="password-toggle"
-              id="passwordToggle">
+              <input
+                type="text"
+                id="username"
+                autocomplete="username"
+                placeholder="Enter username"
+                required
+              />
 
-              Show
-
-            </button>
+            </div>
 
           </div>
 
-        </div>
+
+          <div class="field">
+
+            <label for="password">
+              Password
+            </label>
+
+            <div class="input-wrap">
+
+              <input
+                type="password"
+                id="password"
+                autocomplete="current-password"
+                placeholder="Enter password"
+                required
+              />
+
+              <button
+                type="button"
+                class="toggle-password"
+                id="togglePassword"
+                aria-label="Show password"
+              >
+                👁
+              </button>
+
+            </div>
+
+          </div>
 
 
-        <button
-          type="submit"
-          class="submit-btn"
-          id="submitBtn">
+          <button
+            type="submit"
+            class="login-btn"
+            id="loginBtn"
+          >
+            Login
+          </button>
 
-          Continue as Mentor
-
-        </button>
+        </form>
 
 
         <div
           class="message"
-          id="message">
+          id="message"
+        ></div>
+
+
+        <!-- DEMO INFO -->
+
+        <div class="demo-info">
+
+          <strong id="demoRoleTitle">
+            Mentor Demo
+          </strong>
+
+          <br />
+
+          Username:
+          <strong id="demoUsername">
+            mentor
+          </strong>
+
+          <br />
+
+          Password:
+          <strong id="demoPassword">
+            Mentor@123
+          </strong>
+
         </div>
 
-      </form>
 
+        <div class="bottom-note">
 
-      <div class="private-note">
+          Personal Course Studio
+          <br />
+          Private Mentor / Admin Access
 
-        🔒 Authorized Mentor / Admin access only
+        </div>
 
       </div>
 
-    </div>
+    </section>
 
   </div>
 
 
   <script>
-
     /* =====================================================
+       PERSONAL COURSE STUDIO
+       ROLE BASED LOGIN
+       ===================================================== */
+
+
+    /* =========================
        SESSION KEYS
-    ===================================================== */
+    ========================= */
 
     const MENTOR_SESSION_KEY =
       "personalCourseStudioMentorLoggedIn";
 
     const ADMIN_SESSION_KEY =
-      "personalCourseStudioLoggedIn";
+      "personalCourseStudioAdminLoggedIn";
 
     const ROLE_KEY =
       "personalCourseStudioRole";
@@ -1109,24 +858,32 @@
       "personalCourseStudioUsername";
 
 
-    /* =====================================================
+    /* =========================
+       LOGIN ACCOUNTS
+    ========================= */
+
+    const ACCOUNTS = {
+
+      mentor: {
+        username: "mentor",
+        password: "Mentor@123",
+        role: "mentor",
+        redirect: "index.html"
+      },
+
+      admin: {
+        username: "admin",
+        password: "Admin@123",
+        role: "admin",
+        redirect: "admin.html"
+      }
+
+    };
+
+
+    /* =========================
        ELEMENTS
-    ===================================================== */
-
-    const openLogin =
-      document.getElementById(
-        "openLogin"
-      );
-
-    const closeLogin =
-      document.getElementById(
-        "closeLogin"
-      );
-
-    const loginModal =
-      document.getElementById(
-        "loginModal"
-      );
+    ========================= */
 
     const loginForm =
       document.getElementById(
@@ -1143,14 +900,14 @@
         "password"
       );
 
-    const passwordToggle =
+    const togglePassword =
       document.getElementById(
-        "passwordToggle"
+        "togglePassword"
       );
 
-    const submitBtn =
+    const loginBtn =
       document.getElementById(
-        "submitBtn"
+        "loginBtn"
       );
 
     const message =
@@ -1158,212 +915,161 @@
         "message"
       );
 
-
-    let selectedRole =
-      "mentor";
-
-
-    /* =====================================================
-       OPEN MODAL
-    ===================================================== */
-
-    openLogin.addEventListener(
-      "click",
-      () => {
-
-        loginModal.classList.add(
-          "show"
-        );
-
-        setTimeout(() => {
-
-          usernameInput.focus();
-
-        }, 100);
-
-      }
-    );
-
-
-    /* =====================================================
-       CLOSE MODAL
-    ===================================================== */
-
-    closeLogin.addEventListener(
-      "click",
-      closeModal
-    );
-
-
-    loginModal.addEventListener(
-      "click",
-      event => {
-
-        if (
-          event.target === loginModal
-        ) {
-
-          closeModal();
-
-        }
-
-      }
-    );
-
-
-    function closeModal() {
-
-      loginModal.classList.remove(
-        "show"
+    const mentorRoleBtn =
+      document.getElementById(
+        "mentorRoleBtn"
       );
 
-      clearMessage();
+    const adminRoleBtn =
+      document.getElementById(
+        "adminRoleBtn"
+      );
 
-    }
+    const demoRoleTitle =
+      document.getElementById(
+        "demoRoleTitle"
+      );
 
+    const demoUsername =
+      document.getElementById(
+        "demoUsername"
+      );
 
-    /* =====================================================
-       ESCAPE
-    ===================================================== */
-
-    document.addEventListener(
-      "keydown",
-      event => {
-
-        if (
-          event.key === "Escape"
-        ) {
-
-          closeModal();
-
-        }
-
-      }
-    );
-
-
-    /* =====================================================
-       ROLE BUTTONS
-    ===================================================== */
-
-    const roleButtons =
-      document.querySelectorAll(
-        ".role-btn"
+    const demoPassword =
+      document.getElementById(
+        "demoPassword"
       );
 
 
-    roleButtons.forEach(
-      button => {
+    /* =========================
+       CURRENT ROLE
+    ========================= */
 
-        button.addEventListener(
-          "click",
-          () => {
-
-            roleButtons.forEach(
-              item => {
-
-                item.classList.remove(
-                  "active"
-                );
-
-              }
-            );
+    let selectedRole = "mentor";
 
 
-            button.classList.add(
-              "active"
-            );
+    /* =========================
+       ROLE UI
+    ========================= */
+
+    function selectRole(role) {
+
+      selectedRole = role;
+
+      mentorRoleBtn.classList.remove(
+        "active"
+      );
+
+      adminRoleBtn.classList.remove(
+        "active"
+      );
 
 
-            selectedRole =
-              button.dataset.role;
+      if (role === "mentor") {
 
-
-            updateRoleButton();
-
-            clearMessage();
-
-          }
+        mentorRoleBtn.classList.add(
+          "active"
         );
 
-      }
-    );
+        demoRoleTitle.textContent =
+          "Mentor Demo";
 
+        demoUsername.textContent =
+          "mentor";
 
-    function updateRoleButton() {
-
-      if (
-        selectedRole === "mentor"
-      ) {
-
-        submitBtn.textContent =
-          "Continue as Mentor";
+        demoPassword.textContent =
+          "Mentor@123";
 
       } else {
 
-        submitBtn.textContent =
-          "Continue as Admin";
+        adminRoleBtn.classList.add(
+          "active"
+        );
+
+        demoRoleTitle.textContent =
+          "Admin Demo";
+
+        demoUsername.textContent =
+          "admin";
+
+        demoPassword.textContent =
+          "Admin@123";
 
       }
 
+
+      usernameInput.value = "";
+
+      passwordInput.value = "";
+
+      hideMessage();
+
+      usernameInput.focus();
     }
 
 
-    /* =====================================================
-       PASSWORD SHOW / HIDE
-    ===================================================== */
+    mentorRoleBtn.addEventListener(
+      "click",
+      () => {
+        selectRole("mentor");
+      }
+    );
 
-    passwordToggle.addEventListener(
+
+    adminRoleBtn.addEventListener(
+      "click",
+      () => {
+        selectRole("admin");
+      }
+    );
+
+
+    /* =========================
+       PASSWORD SHOW / HIDE
+    ========================= */
+
+    togglePassword.addEventListener(
       "click",
       () => {
 
-        if (
+        const isPassword =
           passwordInput.type ===
-          "password"
-        ) {
+          "password";
 
-          passwordInput.type =
-            "text";
+        passwordInput.type =
+          isPassword
+            ? "text"
+            : "password";
 
-          passwordToggle.textContent =
-            "Hide";
-
-        } else {
-
-          passwordInput.type =
-            "password";
-
-          passwordToggle.textContent =
-            "Show";
-
-        }
+        togglePassword.textContent =
+          isPassword
+            ? "🙈"
+            : "👁";
 
       }
     );
 
 
-    /* =====================================================
+    /* =========================
        MESSAGE
-    ===================================================== */
+    ========================= */
 
     function showMessage(
       text,
       type = "error"
     ) {
 
-      message.textContent =
-        text;
+      message.textContent = text;
 
       message.className =
-        "message " + type;
+        "message show " + type;
 
     }
 
 
-    function clearMessage() {
+    function hideMessage() {
 
-      message.textContent =
-        "";
+      message.textContent = "";
 
       message.className =
         "message";
@@ -1371,33 +1077,117 @@
     }
 
 
-    /* =====================================================
+    /* =========================
+       CLEAR OLD SESSIONS
+    ========================= */
+
+    function clearSessions() {
+
+      sessionStorage.removeItem(
+        MENTOR_SESSION_KEY
+      );
+
+      sessionStorage.removeItem(
+        ADMIN_SESSION_KEY
+      );
+
+      sessionStorage.removeItem(
+        ROLE_KEY
+      );
+
+      sessionStorage.removeItem(
+        USERNAME_KEY
+      );
+
+    }
+
+
+    /* =========================
+       CHECK EXISTING SESSION
+    ========================= */
+
+    function checkExistingSession() {
+
+      const role =
+        sessionStorage.getItem(
+          ROLE_KEY
+        );
+
+
+      if (
+        role === "mentor" &&
+        sessionStorage.getItem(
+          MENTOR_SESSION_KEY
+        ) === "true"
+      ) {
+
+        window.location.replace(
+          "index.html"
+        );
+
+        return;
+
+      }
+
+
+      if (
+        role === "admin" &&
+        sessionStorage.getItem(
+          ADMIN_SESSION_KEY
+        ) === "true"
+      ) {
+
+        window.location.replace(
+          "admin.html"
+        );
+
+        return;
+
+      }
+
+    }
+
+
+    checkExistingSession();
+
+
+    /* =========================
        LOGIN
-    ===================================================== */
+    ========================= */
 
     loginForm.addEventListener(
       "submit",
-      event => {
+      function (event) {
 
         event.preventDefault();
 
-        clearMessage();
-
 
         const username =
-          usernameInput.value.trim();
+          usernameInput.value
+            .trim();
 
         const password =
-          passwordInput.value.trim();
+          passwordInput.value;
 
+
+        const account =
+          ACCOUNTS[selectedRole];
+
+
+        hideMessage();
+
+
+        /* =====================
+           VALIDATION
+        ===================== */
 
         if (
-          !username ||
-          !password
+          username === "" ||
+          password === ""
         ) {
 
           showMessage(
-            "Username and password are required."
+            "Username এবং password দিন।"
           );
 
           return;
@@ -1405,134 +1195,116 @@
         }
 
 
-        /* ================================================
-           MENTOR
-        ================================================= */
+        loginBtn.classList.add(
+          "loading"
+        );
 
-        if (
-          selectedRole === "mentor"
-        ) {
-
-          if (
-            username === "mentor" &&
-            password === "123456"
-          ) {
-
-            sessionStorage.setItem(
-              MENTOR_SESSION_KEY,
-              "true"
-            );
-
-            sessionStorage.setItem(
-              ROLE_KEY,
-              "mentor"
-            );
-
-            sessionStorage.setItem(
-              USERNAME_KEY,
-              username
-            );
+        loginBtn.textContent =
+          "Checking...";
 
 
-            showMessage(
-              "Login successful. Opening Mentor Studio...",
-              "success"
-            );
+        /* =====================
+           DEMO LOGIN DELAY
+        ===================== */
+
+        setTimeout(
+          function () {
+
+            if (
+              username ===
+                account.username &&
+              password ===
+                account.password
+            ) {
+
+              clearSessions();
 
 
-            setTimeout(
-              () => {
+              /* =================
+                 ROLE SESSION
+              ================= */
 
-                window.location.replace(
-                  "index.html"
+              sessionStorage.setItem(
+                ROLE_KEY,
+                account.role
+              );
+
+              sessionStorage.setItem(
+                USERNAME_KEY,
+                account.username
+              );
+
+
+              if (
+                account.role ===
+                "mentor"
+              ) {
+
+                sessionStorage.setItem(
+                  MENTOR_SESSION_KEY,
+                  "true"
                 );
 
-              },
-              500
-            );
+              }
 
 
-            return;
+              if (
+                account.role ===
+                "admin"
+              ) {
 
-          }
-
-
-          showMessage(
-            "Invalid Mentor username or password."
-          );
-
-          return;
-
-        }
-
-
-        /* ================================================
-           ADMIN
-        ================================================= */
-
-        if (
-          selectedRole === "admin"
-        ) {
-
-          if (
-            username === "admin" &&
-            password === "123456"
-          ) {
-
-            sessionStorage.setItem(
-              ADMIN_SESSION_KEY,
-              "true"
-            );
-
-            sessionStorage.setItem(
-              ROLE_KEY,
-              "admin"
-            );
-
-            sessionStorage.setItem(
-              USERNAME_KEY,
-              username
-            );
-
-
-            showMessage(
-              "Login successful. Opening Admin Panel...",
-              "success"
-            );
-
-
-            setTimeout(
-              () => {
-
-                window.location.replace(
-                  "admin.html"
+                sessionStorage.setItem(
+                  ADMIN_SESSION_KEY,
+                  "true"
                 );
 
-              },
-              500
-            );
+              }
 
 
-            return;
+              showMessage(
+                "Login successful. Opening your panel...",
+                "success"
+              );
 
-          }
+
+              loginBtn.textContent =
+                "Success ✓";
 
 
-          showMessage(
-            "Invalid Admin username or password."
-          );
+              setTimeout(
+                function () {
 
-        }
+                  window.location.replace(
+                    account.redirect
+                  );
+
+                },
+                500
+              );
+
+
+            } else {
+
+              showMessage(
+                "Username অথবা password সঠিক নয়।"
+              );
+
+
+              loginBtn.classList.remove(
+                "loading"
+              );
+
+              loginBtn.textContent =
+                "Login";
+
+            }
+
+          },
+          450
+        );
 
       }
     );
-
-
-    /* =====================================================
-       INITIAL
-    ===================================================== */
-
-    updateRoleButton();
 
   </script>
 
