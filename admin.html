@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Personal Course Studio — Admin</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --bg: #f4f8ff;
+      --card: #ffffff;
+      --text: #172033;
+      --muted: #667085;
+      --border: #e2e8f0;
+      --danger: #dc2626;
+      --success: #16a34a;
+    }
+
+    body {
+      font-family:
+        Inter,
+        "Segoe UI",
+        Arial,
+        sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* =========================
+       TOPBAR
+    ========================= */
+
+    .topbar {
+      height: 72px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 28px;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .brand-area {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .logo {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(
+        135deg,
+        #2563eb,
+        #06b6d4
+      );
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      font-size: 16px;
+    }
+
+    .brand-text h1 {
+      font-size: 18px;
+      line-height: 1.2;
+    }
+
+    .brand-text p {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .top-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    button {
+      border: 0;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn {
+      padding: 10px 16px;
+      border-radius: 10px;
+      font-weight: 600;
+      font-size: 14px;
+    }
+
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+    }
+
+    .btn-light {
+      background: #eff6ff;
+      color: var(--primary);
+    }
+
+    .btn-danger {
+      background: #fef2f2;
+      color: var(--danger);
+    }
+
+    /* =========================
+       LAYOUT
+    ========================= */
+
+    .page {
+      max-width: 1250px;
+      margin: 0 auto;
+      padding: 28px;
+    }
+
+    .welcome {
+      margin-bottom: 24px;
+    }
+
+    .welcome h2 {
+      font-size: 28px;
+      margin-bottom: 7px;
+    }
+
+    .welcome p {
+      color: var(--muted);
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns:
+        minmax(0, 1fr)
+        minmax(280px, 350px);
+      gap: 20px;
+      align-items: start;
+    }
+
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow:
+        0 8px 30px rgba(15, 23, 42, 0.05);
+    }
+
+    .card + .card {
+      margin-top: 20px;
+    }
+
+    .card-title {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin-bottom: 20px;
+    }
+
+    .card-title h3 {
+      font-size: 18px;
+    }
+
+    .card-title p {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 4px;
+    }
+
+    /* =========================
+       FORM
+    ========================= */
+
+    .form-group {
+      margin-bottom: 17px;
+    }
+
+    .form-group:last-child {
+      margin-bottom: 0;
+    }
+
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 7px;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 12px 13px;
+      font-family: inherit;
+      font-size: 14px;
+      color: var(--text);
+      outline: none;
+      transition: 0.2s;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: var(--primary);
+      box-shadow:
+        0 0 0 3px rgba(37, 99, 235, 0.10);
+    }
+
+    textarea {
+      min-height: 90px;
+      resize: vertical;
+    }
+
+    .hint {
+      color: var(--muted);
+      font-size: 12px;
+      margin-top: 6px;
+    }
+
+    /* =========================
+       BRAND OPTIONS
+    ========================= */
+
+    .brand-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .brand-option {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 13px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: #fafcff;
+    }
+
+    .brand-option strong {
+      font-size: 14px;
+    }
+
+    .brand-option small {
+      display: block;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    .delete-brand {
+      background: #fff1f2;
+      color: #e11d48;
+      padding: 7px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    /* =========================
+       STATUS
+    ========================= */
+
+    .save-status {
+      display: none;
+      margin-top: 15px;
+      padding: 11px 13px;
+      border-radius: 10px;
+      background: #ecfdf3;
+      color: var(--success);
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .save-status.show {
+      display: block;
+    }
+
+    /* =========================
+       QUICK ACTION
+    ========================= */
+
+    .quick-actions {
+      display: grid;
+      gap: 10px;
+    }
+
+    .quick-btn {
+      width: 100%;
+      text-align: left;
+      padding: 14px;
+      border: 1px solid var(--border);
+      background: #ffffff;
+      border-radius: 12px;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .quick-btn:hover {
+      background: #f8fbff;
+      border-color: #bfdbfe;
+    }
+
+    .quick-btn span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 400;
+      margin-top: 4px;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
+    @media (max-width: 850px) {
+      .grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .topbar {
+        height: auto;
+        min-height: 70px;
+        padding: 12px 15px;
+        gap: 10px;
+      }
+
+      .brand-text p {
+        display: none;
+      }
+
+      .page {
+        padding: 18px 14px;
+      }
+
+      .welcome h2 {
+        font-size: 23px;
+      }
+
+      .top-actions .btn-light {
+        display: none;
+      }
+
+      .card {
+        padding: 17px;
+        border-radius: 15px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       TOPBAR
+  ========================== -->
+
+  <header class="topbar">
+
+    <div class="brand-area">
+
+      <div class="logo">
+        CS
+      </div>
+
+      <div class="brand-text">
+        <h1>Course Studio Admin</h1>
+        <p>Personal Course Studio Management</p>
+      </div>
+
+    </div>
+
+    <div class="top-actions">
+
+      <button
+        class="btn btn-light"
+        onclick="openStudio()"
+      >
+        Open Studio
+      </button>
+
+      <button
+        class="btn btn-danger"
+        onclick="logout()"
+      >
+        Logout
+      </button>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================
+       MAIN
+  ========================== -->
+
+  <main class="page">
+
+    <section class="welcome">
+
+      <h2>
+        Admin Panel
+      </h2>
+
+      <p>
+        এখান থেকে Personal Course Studio-এর
+        নাম, ব্র্যান্ড, Zoom Demo এবং অন্যান্য
+        সেটিংস পরিচালনা করুন।
+      </p>
+
+    </section>
+
+
+    <div class="grid">
+
+      <!-- =====================
+           LEFT
+      ====================== -->
+
+      <div>
+
+        <!-- Studio Settings -->
+
+        <section class="card">
+
+          <div class="card-title">
+
+            <div>
+              <h3>Studio Settings</h3>
+
+              <p>
+                Studio-এর মূল পরিচয় পরিবর্তন করুন।
+              </p>
+            </div>
+
+          </div>
+
+
+          <form id="studioForm">
+
+            <div class="form-group">
+
+              <label for="studioName">
+                Studio Name
+              </label>
+
+              <input
+                type="text"
+                id="studioName"
+                placeholder="Personal Course Studio"
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="studioSubtitle">
+                Subtitle
+              </label>
+
+              <input
+                type="text"
+                id="studioSubtitle"
+                placeholder="নিজের ক্লাস ও কোর্স ভিডিও তৈরির জন্য"
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="studioLogo">
+                Logo Text
+              </label>
+
+              <input
+                type="text"
+                id="studioLogo"
+                maxlength="5"
+                placeholder="CS"
+              >
+
+              <div class="hint">
+                সর্বোচ্চ ৫টি অক্ষর ব্যবহার করুন।
+              </div>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="selectedBrand">
+                Active Brand
+              </label>
+
+              <select id="selectedBrand">
+              </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="zoomTitle">
+                Zoom Demo Name
+              </label>
+
+              <input
+                type="text"
+                id="zoomTitle"
+                placeholder="Zoom Demo"
+              >
+
+            </div>
+
+
+            <div class="form-group">
+
+              <label for="welcomeText">
+                Welcome Text
+              </label>
+
+              <textarea
+                id="welcomeText"
+                placeholder="আপনার ক্লাস শুরু করার জন্য প্রস্তুত?"
+              ></textarea>
+
+            </div>
+
+
+            <button
+              type="submit"
+              class="btn btn-primary"
+            >
+              Save Studio Settings
+            </button>
+
+            <div
+              class="save-status"
+              id="saveStatus"
+            >
+              ✓ Settings successfully saved
+            </div>
+
+          </form>
+
+        </section>
+
+
+        <!-- Brand Manager -->
+
+        <section class="card">
+
+          <div class="card-title">
+
+            <div>
+              <h3>Brand Manager</h3>
+
+              <p>
+                Studio-তে ব্যবহার করার জন্য
+                বিভিন্ন Brand তৈরি করুন।
+              </p>
+            </div>
+
+          </div>
+
+
+          <div
+            class="brand-list"
+            id="brandList"
+          ></div>
+
+
+          <div
+            style="
+              height:1px;
+              background:#e2e8f0;
+              margin:20px 0;
+            "
+          ></div>
+
+
+          <form id="brandForm">
+
+            <div class="form-group">
+
+              <label for="brandName">
+                New Brand Name
+              </label>
+
+              <input
+                type="text"
+                id="brandName"
+                placeholder="যেমন: SNK AI Academy"
+              >
+
+            </div>
+
+
+            <button
+              type="submit"
+              class="btn btn-primary"
+            >
+              + Add Brand
+            </button>
+
+          </form>
+
+        </section>
+
+      </div>
+
+
+      <!-- =====================
+           RIGHT
+      ====================== -->
+
+      <aside>
+
+        <section class="card">
+
+          <div class="card-title">
+
+            <div>
+              <h3>Quick Actions</h3>
+
+              <p>
+                দ্রুত প্রয়োজনীয় জায়গায় যান।
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="quick-actions">
+
+            <button
+              class="quick-btn"
+              onclick="openStudio()"
+            >
+              🎬 Open Course Studio
+
+              <span>
+                ভিডিও তৈরি ও রেকর্ডিং শুরু করুন
+              </span>
+
+            </button>
+
+
+            <button
+              class="quick-btn"
+              onclick="showStudents()"
+            >
+              👨‍🎓 Student Manager
+
+              <span>
+                পরবর্তী ধাপে Student management
+              </span>
+
+            </button>
+
+
+            <button
+              class="quick-btn"
+              onclick="showMentorSettings()"
+            >
+              🎥 Mentor Video Settings
+
+              <span>
+                Mentor video-এর position ও size
+              </span>
+
+            </button>
+
+
+            <button
+              class="quick-btn"
+              onclick="showAppearance()"
+            >
+              🎨 Appearance
+
+              <span>
+                Studio-এর visual settings
+              </span>
+
+            </button>
+
+          </div>
+
+        </section>
+
+
+        <section class="card">
+
+          <div class="card-title">
+
+            <div>
+              <h3>Current Configuration</h3>
+
+              <p>
+                বর্তমানে ব্যবহৃত settings
+              </p>
+            </div>
+
+          </div>
+
+
+          <div
+            id="currentConfig"
+            style="
+              display:grid;
+              gap:12px;
+            "
+          ></div>
+
+        </section>
+
+      </aside>
+
+    </div>
+
+  </main>
+
+
+  <script>
+
+    /* ==========================================
+       LOGIN PROTECTION
+    ========================================== */
+
+    const SESSION_KEY =
+      "personalCourseStudioLoggedIn";
+
+    if (
+      sessionStorage.getItem(SESSION_KEY) !== "true"
+    ) {
+      window.location.replace("login.html");
+    }
+
+
+    /* ==========================================
+       STORAGE KEYS
+    ========================================== */
+
+    const SETTINGS_KEY =
+      "personalCourseStudioSettings";
+
+    const BRANDS_KEY =
+      "personalCourseStudioBrands";
+
+
+    /* ==========================================
+       DEFAULT SETTINGS
+    ========================================== */
+
+    const defaultSettings = {
+
+      studioName:
+        "Personal Course Studio",
+
+      studioSubtitle:
+        "নিজের ক্লাস ও কোর্স ভিডিও তৈরির জন্য",
+
+      studioLogo:
+        "CS",
+
+      selectedBrand:
+        "Shah Neil Khan / USHA.AI",
+
+      zoomTitle:
+        "Zoom Demo",
+
+      welcomeText:
+        "আপনার ক্লাস শুরু করার জন্য প্রস্তুত?"
+
+    };
+
+
+    /* ==========================================
+       DEFAULT BRANDS
+    ========================================== */
+
+    const defaultBrands = [
+
+      "Shah Neil Khan / USHA.AI",
+
+      "SNK AI Academy",
+
+      "SNK IT Institute",
+
+      "My Personal Studio",
+
+      "Custom Brand"
+
+    ];
+
+
+    /* ==========================================
+       GET SETTINGS
+    ========================================== */
+
+    function getSettings() {
+
+      try {
+
+        const saved =
+          localStorage.getItem(
+            SETTINGS_KEY
+          );
+
+        if (!saved) {
+          return {
+            ...defaultSettings
+          };
+        }
+
+        return {
+          ...defaultSettings,
+          ...JSON.parse(saved)
+        };
+
+      } catch (error) {
+
+        return {
+          ...defaultSettings
+        };
+
+      }
+
+    }
+
+
+    /* ==========================================
+       SAVE SETTINGS
+    ========================================== */
+
+    function saveSettings(settings) {
+
+      localStorage.setItem(
+        SETTINGS_KEY,
+        JSON.stringify(settings)
+      );
+
+    }
+
+
+    /* ==========================================
+       GET BRANDS
+    ========================================== */
+
+    function getBrands() {
+
+      try {
+
+        const saved =
+          localStorage.getItem(
+            BRANDS_KEY
+          );
+
+        if (!saved) {
+
+          localStorage.setItem(
+            BRANDS_KEY,
+            JSON.stringify(defaultBrands)
+          );
+
+          return [
+            ...defaultBrands
+          ];
+
+        }
+
+        const brands =
+          JSON.parse(saved);
+
+        if (
+          !Array.isArray(brands) ||
+          brands.length === 0
+        ) {
+
+          return [
+            ...defaultBrands
+          ];
+
+        }
+
+        return brands;
+
+      } catch (error) {
+
+        return [
+          ...defaultBrands
+        ];
+
+      }
+
+    }
+
+
+    /* ==========================================
+       SAVE BRANDS
+    ========================================== */
+
+    function saveBrands(brands) {
+
+      localStorage.setItem(
+        BRANDS_KEY,
+        JSON.stringify(brands)
+      );
+
+    }
+
+
+    /* ==========================================
+       LOAD FORM
+    ========================================== */
+
+    function loadSettings() {
+
+      const settings =
+        getSettings();
+
+      document.getElementById(
+        "studioName"
+      ).value =
+        settings.studioName;
+
+      document.getElementById(
+        "studioSubtitle"
+      ).value =
+        settings.studioSubtitle;
+
+      document.getElementById(
+        "studioLogo"
+      ).value =
+        settings.studioLogo;
+
+      document.getElementById(
+        "zoomTitle"
+      ).value =
+        settings.zoomTitle;
+
+      document.getElementById(
+        "welcomeText"
+      ).value =
+        settings.welcomeText;
+
+      renderBrandSelect();
+
+      document.getElementById(
+        "selectedBrand"
+      ).value =
+        settings.selectedBrand;
+
+      renderBrands();
+
+      renderCurrentConfig();
+
+    }
+
+
+    /* ==========================================
+       BRAND SELECT
+    ========================================== */
+
+    function renderBrandSelect() {
+
+      const select =
+        document.getElementById(
+          "selectedBrand"
+        );
+
+      const brands =
+        getBrands();
+
+      select.innerHTML = "";
+
+      brands.forEach(
+        function(brand) {
+
+          const option =
+            document.createElement(
+              "option"
+            );
+
+          option.value = brand;
+
+          option.textContent = brand;
+
+          select.appendChild(
+            option
+          );
+
+        }
+      );
+
+    }
+
+
+    /* ==========================================
+       BRAND LIST
+    ========================================== */
+
+    function renderBrands() {
+
+      const list =
+        document.getElementById(
+          "brandList"
+        );
+
+      const brands =
+        getBrands();
+
+      list.innerHTML = "";
+
+      brands.forEach(
+        function(brand, index) {
+
+          const item =
+            document.createElement(
+              "div"
+            );
+
+          item.className =
+            "brand-option";
+
+          const content =
+            document.createElement(
+              "div"
+            );
+
+          content.innerHTML = `
+            <strong>${escapeHtml(brand)}</strong>
+            <small>Brand Option ${index + 1}</small>
+          `;
+
+
+          const deleteButton =
+            document.createElement(
+              "button"
+            );
+
+          deleteButton.className =
+            "delete-brand";
+
+          deleteButton.textContent =
+            "Delete";
+
+          deleteButton.onclick =
+            function() {
+
+              deleteBrand(
+                brand
+              );
+
+            };
+
+
+          item.appendChild(
+            content
+          );
+
+          item.appendChild(
+            deleteButton
+          );
+
+          list.appendChild(
+            item
+          );
+
+        }
+      );
+
+    }
+
+
+    /* ==========================================
+       ADD BRAND
+    ========================================== */
+
+    document
+      .getElementById("brandForm")
+      .addEventListener(
+        "submit",
+        function(event) {
+
+          event.preventDefault();
+
+          const input =
+            document.getElementById(
+              "brandName"
+            );
+
+          const name =
+            input.value.trim();
+
+          if (!name) {
+
+            alert(
+              "Brand name লিখুন।"
+            );
+
+            return;
+
+          }
+
+          const brands =
+            getBrands();
+
+          const exists =
+            brands.some(
+              function(brand) {
+
+                return (
+                  brand.toLowerCase() ===
+                  name.toLowerCase()
+                );
+
+              }
+            );
+
+          if (exists) {
+
+            alert(
+              "এই Brand ইতিমধ্যে আছে।"
+            );
+
+            return;
+
+          }
+
+          brands.push(name);
+
+          saveBrands(brands);
+
+          input.value = "";
+
+          renderBrandSelect();
+
+          renderBrands();
+
+          renderCurrentConfig();
+
+          alert(
+            "Brand successfully added."
+          );
+
+        }
+      );
+
+
+    /* ==========================================
+       DELETE BRAND
+    ========================================== */
+
+    function deleteBrand(
+      brand
+    ) {
+
+      const brands =
+        getBrands();
+
+      if (brands.length <= 1) {
+
+        alert(
+          "কমপক্ষে একটি Brand রাখতে হবে।"
+        );
+
+        return;
+
+      }
+
+      const confirmDelete =
+        confirm(
+          `"${brand}" delete করতে চান?`
+        );
+
+      if (!confirmDelete) {
+        return;
+      }
+
+      const updated =
+        brands.filter(
+          function(item) {
+            return item !== brand;
+          }
+        );
+
+      saveBrands(updated);
+
+
+      const settings =
+        getSettings();
+
+      if (
+        settings.selectedBrand ===
+        brand
+      ) {
+
+        settings.selectedBrand =
+          updated[0];
+
+        saveSettings(
+          settings
+        );
+
+      }
+
+
+      renderBrandSelect();
+
+      renderBrands();
+
+      renderCurrentConfig();
+
+    }
+
+
+    /* ==========================================
+       SAVE STUDIO FORM
+    ========================================== */
+
+    document
+      .getElementById("studioForm")
+      .addEventListener(
+        "submit",
+        function(event) {
+
+          event.preventDefault();
+
+
+          const settings = {
+
+            studioName:
+              document
+                .getElementById(
+                  "studioName"
+                )
+                .value
+                .trim() ||
+              defaultSettings.studioName,
+
+            studioSubtitle:
+              document
+                .getElementById(
+                  "studioSubtitle"
+                )
+                .value
+                .trim() ||
+              defaultSettings.studioSubtitle,
+
+            studioLogo:
+              document
+                .getElementById(
+                  "studioLogo"
+                )
+                .value
+                .trim() ||
+              defaultSettings.studioLogo,
+
+            selectedBrand:
+              document
+                .getElementById(
+                  "selectedBrand"
+                )
+                .value,
+
+            zoomTitle:
+              document
+                .getElementById(
+                  "zoomTitle"
+                )
+                .value
+                .trim() ||
+              defaultSettings.zoomTitle,
+
+            welcomeText:
+              document
+                .getElementById(
+                  "welcomeText"
+                )
+                .value
+                .trim() ||
+              defaultSettings.welcomeText
+
+          };
+
+
+          saveSettings(
+            settings
+          );
+
+
+          const status =
+            document.getElementById(
+              "saveStatus"
+            );
+
+          status.classList.add(
+            "show"
+          );
+
+
+          renderCurrentConfig();
+
+
+          setTimeout(
+            function() {
+
+              status.classList.remove(
+                "show"
+              );
+
+            },
+            2500
+          );
+
+        }
+      );
+
+
+    /* ==========================================
+       CURRENT CONFIG
+    ========================================== */
+
+    function renderCurrentConfig() {
+
+      const settings =
+        getSettings();
+
+      const box =
+        document.getElementById(
+          "currentConfig"
+        );
+
+      box.innerHTML = `
+
+        <div>
+          <small style="color:#667085">
+            Studio Name
+          </small>
+
+          <div style="font-weight:700;margin-top:3px">
+            ${escapeHtml(settings.studioName)}
+          </div>
+        </div>
+
+        <div>
+          <small style="color:#667085">
+            Brand
+          </small>
+
+          <div style="font-weight:700;margin-top:3px">
+            ${escapeHtml(settings.selectedBrand)}
+          </div>
+        </div>
+
+        <div>
+          <small style="color:#667085">
+            Zoom Demo
+          </small>
+
+          <div style="font-weight:700;margin-top:3px">
+            ${escapeHtml(settings.zoomTitle)}
+          </div>
+        </div>
+
+      `;
+
+    }
+
+
+    /* ==========================================
+       ESCAPE HTML
+    ========================================== */
+
+    function escapeHtml(
+      value
+    ) {
+
+      return String(value)
+        .replace(
+          /&/g,
+          "&amp;"
+        )
+        .replace(
+          /</g,
+          "&lt;"
+        )
+        .replace(
+          />/g,
+          "&gt;"
+        )
+        .replace(
+          /"/g,
+          "&quot;"
+        )
+        .replace(
+          /'/g,
+          "&#039;"
+        );
+
+    }
+
+
+    /* ==========================================
+       OPEN STUDIO
+    ========================================== */
+
+    function openStudio() {
+
+      window.location.href =
+        "index.html";
+
+    }
+
+
+    /* ==========================================
+       LOGOUT
+    ========================================== */
+
+    function logout() {
+
+      sessionStorage.removeItem(
+        SESSION_KEY
+      );
+
+      window.location.replace(
+        "login.html"
+      );
+
+    }
+
+
+    /* ==========================================
+       FUTURE FEATURES
+    ========================================== */
+
+    function showStudents() {
+
+      alert(
+        "Student Manager পরের ধাপে তৈরি হবে।"
+      );
+
+    }
+
+
+    function showMentorSettings() {
+
+      alert(
+        "Mentor Video Settings পরের ধাপে তৈরি হবে।"
+      );
+
+    }
+
+
+    function showAppearance() {
+
+      alert(
+        "Appearance Settings পরের ধাপে তৈরি হবে।"
+      );
+
+    }
+
+
+    /* ==========================================
+       INITIALIZE
+    ========================================== */
+
+    loadSettings();
+
+  </script>
+
+</body>
+</html>
